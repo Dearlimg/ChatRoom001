@@ -2,15 +2,15 @@ package redis
 
 import (
 	"context"
+	"github.com/redis/go-redis/v9"
 	"log"
-	"github.com/go-redis/redis/v8"
 )
 
-func Init(Addr, Password string, PoolSize, DB int) *redis.ClusterClient {
+func Init1(Addr []string, Password string, PoolSize, DB int) *redis.ClusterClient {
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs:    []string{Addr}, // Redis 集群的节点地址列表
-		Password: Password,       // 密码
-		PoolSize: PoolSize,       // 连接池大小
+		Addrs:    Addr,     // 使用传入的地址
+		Password: Password, // 密码
+		PoolSize: PoolSize, // 连接池大小
 	})
 
 	// 测试连接

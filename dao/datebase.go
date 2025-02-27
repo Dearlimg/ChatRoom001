@@ -9,3 +9,5 @@ type database struct {
 	DB    *sql.DB
 	Redis *redis.Client
 }
+
+var Database = new(database)
