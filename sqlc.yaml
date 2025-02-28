@@ -1,0 +1,13 @@
+version: "1"
+packages:
+  - name: "db"
+    path: "dao/mysql/sqlc"
+    engine: "mysql"
+    schema: "dao/mysql/migration"
+    queries: "dao/mysql/queries"
+    emit_empty_slices: true
+    emit_interface: true
+    emit_prepared_queries: true
+    emit_result_struct_pointers: true
+    emit_params_struct_pointers: true
+    sql_package: "database/sql"
