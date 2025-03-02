@@ -7,7 +7,7 @@ import (
 
 type database struct {
 	DB    *sql.DB
-	Redis *redis.Client
+	Redis *redis.ClusterClient
 }
 
 var Database = new(database)

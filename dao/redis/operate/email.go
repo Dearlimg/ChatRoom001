@@ -1,9 +1,15 @@
 package operate
 
-import "context"
+import (
+	"context"
+)
 
 const EmailKey = "EmailKey"
 
-func (r *RDB) AddEmails(ctx context.Context, emails ...string) {
+func (r *RDB) AddEmail(ctx context.Context, email ...string) error {
+	return nil
+}
 
+func (r *RDB) ExistEmail(ctx context.Context, email string) (bool, error) {
+	return r.rdb.Get(ctx, EmailKey).Bool()
 }

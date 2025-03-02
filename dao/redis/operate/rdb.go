@@ -1,6 +1,8 @@
 package operate
 
-import "github.com/go-redis/redis/v8"
+import (
+	"github.com/go-redis/redis/v8"
+)
 
 type RDB struct {
 	rdb *redis.ClusterClient
