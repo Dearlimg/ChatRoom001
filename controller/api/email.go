@@ -1,4 +1,4 @@
-package chat
+package api
 
 import (
 	"ChatRoom001/logic"

@@ -3,6 +3,7 @@ package router
 import (
 	"ChatRoom001/global"
 	"ChatRoom001/middlewares"
+	"ChatRoom001/routers"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/gin-gonic/gin"
 	socketio "github.com/googollee/go-socket.io"
@@ -22,7 +23,8 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 			global.Logger.Info("ping", middlewares.ErrLogMsg(ctx)...)
 			reply.Reply(nil, "pong")
 		})
-		rg := routers.Routers
+		//rg := routers.Routers
+		//rg.User.Init()
 	}
 	return r, routers.Routers.Chat.Init(r)
 }
