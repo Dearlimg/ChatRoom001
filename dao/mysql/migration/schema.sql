@@ -1,14 +1,16 @@
+USE chatroom;
+
 -- 性别类型
-CREATE TABLE users (
-                       id INT AUTO_INCREMENT PRIMARY KEY,
-                       gender ENUM('男', '女', '未知') NOT NULL
-);
+# CREATE TABLE users (
+#                        id INT AUTO_INCREMENT PRIMARY KEY,
+#                        gender ENUM('男', '女', '未知') NOT NULL
+# );
 
 -- 群或好友关系的类型
-CREATE TABLE relationships (
-                               id INT AUTO_INCREMENT PRIMARY KEY,
-                               relation_type ENUM('group', 'friend') NOT NULL
-);
+# CREATE TABLE relationships (
+#                                id INT AUTO_INCREMENT PRIMARY KEY,
+#                                relation_type ENUM('group', 'friend') NOT NULL
+# );
 
 -- 群类型
 CREATE TABLE `groups` (
@@ -25,19 +27,41 @@ CREATE TABLE IF NOT EXISTS users (
                                      password VARCHAR(255) NOT NULL, -- 密码
                                      create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
 );
+-- 创建复合索引
+CREATE INDEX idx_users_email_id_password_create_at ON users (email, id, password, create_at);
+
+explain  SELECT email, create_at
+FROM users
+WHERE email = '1492568061@qq.com'
+ORDER BY create_at;
 
 -- 创建账号表
+# CREATE TABLE IF NOT EXISTS accounts (
+#                                         id BIGINT PRIMARY KEY, -- 账号 id
+#                                         user_id BIGINT NOT NULL, -- 用户 id（外键）
+#                                         name VARCHAR(255) NOT NULL, -- 账号名
+#                                         avatar VARCHAR(255) NOT NULL, -- 账号头像
+#                                         gender ENUM('男', '女', '未知') NOT NULL DEFAULT '未知', -- 账号性别
+#                                         signature TEXT NOT NULL DEFAULT '这个用户很懒，什么也没有留下~', -- 账号签名
+#                                         create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
+#                                         CONSTRAINT account_unique_name UNIQUE (user_id, name), -- 一个用户的不同账号名不能重复
+#                                         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE -- 外键约束
+# );
+
 CREATE TABLE IF NOT EXISTS accounts (
-                                        id BIGINT PRIMARY KEY, -- 账号 id
-                                        user_id BIGINT NOT NULL, -- 用户 id（外键）
-                                        name VARCHAR(255) NOT NULL, -- 账号名
-                                        avatar VARCHAR(255) NOT NULL, -- 账号头像
+                                        id BIGINT PRIMARY KEY,                                -- 账号 id
+                                        user_id BIGINT NOT NULL,                              -- 用户 id（外键）
+                                        name VARCHAR(255) NOT NULL,                           -- 账号名
+                                        avatar VARCHAR(255) NOT NULL,                         -- 账号头像
                                         gender ENUM('男', '女', '未知') NOT NULL DEFAULT '未知', -- 账号性别
-                                        signature TEXT NOT NULL DEFAULT '这个用户很懒，什么也没有留下~', -- 账号签名
+                                        signature VARCHAR(1024) NOT NULL DEFAULT '这个用户很懒，什么也没有留下~', -- 账号签名
                                         create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
                                         CONSTRAINT account_unique_name UNIQUE (user_id, name), -- 一个用户的不同账号名不能重复
-                                        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE -- 外键约束
+                                        FOREIGN KEY (user_id) REFERENCES users(id)
+                                            ON DELETE CASCADE
+                                            ON UPDATE CASCADE  -- 外键约束：删除和更新时级联操作
 );
+
 
 -- 创建账号名和头像索引
 CREATE INDEX account_index_name_avatar ON accounts(name, avatar);

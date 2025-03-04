@@ -15,12 +15,12 @@ values (?, ?, ?, ?, ?, ?)
 `
 
 type CreateAccountParams struct {
-	ID        int64
-	UserID    int64
-	Name      string
-	Avatar    string
-	Gender    AccountsGender
-	Signature string
+	ID        int64          `json:"id"`
+	UserID    int64          `json:"user_id"`
+	Name      string         `json:"name"`
+	Avatar    string         `json:"avatar"`
+	Gender    AccountsGender `json:"gender"`
+	Signature string         `json:"signature"`
 }
 
 func (q *Queries) CreateAccount(ctx context.Context, arg *CreateAccountParams) error {
