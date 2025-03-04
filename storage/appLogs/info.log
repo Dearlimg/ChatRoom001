@@ -1,0 +1,14 @@
+2025-03-04T21:40:05.010+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-04T21:41:12.045+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-04T21:48:58.978+0800	INFO	ChatRoom001/main.go:63	Shutdown Server.
+2025-03-04T21:49:26.098+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-04T21:51:38.467+0800	INFO	ChatRoom001/main.go:63	Shutdown Server.
+2025-03-04T21:51:47.019+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-04T21:53:15.396+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 500, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.6678147}
+2025-03-04T21:57:47.097+0800	INFO	middlewares/logger.go:60	//api/user/register 	{"status": 404, "method": "POST", "path": "//api/user/register ", "query": "email=1492568061@qq.com&password=123456&code=123456", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-04T21:57:54.092+0800	INFO	middlewares/logger.go:60	/api/user/register 	{"status": 404, "method": "POST", "path": "/api/user/register ", "query": "email=1492568061@qq.com&password=123456&code=123456", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-04T22:01:24.475+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-04T22:01:36.101+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-04T22:01:36.736+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-04T22:01:37.265+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-04T22:01:38.046+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
