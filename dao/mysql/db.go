@@ -1,29 +1,28 @@
 package mysql
 
 import (
-	"database/sql"
-	"fmt"
-	"time"
+	db "ChatRoom001/dao/mysql/sqlc"
+	"ChatRoom001/dao/mysql/tx"
 )
 
-var db *sql.DB
+//var db *sql.DB
 
-func Init(dsn string) (*sql.DB, error) {
-	// Open a connection to the database
-	db, err := sql.Open("mysql", dsn)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open database: %v", err)
-	}
-
-	// Check if the connection is alive
-	err = db.Ping()
-	if err != nil {
-		return nil, fmt.Errorf("failed to ping database: %v", err)
-	}
-
-	db.SetMaxOpenConns(10)           // Set max open connections
-	db.SetMaxIdleConns(5)            // Set max idle connections
-	db.SetConnMaxLifetime(time.Hour) // Set max connection lifetime
-
-	return db, nil
+type DB interface {
+	db.Querier
+	tx.TXer
 }
+
+//func Init(dataSourceName string) DB {
+//	// Open a connection to the database
+//	db, err := sql.Open("mysql", dataSourceName)
+//	if err != nil {
+//		panic(err)
+//	}
+//	// Check if the connection is alive
+//	err = db.Ping()
+//	db.SetMaxOpenConns(10)           // Set max open connections
+//	db.SetMaxIdleConns(5)            // Set max idle connections
+//	db.SetConnMaxLifetime(time.Hour) // Set max connection lifetime
+//
+//	return &tx.Sql
+//}

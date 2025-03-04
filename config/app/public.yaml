@@ -1,6 +1,6 @@
 Server: # 服务配置
   RunMode: debug # gin 的运行模式（release 是生产模式）
-  HttpPort: :8080 # 默认的 HTTP 监听端口
+  HttpPort: :8002 # 默认的 HTTP 监听端口
   ReadTimeout: 5s # 允许读取的最大持续时间
   WriteTimeout: 5s # 允许写入的最大持续时间
   DefaultContextTimeout: 10s # 默认上下文超时

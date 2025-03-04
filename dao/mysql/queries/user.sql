@@ -1,10 +1,6 @@
 -- name: CreateUser :exec
 INSERT INTO users (email, password)
 VALUES (?, ?);
-# -- 这里假设使用编程语言调用，通过执行获取自增 ID 的操作，若在 MySQL 客户端可直接执行此语句
-# SELECT LAST_INSERT_ID() as id, email, password, create_at
-# FROM users
-# WHERE id = LAST_INSERT_ID();
 
 -- name: DeleteUser :exec
 DELETE

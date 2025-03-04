@@ -22,11 +22,11 @@ func (email) ExistEmail(ctx *gin.Context) {
 	reply.Reply(err, result)
 }
 
-func (email) SendMark(ctx *gin.Context) {
-	reply := app.NewResponse(ctx)
-	params := &request.ParamSendEmail{}
-	if err := ctx.ShouldBind(params); err != nil {
-		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
-	}
-	err := logic.Logics.Email.SendMark(params.Email)
-}
+//func (email) SendMark(ctx *gin.Context) {
+//	reply := app.NewResponse(ctx)
+//	params := &request.ParamSendEmail{}
+//	if err := ctx.ShouldBind(params); err != nil {
+//		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+//	}
+//	err := logic.Logics.Email.SendMark(params.Email)
+//}

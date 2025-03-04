@@ -10,6 +10,15 @@ import (
 
 type Querier interface {
 	CreateAccount(ctx context.Context, arg *CreateAccountParams) error
+	CreateUser(ctx context.Context, arg *CreateUserParams) error
+	DeleteUser(ctx context.Context, id int64) error
+	ExistEmail(ctx context.Context, email string) (bool, error)
+	ExistsUserByID(ctx context.Context, id int64) (bool, error)
+	GetAcountIDsByUserID(ctx context.Context, userID int64) ([]int64, error)
+	GetAllEmail(ctx context.Context) ([]string, error)
+	GetUserByEmail(ctx context.Context, email string) (*User, error)
+	GetUserByID(ctx context.Context, id int64) (*User, error)
+	UpdateUser(ctx context.Context, arg *UpdateUserParams) error
 }
 
 var _ Querier = (*Queries)(nil)

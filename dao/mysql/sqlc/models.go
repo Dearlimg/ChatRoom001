@@ -33,8 +33,8 @@ func (e *AccountsGender) Scan(src interface{}) error {
 }
 
 type NullAccountsGender struct {
-	AccountsGender AccountsGender `json:"accounts_gender"`
-	Valid          bool           `json:"valid"` // Valid is true if AccountsGender is not NULL
+	AccountsGender AccountsGender
+	Valid          bool // Valid is true if AccountsGender is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -76,8 +76,8 @@ func (e *ApplicationsStatus) Scan(src interface{}) error {
 }
 
 type NullApplicationsStatus struct {
-	ApplicationsStatus ApplicationsStatus `json:"applications_status"`
-	Valid              bool               `json:"valid"` // Valid is true if ApplicationsStatus is not NULL
+	ApplicationsStatus ApplicationsStatus
+	Valid              bool // Valid is true if ApplicationsStatus is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -118,8 +118,8 @@ func (e *FilesFileType) Scan(src interface{}) error {
 }
 
 type NullFilesFileType struct {
-	FilesFileType FilesFileType `json:"files_file_type"`
-	Valid         bool          `json:"valid"` // Valid is true if FilesFileType is not NULL
+	FilesFileType FilesFileType
+	Valid         bool // Valid is true if FilesFileType is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -160,8 +160,8 @@ func (e *MessagesMsgType) Scan(src interface{}) error {
 }
 
 type NullMessagesMsgType struct {
-	MessagesMsgType MessagesMsgType `json:"messages_msg_type"`
-	Valid           bool            `json:"valid"` // Valid is true if MessagesMsgType is not NULL
+	MessagesMsgType MessagesMsgType
+	Valid           bool // Valid is true if MessagesMsgType is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -202,8 +202,8 @@ func (e *MessagesNotifyType) Scan(src interface{}) error {
 }
 
 type NullMessagesNotifyType struct {
-	MessagesNotifyType MessagesNotifyType `json:"messages_notify_type"`
-	Valid              bool               `json:"valid"` // Valid is true if MessagesNotifyType is not NULL
+	MessagesNotifyType MessagesNotifyType
+	Valid              bool // Valid is true if MessagesNotifyType is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -244,8 +244,8 @@ func (e *MsgNotificationsMsgType) Scan(src interface{}) error {
 }
 
 type NullMsgNotificationsMsgType struct {
-	MsgNotificationsMsgType MsgNotificationsMsgType `json:"msg_notifications_msg_type"`
-	Valid                   bool                    `json:"valid"` // Valid is true if MsgNotificationsMsgType is not NULL
+	MsgNotificationsMsgType MsgNotificationsMsgType
+	Valid                   bool // Valid is true if MsgNotificationsMsgType is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -286,8 +286,8 @@ func (e *RelationsRelationType) Scan(src interface{}) error {
 }
 
 type NullRelationsRelationType struct {
-	RelationsRelationType RelationsRelationType `json:"relations_relation_type"`
-	Valid                 bool                  `json:"valid"` // Valid is true if RelationsRelationType is not NULL
+	RelationsRelationType RelationsRelationType
+	Valid                 bool // Valid is true if RelationsRelationType is not NULL
 }
 
 // Scan implements the Scanner interface.
@@ -309,98 +309,98 @@ func (ns NullRelationsRelationType) Value() (driver.Value, error) {
 }
 
 type Account struct {
-	ID        int64          `json:"id"`
-	UserID    int64          `json:"user_id"`
-	Name      string         `json:"name"`
-	Avatar    string         `json:"avatar"`
-	Gender    AccountsGender `json:"gender"`
-	Signature string         `json:"signature"`
-	CreateAt  time.Time      `json:"create_at"`
+	ID        int64
+	UserID    int64
+	Name      string
+	Avatar    string
+	Gender    AccountsGender
+	Signature string
+	CreateAt  time.Time
 }
 
 type Application struct {
-	ID       int64              `json:"id"`
-	Status   ApplicationsStatus `json:"status"`
-	CreateAt time.Time          `json:"create_at"`
+	ID       int64
+	Status   ApplicationsStatus
+	CreateAt time.Time
 }
 
 type File struct {
-	ID       int64         `json:"id"`
-	FileType FilesFileType `json:"file_type"`
-	FilePath string        `json:"file_path"`
-	CreateAt time.Time     `json:"create_at"`
+	ID       int64
+	FileType FilesFileType
+	FilePath string
+	CreateAt time.Time
 }
 
 type Group struct {
-	ID          int32          `json:"id"`
-	Name        string         `json:"name"`
-	Description sql.NullString `json:"description"`
-	Avatar      sql.NullString `json:"avatar"`
+	ID          int32
+	Name        string
+	Description sql.NullString
+	Avatar      sql.NullString
 }
 
 type GroupNotify struct {
-	ID            int64           `json:"id"`
-	RelationID    sql.NullInt64   `json:"relation_id"`
-	MsgContent    string          `json:"msg_content"`
-	MsgExpand     json.RawMessage `json:"msg_expand"`
-	AccountID     sql.NullInt64   `json:"account_id"`
-	CreateAt      time.Time       `json:"create_at"`
-	ReadIds       json.RawMessage `json:"read_ids"`
-	MsgContentTsv sql.NullString  `json:"msg_content_tsv"`
+	ID            int64
+	RelationID    sql.NullInt64
+	MsgContent    string
+	MsgExpand     json.RawMessage
+	AccountID     sql.NullInt64
+	CreateAt      time.Time
+	ReadIds       json.RawMessage
+	MsgContentTsv sql.NullString
 }
 
 type Message struct {
-	ID            int64              `json:"id"`
-	NotifyType    MessagesNotifyType `json:"notify_type"`
-	MsgType       MessagesMsgType    `json:"msg_type"`
-	MsgContent    string             `json:"msg_content"`
-	MsgExtend     json.RawMessage    `json:"msg_extend"`
-	FileID        sql.NullInt64      `json:"file_id"`
-	AccountID     sql.NullInt64      `json:"account_id"`
-	RlyMsgID      sql.NullInt64      `json:"rly_msg_id"`
-	RelationID    int64              `json:"relation_id"`
-	CreateAt      time.Time          `json:"create_at"`
-	IsRevoke      bool               `json:"is_revoke"`
-	IsTop         bool               `json:"is_top"`
-	IsPin         bool               `json:"is_pin"`
-	PinTime       time.Time          `json:"pin_time"`
-	ReadIds       json.RawMessage    `json:"read_ids"`
-	MsgContentTsy sql.NullString     `json:"msg_content_tsy"`
+	ID            int64
+	NotifyType    MessagesNotifyType
+	MsgType       MessagesMsgType
+	MsgContent    string
+	MsgExtend     json.RawMessage
+	FileID        sql.NullInt64
+	AccountID     sql.NullInt64
+	RlyMsgID      sql.NullInt64
+	RelationID    int64
+	CreateAt      time.Time
+	IsRevoke      bool
+	IsTop         bool
+	IsPin         bool
+	PinTime       time.Time
+	ReadIds       json.RawMessage
+	MsgContentTsy sql.NullString
 }
 
 type MsgNotification struct {
-	ID       int64                   `json:"id"`
-	MsgType  MsgNotificationsMsgType `json:"msg_type"`
-	Content  string                  `json:"content"`
-	CreateAt time.Time               `json:"create_at"`
+	ID       int64
+	MsgType  MsgNotificationsMsgType
+	Content  string
+	CreateAt time.Time
 }
 
 type Relation struct {
-	ID               int64                 `json:"id"`
-	RelationType     RelationsRelationType `json:"relation_type"`
-	GroupName        sql.NullString        `json:"group_name"`
-	GroupDescription sql.NullString        `json:"group_description"`
-	Account1ID       sql.NullInt64         `json:"account1_id"`
-	Account2ID       sql.NullInt64         `json:"account2_id"`
-	CreateAt         time.Time             `json:"create_at"`
+	ID               int64
+	RelationType     RelationsRelationType
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	Account1ID       sql.NullInt64
+	Account2ID       sql.NullInt64
+	CreateAt         time.Time
 }
 
 type Setting struct {
-	AccountID    int64     `json:"account_id"`
-	RelationID   int64     `json:"relation_id"`
-	NickName     string    `json:"nick_name"`
-	IsNotDisturb bool      `json:"is_not_disturb"`
-	IsPin        bool      `json:"is_pin"`
-	PinTime      time.Time `json:"pin_time"`
-	IsShow       bool      `json:"is_show"`
-	LastShow     time.Time `json:"last_show"`
-	IsLeader     bool      `json:"is_leader"`
-	IsSelf       bool      `json:"is_self"`
+	AccountID    int64
+	RelationID   int64
+	NickName     string
+	IsNotDisturb bool
+	IsPin        bool
+	PinTime      time.Time
+	IsShow       bool
+	LastShow     time.Time
+	IsLeader     bool
+	IsSelf       bool
 }
 
 type User struct {
-	ID       int64     `json:"id"`
-	Email    string    `json:"email"`
-	Password string    `json:"password"`
-	CreateAt time.Time `json:"create_at"`
+	ID       int64
+	Email    string
+	Password string
+	CreateAt time.Time
 }

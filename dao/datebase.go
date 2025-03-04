@@ -1,13 +1,13 @@
 package dao
 
 import (
-	"database/sql"
-	"github.com/redis/go-redis/v9"
+	"ChatRoom001/dao/mysql"
+	"ChatRoom001/dao/redis/operate"
 )
 
 type database struct {
-	DB    *sql.DB
-	Redis *redis.ClusterClient
+	DB    mysql.DB
+	Redis *operate.RDB
 }
 
 var Database = new(database)

@@ -15,8 +15,8 @@ VALUES (?, ?)
 `
 
 type CreateUserParams struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Email    string
+	Password string
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg *CreateUserParams) error {
@@ -25,16 +25,11 @@ func (q *Queries) CreateUser(ctx context.Context, arg *CreateUserParams) error {
 }
 
 const deleteUser = `-- name: DeleteUser :exec
-
 DELETE
 FROM users
 WHERE id = ?
 `
 
-// -- 这里假设使用编程语言调用，通过执行获取自增 ID 的操作，若在 MySQL 客户端可直接执行此语句
-// SELECT LAST_INSERT_ID() as id, email, password, create_at
-// FROM users
-// WHERE id = LAST_INSERT_ID();
 func (q *Queries) DeleteUser(ctx context.Context, id int64) error {
 	_, err := q.exec(ctx, q.deleteUserStmt, deleteUser, id)
 	return err
@@ -74,7 +69,7 @@ func (q *Queries) GetAcountIDsByUserID(ctx context.Context, userID int64) ([]int
 		return nil, err
 	}
 	defer rows.Close()
-	var items []int64
+	items := []int64{}
 	for rows.Next() {
 		var id int64
 		if err := rows.Scan(&id); err != nil {
@@ -102,7 +97,7 @@ func (q *Queries) GetAllEmail(ctx context.Context) ([]string, error) {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []string
+	items := []string{}
 	for rows.Next() {
 		var email string
 		if err := rows.Scan(&email); err != nil {
@@ -165,9 +160,9 @@ WHERE id = ?
 `
 
 type UpdateUserParams struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
-	ID       int64  `json:"id"`
+	Email    string
+	Password string
+	ID       int64
 }
 
 func (q *Queries) UpdateUser(ctx context.Context, arg *UpdateUserParams) error {

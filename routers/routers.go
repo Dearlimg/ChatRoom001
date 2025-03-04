@@ -3,7 +3,7 @@ package routers
 type routers struct {
 	User    user
 	Account account
-	Chat    chat
+	Chat    ws
 }
 
 var Routers = new(routers)

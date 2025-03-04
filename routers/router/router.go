@@ -23,8 +23,8 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 			global.Logger.Info("ping", middlewares.ErrLogMsg(ctx)...)
 			reply.Reply(nil, "pong")
 		})
-		//rg := routers.Routers
-		//rg.User.Init()
+		rg := routers.Routers
+		rg.User.Init(root)
 	}
 	return r, routers.Routers.Chat.Init(r)
 }

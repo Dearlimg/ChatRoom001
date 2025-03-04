@@ -2,6 +2,7 @@ package api
 
 import (
 	"ChatRoom001/errcodes"
+	"ChatRoom001/logic"
 	"ChatRoom001/model/request"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/gin-gonic/gin"
@@ -17,5 +18,6 @@ func (user) Register(ctx *gin.Context) {
 		reply.Reply(errcodes.PasswordNotValid.WithDetails(err.Error()))
 		return
 	}
-
+	result, err := logic.Logics.User.Register(ctx, params.Password, params.Password, params.Code)
+	reply.Reply(err, result)
 }

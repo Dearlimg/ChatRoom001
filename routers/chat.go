@@ -10,9 +10,9 @@ type ws struct {
 }
 
 func (ws) Init(routers *gin.Engine) *socketio.Server {
-	//server:=socketio.NewServer(nil)
-	//{
-	//	server.OnConnect("/", api.Apis.)
-	//}
-	return nil
+	server := socketio.NewServer(nil)
+	{
+
+	}
+	return server
 }
