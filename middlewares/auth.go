@@ -3,6 +3,7 @@ package middlewares
 import (
 	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
+	"ChatRoom001/model"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/token"
 	"github.com/gin-gonic/gin"
@@ -41,5 +42,24 @@ func ParseToken(token string) (*token.Payload, string, errcode.Err) {
 
 // PasetoAuth 鉴权中间件，用于解析并写入 Token
 func PasetoAuth() func(c *gin.Context) {
-	return nil
+	return func(c *gin.Context) {
+		accessToken, err := GetToken(c.Request.Header)
+		if err != nil {
+			c.Next()
+			return
+		}
+		payload, _, err := ParseToken(accessToken)
+		if err != nil {
+			c.Next()
+			return
+		}
+		content := &model.Content{}
+		if err := content.Unmarshal(payload.Content); err != nil {
+			c.Next()
+			return
+		}
+		c.Set(global.PrivateSetting.Token.AuthorizationKey, content)
+		c.Next()
+	}
+
 }

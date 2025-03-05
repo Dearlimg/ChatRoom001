@@ -5,5 +5,5 @@ type ParamExistEmail struct {
 }
 
 type ParamSendEmail struct {
-	Email string `json:"email" binding:"required,lte=50"`
+	Email string `json:"email" binding:"required,lte=50"` // 邮箱
 }

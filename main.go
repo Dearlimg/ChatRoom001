@@ -39,7 +39,6 @@ func main() {
 	defer close(errChan)
 
 	go func() {
-
 		err := server.ListenAndServe()
 		if err != nil {
 			errChan <- err

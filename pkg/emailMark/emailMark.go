@@ -37,7 +37,6 @@ func (m *EmailMark) CheckUserExist(emailStr string) bool {
 }
 
 func (m *EmailMark) SendMark(emailStr, code string) error {
-
 	if m.CheckUserExist(emailStr) {
 		return ErrSendTooMany
 	}

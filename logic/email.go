@@ -6,6 +6,10 @@ import (
 	"ChatRoom001/global"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model/reply"
+	"ChatRoom001/pkg/emailMark"
+	"errors"
+	"fmt"
+	"github.com/Dearlimg/Goutils/pkg/utils"
 
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 
@@ -59,17 +63,19 @@ func CheckEmailNotExists(ctx *gin.Context, emailStr string) errcode.Err {
 }
 
 // SendMark 发送验证码(邮件)
-//func (email) SendMark(emailStr string) errcode.Err {
-//	// 判断发送邮件的频率
-//	if global.EmailMark.CheckUserExist(emailStr) {
-//		return errcodes.EmailSendMany
-//	}
-//	// 异步发送邮件(使用工作池)
-//	global.Worker.SendTask(func() {
-//		code := utils.RandomString(global.PublicSetting.Rules.CodeLength)
-//		if err := global.EmailMark.SendMark(emailStr, code); err != nil && !errors.Is(err, emailMark.ErrSendTooMany) {
-//			global.Logger.Error(err.Error())
-//		}
-//	})
-//	return nil
-//}
+func (email) SendMark(emailStr string) errcode.Err {
+	// 判断发送邮件的频率
+	if global.EmailMark.CheckUserExist(emailStr) {
+		return errcodes.EmailSendMany
+	}
+	// 异步发送邮件(使用工作池)
+	global.Worker.SendTask(func() {
+		code := utils.RandomString(global.PublicSetting.Rules.CodeLength)
+		if err := global.EmailMark.SendMark(emailStr, code); err != nil && !errors.Is(err, emailMark.ErrSendTooMany) {
+
+			fmt.Println("logic/email.go")
+			global.Logger.Error(err.Error())
+		}
+	})
+	return nil
+}
