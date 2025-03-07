@@ -199,50 +199,50 @@ CREATE TABLE IF NOT EXISTS group_notify (
                                             FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-# -- 分词索引
-# CREATE INDEX group_notify_msg_content_tsv ON group_notify (msg_content_tsv);
+-- 分词索引
+CREATE INDEX group_notify_msg_content_tsv ON group_notify (msg_content_tsv);
+
+-- 创建更新时间戳的触发器
+ALTER TABLE applications
+    ADD COLUMN update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+-- 创建更新 applications 表的更新时间戳触发器
+CREATE TRIGGER update_application_timestamp
+    BEFORE UPDATE ON applications
+    FOR EACH ROW
+BEGIN
+    -- 如果需要手动更新时间戳
+    IF OLD.update_at <> NEW.update_at THEN
+        SET NEW.update_at = CURRENT_TIMESTAMP;
+    END IF;
+END;
 #
-# -- 创建更新时间戳的触发器
-# ALTER TABLE applications
-#     ADD COLUMN update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+-- 创建更新 settings 表 last_show 字段的触发器
+CREATE TRIGGER update_show_timestamp
+    BEFORE UPDATE ON settings
+    FOR EACH ROW
+BEGIN
+    IF NEW.is_show THEN
+        SET NEW.last_show = CURRENT_TIMESTAMP;
+    END IF;
+END;
 #
-# -- 创建更新 applications 表的更新时间戳触发器
-# CREATE TRIGGER update_application_timestamp
-#     BEFORE UPDATE ON applications
-#     FOR EACH ROW
-# BEGIN
-#     -- 如果需要手动更新时间戳
-#     IF OLD.update_at <> NEW.update_at THEN
-#         SET NEW.update_at = CURRENT_TIMESTAMP;
-#     END IF;
-# END;
-#
-# -- 创建更新 settings 表 last_show 字段的触发器
-# CREATE TRIGGER update_show_timestamp
-#     BEFORE UPDATE ON settings
-#     FOR EACH ROW
-# BEGIN
-#     IF NEW.is_show THEN
-#         SET NEW.last_show = CURRENT_TIMESTAMP;
-#     END IF;
-# END;
-#
-# -- 创建更新 settings 表 pin_time 字段的触发器
-# CREATE TRIGGER update_pin_timestamp
-#     BEFORE UPDATE ON settings
-#     FOR EACH ROW
-# BEGIN
-#     IF NEW.is_pin THEN
-#         SET NEW.pin_time = CURRENT_TIMESTAMP;
-#     END IF;
-# END;
-#
-# -- 创建更新 messages 表 pin_time 字段的触发器
-# CREATE TRIGGER update_message_pin_timestamp
-#     BEFORE UPDATE ON messages
-#     FOR EACH ROW
-# BEGIN
-#     IF NEW.is_pin THEN
-#         SET NEW.pin_time = CURRENT_TIMESTAMP;
-#     END IF;
-# END;
+-- 创建更新 settings 表 pin_time 字段的触发器
+CREATE TRIGGER update_pin_timestamp
+    BEFORE UPDATE ON settings
+    FOR EACH ROW
+BEGIN
+    IF NEW.is_pin THEN
+        SET NEW.pin_time = CURRENT_TIMESTAMP;
+    END IF;
+END;
+
+-- 创建更新 messages 表 pin_time 字段的触发器
+CREATE TRIGGER update_message_pin_timestamp
+    BEFORE UPDATE ON messages
+    FOR EACH ROW
+BEGIN
+    IF NEW.is_pin THEN
+        SET NEW.pin_time = CURRENT_TIMESTAMP;
+    END IF;
+END;

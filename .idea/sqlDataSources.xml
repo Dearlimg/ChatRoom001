@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="b25f0ae1-15bc-4d09-8142-37fb3b0d967e" name="华为云redis-cluster@123.249.32.125 Mapping">
+      <data-sources db="9f6d7f74-89fa-49bf-b6e1-39f8787601d0" />
+    </mapping>
+    <mapping uuid="2d89f2bb-da82-48a6-a07b-b1e99a93b118" name="0@123.249.32.125 Mapping">
+      <data-sources db="6b15965d-fa7d-4dcf-abb1-68b81da664b8" ddl="221a179c-93a8-446b-898e-a96804cab423" />
+    </mapping>
+    <mapping uuid="e5b65c65-f2a3-47cc-a404-8ab2cf3b86d4" name="0@123.249.32.125 Mapping [2]">
+      <data-sources db="d20bfdbf-ace3-456d-8f76-a25df389c114" />
+    </mapping>
+  </component>
+</project>

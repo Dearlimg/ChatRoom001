@@ -1,6 +1,9 @@
 package operate
 
-import "context"
+import (
+	"context"
+	"fmt"
+)
 
 /*
 redis 中邮件地址集合的 CRUD 操作。因为邮件的地址信息需要频繁访问和更新的数据，使用 Redis 可以提高性能和响应速度。
@@ -18,6 +21,10 @@ func (r *RDB) AddEmails(ctx context.Context, emails ...string) error {
 		data[i] = email
 	}
 	return r.rdb.SAdd(ctx, EmailKey, data...).Err() // 向键值为 EmailKey 的集合中添加邮箱地址集合
+	//if len(emails) == 0 {
+	//	return nil
+	//}
+	//return r.rdb.MSet(ctx, data...).Err()
 }
 
 // ExistEmail 检查指定的 email 是否存在于 set 中
@@ -45,4 +52,11 @@ func (r *RDB) ReloadEmails(ctx context.Context, emails ...string) error {
 		return err
 	}
 	return r.AddEmails(ctx, emails...)
+}
+
+func (r *RDB) TestEmailRedis(ctx context.Context, email string) error {
+	r.rdb.SAdd(ctx, EmailKey, email)
+	r.rdb.SAdd(ctx, "k1", email)
+	fmt.Println(r.rdb.Ping(ctx).Err(), "shuuju")
+	return nil
 }

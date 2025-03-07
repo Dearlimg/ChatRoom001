@@ -1,6 +1,7 @@
 mysql:
   DriverName: mysql # 驱动名称
-  SourceName: user=root password=123456 host=123.249.32.125 port=3306 dbname=ChatRoom sslmode=disable # 数据源名称
+  SourceName: root:123456@tcp(123.249.32.125:3306)/chatroom?charset=utf8mb4&parseTime=True
+#  SourceName: user=root password=123456 host=123.249.32.125 port=3306 dbname=ChatRoom sslmode=disable # 数据源名称
 ###############################################################
 #Redis:
 #  Address: 123.249.32.125:6379 # redis 服务器地址
@@ -9,29 +10,66 @@ mysql:
 #  PoolSize: 100 # redis 连接池大小
 #  CacheTime: 10m # redis 缓存时间
 ###############################################################
+#RedisCluster:
+#  Nodes:
+#    - Address: 123.249.32.125:6381 # 主节点
+#      Role: master
+#      Password: 1234
+#    - Address: 123.249.32.125:6384 # 从节点
+#      Role: slave
+#      Password: 1234
+#    - Address: 123.249.32.125:6382 # 主节点
+#      Role: master
+#      Password: 1234
+#    - Address: 123.249.32.125:6385 # 从节点
+#      Role: slave
+#      Password: 1234
+#    - Address: 123.249.32.125:6383 # 主节点
+#      Role: master
+#      Password: 1234
+#    - Address: 123.249.32.125:6386 # 从节点
+#      Role: slave
+#      Password: 1234
+#  ClusterEnabled: true
+#  PoolSize: 100 # 集群连接池大小
+#  CacheTime: 10m # 集群缓存时间
+###########################################################
 RedisCluster:
-  Nodes:
-    - Address: 123.249.32.125:6381 # 主节点
-      Role: master
-      Password: 1234
-    - Address: 123.249.32.125:6384 # 从节点
-      Role: slave
-      Password: 1234
-    - Address: 123.249.32.125:6382 # 主节点
-      Role: master
-      Password: 1234
-    - Address: 123.249.32.125:6385 # 从节点
-      Role: slave
-      Password: 1234
-    - Address: 123.249.32.125:6383 # 主节点
-      Role: master
-      Password: 1234
-    - Address: 123.249.32.125:6386 # 从节点
-      Role: slave
-      Password: 1234
-  ClusterEnabled: true
-  PoolSize: 100 # 集群连接池大小
-  CacheTime: 10m # 集群缓存时间
+  # 集群节点地址列表（只需主节点或任意可达节点，客户端会自动发现拓扑）
+  Endpoints:
+    - "123.249.32.125:6381"
+    - "123.249.32.125:6382"
+    - "123.249.32.125:6383"
+
+  # 全局认证密码（主从密码一致时可简写）
+  Password: "1234"
+
+  # 连接池配置
+  PoolConfig:
+    PoolSize: 100          # 连接池大小
+    MinIdleConns: 10       # 最小空闲连接
+    ConnectTimeout: 5s     # 连接超时
+    ReadTimeout: 3s        # 读操作超时
+    WriteTimeout: 3s       # 写操作超时
+
+  # 集群特性配置
+  ClusterConfig:
+    MaxRedirects: 8        # 最大重定向次数（默认8）
+    RouteByLatency: false   # 是否启用延迟路由（慎用）
+    RouteRandomly: false    # 是否随机路由
+
+  # TLS 配置（可选）
+  TLS:
+    Enable: false
+    CertFile: ""
+    KeyFile: ""
+    CAFile: ""
+
+  # 高级配置
+  CacheTime: 10m            # 元数据缓存时间（如集群拓扑信息）
+  ReadOnly: false           # 是否启用只读模式
+  DisableAutoReconnect: false # 是否禁用自动重连
+###########################################################################
 Email:
   Password: pmuereghhhoeibee
   IsSSL: true # 是否使用 SSL 加密

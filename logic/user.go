@@ -8,6 +8,7 @@ import (
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/reply"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/password"
 	"github.com/gin-gonic/gin"
@@ -45,6 +46,7 @@ func (user) Register(ctx *gin.Context, emailStr, pwd, code string) (*reply.Param
 	}
 	// 添加邮箱到 redis
 	err = dao.Database.Redis.AddEmails(ctx, emailStr)
+	fmt.Println("logic user 49 : add email success to redis ", emailStr)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer

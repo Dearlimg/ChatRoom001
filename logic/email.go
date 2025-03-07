@@ -22,6 +22,7 @@ type email struct {
 // ExistEmail 是否存在 email
 func (email) ExistEmail(ctx *gin.Context, emailStr string) (*reply.ParamExistEmail, errcode.Err) {
 	// 先在 redis 缓存中查找
+	//dao.Database.Redis.TestEmailRedis(ctx, emailStr)
 	ok, err := dao.Database.Redis.ExistEmail(ctx, emailStr)
 	if err == nil {
 		return &reply.ParamExistEmail{Exist: ok}, nil
@@ -72,7 +73,6 @@ func (email) SendMark(emailStr string) errcode.Err {
 	global.Worker.SendTask(func() {
 		code := utils.RandomString(global.PublicSetting.Rules.CodeLength)
 		if err := global.EmailMark.SendMark(emailStr, code); err != nil && !errors.Is(err, emailMark.ErrSendTooMany) {
-
 			fmt.Println("logic/email.go")
 			global.Logger.Error(err.Error())
 		}

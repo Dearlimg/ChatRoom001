@@ -1,7 +1,7 @@
 package operate
 
 import (
-	"github.com/go-redis/redis/v8"
+	"github.com/redis/go-redis/v9"
 )
 
 type RDB struct {

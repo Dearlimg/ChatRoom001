@@ -31,12 +31,12 @@ type PublicConfig struct {
 }
 
 type PrivateConfig struct {
-	Postgresql PostgresqlConfig `yaml:"Postgresql"`
-	Redis      RedisCluster     `yaml:"Redis"`
-	Email      Email            `yaml:"Email"`
-	Token      Token            `yaml:"Token"`
-	HuaWeiOBS  HuaWeiOBS        `yaml:"HuaWeiOBS"`
-	RocketMQ   RocketMQ         `yaml:"RocketMQ"`
+	Mysql     MysqlConfig  `yaml:"Mysql"`
+	Redis     RedisCluster `yaml:"Redis"`
+	Email     Email        `yaml:"Email"`
+	Token     Token        `yaml:"Token"`
+	HuaWeiOBS HuaWeiOBS    `yaml:"HuaWeiOBS"`
+	RocketMQ  RocketMQ     `yaml:"RocketMQ"`
 }
 
 type LogConfig struct {
@@ -111,7 +111,7 @@ type Retry struct {
 	MaxTimes int           `yaml:"MaxTimes"` // 最大重试次数
 }
 
-type PostgresqlConfig struct {
+type MysqlConfig struct {
 	DriverName string `yaml:"DriverName"`
 	SourceName string `yaml:"SourceName"`
 }
@@ -124,12 +124,47 @@ type PostgresqlConfig struct {
 //	CacheTime time.Duration `yaml:"CacheTime"` // 缓存时间
 //}
 
-type RedisCluster struct {
-	Nodes          []RedisNode `yaml:"Nodes"`          // Redis 集群节点列表
-	ClusterEnabled bool        `yaml:"ClusterEnabled"` // 是否启用集群
-	PoolSize       int         `yaml:"PoolSize"`       // Redis 连接池大小
-	CacheTime      string      `yaml:"CacheTime"`      // 缓存时间
+//type RedisCluster struct {
+//	Nodes          []RedisNode `yaml:"Nodes"`          // Redis 集群节点列表
+//	ClusterEnabled bool        `yaml:"ClusterEnabled"` // 是否启用集群
+//	PoolSize       int         `yaml:"PoolSize"`       // Redis 连接池大小
+//	CacheTime      string      `yaml:"CacheTime"`      // 缓存时间
+//}
+
+///////////////////////////////////////////////////////////////////////////
+
+type PoolConfig struct {
+	PoolSize       int           `yaml:"PoolSize"`
+	MinIdleConns   int           `yaml:"MinIdleConns"`
+	ConnectTimeout time.Duration `yaml:"ConnectTimeout"`
+	ReadTimeout    time.Duration `yaml:"ReadTimeout"`
+	WriteTimeout   time.Duration `yaml:"WriteTimeout"`
 }
+
+type ClusterConfig struct {
+	MaxRedirect    int  `yaml:"MaxRedirect"`
+	RouteByLatency bool `yaml:"RouteByLatency"`
+	RouteRandomly  bool `yaml:"RouteRandomly"`
+}
+
+type TLS struct {
+	CacheTime time.Duration `yaml:"CacheTime"`
+	CertFile  string        `yaml:"CertFile"`
+	KeyFile   string        `yaml:"KeyFile"`
+	CAFile    string        `yaml:"CAFile"`
+}
+type RedisCluster struct {
+	Endpoints            []string      `yaml:"Endpoints"`
+	Password             string        `yaml:"Password"`
+	PoolConfig           PoolConfig    `yaml:"PoolConfig"`
+	ClusterConfig        ClusterConfig `yaml:"ClusterConfig"`
+	TLS                  TLS           `yaml:"TLS"`
+	CacheTime            time.Duration `yaml:"CacheTime"`
+	ReadOnly             bool          `yaml:"ReadOnly"`
+	DisableAutoReconnect bool          `yaml:"DisableAutoReconnect"`
+}
+
+////////////////////////////////////////////////////////////////////////////
 
 type RedisNode struct {
 	Address  string `yaml:"Address"`  // Redis 节点地址

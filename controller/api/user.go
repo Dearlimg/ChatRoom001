@@ -18,6 +18,6 @@ func (user) Register(ctx *gin.Context) {
 		reply.Reply(errcodes.PasswordNotValid.WithDetails(err.Error()))
 		return
 	}
-	result, err := logic.Logics.User.Register(ctx, params.Password, params.Password, params.Code)
+	result, err := logic.Logics.User.Register(ctx, params.Email, params.Password, params.Code)
 	reply.Reply(err, result)
 }

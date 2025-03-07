@@ -10,14 +10,45 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
+	//"github.com/redis/go-redis/v9"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+	//"time"
 )
+
+//func testredis() {
+//	// 集群模式配置
+//	rdb := redis.NewClusterClient(&redis.ClusterOptions{
+//		Addrs: []string{
+//			"123.249.32.125:6381",
+//			"123.249.32.125:6382",
+//			"123.249.32.125:6383",
+//		},
+//		Password:     "1234",          // 集群密码
+//		PoolSize:     20,              // 连接池大小
+//		ReadOnly:     false,           // 是否使用只读节点
+//		DialTimeout:  5 * time.Second, // 连接超时
+//		ReadTimeout:  3 * time.Second, // 读取超时
+//		WriteTimeout: 3 * time.Second, // 写入超时
+//	})
+//
+//	// 测试连接
+//	ctx := context.Background()
+//	pong, err := rdb.Ping(ctx).Result()
+//	if err != nil {
+//		panic(err)
+//	}
+//	fmt.Println("Redis集群连接成功:", pong)
+//	rdb.SAdd(ctx, "chatroom", 1)
+//	rdb.SAdd(ctx, "EmailKey", 123)
+//
+//}
 
 func main() {
 	setting.Inits()
+
 	if global.PublicSetting.Server.RunMode == "release" {
 		gin.SetMode(gin.ReleaseMode)
 	}
@@ -40,6 +71,7 @@ func main() {
 
 	go func() {
 		err := server.ListenAndServe()
+		//err := r.Run("192.169.1.113:8080")
 		if err != nil {
 			errChan <- err
 		}

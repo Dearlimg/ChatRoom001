@@ -108,3 +108,102 @@
 2025-03-05T19:12:15.292+0800	INFO	ChatRoom001/main.go:62	Shutdown Server.
 2025-03-05T19:12:17.055+0800	INFO	ChatRoom001/main.go:36	server start success
 2025-03-05T19:12:20.768+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-05T19:18:15.268+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 500, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.1495328}
+2025-03-05T20:20:45.822+0800	INFO	ChatRoom001/main.go:62	Shutdown Server.
+2025-03-06T17:14:51.632+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T17:15:25.497+0800	INFO	ChatRoom001/main.go:65	Shutdown Server.
+2025-03-06T17:18:05.682+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T17:21:34.794+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-06T17:22:25.902+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1272896}
+2025-03-06T17:22:46.968+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0858909}
+2025-03-06T17:28:01.194+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4364654}
+2025-03-06T17:28:31.495+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1130866}
+2025-03-06T17:28:41.905+0800	INFO	ChatRoom001/main.go:65	Shutdown Server.
+2025-03-06T17:40:30.575+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T17:41:01.172+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-06T17:41:26.250+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1022045}
+2025-03-06T17:43:08.266+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T17:43:12.125+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0953176}
+2025-03-06T17:44:16.005+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T17:44:17.766+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0826205}
+2025-03-06T17:44:45.898+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-06T17:45:15.106+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1045797}
+2025-03-06T18:16:09.835+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T18:16:18.310+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T18:36:29.375+0800	INFO	ChatRoom001/main.go:65	Shutdown Server.
+2025-03-06T18:36:38.244+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T18:36:40.516+0800	INFO	ChatRoom001/main.go:65	Shutdown Server.
+2025-03-06T18:36:45.194+0800	INFO	ChatRoom001/main.go:39	server start success
+2025-03-06T19:19:42.929+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-06T19:19:49.110+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "body": "{\r\n  \"email\": \"1492568061@qq.com\",\r\n  \"password\": \"123456\",\r\n  \"code\": \"HzRJSC\"\r\n}"}
+2025-03-06T19:19:49.111+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0030821}
+2025-03-06T19:20:40.772+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "body": ""}
+2025-03-06T19:20:40.772+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0005036}
+2025-03-06T19:20:40.803+0800	INFO	middlewares/logger.go:60	/favicon.ico	{"status": 404, "method": "GET", "path": "/favicon.ico", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-06T19:23:26.862+0800	INFO	ChatRoom001/main.go:65	Shutdown Server.
+2025-03-06T19:23:56.911+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-06T19:24:18.894+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-06T19:27:27.913+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "body": "{\r\n  \"email\": \"1492568061@qq.com\",\r\n  \"password\": \"123456\",\r\n  \"code\": \"HzRJSC\"\r\n}"}
+2025-03-06T19:27:27.913+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-06T19:28:07.555+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "body": "{\r\n  \"email\": \"1492568061@qq.com\",\r\n  \"password\": \"123456\",\r\n  \"code\": \"HzRJSC\"\r\n}"}
+2025-03-06T19:28:07.555+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-06T19:28:48.782+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "body": ""}
+2025-03-06T19:28:48.782+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.000504}
+2025-03-06T20:27:52.398+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "body": ""}
+2025-03-06T20:27:52.399+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0005043}
+2025-03-06T20:27:52.438+0800	INFO	middlewares/logger.go:60	/favicon.ico	{"status": 404, "method": "GET", "path": "/favicon.ico", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-06T20:28:16.626+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "body": ""}
+2025-03-06T20:28:16.626+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-06T20:28:17.903+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "body": ""}
+2025-03-06T20:28:17.915+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0112695}
+2025-03-06T20:28:19.019+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "body": ""}
+2025-03-06T20:28:19.019+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-06T23:11:38.182+0800	INFO	ChatRoom001/main.go:63	Shutdown Server.
+2025-03-07T11:37:55.051+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T11:38:24.460+0800	INFO	router/router.go:23	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "body": "\n\n\n\n"}
+2025-03-07T11:38:24.463+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0030773}
+2025-03-07T11:39:03.150+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 404, "method": "GET", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T11:39:35.149+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 404, "method": "GET", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T11:39:38.873+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0148418}
+2025-03-07T11:40:03.849+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1015155}
+2025-03-07T11:44:58.921+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.191122}
+2025-03-07T11:45:09.999+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0872933}
+2025-03-07T11:45:37.622+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T11:46:06.781+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0875839}
+2025-03-07T12:09:13.806+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T12:10:36.794+0800	INFO	ChatRoom001/main.go:63	Shutdown Server.
+2025-03-07T13:32:01.713+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:37:05.331+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:37:57.228+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 404, "method": "GET", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T13:38:04.446+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T13:38:16.347+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1237057}
+2025-03-07T13:39:26.560+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:39:29.931+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 404, "method": "GET", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T13:39:33.765+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T13:39:46.340+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1050087}
+2025-03-07T13:40:54.445+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:40:56.219+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 404, "method": "GET", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T13:41:01.020+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T13:41:14.806+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2539093}
+2025-03-07T13:50:22.547+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:58:30.288+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:59:32.843+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T13:59:36.098+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0494407}
+2025-03-07T16:26:37.935+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T16:27:01.997+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3427367}
+2025-03-07T16:34:03.419+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T16:40:34.990+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T16:42:46.291+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T16:43:06.921+0800	INFO	ChatRoom001/main.go:36	server start success
+2025-03-07T16:44:15.450+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T16:48:34.146+0800	INFO	ChatRoom001/main.go:66	server start success
+2025-03-07T16:49:11.732+0800	INFO	ChatRoom001/main.go:67	server start success
+2025-03-07T16:50:03.143+0800	INFO	ChatRoom001/main.go:68	server start success
+2025-03-07T16:53:13.358+0800	INFO	ChatRoom001/main.go:68	server start success
+2025-03-07T16:53:40.862+0800	INFO	ChatRoom001/main.go:68	server start success
+2025-03-07T16:54:09.042+0800	INFO	ChatRoom001/main.go:68	server start success
+2025-03-07T16:54:43.473+0800	INFO	ChatRoom001/main.go:68	server start success
+2025-03-07T16:56:58.923+0800	INFO	ChatRoom001/main.go:68	server start success
+2025-03-07T16:59:45.363+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T16:59:57.889+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4329211}
+2025-03-07T17:03:58.425+0800	INFO	ChatRoom001/main.go:67	server start success
