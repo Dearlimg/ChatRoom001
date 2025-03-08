@@ -256,3 +256,27 @@
 2025-03-08T17:19:23.819+0800	INFO	ChatRoom001/main.go:37	server start success
 2025-03-08T17:20:05.109+0800	INFO	ChatRoom001/main.go:37	server start success
 2025-03-08T17:21:47.542+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:25:29.467+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T17:29:00.466+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T17:29:14.777+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T17:35:15.803+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T17:36:36.805+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-08T17:37:09.883+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 500, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.3234636}
+2025-03-08T17:38:01.042+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0227812}
+2025-03-08T17:42:35.084+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T17:46:25.996+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T17:46:31.877+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2083487}
+2025-03-08T17:47:28.704+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-08T17:48:01.327+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0752318}
+2025-03-08T17:48:49.312+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-08T17:49:08.330+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0267206}
+2025-03-08T17:49:17.274+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0276688}
+2025-03-08T17:53:12.064+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 500, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.2592394}
+2025-03-08T18:14:47.268+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T18:15:06.070+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1893013}
+2025-03-08T18:16:01.991+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T18:18:05.175+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T18:19:32.729+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-08T18:20:01.260+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.5469501}
+2025-03-08T18:23:01.792+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-08T18:23:31.938+0800	INFO	ChatRoom001/main.go:34	server start success

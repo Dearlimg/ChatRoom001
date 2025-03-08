@@ -8,7 +8,6 @@ import (
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/reply"
-	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/password"
 	"github.com/gin-gonic/gin"
@@ -46,7 +45,6 @@ func (user) Register(ctx *gin.Context, emailStr, pwd, code string) (*reply.Param
 	}
 	// 添加邮箱到 redis
 	err = dao.Database.Redis.AddEmails(ctx, emailStr)
-	fmt.Println("logic user 49 : add email success to redis ", emailStr)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -90,7 +88,6 @@ func (user) Login(ctx *gin.Context, emailStr, pwd string) (*reply.ParamLogin, er
 		return nil, errcodes.PasswordNotValid
 	}
 	//token
-	//fmt.Println("logic user 93:", model.UserToken, userInfo.ID, global.PrivateSetting.Token.AccessTokenExpire, global.PrivateSetting.Token.RefreshTokenExpire)
 	accessToken, accessPayload, err := newUserToken(model.UserToken, userInfo.ID, global.PrivateSetting.Token.AccessTokenExpire)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
@@ -101,7 +98,6 @@ func (user) Login(ctx *gin.Context, emailStr, pwd string) (*reply.ParamLogin, er
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
-	//fmt.Println(reflashToken, accessToken, accessPayload)
 	if err = dao.Database.Redis.SaveUserToken(ctx, userInfo.ID, []string{accessToken, reflashToken}); err != nil {
 		return nil, errcode.ErrServer.WithDetails(err.Error())
 	}
