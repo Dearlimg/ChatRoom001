@@ -1,4 +1,4 @@
-mysql:
+Mysql:
   DriverName: mysql # 驱动名称
   SourceName: root:123456@tcp(123.249.32.125:3306)/chatroom?charset=utf8mb4&parseTime=True
 #  SourceName: user=root password=123456 host=123.249.32.125 port=3306 dbname=ChatRoom sslmode=disable # 数据源名称

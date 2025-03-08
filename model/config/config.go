@@ -31,12 +31,12 @@ type PublicConfig struct {
 }
 
 type PrivateConfig struct {
-	Mysql     MysqlConfig  `yaml:"Mysql"`
-	Redis     RedisCluster `yaml:"Redis"`
-	Email     Email        `yaml:"Email"`
-	Token     Token        `yaml:"Token"`
-	HuaWeiOBS HuaWeiOBS    `yaml:"HuaWeiOBS"`
-	RocketMQ  RocketMQ     `yaml:"RocketMQ"`
+	Mysql        MysqlConfig  `yaml:"Mysql"`
+	RedisCluster RedisCluster `yaml:"RedisCluster"`
+	Email        Email        `yaml:"Email"`
+	Token        Token        `yaml:"Token"`
+	HuaWeiOBS    HuaWeiOBS    `yaml:"HuaWeiOBS"`
+	RocketMQ     RocketMQ     `yaml:"RocketMQ"`
 }
 
 type LogConfig struct {
@@ -163,8 +163,6 @@ type RedisCluster struct {
 	ReadOnly             bool          `yaml:"ReadOnly"`
 	DisableAutoReconnect bool          `yaml:"DisableAutoReconnect"`
 }
-
-////////////////////////////////////////////////////////////////////////////
 
 type RedisNode struct {
 	Address  string `yaml:"Address"`  // Redis 节点地址

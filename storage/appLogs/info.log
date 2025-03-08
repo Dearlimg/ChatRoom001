@@ -207,3 +207,52 @@
 2025-03-07T16:59:45.363+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
 2025-03-07T16:59:57.889+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4329211}
 2025-03-07T17:03:58.425+0800	INFO	ChatRoom001/main.go:67	server start success
+2025-03-07T17:05:05.306+0800	INFO	ChatRoom001/main.go:94	Shutdown Server.
+2025-03-07T17:11:41.806+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:16:55.370+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:19:21.260+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:20:44.892+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:34:09.890+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:42:28.845+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:54:34.496+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T17:55:36.806+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 404, "method": "GET", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-07T17:55:40.484+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2412507}
+2025-03-07T18:11:05.226+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:11:07.619+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2485797}
+2025-03-07T18:11:36.475+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1771106}
+2025-03-07T18:11:39.807+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:11:41.902+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2481093}
+2025-03-07T18:12:20.882+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:12:22.684+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2562509}
+2025-03-07T18:14:41.040+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:14:43.423+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.1736319}
+2025-03-07T18:14:50.505+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.1578514}
+2025-03-07T18:23:01.967+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:24:08.365+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:24:13.418+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.0605816}
+2025-03-07T18:24:42.468+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:24:44.482+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.2020047}
+2025-03-07T18:25:00.001+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:25:02.914+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.0138985}
+2025-03-07T18:27:52.558+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:27:55.255+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.1127017}
+2025-03-07T18:33:22.358+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:36:08.885+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:37:51.825+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:54:34.444+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T18:54:58.532+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:01:53.543+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:04:46.022+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:05:39.065+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:09:14.159+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:09:35.635+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:11:51.940+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-07T19:41:37.902+0800	INFO	ChatRoom001/main.go:64	Shutdown Server.
+2025-03-08T17:07:14.201+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:10:52.889+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:11:59.682+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:14:06.466+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:15:14.891+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:19:23.819+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:20:05.109+0800	INFO	ChatRoom001/main.go:37	server start success
+2025-03-08T17:21:47.542+0800	INFO	ChatRoom001/main.go:37	server start success

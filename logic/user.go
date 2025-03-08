@@ -80,3 +80,42 @@ func (user) Register(ctx *gin.Context, emailStr, pwd, code string) (*reply.Param
 		},
 	}, nil
 }
+
+func (user) Login(ctx *gin.Context, emailStr, pwd string) (*reply.ParamLogin, errcode.Err) {
+	userInfo, err := dao.Database.DB.GetUserByEmail(ctx, emailStr)
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+	}
+	if err := password.CheckPassword(pwd, userInfo.Password); err != nil {
+		return nil, errcodes.PasswordNotValid
+	}
+	//token
+	//fmt.Println("logic user 93:", model.UserToken, userInfo.ID, global.PrivateSetting.Token.AccessTokenExpire, global.PrivateSetting.Token.RefreshTokenExpire)
+	accessToken, accessPayload, err := newUserToken(model.UserToken, userInfo.ID, global.PrivateSetting.Token.AccessTokenExpire)
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+	reflashToken, _, err := newUserToken(model.UserToken, userInfo.ID, global.PrivateSetting.Token.RefreshTokenExpire)
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+	//fmt.Println(reflashToken, accessToken, accessPayload)
+	if err = dao.Database.Redis.SaveUserToken(ctx, userInfo.ID, []string{accessToken, reflashToken}); err != nil {
+		return nil, errcode.ErrServer.WithDetails(err.Error())
+	}
+	return &reply.ParamLogin{
+		ParamUserInfo: reply.ParamUserInfo{
+			ID:       userInfo.ID,
+			Email:    userInfo.Email,
+			CreateAt: userInfo.CreateAt,
+		},
+		Token: reply.ParamToken{
+			AccessToken:   accessToken,
+			AccessPayload: accessPayload,
+			RefreshToken:  reflashToken,
+		},
+	}, nil
+
+}

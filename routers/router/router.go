@@ -13,8 +13,7 @@ import (
 
 func NewRouter() (*gin.Engine, *socketio.Server) {
 	r := gin.New()
-	//r.Use(middlewares.Cors(), middlewares.GinLogger(), middlewares.Recovery(true))
-	r.Use(middlewares.GinLogger(), middlewares.Recovery(true))
+	r.Use(middlewares.Cors(), middlewares.GinLogger(), middlewares.Recovery(true))
 	root := r.Group("api", middlewares.LogBody())
 	{
 		root.GET("swagger/*any", gs.WrapHandler(swaggerFiles.Handler))

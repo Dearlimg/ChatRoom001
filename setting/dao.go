@@ -12,5 +12,5 @@ type database struct {
 
 func (d database) Init() {
 	dao.Database.DB = mysql.Init(global.PrivateSetting.Mysql.SourceName)
-	dao.Database.Redis = redis.Init(global.PrivateSetting.Redis)
+	dao.Database.Redis = redis.Init(global.PrivateSetting.RedisCluster)
 }
