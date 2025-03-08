@@ -1,9 +1,11 @@
 package middlewares
 
 import (
+	"ChatRoom001/dao"
 	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
 	"ChatRoom001/model"
+	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/token"
 	"github.com/gin-gonic/gin"
@@ -61,5 +63,61 @@ func PasetoAuth() func(c *gin.Context) {
 		c.Set(global.PrivateSetting.Token.AuthorizationKey, content)
 		c.Next()
 	}
+}
 
+func MustUser() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		reply := app.NewResponse(c)
+		val, ok := c.Get(global.PrivateSetting.Token.AuthorizationKey)
+		if !ok {
+			reply.Reply(errcodes.AuthNotExist)
+			c.Abort()
+			return
+		}
+		data := val.(*model.Content)
+		if data.TokenType != model.UserToken {
+			reply.Reply(errcodes.AuthenticationFailed)
+			c.Abort()
+			return
+		}
+		ok, err := dao.Database.DB.ExistsUserByID(c, data.ID)
+		if err != nil {
+			global.Logger.Error(err.Error(), ErrLogMsg(c)...)
+			reply.Reply(errcode.ErrServer)
+			c.Abort()
+			return
+		}
+		if !ok {
+			reply.Reply(errcodes.UserNotFound)
+			c.Abort()
+			return
+		}
+		c.Next()
+	}
+}
+
+func MustAccount() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		reply := app.NewResponse(c)
+		val, ok := c.Get(global.PrivateSetting.Token.AuthorizationKey)
+		if !ok {
+			reply.Reply(errcodes.AuthNotExist)
+			c.Abort()
+			return
+		}
+		data := val.(*model.Content)
+		if data.TokenType != model.AccountToken {
+			reply.Reply(errcodes.AuthenticationFailed)
+			c.Abort()
+			return
+		}
+	}
+}
+
+func GetTokenContent(ctx *gin.Context) (*model.Content, bool) {
+	value, ok := ctx.Get(global.PrivateSetting.Token.AuthorizationKey)
+	if !ok {
+		return nil, false
+	}
+	return value.(*model.Content), true
 }

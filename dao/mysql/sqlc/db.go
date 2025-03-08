@@ -24,20 +24,41 @@ func New(db DBTX) *Queries {
 func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	q := Queries{db: db}
 	var err error
+	if q.countAccountByUserIDStmt, err = db.PrepareContext(ctx, countAccountByUserID); err != nil {
+		return nil, fmt.Errorf("error preparing query CountAccountByUserID: %w", err)
+	}
 	if q.createAccountStmt, err = db.PrepareContext(ctx, createAccount); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateAccount: %w", err)
 	}
 	if q.createUserStmt, err = db.PrepareContext(ctx, createUser); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateUser: %w", err)
 	}
+	if q.deleteAccountStmt, err = db.PrepareContext(ctx, deleteAccount); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteAccount: %w", err)
+	}
+	if q.deleteAccountByUserIDStmt, err = db.PrepareContext(ctx, deleteAccountByUserID); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteAccountByUserID: %w", err)
+	}
 	if q.deleteUserStmt, err = db.PrepareContext(ctx, deleteUser); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteUser: %w", err)
+	}
+	if q.existAccountByIDStmt, err = db.PrepareContext(ctx, existAccountByID); err != nil {
+		return nil, fmt.Errorf("error preparing query ExistAccountByID: %w", err)
 	}
 	if q.existEmailStmt, err = db.PrepareContext(ctx, existEmail); err != nil {
 		return nil, fmt.Errorf("error preparing query ExistEmail: %w", err)
 	}
 	if q.existsUserByIDStmt, err = db.PrepareContext(ctx, existsUserByID); err != nil {
 		return nil, fmt.Errorf("error preparing query ExistsUserByID: %w", err)
+	}
+	if q.getAccountByIDStmt, err = db.PrepareContext(ctx, getAccountByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAccountByID: %w", err)
+	}
+	if q.getAccountByUserIDStmt, err = db.PrepareContext(ctx, getAccountByUserID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAccountByUserID: %w", err)
+	}
+	if q.getAccountsByNameStmt, err = db.PrepareContext(ctx, getAccountsByName); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAccountsByName: %w", err)
 	}
 	if q.getAcountIDsByUserIDStmt, err = db.PrepareContext(ctx, getAcountIDsByUserID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAcountIDsByUserID: %w", err)
@@ -51,6 +72,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getUserByIDStmt, err = db.PrepareContext(ctx, getUserByID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetUserByID: %w", err)
 	}
+	if q.updateAccountStmt, err = db.PrepareContext(ctx, updateAccount); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateAccount: %w", err)
+	}
+	if q.updateAccountAvatarStmt, err = db.PrepareContext(ctx, updateAccountAvatar); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateAccountAvatar: %w", err)
+	}
 	if q.updateUserStmt, err = db.PrepareContext(ctx, updateUser); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateUser: %w", err)
 	}
@@ -59,6 +86,11 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 
 func (q *Queries) Close() error {
 	var err error
+	if q.countAccountByUserIDStmt != nil {
+		if cerr := q.countAccountByUserIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing countAccountByUserIDStmt: %w", cerr)
+		}
+	}
 	if q.createAccountStmt != nil {
 		if cerr := q.createAccountStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createAccountStmt: %w", cerr)
@@ -69,9 +101,24 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing createUserStmt: %w", cerr)
 		}
 	}
+	if q.deleteAccountStmt != nil {
+		if cerr := q.deleteAccountStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteAccountStmt: %w", cerr)
+		}
+	}
+	if q.deleteAccountByUserIDStmt != nil {
+		if cerr := q.deleteAccountByUserIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteAccountByUserIDStmt: %w", cerr)
+		}
+	}
 	if q.deleteUserStmt != nil {
 		if cerr := q.deleteUserStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing deleteUserStmt: %w", cerr)
+		}
+	}
+	if q.existAccountByIDStmt != nil {
+		if cerr := q.existAccountByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing existAccountByIDStmt: %w", cerr)
 		}
 	}
 	if q.existEmailStmt != nil {
@@ -82,6 +129,21 @@ func (q *Queries) Close() error {
 	if q.existsUserByIDStmt != nil {
 		if cerr := q.existsUserByIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing existsUserByIDStmt: %w", cerr)
+		}
+	}
+	if q.getAccountByIDStmt != nil {
+		if cerr := q.getAccountByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAccountByIDStmt: %w", cerr)
+		}
+	}
+	if q.getAccountByUserIDStmt != nil {
+		if cerr := q.getAccountByUserIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAccountByUserIDStmt: %w", cerr)
+		}
+	}
+	if q.getAccountsByNameStmt != nil {
+		if cerr := q.getAccountsByNameStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAccountsByNameStmt: %w", cerr)
 		}
 	}
 	if q.getAcountIDsByUserIDStmt != nil {
@@ -102,6 +164,16 @@ func (q *Queries) Close() error {
 	if q.getUserByIDStmt != nil {
 		if cerr := q.getUserByIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getUserByIDStmt: %w", cerr)
+		}
+	}
+	if q.updateAccountStmt != nil {
+		if cerr := q.updateAccountStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateAccountStmt: %w", cerr)
+		}
+	}
+	if q.updateAccountAvatarStmt != nil {
+		if cerr := q.updateAccountAvatarStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateAccountAvatarStmt: %w", cerr)
 		}
 	}
 	if q.updateUserStmt != nil {
@@ -146,33 +218,51 @@ func (q *Queries) queryRow(ctx context.Context, stmt *sql.Stmt, query string, ar
 }
 
 type Queries struct {
-	db                       DBTX
-	tx                       *sql.Tx
-	createAccountStmt        *sql.Stmt
-	createUserStmt           *sql.Stmt
-	deleteUserStmt           *sql.Stmt
-	existEmailStmt           *sql.Stmt
-	existsUserByIDStmt       *sql.Stmt
-	getAcountIDsByUserIDStmt *sql.Stmt
-	getAllEmailStmt          *sql.Stmt
-	getUserByEmailStmt       *sql.Stmt
-	getUserByIDStmt          *sql.Stmt
-	updateUserStmt           *sql.Stmt
+	db                        DBTX
+	tx                        *sql.Tx
+	countAccountByUserIDStmt  *sql.Stmt
+	createAccountStmt         *sql.Stmt
+	createUserStmt            *sql.Stmt
+	deleteAccountStmt         *sql.Stmt
+	deleteAccountByUserIDStmt *sql.Stmt
+	deleteUserStmt            *sql.Stmt
+	existAccountByIDStmt      *sql.Stmt
+	existEmailStmt            *sql.Stmt
+	existsUserByIDStmt        *sql.Stmt
+	getAccountByIDStmt        *sql.Stmt
+	getAccountByUserIDStmt    *sql.Stmt
+	getAccountsByNameStmt     *sql.Stmt
+	getAcountIDsByUserIDStmt  *sql.Stmt
+	getAllEmailStmt           *sql.Stmt
+	getUserByEmailStmt        *sql.Stmt
+	getUserByIDStmt           *sql.Stmt
+	updateAccountStmt         *sql.Stmt
+	updateAccountAvatarStmt   *sql.Stmt
+	updateUserStmt            *sql.Stmt
 }
 
 func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 	return &Queries{
-		db:                       tx,
-		tx:                       tx,
-		createAccountStmt:        q.createAccountStmt,
-		createUserStmt:           q.createUserStmt,
-		deleteUserStmt:           q.deleteUserStmt,
-		existEmailStmt:           q.existEmailStmt,
-		existsUserByIDStmt:       q.existsUserByIDStmt,
-		getAcountIDsByUserIDStmt: q.getAcountIDsByUserIDStmt,
-		getAllEmailStmt:          q.getAllEmailStmt,
-		getUserByEmailStmt:       q.getUserByEmailStmt,
-		getUserByIDStmt:          q.getUserByIDStmt,
-		updateUserStmt:           q.updateUserStmt,
+		db:                        tx,
+		tx:                        tx,
+		countAccountByUserIDStmt:  q.countAccountByUserIDStmt,
+		createAccountStmt:         q.createAccountStmt,
+		createUserStmt:            q.createUserStmt,
+		deleteAccountStmt:         q.deleteAccountStmt,
+		deleteAccountByUserIDStmt: q.deleteAccountByUserIDStmt,
+		deleteUserStmt:            q.deleteUserStmt,
+		existAccountByIDStmt:      q.existAccountByIDStmt,
+		existEmailStmt:            q.existEmailStmt,
+		existsUserByIDStmt:        q.existsUserByIDStmt,
+		getAccountByIDStmt:        q.getAccountByIDStmt,
+		getAccountByUserIDStmt:    q.getAccountByUserIDStmt,
+		getAccountsByNameStmt:     q.getAccountsByNameStmt,
+		getAcountIDsByUserIDStmt:  q.getAcountIDsByUserIDStmt,
+		getAllEmailStmt:           q.getAllEmailStmt,
+		getUserByEmailStmt:        q.getUserByEmailStmt,
+		getUserByIDStmt:           q.getUserByIDStmt,
+		updateAccountStmt:         q.updateAccountStmt,
+		updateAccountAvatarStmt:   q.updateAccountAvatarStmt,
+		updateUserStmt:            q.updateUserStmt,
 	}
 }

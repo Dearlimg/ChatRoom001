@@ -13,6 +13,7 @@ func (user) Init(router *gin.RouterGroup) {
 	{
 		r.POST("register", api.Apis.User.Register)
 		r.POST("/login", api.Apis.User.Login)
+		r.DELETE("/logout", api.Apis.User.Logout)
 	}
 	r.DELETE("deleteUser")
 }

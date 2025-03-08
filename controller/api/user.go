@@ -32,3 +32,14 @@ func (user) Register(ctx *gin.Context) {
 	result, err := logic.Logics.User.Register(ctx, params.Email, params.Password, params.Code)
 	reply.Reply(err, result)
 }
+
+func (user) Logout(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	if err := logic.Logics.User.Logout(ctx); err != nil {
+		reply.Reply(err)
+		return
+	}
+	reply.Reply(nil, gin.H{
+		"msg": "登出成功",
+	})
+}

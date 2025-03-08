@@ -7,7 +7,6 @@ package db
 import (
 	"database/sql"
 	"database/sql/driver"
-	"encoding/json"
 	"fmt"
 	"time"
 )
@@ -140,90 +139,6 @@ func (ns NullFilesFileType) Value() (driver.Value, error) {
 	return string(ns.FilesFileType), nil
 }
 
-type MessagesMsgType string
-
-const (
-	MessagesMsgTypeText MessagesMsgType = "text"
-	MessagesMsgTypeFile MessagesMsgType = "file"
-)
-
-func (e *MessagesMsgType) Scan(src interface{}) error {
-	switch s := src.(type) {
-	case []byte:
-		*e = MessagesMsgType(s)
-	case string:
-		*e = MessagesMsgType(s)
-	default:
-		return fmt.Errorf("unsupported scan type for MessagesMsgType: %T", src)
-	}
-	return nil
-}
-
-type NullMessagesMsgType struct {
-	MessagesMsgType MessagesMsgType
-	Valid           bool // Valid is true if MessagesMsgType is not NULL
-}
-
-// Scan implements the Scanner interface.
-func (ns *NullMessagesMsgType) Scan(value interface{}) error {
-	if value == nil {
-		ns.MessagesMsgType, ns.Valid = "", false
-		return nil
-	}
-	ns.Valid = true
-	return ns.MessagesMsgType.Scan(value)
-}
-
-// Value implements the driver Valuer interface.
-func (ns NullMessagesMsgType) Value() (driver.Value, error) {
-	if !ns.Valid {
-		return nil, nil
-	}
-	return string(ns.MessagesMsgType), nil
-}
-
-type MessagesNotifyType string
-
-const (
-	MessagesNotifyTypeSystem MessagesNotifyType = "system"
-	MessagesNotifyTypeCommon MessagesNotifyType = "common"
-)
-
-func (e *MessagesNotifyType) Scan(src interface{}) error {
-	switch s := src.(type) {
-	case []byte:
-		*e = MessagesNotifyType(s)
-	case string:
-		*e = MessagesNotifyType(s)
-	default:
-		return fmt.Errorf("unsupported scan type for MessagesNotifyType: %T", src)
-	}
-	return nil
-}
-
-type NullMessagesNotifyType struct {
-	MessagesNotifyType MessagesNotifyType
-	Valid              bool // Valid is true if MessagesNotifyType is not NULL
-}
-
-// Scan implements the Scanner interface.
-func (ns *NullMessagesNotifyType) Scan(value interface{}) error {
-	if value == nil {
-		ns.MessagesNotifyType, ns.Valid = "", false
-		return nil
-	}
-	ns.Valid = true
-	return ns.MessagesNotifyType.Scan(value)
-}
-
-// Value implements the driver Valuer interface.
-func (ns NullMessagesNotifyType) Value() (driver.Value, error) {
-	if !ns.Valid {
-		return nil, nil
-	}
-	return string(ns.MessagesNotifyType), nil
-}
-
 type MsgNotificationsMsgType string
 
 const (
@@ -264,6 +179,48 @@ func (ns NullMsgNotificationsMsgType) Value() (driver.Value, error) {
 		return nil, nil
 	}
 	return string(ns.MsgNotificationsMsgType), nil
+}
+
+type RelationsGroupType string
+
+const (
+	RelationsGroupTypePublic  RelationsGroupType = "public"
+	RelationsGroupTypePrivate RelationsGroupType = "private"
+)
+
+func (e *RelationsGroupType) Scan(src interface{}) error {
+	switch s := src.(type) {
+	case []byte:
+		*e = RelationsGroupType(s)
+	case string:
+		*e = RelationsGroupType(s)
+	default:
+		return fmt.Errorf("unsupported scan type for RelationsGroupType: %T", src)
+	}
+	return nil
+}
+
+type NullRelationsGroupType struct {
+	RelationsGroupType RelationsGroupType
+	Valid              bool // Valid is true if RelationsGroupType is not NULL
+}
+
+// Scan implements the Scanner interface.
+func (ns *NullRelationsGroupType) Scan(value interface{}) error {
+	if value == nil {
+		ns.RelationsGroupType, ns.Valid = "", false
+		return nil
+	}
+	ns.Valid = true
+	return ns.RelationsGroupType.Scan(value)
+}
+
+// Value implements the driver Valuer interface.
+func (ns NullRelationsGroupType) Value() (driver.Value, error) {
+	if !ns.Valid {
+		return nil, nil
+	}
+	return string(ns.RelationsGroupType), nil
 }
 
 type RelationsRelationType string
@@ -338,36 +295,6 @@ type Group struct {
 	Avatar      sql.NullString
 }
 
-type GroupNotify struct {
-	ID            int64
-	RelationID    sql.NullInt64
-	MsgContent    string
-	MsgExpand     json.RawMessage
-	AccountID     sql.NullInt64
-	CreateAt      time.Time
-	ReadIds       json.RawMessage
-	MsgContentTsv sql.NullString
-}
-
-type Message struct {
-	ID            int64
-	NotifyType    MessagesNotifyType
-	MsgType       MessagesMsgType
-	MsgContent    string
-	MsgExtend     json.RawMessage
-	FileID        sql.NullInt64
-	AccountID     sql.NullInt64
-	RlyMsgID      sql.NullInt64
-	RelationID    int64
-	CreateAt      time.Time
-	IsRevoke      bool
-	IsTop         bool
-	IsPin         bool
-	PinTime       time.Time
-	ReadIds       json.RawMessage
-	MsgContentTsy sql.NullString
-}
-
 type MsgNotification struct {
 	ID       int64
 	MsgType  MsgNotificationsMsgType
@@ -376,26 +303,15 @@ type MsgNotification struct {
 }
 
 type Relation struct {
-	ID               int64
-	RelationType     RelationsRelationType
-	GroupName        sql.NullString
-	GroupDescription sql.NullString
-	Account1ID       sql.NullInt64
-	Account2ID       sql.NullInt64
-	CreateAt         time.Time
-}
-
-type Setting struct {
-	AccountID    int64
-	RelationID   int64
-	NickName     string
-	IsNotDisturb bool
-	IsPin        bool
-	PinTime      time.Time
-	IsShow       bool
-	LastShow     time.Time
-	IsLeader     bool
-	IsSelf       bool
+	ID           int64
+	RelationType RelationsRelationType
+	// 群组类型，仅 relation_type=group 时有效
+	GroupType NullRelationsGroupType
+	// 好友账号1 ID，仅 relation_type=friend 时有效
+	FriendAccount1ID sql.NullInt64
+	// 好友账号2 ID，仅 relation_type=friend 时有效
+	FriendAccount2ID sql.NullInt64
+	CreatedAt        sql.NullTime
 }
 
 type User struct {

@@ -7,7 +7,22 @@ package db
 
 import (
 	"context"
+	"database/sql"
+	"time"
 )
+
+const countAccountByUserID = `-- name: CountAccountByUserID :one
+SELECT COUNT(id) AS count
+FROM accounts
+WHERE user_id = ?
+`
+
+func (q *Queries) CountAccountByUserID(ctx context.Context, userID int64) (int64, error) {
+	row := q.queryRow(ctx, q.countAccountByUserIDStmt, countAccountByUserID, userID)
+	var count int64
+	err := row.Scan(&count)
+	return count, err
+}
 
 const createAccount = `-- name: CreateAccount :exec
 insert into accounts (id, user_id, name, avatar, gender, signature)
@@ -32,5 +47,267 @@ func (q *Queries) CreateAccount(ctx context.Context, arg *CreateAccountParams) e
 		arg.Gender,
 		arg.Signature,
 	)
+	return err
+}
+
+const deleteAccount = `-- name: DeleteAccount :exec
+delete
+from accounts
+where id = ?
+`
+
+func (q *Queries) DeleteAccount(ctx context.Context, id int64) error {
+	_, err := q.exec(ctx, q.deleteAccountStmt, deleteAccount, id)
+	return err
+}
+
+const deleteAccountByUserID = `-- name: DeleteAccountByUserID :exec
+delete
+from accounts
+where user_id = ?
+`
+
+func (q *Queries) DeleteAccountByUserID(ctx context.Context, userID int64) error {
+	_, err := q.exec(ctx, q.deleteAccountByUserIDStmt, deleteAccountByUserID, userID)
+	return err
+}
+
+const existAccountByID = `-- name: ExistAccountByID :one
+select exists(
+    select 1
+    from accounts
+    where id =?
+)
+`
+
+func (q *Queries) ExistAccountByID(ctx context.Context, id int64) (bool, error) {
+	row := q.queryRow(ctx, q.existAccountByIDStmt, existAccountByID, id)
+	var exists bool
+	err := row.Scan(&exists)
+	return exists, err
+}
+
+const getAccountByID = `-- name: GetAccountByID :many
+SELECT
+    a.id, a.user_id, a.name, a.avatar, a.gender, a.signature, a.create_at,
+    r.id AS relation_id
+FROM (
+         SELECT id, user_id, name, avatar, gender, signature, create_at
+         FROM accounts
+         WHERE accounts.user_id = ?
+     ) a
+         LEFT JOIN relations r
+                   ON r.relation_type = 'friend'
+                       AND (
+                          (r.friend_account1_id = a.id AND r.friend_account2_id = ?) -- 当前用户ID
+                              OR
+                          (r.friend_account1_id = ? AND r.friend_account2_id = a.id) -- 当前用户ID
+                          )
+LIMIT 1
+`
+
+type GetAccountByIDParams struct {
+	UserID           int64
+	FriendAccount2ID sql.NullInt64
+	FriendAccount1ID sql.NullInt64
+}
+
+type GetAccountByIDRow struct {
+	ID         int64
+	UserID     int64
+	Name       string
+	Avatar     string
+	Gender     AccountsGender
+	Signature  string
+	CreateAt   time.Time
+	RelationID sql.NullInt64
+}
+
+func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) ([]*GetAccountByIDRow, error) {
+	rows, err := q.query(ctx, q.getAccountByIDStmt, getAccountByID, arg.UserID, arg.FriendAccount2ID, arg.FriendAccount1ID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []*GetAccountByIDRow{}
+	for rows.Next() {
+		var i GetAccountByIDRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.UserID,
+			&i.Name,
+			&i.Avatar,
+			&i.Gender,
+			&i.Signature,
+			&i.CreateAt,
+			&i.RelationID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, &i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const getAccountByUserID = `-- name: GetAccountByUserID :many
+select id,name,avatar,gender
+from accounts
+where user_id = ?
+`
+
+type GetAccountByUserIDRow struct {
+	ID     int64
+	Name   string
+	Avatar string
+	Gender AccountsGender
+}
+
+func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetAccountByUserIDRow, error) {
+	rows, err := q.query(ctx, q.getAccountByUserIDStmt, getAccountByUserID, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []*GetAccountByUserIDRow{}
+	for rows.Next() {
+		var i GetAccountByUserIDRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.Avatar,
+			&i.Gender,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, &i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const getAccountsByName = `-- name: GetAccountsByName :many
+SELECT
+    a.id, a.name, a.avatar, a.gender,
+    r.id AS relation_id,
+    (SELECT COUNT(*) FROM accounts WHERE name LIKE CONCAT('%', ?, '%')) AS total
+FROM (
+         SELECT id, name, avatar, gender
+         FROM accounts
+         WHERE name LIKE CONCAT('%', ?, '%')
+     ) AS a
+         LEFT JOIN relations r
+                   ON r.relation_type = 'friend'
+                       AND (
+                          (r.friend_account1_id = a.id AND r.friend_account2_id = ?)
+                              OR
+                          (r.friend_account1_id = ? AND r.friend_account2_id = a.id)
+                          )
+LIMIT ? OFFSET ?
+`
+
+type GetAccountsByNameParams struct {
+	CONCAT           interface{}
+	CONCAT_2         interface{}
+	FriendAccount2ID sql.NullInt64
+	FriendAccount1ID sql.NullInt64
+	Limit            int32
+	Offset           int32
+}
+
+type GetAccountsByNameRow struct {
+	ID         int64
+	Name       string
+	Avatar     string
+	Gender     AccountsGender
+	RelationID sql.NullInt64
+	Total      int64
+}
+
+func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error) {
+	rows, err := q.query(ctx, q.getAccountsByNameStmt, getAccountsByName,
+		arg.CONCAT,
+		arg.CONCAT_2,
+		arg.FriendAccount2ID,
+		arg.FriendAccount1ID,
+		arg.Limit,
+		arg.Offset,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []*GetAccountsByNameRow{}
+	for rows.Next() {
+		var i GetAccountsByNameRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.Avatar,
+			&i.Gender,
+			&i.RelationID,
+			&i.Total,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, &i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const updateAccount = `-- name: UpdateAccount :exec
+update accounts
+set name = ?,
+    gender=?,
+    signature=?
+where id =?
+`
+
+type UpdateAccountParams struct {
+	Name      string
+	Gender    AccountsGender
+	Signature string
+	ID        int64
+}
+
+func (q *Queries) UpdateAccount(ctx context.Context, arg *UpdateAccountParams) error {
+	_, err := q.exec(ctx, q.updateAccountStmt, updateAccount,
+		arg.Name,
+		arg.Gender,
+		arg.Signature,
+		arg.ID,
+	)
+	return err
+}
+
+const updateAccountAvatar = `-- name: UpdateAccountAvatar :exec
+update accounts
+set avatar = ?
+where id = ?
+`
+
+type UpdateAccountAvatarParams struct {
+	Avatar string
+	ID     int64
+}
+
+func (q *Queries) UpdateAccountAvatar(ctx context.Context, arg *UpdateAccountAvatarParams) error {
+	_, err := q.exec(ctx, q.updateAccountAvatarStmt, updateAccountAvatar, arg.Avatar, arg.ID)
 	return err
 }

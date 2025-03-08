@@ -44,9 +44,6 @@ func (m *EmailMark) SendMark(emailStr, code string) error {
 	sendMark := email.NewEmail(&m.config.SMTPInfo)
 
 	err := sendMark.SendMail([]string{emailStr}, fmt.Sprintf("%s邮箱验证码", m.config.AppName), fmt.Sprintf("<h1>邮箱验证码</h1>尊敬的用户您好！<br>您的验证码是：%s，请在 %v 分钟内进行验证。O(∩_∩)~", code, m.config.CodeMarkDuration.Minutes()))
-
-	fmt.Println("pkg/emailmark/48/发送邮件成功", code)
-
 	if err != nil {
 		// 发送失败删除标记
 		m.userMark.Delete(emailStr)
@@ -54,7 +51,6 @@ func (m *EmailMark) SendMark(emailStr, code string) error {
 	}
 
 	m.codeMark.Store(emailStr, code)
-	fmt.Println("SendMark:", emailStr, code)
 	m.DeleteMarkDelay(emailStr)
 	return nil
 }
@@ -72,8 +68,6 @@ func (m *EmailMark) DeleteMarkDelay(emailStr string) {
 // CheckCode 校验验证码
 func (m *EmailMark) CheckCode(emailStr, code string) bool {
 	myCode, ok := m.codeMark.Load(emailStr)
-	fmt.Println(emailStr, code, myCode, ok)
-	fmt.Println("删除成功myCode", emailStr, myCode)
 	// 验证成功删除标记
 	if ok && myCode == code {
 		m.codeMark.Delete(emailStr)
