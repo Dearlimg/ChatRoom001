@@ -3,6 +3,7 @@
   <component name="GoImports">
     <option name="excludedPackages">
       <array>
+        <option value="errors" />
         <option value="github.com/redis/go-redis/v9" />
       </array>
     </option>
