@@ -37,41 +37,6 @@ type SqlStore struct {
 	Pool        *sql.DB
 }
 
-func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB, maxAccountNum int32, arg *db.CreateAccountParams) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB, accountID int64) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (store *SqlStore) DeleteRelationWithTx(ctx context.Context, rdb *operate.RDB, relationID int64) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (store *SqlStore) AddSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64, isLeader bool) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (store *SqlStore) TransferGroupWithTx(ctx context.Context, accountID, relationID, toAccountID int64) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (store *SqlStore) DeleteSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64) error {
-	//TODO implement me
-	panic("implement me")
-}
-
-func (store *SqlStore) RevokeMsgWithTx(ctx context.Context, msgID int64, isPin, isTop bool) error {
-	//TODO implement me
-	panic("implement me")
-}
-
 func (store *SqlStore) execTx(ctx context.Context, fn func(queries *db.Queries) error) error {
 	// 开启数据库事务
 	tx, err := store.Pool.BeginTx(ctx, &sql.TxOptions{

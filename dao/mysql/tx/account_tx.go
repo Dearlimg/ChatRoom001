@@ -28,5 +28,25 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 			return ErrAccountOverNum
 		}
 		// 检查账户名
-	}
+		var exists bool
+		err = tool.DoThat(err, func() error {
+			exists, err = queries.ExistsAccountByNameAndUserID(ctx, &db.ExistsAccountByNameAndUserIDParams{
+				UserID: arg.UserID,
+				Name:   arg.Name,
+			})
+			return err
+		})
+		if exists {
+			return ErrAccountNameExist
+		}
+		// 创建账户
+		err = tool.DoThat(err, func() error {
+			return queries.CreateAccount(ctx, arg)
+		})
+		// 建立关系(自己与自己的好友关系)
+		var relationID int64
+		err = tool.DoThat(err, func() error {
+			relationID, err = queries.Crea
+		})
+	})
 }

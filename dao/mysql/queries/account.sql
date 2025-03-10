@@ -62,7 +62,13 @@ SELECT COUNT(id) AS count
 FROM accounts
 WHERE user_id = ?;
 
-
+-- name: ExistsAccountByNameAndUserID :one
+select exists(
+    select 1
+    from accounts
+    where user_id=?
+    and name =?
+);
 
 -- name: GetAccountsByName :many
 SELECT

@@ -87,6 +87,27 @@ func (q *Queries) ExistAccountByID(ctx context.Context, id int64) (bool, error) 
 	return exists, err
 }
 
+const existsAccountByNameAndUserID = `-- name: ExistsAccountByNameAndUserID :one
+select exists(
+    select 1
+    from accounts
+    where user_id=?
+    and name =?
+)
+`
+
+type ExistsAccountByNameAndUserIDParams struct {
+	UserID int64
+	Name   string
+}
+
+func (q *Queries) ExistsAccountByNameAndUserID(ctx context.Context, arg *ExistsAccountByNameAndUserIDParams) (bool, error) {
+	row := q.queryRow(ctx, q.existsAccountByNameAndUserIDStmt, existsAccountByNameAndUserID, arg.UserID, arg.Name)
+	var exists bool
+	err := row.Scan(&exists)
+	return exists, err
+}
+
 const getAccountByID = `-- name: GetAccountByID :many
 SELECT
     a.id, a.user_id, a.name, a.avatar, a.gender, a.signature, a.create_at,

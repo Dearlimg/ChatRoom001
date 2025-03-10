@@ -1,5 +1,7 @@
 USE chatroom;
 
+
+
 -- 性别类型
 # CREATE TABLE users (
 #                        id INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,23 +32,6 @@ CREATE TABLE IF NOT EXISTS users (
 -- 创建复合索引
 CREATE INDEX idx_users_email_id_password_create_at ON users (email, id, password, create_at);
 
-# explain  SELECT email, create_at
-# FROM users
-# WHERE email = '1492568061@qq.com'
-# ORDER BY create_at;
-
--- 创建账号表
-# CREATE TABLE IF NOT EXISTS accounts (
-#                                         id BIGINT PRIMARY KEY, -- 账号 id
-#                                         user_id BIGINT NOT NULL, -- 用户 id（外键）
-#                                         name VARCHAR(255) NOT NULL, -- 账号名
-#                                         avatar VARCHAR(255) NOT NULL, -- 账号头像
-#                                         gender ENUM('男', '女', '未知') NOT NULL DEFAULT '未知', -- 账号性别
-#                                         signature TEXT NOT NULL DEFAULT '这个用户很懒，什么也没有留下~', -- 账号签名
-#                                         create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
-#                                         CONSTRAINT account_unique_name UNIQUE (user_id, name), -- 一个用户的不同账号名不能重复
-#                                         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE -- 外键约束
-# );
 
 CREATE TABLE IF NOT EXISTS accounts (
                                         id BIGINT PRIMARY KEY,                                -- 账号 id
@@ -82,6 +67,50 @@ CREATE INDEX account_index_name_avatar ON accounts(name, avatar);
 #                                              (relation_type = 'friend' AND account1_id IS NOT NULL AND account2_id IS NOT NULL)
 #                                              ) -- 检查约束，确保群组或好友信息互斥
 # );
+
+-- 创建统一关系表（包含群组和好友的所有字段）
+CREATE TABLE relations (
+                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    -- 关系类型标识
+                           relation_type ENUM('group', 'friend') NOT NULL,
+
+    -- 群组相关字段（当 relation_type='group' 时有效）
+                           group_name VARCHAR(50),
+                           group_description VARCHAR(255),
+                           group_avatar VARCHAR(255),
+
+    -- 好友相关字段（当 relation_type='friend' 时有效）
+                           account1_id BIGINT,
+                           account2_id BIGINT,
+
+                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- 添加外键约束（假设有 users 表）
+                           FOREIGN KEY (account1_id) REFERENCES users(id),
+                           FOREIGN KEY (account2_id) REFERENCES users(id),
+
+    -- 约束条件（需 MySQL 8.0+）
+                           CHECK (
+                               (relation_type = 'group' AND
+                                group_name IS NOT NULL AND
+                                account1_id IS NULL AND
+                                account2_id IS NULL)
+                                   OR
+                               (relation_type = 'friend' AND
+                                account1_id IS NOT NULL AND
+                                account2_id IS NOT NULL AND
+                                group_name IS NULL AND
+                                group_description IS NULL AND
+                                group_avatar IS NULL)
+                               ),
+
+    -- 确保好友关系不重复（如 1-2 和 2-1 视为相同）
+                           CHECK (
+                               relation_type <> 'friend' OR
+                               (account1_id < account2_id)
+                               ),
+                           UNIQUE KEY (account1_id, account2_id)
+);
 
 
 -- 创建申请状态表（示例：可以根据需要将此列放入用户或好友申请表中）
@@ -136,21 +165,21 @@ CREATE TABLE relations (
 # ) ENGINE=InnoDB;
 #
 # -- 账号对群组或好友关系的设置
-# CREATE TABLE IF NOT EXISTS settings (
-#                                         account_id BIGINT NOT NULL, -- 账号id（外键）
-#                                         relation_id BIGINT NOT NULL, -- 关系 id（外键）
-#                                         nick_name VARCHAR(255) NOT NULL, -- 昵称，默认是账户名或群组名
-#                                         is_not_disturb BOOLEAN NOT NULL DEFAULT FALSE, -- 是否免打扰
-#                                         is_pin BOOLEAN NOT NULL DEFAULT FALSE, -- 是否置顶
-#                                         pin_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 置顶时间
-#                                         is_show BOOLEAN NOT NULL DEFAULT TRUE, -- 是否显示
-#                                         last_show TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 最后一次显示时间
-#                                         is_leader BOOLEAN NOT NULL DEFAULT FALSE, -- 是否是群主，仅对群组有效
-#                                         is_self BOOLEAN NOT NULL DEFAULT FALSE, -- 是否是自己对自己的关系，仅对好友有效
-#                                         FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE,
-#                                         FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE
-# );
-#
+CREATE TABLE IF NOT EXISTS settings (
+                                        account_id BIGINT NOT NULL, -- 账号id（外键）
+                                        relation_id BIGINT NOT NULL, -- 关系 id（外键）
+                                        nick_name VARCHAR(255) NOT NULL, -- 昵称，默认是账户名或群组名
+                                        is_not_disturb BOOLEAN NOT NULL DEFAULT FALSE, -- 是否免打扰
+                                        is_pin BOOLEAN NOT NULL DEFAULT FALSE, -- 是否置顶
+                                        pin_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 置顶时间
+                                        is_show BOOLEAN NOT NULL DEFAULT TRUE, -- 是否显示
+                                        last_show TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 最后一次显示时间
+                                        is_leader BOOLEAN NOT NULL DEFAULT FALSE, -- 是否是群主，仅对群组有效
+                                        is_self BOOLEAN NOT NULL DEFAULT FALSE, -- 是否是自己对自己的关系，仅对好友有效
+                                        FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                                        FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # -- 昵称索引
 # CREATE INDEX relation_setting_nickname ON settings (nick_name);
 #
