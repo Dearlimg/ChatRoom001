@@ -181,48 +181,6 @@ func (ns NullMsgNotificationsMsgType) Value() (driver.Value, error) {
 	return string(ns.MsgNotificationsMsgType), nil
 }
 
-type RelationsGroupType string
-
-const (
-	RelationsGroupTypePublic  RelationsGroupType = "public"
-	RelationsGroupTypePrivate RelationsGroupType = "private"
-)
-
-func (e *RelationsGroupType) Scan(src interface{}) error {
-	switch s := src.(type) {
-	case []byte:
-		*e = RelationsGroupType(s)
-	case string:
-		*e = RelationsGroupType(s)
-	default:
-		return fmt.Errorf("unsupported scan type for RelationsGroupType: %T", src)
-	}
-	return nil
-}
-
-type NullRelationsGroupType struct {
-	RelationsGroupType RelationsGroupType
-	Valid              bool // Valid is true if RelationsGroupType is not NULL
-}
-
-// Scan implements the Scanner interface.
-func (ns *NullRelationsGroupType) Scan(value interface{}) error {
-	if value == nil {
-		ns.RelationsGroupType, ns.Valid = "", false
-		return nil
-	}
-	ns.Valid = true
-	return ns.RelationsGroupType.Scan(value)
-}
-
-// Value implements the driver Valuer interface.
-func (ns NullRelationsGroupType) Value() (driver.Value, error) {
-	if !ns.Valid {
-		return nil, nil
-	}
-	return string(ns.RelationsGroupType), nil
-}
-
 type RelationsRelationType string
 
 const (
@@ -303,15 +261,27 @@ type MsgNotification struct {
 }
 
 type Relation struct {
-	ID           int64
-	RelationType RelationsRelationType
-	// 群组类型，仅 relation_type=group 时有效
-	GroupType NullRelationsGroupType
-	// 好友账号1 ID，仅 relation_type=friend 时有效
-	FriendAccount1ID sql.NullInt64
-	// 好友账号2 ID，仅 relation_type=friend 时有效
-	FriendAccount2ID sql.NullInt64
+	ID               int64
+	RelationType     RelationsRelationType
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	GroupAvatar      sql.NullString
+	Account1ID       sql.NullInt64
+	Account2ID       sql.NullInt64
 	CreatedAt        sql.NullTime
+}
+
+type Setting struct {
+	AccountID    int64
+	RelationID   int64
+	NickName     string
+	IsNotDisturb bool
+	IsPin        bool
+	PinTime      time.Time
+	IsShow       bool
+	LastShow     time.Time
+	IsLeader     bool
+	IsSelf       bool
 }
 
 type User struct {

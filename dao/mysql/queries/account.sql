@@ -37,9 +37,9 @@ FROM (
          LEFT JOIN relations r
                    ON r.relation_type = 'friend'
                        AND (
-                          (r.friend_account1_id = a.id AND r.friend_account2_id = ?) -- 当前用户ID
+                          (r.account1_id = a.id AND r.account2_id = ?) -- 当前用户ID
                               OR
-                          (r.friend_account1_id = ? AND r.friend_account2_id = a.id) -- 当前用户ID
+                          (r.account1_id = ? AND r.account2_id = a.id) -- 当前用户ID
                           )
 LIMIT 1;
 
@@ -83,8 +83,8 @@ FROM (
          LEFT JOIN relations r
                    ON r.relation_type = 'friend'
                        AND (
-                          (r.friend_account1_id = a.id AND r.friend_account2_id = ?)
+                          (r.account1_id = a.id AND r.account2_id = ?)
                               OR
-                          (r.friend_account1_id = ? AND r.friend_account2_id = a.id)
+                          (r.account1_id = ? AND r.account2_id = a.id)
                           )
 LIMIT ? OFFSET ?;

@@ -1,8 +1,12 @@
--- name: CreateGroupRelation :one
+-- name: CreateGroupRelation :exec
 INSERT INTO relations (relation_type, group_name, group_description, group_avatar)
 value ('group',?,?,?);
 
--- name: DeleteFriendRelation :one
+-- name: CreateFriendRelation :exec
+insert into relations(relation_type,account1_id,account2_id)
+value ('friend',?,?);
+
+-- name: DeleteFriendRelation :exec
 insert into relations(relation_type,account1_id,account2_id)
 value ('friend',?,?);
 
@@ -11,27 +15,54 @@ delete
 from relations
 where id=?;
 
--- name: DeleteFriendRelationByAccountID :many
+-- name: DeleteFriendRelationByAccountID :exec
 delete
 from relations
 where relation_type ='friend'
 and (account1_id=?);
 
--- 第一步：查询待删除的ID
-SELECT id
-FROM relations
-WHERE
-    relation_type = 'friend'
-  AND (
-    account1_id = :account2_id
-        OR account2_id = :account1_id
-    );
+-- name: UpdateGroupRelation :exec
+UPDATE relations
+SET group_name = ?, group_description = ?, group_avatar = ?
+WHERE relation_type = 'group'
+AND id = ?;
 
--- 第二步：执行删除操作
-DELETE FROM relations
-WHERE
-    relation_type = 'friend'
-  AND (
-    account1_id = :account1_id
-        OR account2_id = :account1_id
-    );
+-- name: GetGroupRelationByID :one
+select id,relation_type,relations.group_name,relations.group_description,relations.group_avatar
+from relations
+where relation_type = 'group' and id = ?;
+
+-- name: ExistsFriendRelation :one
+select exists(select 1
+              from relations
+              where relation_type = 'friend'
+              and account1_id =?
+              and account2_id=?);
+
+-- name: GetFriendRelationByID :one
+select (relations.account2_id,relations.account1_id,relations.created_at)
+from relations
+where relation_type='friend'
+  and id =?;
+
+-- name: GetAllGroupRelation :many
+select id
+from relations
+where relation_type = 'group'
+and account1_id is null
+and account2_id is null;
+
+-- name: GetAllRelationOnRelation :many
+select *
+from relations;
+
+-- name: GetAllRelationIDs :many
+select id
+from relations;
+
+-- name: GetRelationIDByAccountID :one
+select id
+from relations
+where account2_id=?
+and account1_id=?;
+

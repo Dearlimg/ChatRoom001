@@ -25,6 +25,6 @@ func (account) CreateAccount(ctx *gin.Context, userID int64, name, avatar, gende
 
 	err := dao.Database.DB.CreateAccountWithTx(ctx, dao.Database.Redis, global.PublicSetting.Rules.AccountNumMax, Param)
 	switch {
-	case errors.Is(err, tx.Err):
+	case errors.Is(err, tx.ErrAccountOverNum):
 	}
 }

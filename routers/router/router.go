@@ -30,6 +30,7 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 			})
 		})
 		rg := routers.Routers
+		rg.Account.Init(root)
 		rg.User.Init(root)
 		rg.Email.Init(root)
 	}

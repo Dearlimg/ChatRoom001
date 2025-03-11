@@ -120,17 +120,17 @@ FROM (
          LEFT JOIN relations r
                    ON r.relation_type = 'friend'
                        AND (
-                          (r.friend_account1_id = a.id AND r.friend_account2_id = ?) -- 当前用户ID
+                          (r.account1_id = a.id AND r.account2_id = ?) -- 当前用户ID
                               OR
-                          (r.friend_account1_id = ? AND r.friend_account2_id = a.id) -- 当前用户ID
+                          (r.account1_id = ? AND r.account2_id = a.id) -- 当前用户ID
                           )
 LIMIT 1
 `
 
 type GetAccountByIDParams struct {
-	UserID           int64
-	FriendAccount2ID sql.NullInt64
-	FriendAccount1ID sql.NullInt64
+	UserID     int64
+	Account2ID sql.NullInt64
+	Account1ID sql.NullInt64
 }
 
 type GetAccountByIDRow struct {
@@ -145,7 +145,7 @@ type GetAccountByIDRow struct {
 }
 
 func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) ([]*GetAccountByIDRow, error) {
-	rows, err := q.query(ctx, q.getAccountByIDStmt, getAccountByID, arg.UserID, arg.FriendAccount2ID, arg.FriendAccount1ID)
+	rows, err := q.query(ctx, q.getAccountByIDStmt, getAccountByID, arg.UserID, arg.Account2ID, arg.Account1ID)
 	if err != nil {
 		return nil, err
 	}
@@ -230,20 +230,20 @@ FROM (
          LEFT JOIN relations r
                    ON r.relation_type = 'friend'
                        AND (
-                          (r.friend_account1_id = a.id AND r.friend_account2_id = ?)
+                          (r.account1_id = a.id AND r.account2_id = ?)
                               OR
-                          (r.friend_account1_id = ? AND r.friend_account2_id = a.id)
+                          (r.account1_id = ? AND r.account2_id = a.id)
                           )
 LIMIT ? OFFSET ?
 `
 
 type GetAccountsByNameParams struct {
-	CONCAT           interface{}
-	CONCAT_2         interface{}
-	FriendAccount2ID sql.NullInt64
-	FriendAccount1ID sql.NullInt64
-	Limit            int32
-	Offset           int32
+	CONCAT     interface{}
+	CONCAT_2   interface{}
+	Account2ID sql.NullInt64
+	Account1ID sql.NullInt64
+	Limit      int32
+	Offset     int32
 }
 
 type GetAccountsByNameRow struct {
@@ -259,8 +259,8 @@ func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameP
 	rows, err := q.query(ctx, q.getAccountsByNameStmt, getAccountsByName,
 		arg.CONCAT,
 		arg.CONCAT_2,
-		arg.FriendAccount2ID,
-		arg.FriendAccount1ID,
+		arg.Account2ID,
+		arg.Account1ID,
 		arg.Limit,
 		arg.Offset,
 	)

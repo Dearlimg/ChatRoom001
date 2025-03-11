@@ -136,20 +136,20 @@ CREATE TABLE IF NOT EXISTS msg_notifications (
                                                  create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
 );
 
--- 创建 relations 表
-CREATE TABLE relations (
-                           id BIGINT AUTO_INCREMENT PRIMARY KEY,
-                           relation_type ENUM('group', 'friend') NOT NULL,
-                           group_type ENUM('public', 'private') COMMENT '群组类型，仅 relation_type=group 时有效',
-                           friend_account1_id BIGINT COMMENT '好友账号1 ID，仅 relation_type=friend 时有效',
-                           friend_account2_id BIGINT COMMENT '好友账号2 ID，仅 relation_type=friend 时有效',
-                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                           CONSTRAINT chk_relations CHECK (
-                               (relation_type = 'group' AND group_type IS NOT NULL AND friend_account1_id IS NULL AND friend_account2_id IS NULL)
-                                   OR
-                               (relation_type = 'friend' AND group_type IS NULL AND friend_account1_id IS NOT NULL AND friend_account2_id IS NOT NULL)
-                               )
-) ENGINE=InnoDB;
+# -- 创建 relations 表
+# CREATE TABLE relations (
+#                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
+#                            relation_type ENUM('group', 'friend') NOT NULL,
+#                            group_type ENUM('public', 'private') COMMENT '群组类型，仅 relation_type=group 时有效',
+#                            friend_account1_id BIGINT COMMENT '好友账号1 ID，仅 relation_type=friend 时有效',
+#                            friend_account2_id BIGINT COMMENT '好友账号2 ID，仅 relation_type=friend 时有效',
+#                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+#                            CONSTRAINT chk_relations CHECK (
+#                                (relation_type = 'group' AND group_type IS NOT NULL AND friend_account1_id IS NULL AND friend_account2_id IS NULL)
+#                                    OR
+#                                (relation_type = 'friend' AND group_type IS NULL AND friend_account1_id IS NOT NULL AND friend_account2_id IS NOT NULL)
+#                                )
+# ) ENGINE=InnoDB;
 
 # -- 创建 accounts 表
 # CREATE TABLE IF NOT EXISTS accounts (

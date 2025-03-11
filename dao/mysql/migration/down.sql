@@ -1,2 +1,2 @@
-drop table settings;
-drop table relations;
+# drop table settings;
+# drop table relations;

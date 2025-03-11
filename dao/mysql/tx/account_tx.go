@@ -5,6 +5,7 @@ import (
 	"ChatRoom001/dao/redis/operate"
 	"ChatRoom001/pkg/tool"
 	"context"
+	"database/sql"
 	"github.com/pkg/errors"
 )
 
@@ -44,9 +45,23 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 			return queries.CreateAccount(ctx, arg)
 		})
 		// 建立关系(自己与自己的好友关系)
-		var relationID int64
+		//var relationID int64
+
+		ID := sql.NullInt64{
+			Int64: arg.ID,
+			Valid: true,
+		}
+
 		err = tool.DoThat(err, func() error {
-			relationID, err = queries.Crea
+			err = queries.CreateFriendRelation(ctx, &db.CreateFriendRelationParams{
+				Account1ID: ID,
+				Account2ID: ID,
+			})
+			return err
+		})
+		err = tool.DoThat(err, func() error {
+			return queries.CreateSt
 		})
 	})
+
 }

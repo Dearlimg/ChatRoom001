@@ -30,6 +30,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.createAccountStmt, err = db.PrepareContext(ctx, createAccount); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateAccount: %w", err)
 	}
+	if q.createFriendRelationStmt, err = db.PrepareContext(ctx, createFriendRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateFriendRelation: %w", err)
+	}
+	if q.createGroupRelationStmt, err = db.PrepareContext(ctx, createGroupRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateGroupRelation: %w", err)
+	}
 	if q.createUserStmt, err = db.PrepareContext(ctx, createUser); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateUser: %w", err)
 	}
@@ -38,6 +44,15 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.deleteAccountByUserIDStmt, err = db.PrepareContext(ctx, deleteAccountByUserID); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteAccountByUserID: %w", err)
+	}
+	if q.deleteFriendRelationStmt, err = db.PrepareContext(ctx, deleteFriendRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteFriendRelation: %w", err)
+	}
+	if q.deleteFriendRelationByAccountIDStmt, err = db.PrepareContext(ctx, deleteFriendRelationByAccountID); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteFriendRelationByAccountID: %w", err)
+	}
+	if q.deleteRelationStmt, err = db.PrepareContext(ctx, deleteRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteRelation: %w", err)
 	}
 	if q.deleteUserStmt, err = db.PrepareContext(ctx, deleteUser); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteUser: %w", err)
@@ -50,6 +65,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.existsAccountByNameAndUserIDStmt, err = db.PrepareContext(ctx, existsAccountByNameAndUserID); err != nil {
 		return nil, fmt.Errorf("error preparing query ExistsAccountByNameAndUserID: %w", err)
+	}
+	if q.existsFriendRelationStmt, err = db.PrepareContext(ctx, existsFriendRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query ExistsFriendRelation: %w", err)
 	}
 	if q.existsUserByIDStmt, err = db.PrepareContext(ctx, existsUserByID); err != nil {
 		return nil, fmt.Errorf("error preparing query ExistsUserByID: %w", err)
@@ -69,6 +87,24 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getAllEmailStmt, err = db.PrepareContext(ctx, getAllEmail); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAllEmail: %w", err)
 	}
+	if q.getAllGroupRelationStmt, err = db.PrepareContext(ctx, getAllGroupRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllGroupRelation: %w", err)
+	}
+	if q.getAllRelationIDsStmt, err = db.PrepareContext(ctx, getAllRelationIDs); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllRelationIDs: %w", err)
+	}
+	if q.getAllRelationOnRelationStmt, err = db.PrepareContext(ctx, getAllRelationOnRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAllRelationOnRelation: %w", err)
+	}
+	if q.getFriendRelationByIDStmt, err = db.PrepareContext(ctx, getFriendRelationByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetFriendRelationByID: %w", err)
+	}
+	if q.getGroupRelationByIDStmt, err = db.PrepareContext(ctx, getGroupRelationByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetGroupRelationByID: %w", err)
+	}
+	if q.getRelationIDByAccountIDStmt, err = db.PrepareContext(ctx, getRelationIDByAccountID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetRelationIDByAccountID: %w", err)
+	}
 	if q.getUserByEmailStmt, err = db.PrepareContext(ctx, getUserByEmail); err != nil {
 		return nil, fmt.Errorf("error preparing query GetUserByEmail: %w", err)
 	}
@@ -80,6 +116,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.updateAccountAvatarStmt, err = db.PrepareContext(ctx, updateAccountAvatar); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateAccountAvatar: %w", err)
+	}
+	if q.updateGroupRelationStmt, err = db.PrepareContext(ctx, updateGroupRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateGroupRelation: %w", err)
 	}
 	if q.updateUserStmt, err = db.PrepareContext(ctx, updateUser); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateUser: %w", err)
@@ -99,6 +138,16 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing createAccountStmt: %w", cerr)
 		}
 	}
+	if q.createFriendRelationStmt != nil {
+		if cerr := q.createFriendRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createFriendRelationStmt: %w", cerr)
+		}
+	}
+	if q.createGroupRelationStmt != nil {
+		if cerr := q.createGroupRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createGroupRelationStmt: %w", cerr)
+		}
+	}
 	if q.createUserStmt != nil {
 		if cerr := q.createUserStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createUserStmt: %w", cerr)
@@ -112,6 +161,21 @@ func (q *Queries) Close() error {
 	if q.deleteAccountByUserIDStmt != nil {
 		if cerr := q.deleteAccountByUserIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing deleteAccountByUserIDStmt: %w", cerr)
+		}
+	}
+	if q.deleteFriendRelationStmt != nil {
+		if cerr := q.deleteFriendRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteFriendRelationStmt: %w", cerr)
+		}
+	}
+	if q.deleteFriendRelationByAccountIDStmt != nil {
+		if cerr := q.deleteFriendRelationByAccountIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteFriendRelationByAccountIDStmt: %w", cerr)
+		}
+	}
+	if q.deleteRelationStmt != nil {
+		if cerr := q.deleteRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteRelationStmt: %w", cerr)
 		}
 	}
 	if q.deleteUserStmt != nil {
@@ -132,6 +196,11 @@ func (q *Queries) Close() error {
 	if q.existsAccountByNameAndUserIDStmt != nil {
 		if cerr := q.existsAccountByNameAndUserIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing existsAccountByNameAndUserIDStmt: %w", cerr)
+		}
+	}
+	if q.existsFriendRelationStmt != nil {
+		if cerr := q.existsFriendRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing existsFriendRelationStmt: %w", cerr)
 		}
 	}
 	if q.existsUserByIDStmt != nil {
@@ -164,6 +233,36 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getAllEmailStmt: %w", cerr)
 		}
 	}
+	if q.getAllGroupRelationStmt != nil {
+		if cerr := q.getAllGroupRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllGroupRelationStmt: %w", cerr)
+		}
+	}
+	if q.getAllRelationIDsStmt != nil {
+		if cerr := q.getAllRelationIDsStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllRelationIDsStmt: %w", cerr)
+		}
+	}
+	if q.getAllRelationOnRelationStmt != nil {
+		if cerr := q.getAllRelationOnRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAllRelationOnRelationStmt: %w", cerr)
+		}
+	}
+	if q.getFriendRelationByIDStmt != nil {
+		if cerr := q.getFriendRelationByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getFriendRelationByIDStmt: %w", cerr)
+		}
+	}
+	if q.getGroupRelationByIDStmt != nil {
+		if cerr := q.getGroupRelationByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getGroupRelationByIDStmt: %w", cerr)
+		}
+	}
+	if q.getRelationIDByAccountIDStmt != nil {
+		if cerr := q.getRelationIDByAccountIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getRelationIDByAccountIDStmt: %w", cerr)
+		}
+	}
 	if q.getUserByEmailStmt != nil {
 		if cerr := q.getUserByEmailStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getUserByEmailStmt: %w", cerr)
@@ -182,6 +281,11 @@ func (q *Queries) Close() error {
 	if q.updateAccountAvatarStmt != nil {
 		if cerr := q.updateAccountAvatarStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing updateAccountAvatarStmt: %w", cerr)
+		}
+	}
+	if q.updateGroupRelationStmt != nil {
+		if cerr := q.updateGroupRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateGroupRelationStmt: %w", cerr)
 		}
 	}
 	if q.updateUserStmt != nil {
@@ -226,53 +330,79 @@ func (q *Queries) queryRow(ctx context.Context, stmt *sql.Stmt, query string, ar
 }
 
 type Queries struct {
-	db                               DBTX
-	tx                               *sql.Tx
-	countAccountByUserIDStmt         *sql.Stmt
-	createAccountStmt                *sql.Stmt
-	createUserStmt                   *sql.Stmt
-	deleteAccountStmt                *sql.Stmt
-	deleteAccountByUserIDStmt        *sql.Stmt
-	deleteUserStmt                   *sql.Stmt
-	existAccountByIDStmt             *sql.Stmt
-	existEmailStmt                   *sql.Stmt
-	existsAccountByNameAndUserIDStmt *sql.Stmt
-	existsUserByIDStmt               *sql.Stmt
-	getAccountByIDStmt               *sql.Stmt
-	getAccountByUserIDStmt           *sql.Stmt
-	getAccountsByNameStmt            *sql.Stmt
-	getAcountIDsByUserIDStmt         *sql.Stmt
-	getAllEmailStmt                  *sql.Stmt
-	getUserByEmailStmt               *sql.Stmt
-	getUserByIDStmt                  *sql.Stmt
-	updateAccountStmt                *sql.Stmt
-	updateAccountAvatarStmt          *sql.Stmt
-	updateUserStmt                   *sql.Stmt
+	db                                  DBTX
+	tx                                  *sql.Tx
+	countAccountByUserIDStmt            *sql.Stmt
+	createAccountStmt                   *sql.Stmt
+	createFriendRelationStmt            *sql.Stmt
+	createGroupRelationStmt             *sql.Stmt
+	createUserStmt                      *sql.Stmt
+	deleteAccountStmt                   *sql.Stmt
+	deleteAccountByUserIDStmt           *sql.Stmt
+	deleteFriendRelationStmt            *sql.Stmt
+	deleteFriendRelationByAccountIDStmt *sql.Stmt
+	deleteRelationStmt                  *sql.Stmt
+	deleteUserStmt                      *sql.Stmt
+	existAccountByIDStmt                *sql.Stmt
+	existEmailStmt                      *sql.Stmt
+	existsAccountByNameAndUserIDStmt    *sql.Stmt
+	existsFriendRelationStmt            *sql.Stmt
+	existsUserByIDStmt                  *sql.Stmt
+	getAccountByIDStmt                  *sql.Stmt
+	getAccountByUserIDStmt              *sql.Stmt
+	getAccountsByNameStmt               *sql.Stmt
+	getAcountIDsByUserIDStmt            *sql.Stmt
+	getAllEmailStmt                     *sql.Stmt
+	getAllGroupRelationStmt             *sql.Stmt
+	getAllRelationIDsStmt               *sql.Stmt
+	getAllRelationOnRelationStmt        *sql.Stmt
+	getFriendRelationByIDStmt           *sql.Stmt
+	getGroupRelationByIDStmt            *sql.Stmt
+	getRelationIDByAccountIDStmt        *sql.Stmt
+	getUserByEmailStmt                  *sql.Stmt
+	getUserByIDStmt                     *sql.Stmt
+	updateAccountStmt                   *sql.Stmt
+	updateAccountAvatarStmt             *sql.Stmt
+	updateGroupRelationStmt             *sql.Stmt
+	updateUserStmt                      *sql.Stmt
 }
 
 func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 	return &Queries{
-		db:                               tx,
-		tx:                               tx,
-		countAccountByUserIDStmt:         q.countAccountByUserIDStmt,
-		createAccountStmt:                q.createAccountStmt,
-		createUserStmt:                   q.createUserStmt,
-		deleteAccountStmt:                q.deleteAccountStmt,
-		deleteAccountByUserIDStmt:        q.deleteAccountByUserIDStmt,
-		deleteUserStmt:                   q.deleteUserStmt,
-		existAccountByIDStmt:             q.existAccountByIDStmt,
-		existEmailStmt:                   q.existEmailStmt,
-		existsAccountByNameAndUserIDStmt: q.existsAccountByNameAndUserIDStmt,
-		existsUserByIDStmt:               q.existsUserByIDStmt,
-		getAccountByIDStmt:               q.getAccountByIDStmt,
-		getAccountByUserIDStmt:           q.getAccountByUserIDStmt,
-		getAccountsByNameStmt:            q.getAccountsByNameStmt,
-		getAcountIDsByUserIDStmt:         q.getAcountIDsByUserIDStmt,
-		getAllEmailStmt:                  q.getAllEmailStmt,
-		getUserByEmailStmt:               q.getUserByEmailStmt,
-		getUserByIDStmt:                  q.getUserByIDStmt,
-		updateAccountStmt:                q.updateAccountStmt,
-		updateAccountAvatarStmt:          q.updateAccountAvatarStmt,
-		updateUserStmt:                   q.updateUserStmt,
+		db:                                  tx,
+		tx:                                  tx,
+		countAccountByUserIDStmt:            q.countAccountByUserIDStmt,
+		createAccountStmt:                   q.createAccountStmt,
+		createFriendRelationStmt:            q.createFriendRelationStmt,
+		createGroupRelationStmt:             q.createGroupRelationStmt,
+		createUserStmt:                      q.createUserStmt,
+		deleteAccountStmt:                   q.deleteAccountStmt,
+		deleteAccountByUserIDStmt:           q.deleteAccountByUserIDStmt,
+		deleteFriendRelationStmt:            q.deleteFriendRelationStmt,
+		deleteFriendRelationByAccountIDStmt: q.deleteFriendRelationByAccountIDStmt,
+		deleteRelationStmt:                  q.deleteRelationStmt,
+		deleteUserStmt:                      q.deleteUserStmt,
+		existAccountByIDStmt:                q.existAccountByIDStmt,
+		existEmailStmt:                      q.existEmailStmt,
+		existsAccountByNameAndUserIDStmt:    q.existsAccountByNameAndUserIDStmt,
+		existsFriendRelationStmt:            q.existsFriendRelationStmt,
+		existsUserByIDStmt:                  q.existsUserByIDStmt,
+		getAccountByIDStmt:                  q.getAccountByIDStmt,
+		getAccountByUserIDStmt:              q.getAccountByUserIDStmt,
+		getAccountsByNameStmt:               q.getAccountsByNameStmt,
+		getAcountIDsByUserIDStmt:            q.getAcountIDsByUserIDStmt,
+		getAllEmailStmt:                     q.getAllEmailStmt,
+		getAllGroupRelationStmt:             q.getAllGroupRelationStmt,
+		getAllRelationIDsStmt:               q.getAllRelationIDsStmt,
+		getAllRelationOnRelationStmt:        q.getAllRelationOnRelationStmt,
+		getFriendRelationByIDStmt:           q.getFriendRelationByIDStmt,
+		getGroupRelationByIDStmt:            q.getGroupRelationByIDStmt,
+		getRelationIDByAccountIDStmt:        q.getRelationIDByAccountIDStmt,
+		getUserByEmailStmt:                  q.getUserByEmailStmt,
+		getUserByIDStmt:                     q.getUserByIDStmt,
+		updateAccountStmt:                   q.updateAccountStmt,
+		updateAccountAvatarStmt:             q.updateAccountAvatarStmt,
+		updateGroupRelationStmt:             q.updateGroupRelationStmt,
+		updateUserStmt:                      q.updateUserStmt,
 	}
 }
