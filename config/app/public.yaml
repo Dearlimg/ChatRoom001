@@ -34,7 +34,7 @@ Rules:
   CodeMarkDuration: 5m # 验证码有效时间
   AccountNumMax: 5 # 用户账号最大数量
   BiggestFileSize: 1024000 # 最大文件大小
-  DefaultAvatarURL: "https://avatars.githubusercontent.com/u/146077238?v=4&size=64" # 默认头像
+  DefaultAvatarURL: "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" # 默认头像
 Limit: #限流
   IPLimit: # IP 限流
     Cap: 10 # 令牌桶容量

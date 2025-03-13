@@ -14,34 +14,59 @@ type Querier interface {
 	CreateAccount(ctx context.Context, arg *CreateAccountParams) error
 	CreateFriendRelation(ctx context.Context, arg *CreateFriendRelationParams) error
 	CreateGroupRelation(ctx context.Context, arg *CreateGroupRelationParams) error
+	CreateManySetting(ctx context.Context, arg *CreateManySettingParams) error
+	CreateSetting(ctx context.Context, arg *CreateSettingParams) error
 	CreateUser(ctx context.Context, arg *CreateUserParams) error
 	DeleteAccount(ctx context.Context, id int64) error
 	DeleteAccountByUserID(ctx context.Context, userID int64) error
 	DeleteFriendRelation(ctx context.Context, arg *DeleteFriendRelationParams) error
 	DeleteFriendRelationByAccountID(ctx context.Context, account1ID sql.NullInt64) error
+	DeleteGroup(ctx context.Context, relationID int64) error
 	DeleteRelation(ctx context.Context, id int64) error
+	DeleteSetting(ctx context.Context, arg *DeleteSettingParams) error
+	DeleteSettingsByAccountID(ctx context.Context, accountID int64) error
 	DeleteUser(ctx context.Context, id int64) error
 	ExistAccountByID(ctx context.Context, id int64) (bool, error)
 	ExistEmail(ctx context.Context, email string) (bool, error)
+	ExistGroupLeaderByAccountIDWithLock(ctx context.Context, accountID int64) (bool, error)
 	ExistsAccountByNameAndUserID(ctx context.Context, arg *ExistsAccountByNameAndUserIDParams) (bool, error)
 	ExistsFriendRelation(ctx context.Context, arg *ExistsFriendRelationParams) (bool, error)
+	ExistsFriendSetting(ctx context.Context, arg *ExistsFriendSettingParams) (bool, error)
+	ExistsIsLeader(ctx context.Context, arg *ExistsIsLeaderParams) (bool, error)
+	ExistsSetting(ctx context.Context, arg *ExistsSettingParams) (bool, error)
 	ExistsUserByID(ctx context.Context, id int64) (bool, error)
 	GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) ([]*GetAccountByIDRow, error)
 	GetAccountByUserID(ctx context.Context, userID int64) ([]*GetAccountByUserIDRow, error)
+	GetAccountIDsByRelationID(ctx context.Context, relationID int64) ([]int64, error)
 	GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error)
 	GetAcountIDsByUserID(ctx context.Context, userID int64) ([]int64, error)
 	GetAllEmail(ctx context.Context) ([]string, error)
 	GetAllGroupRelation(ctx context.Context) ([]int64, error)
 	GetAllRelationIDs(ctx context.Context) ([]int64, error)
 	GetAllRelationOnRelation(ctx context.Context) ([]*Relation, error)
+	GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *GetFriendPinSettingsOrderByPinTimeParams) ([]*GetFriendPinSettingsOrderByPinTimeRow, error)
 	GetFriendRelationByID(ctx context.Context, id int64) (interface{}, error)
+	GetFriendSettingsByName(ctx context.Context, arg *GetFriendSettingsByNameParams) ([]*GetFriendSettingsByNameRow, error)
+	GetFriendSettingsOrderByName(ctx context.Context, arg *GetFriendSettingsOrderByNameParams) ([]*GetFriendSettingsOrderByNameRow, error)
+	GetFriendShowSettingsOrderByShowTime(ctx context.Context, arg *GetFriendShowSettingsOrderByShowTimeParams) ([]*GetFriendShowSettingsOrderByShowTimeRow, error)
+	GetGroupList(ctx context.Context, arg *GetGroupListParams) ([]*GetGroupListRow, error)
+	GetGroupMembers(ctx context.Context, relationID int64) ([]int64, error)
+	GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersByIDParams) ([]*GetGroupMembersByIDRow, error)
+	GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *GetGroupPinSettingsOrderByPinTimeParams) ([]*GetGroupPinSettingsOrderByPinTimeRow, error)
 	GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error)
+	GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error)
 	GetRelationIDByAccountID(ctx context.Context, arg *GetRelationIDByAccountIDParams) (int64, error)
+	GetSettingByID(ctx context.Context, arg *GetSettingByIDParams) (*Setting, error)
 	GetUserByEmail(ctx context.Context, email string) (*User, error)
 	GetUserByID(ctx context.Context, id int64) (*User, error)
+	TransferIsLeaderFalse(ctx context.Context, arg *TransferIsLeaderFalseParams) error
+	TransferIsLeaderTrue(ctx context.Context, arg *TransferIsLeaderTrueParams) error
 	UpdateAccount(ctx context.Context, arg *UpdateAccountParams) error
 	UpdateAccountAvatar(ctx context.Context, arg *UpdateAccountAvatarParams) error
 	UpdateGroupRelation(ctx context.Context, arg *UpdateGroupRelationParams) error
+	UpdateSettingDisturb(ctx context.Context, arg *UpdateSettingDisturbParams) error
+	UpdateSettingNickName(ctx context.Context, arg *UpdateSettingNickNameParams) error
+	UpdateSettingShow(ctx context.Context, arg *UpdateSettingShowParams) error
 	UpdateUser(ctx context.Context, arg *UpdateUserParams) error
 }
 
