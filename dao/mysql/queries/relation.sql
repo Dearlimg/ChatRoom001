@@ -66,3 +66,9 @@ from relations
 where account2_id=?
 and account1_id=?;
 
+-- name: GetRelationIDByInfo :one
+select id
+from relations
+where relation_type='friend'
+and account1_id=?
+and account2_id=?;

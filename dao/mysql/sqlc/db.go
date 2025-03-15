@@ -162,6 +162,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getRelationIDByAccountIDStmt, err = db.PrepareContext(ctx, getRelationIDByAccountID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetRelationIDByAccountID: %w", err)
 	}
+	if q.getRelationIDByAccountIDFromSettingsStmt, err = db.PrepareContext(ctx, getRelationIDByAccountIDFromSettings); err != nil {
+		return nil, fmt.Errorf("error preparing query GetRelationIDByAccountIDFromSettings: %w", err)
+	}
+	if q.getRelationIDByInfoStmt, err = db.PrepareContext(ctx, getRelationIDByInfo); err != nil {
+		return nil, fmt.Errorf("error preparing query GetRelationIDByInfo: %w", err)
+	}
 	if q.getSettingByIDStmt, err = db.PrepareContext(ctx, getSettingByID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetSettingByID: %w", err)
 	}
@@ -433,6 +439,16 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getRelationIDByAccountIDStmt: %w", cerr)
 		}
 	}
+	if q.getRelationIDByAccountIDFromSettingsStmt != nil {
+		if cerr := q.getRelationIDByAccountIDFromSettingsStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getRelationIDByAccountIDFromSettingsStmt: %w", cerr)
+		}
+	}
+	if q.getRelationIDByInfoStmt != nil {
+		if cerr := q.getRelationIDByInfoStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getRelationIDByInfoStmt: %w", cerr)
+		}
+	}
 	if q.getSettingByIDStmt != nil {
 		if cerr := q.getSettingByIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getSettingByIDStmt: %w", cerr)
@@ -578,6 +594,8 @@ type Queries struct {
 	getGroupRelationByIDStmt                 *sql.Stmt
 	getGroupSettingsByNameStmt               *sql.Stmt
 	getRelationIDByAccountIDStmt             *sql.Stmt
+	getRelationIDByAccountIDFromSettingsStmt *sql.Stmt
+	getRelationIDByInfoStmt                  *sql.Stmt
 	getSettingByIDStmt                       *sql.Stmt
 	getUserByEmailStmt                       *sql.Stmt
 	getUserByIDStmt                          *sql.Stmt
@@ -642,6 +660,8 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getGroupRelationByIDStmt:                 q.getGroupRelationByIDStmt,
 		getGroupSettingsByNameStmt:               q.getGroupSettingsByNameStmt,
 		getRelationIDByAccountIDStmt:             q.getRelationIDByAccountIDStmt,
+		getRelationIDByAccountIDFromSettingsStmt: q.getRelationIDByAccountIDFromSettingsStmt,
+		getRelationIDByInfoStmt:                  q.getRelationIDByInfoStmt,
 		getSettingByIDStmt:                       q.getSettingByIDStmt,
 		getUserByEmailStmt:                       q.getUserByEmailStmt,
 		getUserByIDStmt:                          q.getUserByIDStmt,

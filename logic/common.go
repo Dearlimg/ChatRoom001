@@ -8,11 +8,11 @@ import (
 	"time"
 )
 
-func newAccountToken(t model.TokenType, id int64, expireTime time.Duration) (string, *token.Payload, error) {
-	if t == model.AccountToken {
+func newAccountToken(t model.TokenType, id int64) (string, *token.Payload, error) {
+	if t != model.AccountToken {
 		return "", nil, nil
 	}
-	duration := expireTime
+	duration := global.PrivateSetting.Token.AccountTokenDuration
 	data, err := model.NewTokenContent(t, id).Marshal()
 	if err != nil {
 		return "", nil, err

@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"ChatRoom001/dao/mysql/sqlc"
+	db "ChatRoom001/dao/mysql/sqlc"
 	"ChatRoom001/dao/mysql/tx"
 	"database/sql"
 	"fmt"
@@ -24,6 +24,7 @@ func Init(dataSourceName string) DB {
 	if err = pool.Ping(); err != nil {
 		panic(fmt.Sprintf("Database connection verification failed: %v", err))
 	}
+	fmt.Println("Successfully connected to database")
 	// 配置连接池（推荐生产环境参数）
 	pool.SetMaxOpenConns(100)                // 最大打开连接数
 	pool.SetMaxIdleConns(20)                 // 最大空闲连接数

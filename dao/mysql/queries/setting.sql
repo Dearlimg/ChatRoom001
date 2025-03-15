@@ -13,6 +13,11 @@ delete
 from settings
 where account_id =?;
 
+-- name: GetRelationIDByAccountIDFromSettings :many
+select relation_id
+FROM settings
+where account_id = ?;
+
 -- name: ExistGroupLeaderByAccountIDWithLock :one
 select exists(select 1
               from settings

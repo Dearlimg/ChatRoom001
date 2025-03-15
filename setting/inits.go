@@ -7,6 +7,7 @@ type group struct {
 	EmailMark  mark
 	Worker     worker
 	TokenMaker tokenMaker
+	GenerateID generateID
 }
 
 var Group group
@@ -18,5 +19,5 @@ func Inits() {
 	Group.EmailMark.Init()
 	Group.Worker.Init()
 	Group.TokenMaker.Init()
-
+	Group.GenerateID.Init()
 }

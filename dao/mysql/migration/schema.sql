@@ -102,14 +102,14 @@ CREATE TABLE relations (
                                 group_name IS NULL AND
                                 group_description IS NULL AND
                                 group_avatar IS NULL)
-                               ),
+                               )
 
     -- 确保好友关系不重复（如 1-2 和 2-1 视为相同）
-                           CHECK (
-                               relation_type <> 'friend' OR
-                               (account1_id < account2_id)
-                               ),
-                           UNIQUE KEY (account1_id, account2_id)
+#                            CHECK (
+#                                relation_type <> 'friend' OR
+#                                (account1_id < account2_id)
+#                                ),
+#                            UNIQUE KEY (account1_id, account2_id)
 );
 
 

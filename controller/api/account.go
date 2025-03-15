@@ -2,6 +2,7 @@ package api
 
 import (
 	"ChatRoom001/errcodes"
+	"ChatRoom001/global"
 	"ChatRoom001/logic"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
@@ -26,5 +27,6 @@ func (account) CreateAccount(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
-	result, err := logic.Logics.Account
+	result, err := logic.Logics.Account.CreateAccount(ctx, content.ID, params.Name, global.PublicSetting.Rules.DefaultAvatarURL, params.Gender, params.Signature)
+	reply.Reply(err, result)
 }

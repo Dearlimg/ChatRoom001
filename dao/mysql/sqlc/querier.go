@@ -56,6 +56,8 @@ type Querier interface {
 	GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error)
 	GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error)
 	GetRelationIDByAccountID(ctx context.Context, arg *GetRelationIDByAccountIDParams) (int64, error)
+	GetRelationIDByAccountIDFromSettings(ctx context.Context, accountID int64) ([]int64, error)
+	GetRelationIDByInfo(ctx context.Context, arg *GetRelationIDByInfoParams) (int64, error)
 	GetSettingByID(ctx context.Context, arg *GetSettingByIDParams) (*Setting, error)
 	GetUserByEmail(ctx context.Context, email string) (*User, error)
 	GetUserByID(ctx context.Context, id int64) (*User, error)

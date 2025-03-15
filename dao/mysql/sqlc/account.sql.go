@@ -25,8 +25,8 @@ func (q *Queries) CountAccountByUserID(ctx context.Context, userID int64) (int64
 }
 
 const createAccount = `-- name: CreateAccount :exec
-insert into accounts (id, user_id, name, avatar, gender, signature)
-values (?, ?, ?, ?, ?, ?)
+INSERT INTO accounts (id, user_id, name, avatar, gender, signature)
+values (?,?,?,?,?,?)
 `
 
 type CreateAccountParams struct {

@@ -265,3 +265,324 @@
 2025-03-11T21:35:46.322+0800	INFO	middlewares/logger.go:60	/api/man	{"status": 200, "method": "GET", "path": "/api/man", "query": "", "ip": "192.168.0.197", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0.0092354}
 2025-03-11T21:36:23.669+0800	INFO	middlewares/logger.go:60	/api/man	{"status": 200, "method": "GET", "path": "/api/man", "query": "", "ip": "192.168.0.160", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
 2025-03-11T22:55:15.523+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T10:55:34.518+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T10:56:12.144+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0020499}
+2025-03-13T10:58:00.550+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.5675445}
+2025-03-13T10:59:08.913+0800	INFO	middlewares/logger.go:60	/api/account	{"status": 404, "method": "GET", "path": "/api/account", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T10:59:39.424+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 404, "method": "GET", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T10:59:46.636+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 404, "method": "GET", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T10:59:55.355+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 404, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T11:02:28.562+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 404, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T11:02:53.343+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:03:14.652+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:04:45.575+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:04:53.595+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:04:57.915+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:05:03.430+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:05:11.638+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:05:21.612+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T11:05:34.996+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T20:30:34.198+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T20:30:43.992+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T20:54:40.386+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:07:35.062+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:07:36.242+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 1.1792663}
+2025-03-13T21:08:00.295+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:08:00.317+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0221385}
+2025-03-13T21:08:47.973+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:08:47.996+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0231326}
+2025-03-13T21:09:09.053+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T21:09:12.467+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:09:21.046+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:09:40.872+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:09:59.948+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T21:10:02.112+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:10:47.770+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T21:10:49.954+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:13:28.383+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:13:28.383+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-13T21:13:28.383+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0.0005373}
+2025-03-13T21:14:00.802+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:14:00.802+0800	INFO	middlewares/logger.go:60	/api/ping
+	{"status": 404, "method": "POST", "path": "/api/ping\n", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T21:14:15.595+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:14:15.595+0800	INFO	middlewares/logger.go:60	/api/ping
+	{"status": 404, "method": "POST", "path": "/api/ping\n", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T21:14:24.947+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:14:24.947+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 404, "method": "POST", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T21:14:39.031+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:14:39.031+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-13T21:14:39.031+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0}
+2025-03-13T21:14:49.144+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:14:49.144+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "body": ""}
+2025-03-13T21:14:49.144+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-13T21:19:01.564+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T21:19:03.762+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:22:12.382+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:22:15.356+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 500, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 2.973654}
+2025-03-13T21:27:28.025+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T21:27:30.612+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:27:34.345+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:27:34.690+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3449864}
+2025-03-13T21:36:30.808+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T21:36:36.603+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:36:37.813+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:36:38.220+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4064625}
+2025-03-13T21:37:30.250+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:37:31.002+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:37:31.383+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3809973}
+2025-03-13T21:37:55.855+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:37:56.520+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:37:56.866+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3453444}
+2025-03-13T21:38:43.745+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T21:38:45.362+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T21:38:45.689+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3264926}
+2025-03-13T22:19:27.833+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T22:19:36.843+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T22:19:41.613+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T22:19:41.614+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-13T22:19:41.614+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0}
+2025-03-13T22:22:18.626+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T22:22:20.102+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T22:22:24.119+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T22:22:24.595+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.475339}
+2025-03-13T22:24:46.139+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T22:24:48.461+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T22:27:40.482+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T22:27:40.482+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-13T22:27:40.482+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0}
+2025-03-13T22:32:47.899+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-13T22:33:09.344+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T22:33:17.053+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T22:33:17.053+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-13T22:33:17.053+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0}
+2025-03-13T22:33:48.964+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T22:33:48.977+0800	INFO	middlewares/logger.go:60	/api	{"status": 404, "method": "GET", "path": "/api", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.19041.5486", "errors": "", "cost": 0}
+2025-03-13T22:33:56.978+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-13T22:33:56.978+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.19041.5486", "body": ""}
+2025-03-13T22:33:56.978+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.19041.5486", "errors": "", "cost": 0}
+2025-03-13T22:34:12.560+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-13T22:34:12.560+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "OPTIONS", "path": "/api/user/login", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-13T22:34:12.575+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-13T22:34:13.568+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 500, "method": "POST", "path": "/api/user/login", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.9924025}
+2025-03-13T22:40:45.285+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-13T22:41:03.357+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-13T22:41:03.358+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "OPTIONS", "path": "/api/user/login", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-13T22:41:03.367+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-13T22:41:03.689+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.3221684}
+2025-03-13T22:42:06.230+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-13T22:42:06.230+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-13T22:42:06.237+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-13T22:42:06.237+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.1.107", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-13T22:47:06.491+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T13:53:39.808+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T13:55:52.461+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T13:55:52.463+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 404, "method": "GET", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-14T13:56:02.116+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T13:56:02.132+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0163961}
+2025-03-14T13:56:28.423+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T13:56:28.802+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3685692}
+2025-03-14T13:57:10.423+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T13:57:10.790+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3668331}
+2025-03-14T13:57:59.489+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T13:58:43.501+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T13:58:45.388+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T13:58:45.720+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3314466}
+2025-03-14T14:00:20.784+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:00:22.368+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:00:22.765+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3971416}
+2025-03-14T14:02:41.968+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:03:20.477+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:03:25.305+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:03:25.692+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.38697}
+2025-03-14T14:06:46.550+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T14:07:15.120+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:07:18.768+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:07:18.957+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1894179}
+2025-03-14T14:11:14.588+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:11:14.931+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3416273}
+2025-03-14T14:12:16.490+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:12:17.015+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.5250064}
+2025-03-14T14:13:16.083+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T14:13:23.983+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:13:25.658+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:13:26.033+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3749558}
+2025-03-14T14:18:05.814+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:18:07.478+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:18:07.844+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3662245}
+2025-03-14T14:18:30.724+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:18:51.810+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T14:18:52.819+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T14:18:53.102+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2836306}
+2025-03-14T16:29:49.943+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:29:50.427+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4720473}
+2025-03-14T16:50:02.296+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:50:02.671+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3748264}
+2025-03-14T16:50:12.041+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:50:12.317+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.27604}
+2025-03-14T16:52:07.574+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:52:09.267+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:52:09.609+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3422549}
+2025-03-14T16:52:34.106+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:52:34.835+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:52:35.107+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.272775}
+2025-03-14T16:53:18.226+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:53:19.826+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:53:20.188+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3611089}
+2025-03-14T16:57:46.064+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:57:46.751+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:57:47.098+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3468671}
+2025-03-14T16:58:45.199+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:58:52.631+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:58:55.596+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:58:55.964+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3679997}
+2025-03-14T16:59:33.983+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T16:59:45.369+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T16:59:45.747+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.3779974}
+2025-03-14T17:01:16.251+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:01:22.734+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:01:52.270+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:01:52.658+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.388088}
+2025-03-14T17:10:25.312+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:10:30.316+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:10:34.788+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:10:35.007+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2185576}
+2025-03-14T17:11:08.292+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:11:08.701+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4090195}
+2025-03-14T17:13:33.858+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:13:46.126+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:13:47.233+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:13:47.720+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4873014}
+2025-03-14T17:17:25.777+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:17:27.149+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:17:27.574+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.4248508}
+2025-03-14T17:18:40.517+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:18:41.148+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:18:41.416+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2683883}
+2025-03-14T17:19:40.759+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:19:42.190+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:19:42.446+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2559719}
+2025-03-14T17:20:07.695+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:20:13.754+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:20:14.514+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:20:14.821+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.307435}
+2025-03-14T17:20:52.470+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:24:37.555+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:24:43.384+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:24:44.360+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:24:44.621+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2616549}
+2025-03-14T17:25:38.432+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:25:38.686+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2540955}
+2025-03-14T17:25:55.405+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:25:55.656+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2511776}
+2025-03-14T17:26:29.034+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:26:29.311+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.2764497}
+2025-03-14T17:27:38.590+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:27:38.842+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.251317}
+2025-03-14T17:28:23.144+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:28:28.605+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:28:29.744+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:29:06.622+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:32:35.666+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:32:38.235+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:32:41.485+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:32:44.429+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T17:34:58.603+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:34:58.603+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-14T17:35:50.917+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:35:51.093+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1761711}
+2025-03-14T17:38:44.022+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:38:44.222+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.1997685}
+2025-03-14T17:39:14.729+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:39:14.808+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.078915}
+2025-03-14T17:39:33.566+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:39:33.566+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0}
+2025-03-14T17:40:02.194+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-14T17:40:02.270+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.0", "errors": "", "cost": 0.0758327}
+2025-03-14T17:41:36.096+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-14T17:44:06.909+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-14T20:29:18.838+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-15T17:27:13.283+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:27:31.711+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:27:31.712+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0005042}
+2025-03-15T17:28:12.512+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:28:13.152+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.6397789}
+2025-03-15T17:28:38.213+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:28:38.431+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2174033}
+2025-03-15T17:29:07.923+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:29:07.964+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0410434}
+2025-03-15T17:29:26.419+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:29:26.646+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2274127}
+2025-03-15T17:30:16.187+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:30:16.494+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3071373}
+2025-03-15T17:30:45.658+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:30:46.024+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3665466}
+2025-03-15T17:30:47.642+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:30:47.866+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2240197}
+2025-03-15T17:30:51.456+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:30:51.685+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2293867}
+2025-03-15T17:32:36.310+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-15T17:32:53.373+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:32:56.953+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:32:57.234+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2813148}
+2025-03-15T17:34:45.932+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-15T17:34:54.609+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:34:55.461+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:34:55.690+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.228346}
+2025-03-15T17:36:43.922+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:36:44.157+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2343016}
+2025-03-15T17:36:59.049+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:36:59.850+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:37:00.100+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2495934}
+2025-03-15T17:37:17.710+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:37:19.285+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:37:19.674+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3889136}
+2025-03-15T17:38:23.359+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:38:24.880+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:38:25.143+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2631724}
+2025-03-15T17:39:35.391+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:39:35.990+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:39:36.320+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3287639}
+2025-03-15T17:42:19.066+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:42:19.250+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1834942}
+2025-03-15T17:42:24.415+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:42:24.603+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1878757}
+2025-03-15T17:42:26.386+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:42:26.575+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1893576}
+2025-03-15T17:42:38.185+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:42:38.628+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.4430927}
+2025-03-15T17:56:43.765+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T17:56:44.545+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T17:56:45.232+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.6871974}
+2025-03-15T17:59:11.308+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:00:33.688+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:00:34.067+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3787741}
+2025-03-15T18:07:03.547+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:07:04.409+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:07:04.912+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.5031331}
+2025-03-15T18:09:09.576+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:09:37.705+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:09:38.427+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:09:39.069+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.6424396}
+2025-03-15T18:10:18.388+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:10:19.096+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:10:19.581+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.4845555}
+2025-03-15T18:10:54.471+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:10:55.300+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:10:55.736+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.435514}
+2025-03-15T18:12:26.723+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:13:26.384+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:13:28.567+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:13:30.916+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 500, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 2.3494897}
+2025-03-15T18:18:41.941+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:21:41.517+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:33:45.677+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:33:55.489+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:33:57.163+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 500, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 1.6742198}
+2025-03-15T18:34:31.234+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:36:31.972+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:37:23.440+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:37:24.342+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:37:24.545+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2033646}
+2025-03-15T18:37:29.750+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:37:31.298+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 500, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 1.548257}

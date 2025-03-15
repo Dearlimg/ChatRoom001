@@ -255,6 +255,26 @@ func (q *Queries) GetRelationIDByAccountID(ctx context.Context, arg *GetRelation
 	return id, err
 }
 
+const getRelationIDByInfo = `-- name: GetRelationIDByInfo :one
+select id
+from relations
+where relation_type='friend'
+and account1_id=?
+and account2_id=?
+`
+
+type GetRelationIDByInfoParams struct {
+	Account1ID sql.NullInt64
+	Account2ID sql.NullInt64
+}
+
+func (q *Queries) GetRelationIDByInfo(ctx context.Context, arg *GetRelationIDByInfoParams) (int64, error) {
+	row := q.queryRow(ctx, q.getRelationIDByInfoStmt, getRelationIDByInfo, arg.Account1ID, arg.Account2ID)
+	var id int64
+	err := row.Scan(&id)
+	return id, err
+}
+
 const updateGroupRelation = `-- name: UpdateGroupRelation :exec
 UPDATE relations
 SET group_name = ?, group_description = ?, group_avatar = ?

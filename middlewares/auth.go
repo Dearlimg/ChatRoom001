@@ -24,7 +24,7 @@ func GetToken(header http.Header) (string, errcode.Err) {
 		return "", errcodes.AuthNotExist
 	}
 	parts := strings.SplitN(authorizationHeader, " ", 2)
-	if len(parts) != 2 && parts[0] == global.PrivateSetting.Token.AuthorizationKey {
+	if !(len(parts) == 2 && parts[0] == global.PrivateSetting.Token.AuthorizationType) {
 		return "", errcodes.AuthenticationFailed
 	}
 	return parts[1], nil
