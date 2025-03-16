@@ -25,7 +25,7 @@ update accounts
 set avatar = ?
 where id = ?;
 
--- name: GetAccountByID :many
+-- name: GetAccountByID :one
 SELECT
     a.*,
     r.id AS relation_id
@@ -48,6 +48,8 @@ LIMIT 1;
 select id,name,avatar,gender
 from accounts
 where user_id = ?;
+
+
 
 -- name: ExistAccountByID :one
 select exists(

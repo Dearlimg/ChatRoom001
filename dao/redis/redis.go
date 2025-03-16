@@ -3,13 +3,11 @@ package redis
 import (
 	"ChatRoom001/dao/redis/operate"
 	"ChatRoom001/model/config"
-	"fmt"
 	"github.com/redis/go-redis/v9"
 )
 
 // Init RedisCluster init 造成了一些参数浪费,ClusterOptions不支持,就当为日后扩展做准备吧
 func Init(cluster config.RedisCluster) *operate.RDB {
-	fmt.Println(cluster)
 	rdb := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs:        cluster.Endpoints,
 		Password:     cluster.Password,

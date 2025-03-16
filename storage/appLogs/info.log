@@ -586,3 +586,320 @@
 2025-03-15T18:37:24.545+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2033646}
 2025-03-15T18:37:29.750+0800	INFO	middlewares/cors.go:46	---------------------------------------------
 2025-03-15T18:37:31.298+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 500, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 1.548257}
+2025-03-15T18:38:39.842+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:38:48.571+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:38:49.045+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.4744773}
+2025-03-15T18:45:05.350+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:46:37.210+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:47:00.000+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:47:00.048+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0482858}
+2025-03-15T18:47:06.836+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:47:07.073+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2374772}
+2025-03-15T18:48:48.949+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:48:49.620+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.6704085}
+2025-03-15T18:51:20.015+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-15T18:51:26.749+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T18:51:55.033+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:51:55.033+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "curl/8.9.1", "body": ""}
+2025-03-15T18:51:55.034+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "::1", "user-agent": "curl/8.9.1", "errors": "", "cost": 0.000504}
+2025-03-15T18:53:00.948+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:53:00.948+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.102", "user-agent": "curl/8.9.1", "body": ""}
+2025-03-15T18:53:00.948+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.102", "user-agent": "curl/8.9.1", "errors": "", "cost": 0}
+2025-03-15T18:53:19.720+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:53:19.721+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.100", "user-agent": "curl/8.10.1", "body": ""}
+2025-03-15T18:53:19.721+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.100", "user-agent": "curl/8.10.1", "errors": "", "cost": 0}
+2025-03-15T18:53:38.146+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:53:38.146+0800	INFO	middlewares/logger.go:60	/api/man	{"status": 200, "method": "GET", "path": "/api/man", "query": "", "ip": "192.168.1.100", "user-agent": "curl/8.10.1", "errors": "", "cost": 0}
+2025-03-15T18:53:56.671+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:53:56.671+0800	INFO	middlewares/logger.go:60	/api/ha	{"status": 404, "method": "GET", "path": "/api/ha", "query": "", "ip": "192.168.1.100", "user-agent": "curl/8.10.1", "errors": "", "cost": 0}
+2025-03-15T18:54:15.416+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:54:15.416+0800	INFO	middlewares/logger.go:60	/api/man	{"status": 200, "method": "GET", "path": "/api/man", "query": "", "ip": "192.168.1.100", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-15T18:54:15.621+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:54:15.621+0800	INFO	middlewares/logger.go:60	/favicon.ico	{"status": 404, "method": "GET", "path": "/favicon.ico", "query": "", "ip": "192.168.1.100", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-15T18:54:31.356+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:54:31.356+0800	INFO	middlewares/logger.go:60	/api/man	{"status": 200, "method": "GET", "path": "/api/man", "query": "", "ip": "192.168.1.100", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-15T18:54:35.312+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-15T18:54:35.312+0800	INFO	middlewares/logger.go:60	/api/man	{"status": 200, "method": "GET", "path": "/api/man", "query": "", "ip": "192.168.1.100", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-15T19:18:29.837+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T19:24:16.001+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T19:35:29.300+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T19:41:55.738+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-15T20:21:49.722+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-15T20:21:54.887+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T18:34:03.992+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:40:13.701+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:40:13.702+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 404, "method": "GET", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:40:20.836+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:40:20.850+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.014024}
+2025-03-16T18:40:40.041+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:40:40.041+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:40:44.299+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:40:44.299+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:40:58.283+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:40:58.283+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:41:59.798+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:41:59.812+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:42:35.819+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T18:42:41.380+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:42:44.670+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:42:44.670+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:43:05.015+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:43:05.015+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:44:26.320+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:44:26.320+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:44:29.795+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T18:44:32.172+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:44:36.883+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:44:36.883+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:44:55.256+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:44:55.256+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:44:56.879+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:44:56.879+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:45:39.720+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:45:40.372+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:45:40.372+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T18:45:49.328+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:46:46.169+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:46:46.265+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0606149}
+2025-03-16T18:46:56.498+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:46:56.545+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0476581}
+2025-03-16T18:47:46.419+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:47:46.530+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1117838}
+2025-03-16T18:48:01.350+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:48:01.413+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0619225}
+2025-03-16T18:48:05.351+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:48:05.465+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1137934}
+2025-03-16T18:48:40.108+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:48:40.439+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3312813}
+2025-03-16T18:51:20.646+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:51:21.299+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:51:21.644+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3452183}
+2025-03-16T18:51:48.392+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:51:49.893+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:51:50.234+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3416925}
+2025-03-16T18:52:01.247+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T18:52:06.053+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:52:17.336+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:52:17.431+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0950627}
+2025-03-16T18:53:49.484+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T18:53:53.865+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:53:55.427+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:53:55.525+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0976139}
+2025-03-16T18:54:49.735+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:54:50.309+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:54:50.416+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1069799}
+2025-03-16T18:55:53.974+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:55:54.114+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.140245}
+2025-03-16T18:56:16.676+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:16.781+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1049059}
+2025-03-16T18:56:20.123+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T18:56:22.493+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:22.606+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1013339}
+2025-03-16T18:56:25.722+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:25.822+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0994919}
+2025-03-16T18:56:26.869+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:26.967+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0979196}
+2025-03-16T18:56:29.097+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:29.193+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0959029}
+2025-03-16T18:56:30.087+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:30.192+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1036406}
+2025-03-16T18:56:31.038+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:31.134+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0956003}
+2025-03-16T18:56:31.892+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:31.985+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0935254}
+2025-03-16T18:56:32.729+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:32.822+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0933615}
+2025-03-16T18:56:33.600+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T18:56:33.695+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0949616}
+2025-03-16T19:07:10.614+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:08:30.542+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T19:08:30.625+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0822883}
+2025-03-16T19:26:16.391+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:28:43.380+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:29:16.457+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:30:35.303+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:33:22.385+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:37:44.391+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:43:54.269+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T19:46:18.245+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T20:20:06.172+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T20:22:08.556+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:22:08.556+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.116", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-16T20:22:08.556+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.1.116", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0}
+2025-03-16T20:22:21.526+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:22:21.526+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "OPTIONS", "path": "/api/email/send", "query": "", "ip": "192.168.1.115", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:22:21.545+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:22:21.545+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "192.168.1.115", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:24:59.528+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T20:25:01.648+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T20:25:33.889+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:25:33.889+0800	INFO	router/router.go:22	ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.3.34", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "body": ""}
+2025-03-16T20:25:33.890+0800	INFO	middlewares/logger.go:60	/api/ping	{"status": 200, "method": "GET", "path": "/api/ping", "query": "", "ip": "192.168.3.34", "user-agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.22621.4391", "errors": "", "cost": 0.0005055}
+2025-03-16T20:25:44.732+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:25:44.732+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "OPTIONS", "path": "/api/email/send", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:25:44.748+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:25:44.748+0800	INFO	middlewares/logger.go:60	/api/email/send	{"status": 200, "method": "POST", "path": "/api/email/send", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:26:00.098+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:26:00.098+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "OPTIONS", "path": "/api/user/register", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:26:00.109+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:26:00.884+0800	INFO	middlewares/logger.go:60	/api/user/register	{"status": 200, "method": "POST", "path": "/api/user/register", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.7753463}
+2025-03-16T20:26:11.677+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:26:11.677+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "OPTIONS", "path": "/api/user/login", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:26:11.698+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:26:12.136+0800	INFO	middlewares/logger.go:60	/api/user/login	{"status": 200, "method": "POST", "path": "/api/user/login", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.4379922}
+2025-03-16T20:26:43.268+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:26:43.268+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:26:43.284+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:26:43.284+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:28:25.640+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:28:25.640+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:28:25.669+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:28:25.669+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:29:31.870+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:29:32.680+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.8098136}
+2025-03-16T20:30:05.251+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:30:05.251+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:30:28.689+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:30:28.689+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:31:22.330+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:31:22.330+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:32:43.787+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:32:44.518+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.7308601}
+2025-03-16T20:33:37.296+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:33:37.296+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:34:30.193+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:34:30.193+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:37:57.400+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T20:38:15.349+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T20:38:22.220+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T20:40:22.919+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T20:40:52.351+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:40:52.352+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:40:52.360+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:40:52.360+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:42:27.740+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:42:27.740+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T20:42:44.785+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:42:44.994+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2089399}
+2025-03-16T20:42:59.552+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:42:59.552+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T20:44:31.381+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:44:31.490+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.1089012}
+2025-03-16T20:45:17.444+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:45:17.444+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:45:17.449+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:45:17.449+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:49:09.591+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:49:09.591+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:49:09.631+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:49:09.631+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:49:41.028+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:49:41.028+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:49:41.033+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:49:41.033+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:50:20.690+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:50:20.690+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:50:20.696+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T20:50:20.696+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T20:51:33.643+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T20:51:33.939+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.2961186}
+2025-03-16T20:52:40.654+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T21:53:11.132+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T21:54:00.569+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T21:54:03.132+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T21:55:37.048+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T21:55:37.049+0800	INFO	middlewares/logger.go:60	/api/account/update	{"status": 200, "method": "PUT", "path": "/api/account/update", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0005361}
+2025-03-16T21:55:50.177+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T21:55:50.177+0800	INFO	middlewares/logger.go:60	/api/account/update	{"status": 200, "method": "PUT", "path": "/api/account/update", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-16T21:56:54.560+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T21:56:54.895+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "POST", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.3352942}
+2025-03-16T21:57:01.540+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:57:01.540+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "OPTIONS", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T21:57:01.864+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:57:02.356+0800	INFO	middlewares/logger.go:60	/api/account/create	{"status": 200, "method": "POST", "path": "/api/account/create", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.4916481}
+2025-03-16T21:57:07.157+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T21:57:07.214+0800	INFO	middlewares/logger.go:60	/api/account/update	{"status": 200, "method": "PUT", "path": "/api/account/update", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.0575438}
+2025-03-16T21:58:12.988+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T21:58:15.440+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-16T21:58:21.102+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T21:59:15.779+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:59:15.779+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T21:59:15.787+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:59:15.787+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 404, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T21:59:23.350+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:59:23.350+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T21:59:23.356+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:59:23.356+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 404, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T21:59:29.007+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:59:29.007+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T21:59:29.025+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T21:59:29.025+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 404, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:01:34.326+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:01:34.326+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:01:34.332+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:01:34.427+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0958443}
+2025-03-16T22:01:40.027+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:01:40.027+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:01:40.035+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:01:40.143+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.1082568}
+2025-03-16T22:02:21.855+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:21.855+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:02:21.860+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:21.949+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0892002}
+2025-03-16T22:02:25.061+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:25.154+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0927564}
+2025-03-16T22:02:37.559+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:37.560+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:02:37.571+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:37.902+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.3313724}
+2025-03-16T22:02:38.740+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:38.852+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.112484}
+2025-03-16T22:02:53.198+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:53.198+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:02:53.209+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:02:53.301+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "POST", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0919189}
+2025-03-16T22:03:03.975+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-16T22:03:31.575+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-16T22:03:53.927+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:03:53.928+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:03:53.934+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:03:54.018+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.083877}
+2025-03-16T22:03:56.016+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:03:56.099+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0825425}
+2025-03-16T22:06:15.209+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:06:15.209+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:06:15.216+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:06:15.307+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.09057}
+2025-03-16T22:07:52.686+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:07:52.686+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:07:52.692+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:07:52.778+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0861147}
+2025-03-16T22:08:06.612+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:08:06.612+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:08:06.619+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:08:06.939+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.3199051}
+2025-03-16T22:08:22.865+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:08:22.865+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:08:22.885+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:08:22.981+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.0962551}
+2025-03-16T22:08:59.002+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:08:59.002+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:08:59.007+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:08:59.753+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.745557}
+2025-03-16T22:09:46.964+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:09:46.964+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:09:46.974+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:09:47.106+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.1319528}
+2025-03-16T22:11:00.415+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:11:00.415+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:11:00.439+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:11:00.577+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.1374512}
+2025-03-16T22:11:02.173+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:11:02.317+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.144248}
+2025-03-16T22:11:39.074+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:11:39.074+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-16T22:11:39.100+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:11:39.245+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.1435667}
+2025-03-16T22:11:40.491+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
+2025-03-16T22:11:40.630+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.138342}
+2025-03-16T22:11:43.778+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.

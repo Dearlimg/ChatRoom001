@@ -30,12 +30,12 @@ values (?,?,?,?,?,?)
 `
 
 type CreateAccountParams struct {
-	ID        int64
-	UserID    int64
-	Name      string
-	Avatar    string
-	Gender    AccountsGender
-	Signature string
+	ID        int64          `json:"id"`
+	UserID    int64          `json:"user_id"`
+	Name      string         `json:"name"`
+	Avatar    string         `json:"avatar"`
+	Gender    AccountsGender `json:"gender"`
+	Signature string         `json:"signature"`
 }
 
 func (q *Queries) CreateAccount(ctx context.Context, arg *CreateAccountParams) error {
@@ -97,8 +97,8 @@ select exists(
 `
 
 type ExistsAccountByNameAndUserIDParams struct {
-	UserID int64
-	Name   string
+	UserID int64  `json:"user_id"`
+	Name   string `json:"name"`
 }
 
 func (q *Queries) ExistsAccountByNameAndUserID(ctx context.Context, arg *ExistsAccountByNameAndUserIDParams) (bool, error) {
@@ -108,7 +108,7 @@ func (q *Queries) ExistsAccountByNameAndUserID(ctx context.Context, arg *ExistsA
 	return exists, err
 }
 
-const getAccountByID = `-- name: GetAccountByID :many
+const getAccountByID = `-- name: GetAccountByID :one
 SELECT
     a.id, a.user_id, a.name, a.avatar, a.gender, a.signature, a.create_at,
     r.id AS relation_id
@@ -128,52 +128,36 @@ LIMIT 1
 `
 
 type GetAccountByIDParams struct {
-	UserID     int64
-	Account2ID sql.NullInt64
-	Account1ID sql.NullInt64
+	UserID     int64         `json:"user_id"`
+	Account2ID sql.NullInt64 `json:"account2_id"`
+	Account1ID sql.NullInt64 `json:"account1_id"`
 }
 
 type GetAccountByIDRow struct {
-	ID         int64
-	UserID     int64
-	Name       string
-	Avatar     string
-	Gender     AccountsGender
-	Signature  string
-	CreateAt   time.Time
-	RelationID sql.NullInt64
+	ID         int64          `json:"id"`
+	UserID     int64          `json:"user_id"`
+	Name       string         `json:"name"`
+	Avatar     string         `json:"avatar"`
+	Gender     AccountsGender `json:"gender"`
+	Signature  string         `json:"signature"`
+	CreateAt   time.Time      `json:"create_at"`
+	RelationID sql.NullInt64  `json:"relation_id"`
 }
 
-func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) ([]*GetAccountByIDRow, error) {
-	rows, err := q.query(ctx, q.getAccountByIDStmt, getAccountByID, arg.UserID, arg.Account2ID, arg.Account1ID)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	items := []*GetAccountByIDRow{}
-	for rows.Next() {
-		var i GetAccountByIDRow
-		if err := rows.Scan(
-			&i.ID,
-			&i.UserID,
-			&i.Name,
-			&i.Avatar,
-			&i.Gender,
-			&i.Signature,
-			&i.CreateAt,
-			&i.RelationID,
-		); err != nil {
-			return nil, err
-		}
-		items = append(items, &i)
-	}
-	if err := rows.Close(); err != nil {
-		return nil, err
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
+func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) (*GetAccountByIDRow, error) {
+	row := q.queryRow(ctx, q.getAccountByIDStmt, getAccountByID, arg.UserID, arg.Account2ID, arg.Account1ID)
+	var i GetAccountByIDRow
+	err := row.Scan(
+		&i.ID,
+		&i.UserID,
+		&i.Name,
+		&i.Avatar,
+		&i.Gender,
+		&i.Signature,
+		&i.CreateAt,
+		&i.RelationID,
+	)
+	return &i, err
 }
 
 const getAccountByUserID = `-- name: GetAccountByUserID :many
@@ -183,10 +167,10 @@ where user_id = ?
 `
 
 type GetAccountByUserIDRow struct {
-	ID     int64
-	Name   string
-	Avatar string
-	Gender AccountsGender
+	ID     int64          `json:"id"`
+	Name   string         `json:"name"`
+	Avatar string         `json:"avatar"`
+	Gender AccountsGender `json:"gender"`
 }
 
 func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetAccountByUserIDRow, error) {
@@ -195,7 +179,7 @@ func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetA
 		return nil, err
 	}
 	defer rows.Close()
-	items := []*GetAccountByUserIDRow{}
+	var items []*GetAccountByUserIDRow
 	for rows.Next() {
 		var i GetAccountByUserIDRow
 		if err := rows.Scan(
@@ -238,21 +222,21 @@ LIMIT ? OFFSET ?
 `
 
 type GetAccountsByNameParams struct {
-	CONCAT     interface{}
-	CONCAT_2   interface{}
-	Account2ID sql.NullInt64
-	Account1ID sql.NullInt64
-	Limit      int32
-	Offset     int32
+	CONCAT     interface{}   `json:"CONCAT"`
+	CONCAT_2   interface{}   `json:"CONCAT_2"`
+	Account2ID sql.NullInt64 `json:"account2_id"`
+	Account1ID sql.NullInt64 `json:"account1_id"`
+	Limit      int32         `json:"limit"`
+	Offset     int32         `json:"offset"`
 }
 
 type GetAccountsByNameRow struct {
-	ID         int64
-	Name       string
-	Avatar     string
-	Gender     AccountsGender
-	RelationID sql.NullInt64
-	Total      int64
+	ID         int64          `json:"id"`
+	Name       string         `json:"name"`
+	Avatar     string         `json:"avatar"`
+	Gender     AccountsGender `json:"gender"`
+	RelationID sql.NullInt64  `json:"relation_id"`
+	Total      int64          `json:"total"`
 }
 
 func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error) {
@@ -268,7 +252,7 @@ func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameP
 		return nil, err
 	}
 	defer rows.Close()
-	items := []*GetAccountsByNameRow{}
+	var items []*GetAccountsByNameRow
 	for rows.Next() {
 		var i GetAccountsByNameRow
 		if err := rows.Scan(
@@ -301,10 +285,10 @@ where id =?
 `
 
 type UpdateAccountParams struct {
-	Name      string
-	Gender    AccountsGender
-	Signature string
-	ID        int64
+	Name      string         `json:"name"`
+	Gender    AccountsGender `json:"gender"`
+	Signature string         `json:"signature"`
+	ID        int64          `json:"id"`
 }
 
 func (q *Queries) UpdateAccount(ctx context.Context, arg *UpdateAccountParams) error {
@@ -324,8 +308,8 @@ where id = ?
 `
 
 type UpdateAccountAvatarParams struct {
-	Avatar string
-	ID     int64
+	Avatar string `json:"avatar"`
+	ID     int64  `json:"id"`
 }
 
 func (q *Queries) UpdateAccountAvatar(ctx context.Context, arg *UpdateAccountAvatarParams) error {

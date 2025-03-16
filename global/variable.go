@@ -1,6 +1,7 @@
 package global
 
 import (
+	"ChatRoom001/manager"
 	"ChatRoom001/model/config"
 	"ChatRoom001/pkg/emailMark"
 	"github.com/Dearlimg/Goutils/pkg/generateID/snowflake"
@@ -17,4 +18,5 @@ var (
 	TokenMaker     token.MakerToken
 	Worker         *work.Worker
 	GenerateID     *snowflake.Snowflake //snowflake 雪花算法生成的 ID
+	ChatMap        *manager.ChatMap     // 聊天链接管理器
 )

@@ -6,7 +6,6 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
-	"fmt"
 	"github.com/pkg/errors"
 )
 
@@ -20,8 +19,6 @@ var (
 func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB, maxAccountNum int64, arg *db.CreateAccountParams) error {
 	return store.execTx(ctx, func(queries *db.Queries) error {
 		var err error
-		//err = queries.CreateAccount(ctx, arg)
-		//fmt.Println(err, "+", arg)
 		var accountNum int64
 		// 检查数量
 		err = tool.DoThat(err, func() error {
@@ -40,8 +37,6 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 			})
 			return err
 		})
-		fmt.Println("id userid", arg.ID, arg.UserID)
-		fmt.Println("33 :", err, exists)
 		if exists {
 			return ErrAccountNameExist
 		}
@@ -50,26 +45,24 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 			return queries.CreateAccount(ctx, arg)
 		})
 		// 建立关系(自己与自己的好友关系)
-		fmt.Println("account tx 49", arg, err)
 		ID := sql.NullInt64{
 			Int64: arg.UserID,
 			Valid: true,
 		}
 
-		err1 := tool.DoThat(err, func() error {
+		err = tool.DoThat(err, func() error {
 			err = queries.CreateFriendRelation(ctx, &db.CreateFriendRelationParams{
 				Account1ID: ID,
 				Account2ID: ID,
 			})
 			return err
 		})
-		fmt.Println("account tx 67 二日", ID, err1)
 		ID1 := sql.NullInt64{Int64: arg.UserID, Valid: true} // arg.ID 是账户的 ID（来自 accounts 表）
 		err = queries.CreateFriendRelation(ctx, &db.CreateFriendRelationParams{
 			Account1ID: ID,
 			Account2ID: ID,
 		})
-		fmt.Println(ID1)
+
 		param1 := db.GetRelationIDByInfoParams{
 			Account1ID: ID1,
 			Account2ID: ID1,
@@ -83,9 +76,7 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     true,
 			})
 		})
-		fmt.Println("account tx 81", err)
 		err = tool.DoThat(err, func() error { return rdb.AddRelationAccount(ctx, rID) })
-		fmt.Println("account tx 83", err)
 		return err
 	})
 }

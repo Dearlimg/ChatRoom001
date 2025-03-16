@@ -35,7 +35,7 @@ type Querier interface {
 	ExistsIsLeader(ctx context.Context, arg *ExistsIsLeaderParams) (bool, error)
 	ExistsSetting(ctx context.Context, arg *ExistsSettingParams) (bool, error)
 	ExistsUserByID(ctx context.Context, id int64) (bool, error)
-	GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) ([]*GetAccountByIDRow, error)
+	GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) (*GetAccountByIDRow, error)
 	GetAccountByUserID(ctx context.Context, userID int64) ([]*GetAccountByUserIDRow, error)
 	GetAccountIDsByRelationID(ctx context.Context, relationID int64) ([]int64, error)
 	GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error)
