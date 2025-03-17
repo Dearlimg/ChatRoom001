@@ -45,7 +45,7 @@ LIMIT 1;
 
 
 -- name: GetAccountByUserID :many
-select id,name,avatar,gender
+select id,name,avatar,gender,signature
 from accounts
 where user_id = ?;
 
@@ -72,11 +72,9 @@ select exists(
     and name =?
 );
 
+
 -- name: GetAccountsByName :many
-SELECT
-    a.*,
-    r.id AS relation_id,
-    (SELECT COUNT(*) FROM accounts WHERE name LIKE CONCAT('%', ?, '%')) AS total
+SELECT a.id, a.name, a.avatar, a.gender, r.id AS relation_id, COUNT(*) OVER () AS total
 FROM (
          SELECT id, name, avatar, gender
          FROM accounts
@@ -86,7 +84,25 @@ FROM (
                    ON r.relation_type = 'friend'
                        AND (
                           (r.account1_id = a.id AND r.account2_id = ?)
-                              OR
-                          (r.account1_id = ? AND r.account2_id = a.id)
+                              OR (r.account1_id = ? AND r.account2_id = a.id)
                           )
-LIMIT ? OFFSET ?;
+LIMIT ? OFFSET ?
+
+# -- name: GetAccountsByName :many
+# SELECT
+#     a.*,
+#     r.id AS relation_id,
+#     (SELECT COUNT(*) FROM accounts WHERE name LIKE CONCAT('%', ?, '%')) AS total
+# FROM (
+#          SELECT id, name, avatar, gender
+#          FROM accounts
+#          WHERE name LIKE CONCAT('%', ?, '%')
+#      ) AS a
+#          LEFT JOIN relations r
+#                    ON r.relation_type = 'friend'
+#                        AND (
+#                           (r.account1_id = a.id AND r.account2_id = ?)
+#                               OR
+#                           (r.account1_id = ? AND r.account2_id = a.id)
+#                           )
+# LIMIT ? OFFSET ?;

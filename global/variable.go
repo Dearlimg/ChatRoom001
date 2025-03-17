@@ -4,6 +4,7 @@ import (
 	"ChatRoom001/manager"
 	"ChatRoom001/model/config"
 	"ChatRoom001/pkg/emailMark"
+	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/generateID/snowflake"
 	"github.com/Dearlimg/Goutils/pkg/goroutine/work"
 	"github.com/Dearlimg/Goutils/pkg/logger"
@@ -19,4 +20,5 @@ var (
 	Worker         *work.Worker
 	GenerateID     *snowflake.Snowflake //snowflake 雪花算法生成的 ID
 	ChatMap        *manager.ChatMap     // 聊天链接管理器
+	Page           *app.Page
 )

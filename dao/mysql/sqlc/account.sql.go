@@ -161,16 +161,17 @@ func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams)
 }
 
 const getAccountByUserID = `-- name: GetAccountByUserID :many
-select id,name,avatar,gender
+select id,name,avatar,gender,signature
 from accounts
 where user_id = ?
 `
 
 type GetAccountByUserIDRow struct {
-	ID     int64          `json:"id"`
-	Name   string         `json:"name"`
-	Avatar string         `json:"avatar"`
-	Gender AccountsGender `json:"gender"`
+	ID        int64          `json:"id"`
+	Name      string         `json:"name"`
+	Avatar    string         `json:"avatar"`
+	Gender    AccountsGender `json:"gender"`
+	Signature string         `json:"signature"`
 }
 
 func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetAccountByUserIDRow, error) {
@@ -187,6 +188,7 @@ func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetA
 			&i.Name,
 			&i.Avatar,
 			&i.Gender,
+			&i.Signature,
 		); err != nil {
 			return nil, err
 		}
@@ -202,10 +204,7 @@ func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetA
 }
 
 const getAccountsByName = `-- name: GetAccountsByName :many
-SELECT
-    a.id, a.name, a.avatar, a.gender,
-    r.id AS relation_id,
-    (SELECT COUNT(*) FROM accounts WHERE name LIKE CONCAT('%', ?, '%')) AS total
+SELECT a.id, a.name, a.avatar, a.gender, r.id AS relation_id, COUNT(*) OVER () AS total
 FROM (
          SELECT id, name, avatar, gender
          FROM accounts
@@ -215,15 +214,14 @@ FROM (
                    ON r.relation_type = 'friend'
                        AND (
                           (r.account1_id = a.id AND r.account2_id = ?)
-                              OR
-                          (r.account1_id = ? AND r.account2_id = a.id)
+                              OR (r.account1_id = ? AND r.account2_id = a.id)
                           )
 LIMIT ? OFFSET ?
+
 `
 
 type GetAccountsByNameParams struct {
 	CONCAT     interface{}   `json:"CONCAT"`
-	CONCAT_2   interface{}   `json:"CONCAT_2"`
 	Account2ID sql.NullInt64 `json:"account2_id"`
 	Account1ID sql.NullInt64 `json:"account1_id"`
 	Limit      int32         `json:"limit"`
@@ -236,13 +234,34 @@ type GetAccountsByNameRow struct {
 	Avatar     string         `json:"avatar"`
 	Gender     AccountsGender `json:"gender"`
 	RelationID sql.NullInt64  `json:"relation_id"`
-	Total      int64          `json:"total"`
+	Total      interface{}    `json:"total"`
 }
 
+// -- name: GetAccountsByName :many
+// SELECT
+//
+//	a.*,
+//	r.id AS relation_id,
+//	(SELECT COUNT(*) FROM accounts WHERE name LIKE CONCAT('%', ?, '%')) AS total
+//
+// FROM (
+//
+//	    SELECT id, name, avatar, gender
+//	    FROM accounts
+//	    WHERE name LIKE CONCAT('%', ?, '%')
+//	) AS a
+//	    LEFT JOIN relations r
+//	              ON r.relation_type = 'friend'
+//	                  AND (
+//	                     (r.account1_id = a.id AND r.account2_id = ?)
+//	                         OR
+//	                     (r.account1_id = ? AND r.account2_id = a.id)
+//	                     )
+//
+// LIMIT ? OFFSET ?;
 func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error) {
 	rows, err := q.query(ctx, q.getAccountsByNameStmt, getAccountsByName,
 		arg.CONCAT,
-		arg.CONCAT_2,
 		arg.Account2ID,
 		arg.Account1ID,
 		arg.Limit,

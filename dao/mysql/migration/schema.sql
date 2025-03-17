@@ -86,8 +86,8 @@ CREATE TABLE relations (
                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     -- 添加外键约束（假设有 users 表）
-                           FOREIGN KEY (account1_id) REFERENCES users(id),
-                           FOREIGN KEY (account2_id) REFERENCES users(id),
+                           FOREIGN KEY (account1_id) REFERENCES accounts(id),
+                           FOREIGN KEY (account2_id) REFERENCES accounts(id),
 
     -- 约束条件（需 MySQL 8.0+）
                            CHECK (

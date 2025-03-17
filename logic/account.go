@@ -108,10 +108,11 @@ func (account) GetAccountsByUserID(ctx *gin.Context, userID int64) (reply.ParamG
 	result := make([]reply.ParamAccountInfo, len(accountInfos))
 	for i, accountInfo := range accountInfos {
 		result[i] = reply.ParamAccountInfo{
-			ID:     accountInfo.ID,
-			Name:   accountInfo.Name,
-			Avatar: accountInfo.Avatar,
-			Gender: string(accountInfo.Gender),
+			ID:        accountInfo.ID,
+			Name:      accountInfo.Name,
+			Avatar:    accountInfo.Avatar,
+			Gender:    string(accountInfo.Gender),
+			Signature: accountInfo.Signature,
 		}
 	}
 	return reply.ParamGetAccountByUserID{
@@ -122,17 +123,51 @@ func (account) GetAccountsByUserID(ctx *gin.Context, userID int64) (reply.ParamG
 
 func (account) UpdateAccount(ctx *gin.Context, accountID int64, name, gender, signature string) errcode.Err {
 	err := dao.Database.DB.UpdateAccount(ctx, &db.UpdateAccountParams{
-		ID:        global.GenerateID.GetID(),
 		Name:      name,
 		Gender:    db.AccountsGender(gender),
 		Signature: signature,
+		ID:        accountID,
 	})
 	if err != nil {
 		global.Logger.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		//fmt.Println("is here", ctx, accountID, name, gender, signature, err)
 		return errcode.ErrServer
 	}
 
 	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
 	global.Worker.SendTask(task.UpdateAccount(accessToken, accountID, name, gender, signature))
 	return nil
+}
+
+func (account) GetAccountsByName(ctx *gin.Context, accountID int64, name string, limit, offset int32) (reply.ParamGetAccountsByName, errcode.Err) {
+	var ID sql.NullInt64
+	ID.Int64 = accountID
+	accounts, err := dao.Database.DB.GetAccountsByName(ctx, &db.GetAccountsByNameParams{
+		Limit:      limit,
+		Offset:     offset,
+		CONCAT:     name,
+		Account1ID: ID,
+		Account2ID: ID,
+	})
+	if err != nil {
+		global.Logger.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return reply.ParamGetAccountsByName{}, errcode.ErrServer
+	}
+	result := make([]*reply.ParamFriendInfo, len(accounts))
+	for i, info := range accounts {
+		result[i] = &reply.ParamFriendInfo{
+			ParamAccountInfo: reply.ParamAccountInfo{
+				ID:     info.ID,
+				Name:   info.Name,
+				Avatar: info.Avatar,
+				Gender: string(info.Gender),
+			},
+			RelationID: info.RelationID.Int64,
+		}
+	}
+	return reply.ParamGetAccountsByName{
+		List:  result,
+		Total: int64(len(result)),
+	}, nil
+
 }

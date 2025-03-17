@@ -11,10 +11,11 @@ type ParamCreateAccount struct {
 }
 
 type ParamAccountInfo struct {
-	ID     int64  `json:"id,omitempty"`
-	Name   string `json:"name,omitempty"`
-	Avatar string `json:"avatar,omitempty"`
-	Gender string `json:"gender,omitempty"`
+	ID        int64  `json:"id,omitempty"`
+	Name      string `json:"name,omitempty"`
+	Avatar    string `json:"avatar,omitempty"`
+	Gender    string `json:"gender,omitempty"`
+	Signature string `json:"signature,omitempty"`
 }
 
 type ParamGetAccountToken struct {
@@ -26,7 +27,7 @@ type ParamGetAccountByUserID struct {
 	Total int64              `json:"total,omitempty"`
 }
 
-type ParamGetAccountByName struct {
+type ParamFriendInfo struct {
 	ParamAccountInfo
 	RelationID int64 `json:"relation_id,omitempty"`
 }
@@ -36,4 +37,9 @@ type ParamGetAccountByID struct {
 	Signature  string           `json:"signature,omitempty"`
 	CreateAt   time.Time        `json:"create_at,omitempty"`
 	RelationID int64            `json:"relation_id"`
+}
+
+type ParamGetAccountsByName struct {
+	List  []*ParamFriendInfo `json:"list,omitempty"`  // 账号列表
+	Total int64              `json:"total,omitempty"` // 总数
 }

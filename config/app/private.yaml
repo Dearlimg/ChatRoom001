@@ -85,6 +85,7 @@ Token:
   RefreshTokenExpire: 720h # 用户 token 的刷新令牌
   AccountTokenDuration: 24h # 账户 token 的有效期限
   AuthorizationKey: Authorization
+  NewAuthorizationKey: AccountToken
   AuthorizationType: Bearer
 HuaWeiOBS:
   BucketName: chatroom-bucket # 存储桶名称
