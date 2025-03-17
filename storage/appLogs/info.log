@@ -2079,3 +2079,4 @@
 2025-03-17T20:15:59.230+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "OPTIONS", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0}
 2025-03-17T20:15:59.235+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:5173
 2025-03-17T20:15:59.456+0800	INFO	middlewares/logger.go:60	/api/account/infos/account	{"status": 200, "method": "GET", "path": "/api/account/infos/account", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36", "errors": "", "cost": 0.2205395}
+2025-03-17T20:24:32.431+0800	INFO	ChatRoom001/main.go:34	server start success
