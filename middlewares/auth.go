@@ -5,7 +5,6 @@ import (
 	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
 	"ChatRoom001/model"
-	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/token"
@@ -76,12 +75,13 @@ func MustUser() gin.HandlerFunc {
 			return
 		}
 		data := val.(*model.Content)
-		fmt.Println(data)
+
 		if data.TokenType != model.UserToken {
 			reply.Reply(errcodes.AuthenticationFailed)
 			c.Abort()
 			return
 		}
+		//fmt.Println(data)
 		ok, err := dao.Database.DB.ExistsUserByID(c, data.ID)
 		if err != nil {
 			global.Logger.Error(err.Error(), ErrLogMsg(c)...)

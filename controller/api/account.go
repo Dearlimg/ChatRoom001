@@ -82,10 +82,11 @@ func (account) UpdateAccount(ctx *gin.Context) {
 func (account) GetAccountsByName(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := new(request.ParamGetAccountByName)
-	if err := ctx.ShouldBind(params); err != nil {
+	if err := ctx.ShouldBindJSON(params); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}
+	fmt.Println("Get Account By Name", params)
 	content, ok := middlewares.GetTokenContent(ctx)
 	if !ok && content.TokenType != model.AccountToken {
 		reply.Reply(errcodes.AuthNotExist)
@@ -94,4 +95,37 @@ func (account) GetAccountsByName(ctx *gin.Context) {
 	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
 	result, err := logic.Logics.Account.GetAccountsByName(ctx, content.ID, params.Name, limit, offset)
 	reply.Reply(err, result)
+}
+
+func (account) GetAccountByID(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamGetAccountByID)
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	//fmt.Println(content, ok, params)
+	if !ok && content.TokenType != model.UserToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	result, err := logic.Logics.Account.GetAccountByID(ctx, params.AccountID, content.ID)
+	reply.Reply(err, result)
+}
+
+func (account) DeleteAccount(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	param := new(request.ParamDeleteAccount)
+	if err := ctx.ShouldBind(param); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok && content.TokenType != model.UserToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.Account.DeleteAccount(ctx, content.ID, param.AccountID)
+	reply.Reply(err, nil)
 }

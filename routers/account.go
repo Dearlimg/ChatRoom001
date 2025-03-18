@@ -18,12 +18,12 @@ func (account) Init(routers *gin.RouterGroup) {
 			userGroup.GET("token", api.Apis.Account.GetAccountToken)
 			userGroup.GET("infos/account", api.Apis.Account.GetAccountByUserID)
 			userGroup.PUT("update", api.Apis.Account.UpdateAccount)
-			userGroup.DELETE("delete")
+			userGroup.DELETE("delete", api.Apis.Account.DeleteAccount)
+			userGroup.GET("infos/ID", api.Apis.Account.GetAccountByID)
 		}
 		accountGroup := r.Group("").Use(middlewares.MustAccount())
 		{
 			accountGroup.GET("infos/name", api.Apis.Account.GetAccountsByName)
-			accountGroup.GET("infos")
 		}
 	}
 }

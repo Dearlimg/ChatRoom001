@@ -6,6 +6,7 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/pkg/errors"
 )
 
@@ -18,6 +19,7 @@ var (
 // CreateAccountWithTx 检查数量、账户名之后创建账户并建立和自己的关系
 func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB, maxAccountNum int64, arg *db.CreateAccountParams) error {
 	return store.execTx(ctx, func(queries *db.Queries) error {
+
 		var err error
 		var accountNum int64
 		// 检查数量
@@ -44,9 +46,10 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 		err = tool.DoThat(err, func() error {
 			return queries.CreateAccount(ctx, arg)
 		})
+
 		// 建立关系(自己与自己的好友关系)
 		ID := sql.NullInt64{
-			Int64: arg.UserID,
+			Int64: arg.ID,
 			Valid: true,
 		}
 
@@ -57,15 +60,10 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 			})
 			return err
 		})
-		ID1 := sql.NullInt64{Int64: arg.UserID, Valid: true} // arg.ID 是账户的 ID（来自 accounts 表）
-		err = queries.CreateFriendRelation(ctx, &db.CreateFriendRelationParams{
-			Account1ID: ID,
-			Account2ID: ID,
-		})
 
 		param1 := db.GetRelationIDByInfoParams{
-			Account1ID: ID1,
-			Account2ID: ID1,
+			Account1ID: ID,
+			Account2ID: ID,
 		}
 		rID, err := queries.GetRelationIDByInfo(ctx, &param1)
 
@@ -76,6 +74,7 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     true,
 			})
 		})
+
 		err = tool.DoThat(err, func() error { return rdb.AddRelationAccount(ctx, rID) })
 		return err
 	})
@@ -90,6 +89,7 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 			isLeader, err = queries.ExistGroupLeaderByAccountIDWithLock(ctx, accountID)
 			return err
 		})
+		fmt.Println("account 92", err)
 		if isLeader {
 			return ErrAccountGroupLeader
 		}
@@ -109,9 +109,10 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 			err = queries.DeleteSettingsByAccountID(ctx, accountID)
 			return err
 		})
-		// 删除账户
+		fmt.Println("account 112", err)
+		// 删除relation
 		err = tool.DoThat(err, func() error {
-			err = queries.DeleteAccount(ctx, accountID)
+			err = queries.DeleteRelation(ctx, accountID)
 			return err
 		})
 		// 从 redis 中删除对应的关系
@@ -119,10 +120,31 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 		err = tool.DoThat(err, func() error {
 			return rdb.DeleteRelations(ctx, friendRelationIDs...)
 		})
-		// 在 redis 中删除该账户所在的群聊中的该账户
+		fmt.Println("account 123", err)
 		err = tool.DoThat(err, func() error {
 			return rdb.DeleteAccountFromRelations(ctx, accountID, groupRelationIDs...)
 		})
+		// 删除账户
+		err = tool.DoThat(err, func() error {
+			return rdb.DeleteAccountFromRelations(ctx, accountID, groupRelationIDs...)
+		})
+
+		err = tool.DoThat(err, func() error {
+			err = queries.DeleteAccount(ctx, accountID)
+			return err
+		})
+		fmt.Println("account 132", err)
+		// 从 redis 中删除对应的关系
+		// 从 redis 中删除该账户的好友关系
+		//err = tool.DoThat(err, func() error {
+		//	return rdb.DeleteRelations(ctx, friendRelationIDs...)
+		//})
+
+		// 在 redis 中删除该账户所在的群聊中的该账户
+		//err = tool.DoThat(err, func() error {
+		//	return rdb.DeleteAccountFromRelations(ctx, accountID, groupRelationIDs...)
+		//})
+		fmt.Println("account 143", err)
 		return err
 	})
 }

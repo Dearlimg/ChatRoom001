@@ -12,6 +12,7 @@ import (
 	"ChatRoom001/model/reply"
 	"ChatRoom001/task"
 	"database/sql"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
@@ -149,6 +150,7 @@ func (account) GetAccountsByName(ctx *gin.Context, accountID int64, name string,
 		Account1ID: ID,
 		Account2ID: ID,
 	})
+	fmt.Println("account153", accountID, name, limit, offset)
 	if err != nil {
 		global.Logger.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return reply.ParamGetAccountsByName{}, errcode.ErrServer
@@ -169,5 +171,43 @@ func (account) GetAccountsByName(ctx *gin.Context, accountID int64, name string,
 		List:  result,
 		Total: int64(len(result)),
 	}, nil
+}
 
+func (account) GetAccountByID(ctx *gin.Context, accountID, selfID int64) (*reply.ParamGetAccountByID, errcode.Err) {
+	info, err := GetAccountInfoByID(ctx, selfID, accountID)
+
+	if err != nil {
+		return nil, err
+	}
+	return &reply.ParamGetAccountByID{
+		Info: reply.ParamAccountInfo{
+			ID:     info.ID,
+			Name:   info.Name,
+			Avatar: info.Avatar,
+			Gender: string(info.Gender),
+		},
+		Signature:  info.Signature,
+		CreateAt:   info.CreateAt,
+		RelationID: info.RelationID.Int64,
+	}, nil
+}
+
+func (account) DeleteAccount(ctx *gin.Context, selfID int64, accountID int64) errcode.Err {
+	accountInfo, myerr := GetAccountInfoByID(ctx, selfID, accountID)
+	if myerr != nil {
+		return myerr
+	}
+	if accountInfo.UserID != selfID {
+		return errcodes.AuthPermissionsInsufficient
+	}
+	err := dao.Database.DB.DeleteAccountWithTx(ctx, dao.Database.Redis, accountID)
+	switch {
+	case errors.Is(err, tx.ErrAccountGroupLeader):
+		return errcodes.AccountGroupLeader
+	case errors.Is(err, nil):
+		return nil
+	default:
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
 }
