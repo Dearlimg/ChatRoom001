@@ -30,12 +30,12 @@ values (?,?,?,?,?,?)
 `
 
 type CreateAccountParams struct {
-	ID        int64          `json:"id"`
-	UserID    int64          `json:"user_id"`
-	Name      string         `json:"name"`
-	Avatar    string         `json:"avatar"`
-	Gender    AccountsGender `json:"gender"`
-	Signature string         `json:"signature"`
+	ID        int64
+	UserID    int64
+	Name      string
+	Avatar    string
+	Gender    AccountsGender
+	Signature string
 }
 
 func (q *Queries) CreateAccount(ctx context.Context, arg *CreateAccountParams) error {
@@ -97,8 +97,8 @@ select exists(
 `
 
 type ExistsAccountByNameAndUserIDParams struct {
-	UserID int64  `json:"user_id"`
-	Name   string `json:"name"`
+	UserID int64
+	Name   string
 }
 
 func (q *Queries) ExistsAccountByNameAndUserID(ctx context.Context, arg *ExistsAccountByNameAndUserIDParams) (bool, error) {
@@ -128,20 +128,20 @@ LIMIT 1
 `
 
 type GetAccountByIDParams struct {
-	UserID     int64         `json:"user_id"`
-	Account2ID sql.NullInt64 `json:"account2_id"`
-	Account1ID sql.NullInt64 `json:"account1_id"`
+	UserID     int64
+	Account2ID sql.NullInt64
+	Account1ID sql.NullInt64
 }
 
 type GetAccountByIDRow struct {
-	ID         int64          `json:"id"`
-	UserID     int64          `json:"user_id"`
-	Name       string         `json:"name"`
-	Avatar     string         `json:"avatar"`
-	Gender     AccountsGender `json:"gender"`
-	Signature  string         `json:"signature"`
-	CreateAt   time.Time      `json:"create_at"`
-	RelationID sql.NullInt64  `json:"relation_id"`
+	ID         int64
+	UserID     int64
+	Name       string
+	Avatar     string
+	Gender     AccountsGender
+	Signature  string
+	CreateAt   time.Time
+	RelationID sql.NullInt64
 }
 
 func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) (*GetAccountByIDRow, error) {
@@ -167,11 +167,11 @@ where user_id = ?
 `
 
 type GetAccountByUserIDRow struct {
-	ID        int64          `json:"id"`
-	Name      string         `json:"name"`
-	Avatar    string         `json:"avatar"`
-	Gender    AccountsGender `json:"gender"`
-	Signature string         `json:"signature"`
+	ID        int64
+	Name      string
+	Avatar    string
+	Gender    AccountsGender
+	Signature string
 }
 
 func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetAccountByUserIDRow, error) {
@@ -180,7 +180,7 @@ func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetA
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetAccountByUserIDRow
+	items := []*GetAccountByUserIDRow{}
 	for rows.Next() {
 		var i GetAccountByUserIDRow
 		if err := rows.Scan(
@@ -221,20 +221,20 @@ LIMIT ? OFFSET ?
 `
 
 type GetAccountsByNameParams struct {
-	CONCAT     interface{}   `json:"CONCAT"`
-	Account2ID sql.NullInt64 `json:"account2_id"`
-	Account1ID sql.NullInt64 `json:"account1_id"`
-	Limit      int32         `json:"limit"`
-	Offset     int32         `json:"offset"`
+	CONCAT     interface{}
+	Account2ID sql.NullInt64
+	Account1ID sql.NullInt64
+	Limit      int32
+	Offset     int32
 }
 
 type GetAccountsByNameRow struct {
-	ID         int64          `json:"id"`
-	Name       string         `json:"name"`
-	Avatar     string         `json:"avatar"`
-	Gender     AccountsGender `json:"gender"`
-	RelationID sql.NullInt64  `json:"relation_id"`
-	Total      interface{}    `json:"total"`
+	ID         int64
+	Name       string
+	Avatar     string
+	Gender     AccountsGender
+	RelationID sql.NullInt64
+	Total      interface{}
 }
 
 // -- name: GetAccountsByName :many
@@ -271,7 +271,7 @@ func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameP
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetAccountsByNameRow
+	items := []*GetAccountsByNameRow{}
 	for rows.Next() {
 		var i GetAccountsByNameRow
 		if err := rows.Scan(
@@ -304,10 +304,10 @@ where id =?
 `
 
 type UpdateAccountParams struct {
-	Name      string         `json:"name"`
-	Gender    AccountsGender `json:"gender"`
-	Signature string         `json:"signature"`
-	ID        int64          `json:"id"`
+	Name      string
+	Gender    AccountsGender
+	Signature string
+	ID        int64
 }
 
 func (q *Queries) UpdateAccount(ctx context.Context, arg *UpdateAccountParams) error {
@@ -327,8 +327,8 @@ where id = ?
 `
 
 type UpdateAccountAvatarParams struct {
-	Avatar string `json:"avatar"`
-	ID     int64  `json:"id"`
+	Avatar string
+	ID     int64
 }
 
 func (q *Queries) UpdateAccountAvatar(ctx context.Context, arg *UpdateAccountAvatarParams) error {

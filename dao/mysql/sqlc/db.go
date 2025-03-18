@@ -30,8 +30,14 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.createAccountStmt, err = db.PrepareContext(ctx, createAccount); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateAccount: %w", err)
 	}
+	if q.createApplicationStmt, err = db.PrepareContext(ctx, createApplication); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateApplication: %w", err)
+	}
 	if q.createFriendRelationStmt, err = db.PrepareContext(ctx, createFriendRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateFriendRelation: %w", err)
+	}
+	if q.createGetStmt, err = db.PrepareContext(ctx, createGet); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateGet: %w", err)
 	}
 	if q.createGroupRelationStmt, err = db.PrepareContext(ctx, createGroupRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateGroupRelation: %w", err)
@@ -50,6 +56,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.deleteAccountByUserIDStmt, err = db.PrepareContext(ctx, deleteAccountByUserID); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteAccountByUserID: %w", err)
+	}
+	if q.deleteApplicationStmt, err = db.PrepareContext(ctx, deleteApplication); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteApplication: %w", err)
 	}
 	if q.deleteFriendRelationStmt, err = db.PrepareContext(ctx, deleteFriendRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteFriendRelation: %w", err)
@@ -83,6 +92,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.existsAccountByNameAndUserIDStmt, err = db.PrepareContext(ctx, existsAccountByNameAndUserID); err != nil {
 		return nil, fmt.Errorf("error preparing query ExistsAccountByNameAndUserID: %w", err)
+	}
+	if q.existsApplicationByIDWithLockStmt, err = db.PrepareContext(ctx, existsApplicationByIDWithLock); err != nil {
+		return nil, fmt.Errorf("error preparing query ExistsApplicationByIDWithLock: %w", err)
 	}
 	if q.existsFriendRelationStmt, err = db.PrepareContext(ctx, existsFriendRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query ExistsFriendRelation: %w", err)
@@ -125,6 +137,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.getAllRelationOnRelationStmt, err = db.PrepareContext(ctx, getAllRelationOnRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAllRelationOnRelation: %w", err)
+	}
+	if q.getApplicationByIDStmt, err = db.PrepareContext(ctx, getApplicationByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetApplicationByID: %w", err)
+	}
+	if q.getApplicationsStmt, err = db.PrepareContext(ctx, getApplications); err != nil {
+		return nil, fmt.Errorf("error preparing query GetApplications: %w", err)
 	}
 	if q.getFriendPinSettingsOrderByPinTimeStmt, err = db.PrepareContext(ctx, getFriendPinSettingsOrderByPinTime); err != nil {
 		return nil, fmt.Errorf("error preparing query GetFriendPinSettingsOrderByPinTime: %w", err)
@@ -189,6 +207,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.updateAccountAvatarStmt, err = db.PrepareContext(ctx, updateAccountAvatar); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateAccountAvatar: %w", err)
 	}
+	if q.updateApplicationStmt, err = db.PrepareContext(ctx, updateApplication); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateApplication: %w", err)
+	}
 	if q.updateGroupRelationStmt, err = db.PrepareContext(ctx, updateGroupRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateGroupRelation: %w", err)
 	}
@@ -219,9 +240,19 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing createAccountStmt: %w", cerr)
 		}
 	}
+	if q.createApplicationStmt != nil {
+		if cerr := q.createApplicationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createApplicationStmt: %w", cerr)
+		}
+	}
 	if q.createFriendRelationStmt != nil {
 		if cerr := q.createFriendRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createFriendRelationStmt: %w", cerr)
+		}
+	}
+	if q.createGetStmt != nil {
+		if cerr := q.createGetStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createGetStmt: %w", cerr)
 		}
 	}
 	if q.createGroupRelationStmt != nil {
@@ -252,6 +283,11 @@ func (q *Queries) Close() error {
 	if q.deleteAccountByUserIDStmt != nil {
 		if cerr := q.deleteAccountByUserIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing deleteAccountByUserIDStmt: %w", cerr)
+		}
+	}
+	if q.deleteApplicationStmt != nil {
+		if cerr := q.deleteApplicationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteApplicationStmt: %w", cerr)
 		}
 	}
 	if q.deleteFriendRelationStmt != nil {
@@ -307,6 +343,11 @@ func (q *Queries) Close() error {
 	if q.existsAccountByNameAndUserIDStmt != nil {
 		if cerr := q.existsAccountByNameAndUserIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing existsAccountByNameAndUserIDStmt: %w", cerr)
+		}
+	}
+	if q.existsApplicationByIDWithLockStmt != nil {
+		if cerr := q.existsApplicationByIDWithLockStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing existsApplicationByIDWithLockStmt: %w", cerr)
 		}
 	}
 	if q.existsFriendRelationStmt != nil {
@@ -377,6 +418,16 @@ func (q *Queries) Close() error {
 	if q.getAllRelationOnRelationStmt != nil {
 		if cerr := q.getAllRelationOnRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getAllRelationOnRelationStmt: %w", cerr)
+		}
+	}
+	if q.getApplicationByIDStmt != nil {
+		if cerr := q.getApplicationByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getApplicationByIDStmt: %w", cerr)
+		}
+	}
+	if q.getApplicationsStmt != nil {
+		if cerr := q.getApplicationsStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getApplicationsStmt: %w", cerr)
 		}
 	}
 	if q.getFriendPinSettingsOrderByPinTimeStmt != nil {
@@ -484,6 +535,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing updateAccountAvatarStmt: %w", cerr)
 		}
 	}
+	if q.updateApplicationStmt != nil {
+		if cerr := q.updateApplicationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateApplicationStmt: %w", cerr)
+		}
+	}
 	if q.updateGroupRelationStmt != nil {
 		if cerr := q.updateGroupRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing updateGroupRelationStmt: %w", cerr)
@@ -550,13 +606,16 @@ type Queries struct {
 	tx                                       *sql.Tx
 	countAccountByUserIDStmt                 *sql.Stmt
 	createAccountStmt                        *sql.Stmt
+	createApplicationStmt                    *sql.Stmt
 	createFriendRelationStmt                 *sql.Stmt
+	createGetStmt                            *sql.Stmt
 	createGroupRelationStmt                  *sql.Stmt
 	createManySettingStmt                    *sql.Stmt
 	createSettingStmt                        *sql.Stmt
 	createUserStmt                           *sql.Stmt
 	deleteAccountStmt                        *sql.Stmt
 	deleteAccountByUserIDStmt                *sql.Stmt
+	deleteApplicationStmt                    *sql.Stmt
 	deleteFriendRelationStmt                 *sql.Stmt
 	deleteFriendRelationByAccountIDStmt      *sql.Stmt
 	deleteGroupStmt                          *sql.Stmt
@@ -568,6 +627,7 @@ type Queries struct {
 	existEmailStmt                           *sql.Stmt
 	existGroupLeaderByAccountIDWithLockStmt  *sql.Stmt
 	existsAccountByNameAndUserIDStmt         *sql.Stmt
+	existsApplicationByIDWithLockStmt        *sql.Stmt
 	existsFriendRelationStmt                 *sql.Stmt
 	existsFriendSettingStmt                  *sql.Stmt
 	existsIsLeaderStmt                       *sql.Stmt
@@ -582,6 +642,8 @@ type Queries struct {
 	getAllGroupRelationStmt                  *sql.Stmt
 	getAllRelationIDsStmt                    *sql.Stmt
 	getAllRelationOnRelationStmt             *sql.Stmt
+	getApplicationByIDStmt                   *sql.Stmt
+	getApplicationsStmt                      *sql.Stmt
 	getFriendPinSettingsOrderByPinTimeStmt   *sql.Stmt
 	getFriendRelationByIDStmt                *sql.Stmt
 	getFriendSettingsByNameStmt              *sql.Stmt
@@ -603,6 +665,7 @@ type Queries struct {
 	transferIsLeaderTrueStmt                 *sql.Stmt
 	updateAccountStmt                        *sql.Stmt
 	updateAccountAvatarStmt                  *sql.Stmt
+	updateApplicationStmt                    *sql.Stmt
 	updateGroupRelationStmt                  *sql.Stmt
 	updateSettingDisturbStmt                 *sql.Stmt
 	updateSettingNickNameStmt                *sql.Stmt
@@ -616,13 +679,16 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		tx:                                       tx,
 		countAccountByUserIDStmt:                 q.countAccountByUserIDStmt,
 		createAccountStmt:                        q.createAccountStmt,
+		createApplicationStmt:                    q.createApplicationStmt,
 		createFriendRelationStmt:                 q.createFriendRelationStmt,
+		createGetStmt:                            q.createGetStmt,
 		createGroupRelationStmt:                  q.createGroupRelationStmt,
 		createManySettingStmt:                    q.createManySettingStmt,
 		createSettingStmt:                        q.createSettingStmt,
 		createUserStmt:                           q.createUserStmt,
 		deleteAccountStmt:                        q.deleteAccountStmt,
 		deleteAccountByUserIDStmt:                q.deleteAccountByUserIDStmt,
+		deleteApplicationStmt:                    q.deleteApplicationStmt,
 		deleteFriendRelationStmt:                 q.deleteFriendRelationStmt,
 		deleteFriendRelationByAccountIDStmt:      q.deleteFriendRelationByAccountIDStmt,
 		deleteGroupStmt:                          q.deleteGroupStmt,
@@ -634,6 +700,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		existEmailStmt:                           q.existEmailStmt,
 		existGroupLeaderByAccountIDWithLockStmt:  q.existGroupLeaderByAccountIDWithLockStmt,
 		existsAccountByNameAndUserIDStmt:         q.existsAccountByNameAndUserIDStmt,
+		existsApplicationByIDWithLockStmt:        q.existsApplicationByIDWithLockStmt,
 		existsFriendRelationStmt:                 q.existsFriendRelationStmt,
 		existsFriendSettingStmt:                  q.existsFriendSettingStmt,
 		existsIsLeaderStmt:                       q.existsIsLeaderStmt,
@@ -648,6 +715,8 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getAllGroupRelationStmt:                  q.getAllGroupRelationStmt,
 		getAllRelationIDsStmt:                    q.getAllRelationIDsStmt,
 		getAllRelationOnRelationStmt:             q.getAllRelationOnRelationStmt,
+		getApplicationByIDStmt:                   q.getApplicationByIDStmt,
+		getApplicationsStmt:                      q.getApplicationsStmt,
 		getFriendPinSettingsOrderByPinTimeStmt:   q.getFriendPinSettingsOrderByPinTimeStmt,
 		getFriendRelationByIDStmt:                q.getFriendRelationByIDStmt,
 		getFriendSettingsByNameStmt:              q.getFriendSettingsByNameStmt,
@@ -669,6 +738,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		transferIsLeaderTrueStmt:                 q.transferIsLeaderTrueStmt,
 		updateAccountStmt:                        q.updateAccountStmt,
 		updateAccountAvatarStmt:                  q.updateAccountAvatarStmt,
+		updateApplicationStmt:                    q.updateApplicationStmt,
 		updateGroupRelationStmt:                  q.updateGroupRelationStmt,
 		updateSettingDisturbStmt:                 q.updateSettingDisturbStmt,
 		updateSettingNickNameStmt:                q.updateSettingNickNameStmt,

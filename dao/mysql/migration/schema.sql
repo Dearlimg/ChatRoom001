@@ -1,19 +1,5 @@
 USE chatroom;
 
-
-
--- 性别类型
-# CREATE TABLE users (
-#                        id INT AUTO_INCREMENT PRIMARY KEY,
-#                        gender ENUM('男', '女', '未知') NOT NULL
-# );
-
--- 群或好友关系的类型
-# CREATE TABLE relationships (
-#                                id INT AUTO_INCREMENT PRIMARY KEY,
-#                                relation_type ENUM('group', 'friend') NOT NULL
-# );
-
 -- 群类型
 CREATE TABLE `groups` (
                         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,21 +38,7 @@ CREATE TABLE IF NOT EXISTS accounts (
 CREATE INDEX account_index_name_avatar ON accounts(name, avatar);
 
 
-# -- 创建群组或好友表
-# CREATE TABLE IF NOT EXISTS relations (
-#                                          id BIGINT AUTO_INCREMENT PRIMARY KEY, -- id
-#                                          relation_type ENUM('group', 'friend') NOT NULL, -- 关系类型，'group' 或 'friend'
-#                                          group_name VARCHAR(255), -- 群组名称（如果是群组关系）
-#                                          group_description VARCHAR(255), -- 群组描述（如果是群组关系）
-#                                          group_avatar VARCHAR(255),
-#                                          account1_id BIGINT, -- 好友 1 的账号 id（如果是好友关系）
-#                                          account2_id BIGINT, -- 好友 2 的账号 id（如果是好友关系）
-#                                          create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
-#                                          CONSTRAINT chk_relation_type CHECK (
-#                                              (relation_type = 'group' AND group_name IS NOT NULL) OR
-#                                              (relation_type = 'friend' AND account1_id IS NOT NULL AND account2_id IS NOT NULL)
-#                                              ) -- 检查约束，确保群组或好友信息互斥
-# );
+
 
 -- 创建统一关系表（包含群组和好友的所有字段）
 CREATE TABLE relations (
@@ -86,8 +58,8 @@ CREATE TABLE relations (
                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     -- 添加外键约束（假设有 users 表）
-                           FOREIGN KEY (account1_id) REFERENCES accounts(id),
-                           FOREIGN KEY (account2_id) REFERENCES accounts(id),
+#                            FOREIGN KEY (account1_id) REFERENCES accounts(id),
+#                            FOREIGN KEY (account2_id) REFERENCES accounts(id),
 
     -- 约束条件（需 MySQL 8.0+）
                            CHECK (
@@ -114,11 +86,11 @@ CREATE TABLE relations (
 
 
 -- 创建申请状态表（示例：可以根据需要将此列放入用户或好友申请表中）
-CREATE TABLE IF NOT EXISTS applications (
-                                            id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 申请 id
-                                            status ENUM('已申请', '已同意', '已拒绝') NOT NULL, -- 申请状态
-                                            create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
-);
+# CREATE TABLE IF NOT EXISTS application (
+#                                             id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 申请 id
+#                                             status ENUM('已申请', '已同意', '已拒绝') NOT NULL, -- 申请状态
+#                                             create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
+# );
 
 -- 创建文件类型表（示例：可以根据需要使用此列存储文件信息）
 CREATE TABLE IF NOT EXISTS files (
@@ -136,34 +108,7 @@ CREATE TABLE IF NOT EXISTS msg_notifications (
                                                  create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
 );
 
-# -- 创建 relations 表
-# CREATE TABLE relations (
-#                            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-#                            relation_type ENUM('group', 'friend') NOT NULL,
-#                            group_type ENUM('public', 'private') COMMENT '群组类型，仅 relation_type=group 时有效',
-#                            friend_account1_id BIGINT COMMENT '好友账号1 ID，仅 relation_type=friend 时有效',
-#                            friend_account2_id BIGINT COMMENT '好友账号2 ID，仅 relation_type=friend 时有效',
-#                            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-#                            CONSTRAINT chk_relations CHECK (
-#                                (relation_type = 'group' AND group_type IS NOT NULL AND friend_account1_id IS NULL AND friend_account2_id IS NULL)
-#                                    OR
-#                                (relation_type = 'friend' AND group_type IS NULL AND friend_account1_id IS NOT NULL AND friend_account2_id IS NOT NULL)
-#                                )
-# ) ENGINE=InnoDB;
 
-# -- 创建 accounts 表
-# CREATE TABLE IF NOT EXISTS accounts (
-#                                         id BIGINT PRIMARY KEY,
-#                                         user_id BIGINT NOT NULL,
-#                                         name VARCHAR(255) NOT NULL,
-#                                         avatar VARCHAR(255) NOT NULL,
-#                                         gender ENUM('未知', '男', '女') NOT NULL DEFAULT '未知',
-#                                         signature TEXT NOT NULL DEFAULT '这个用户很懒，什么也没有留下~',
-#                                         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-#                                         FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-#                                         UNIQUE KEY (user_id, name)
-# ) ENGINE=InnoDB;
-#
 # -- 账号对群组或好友关系的设置
 CREATE TABLE IF NOT EXISTS settings (
                                         account_id BIGINT NOT NULL, -- 账号id（外键）
@@ -180,26 +125,21 @@ CREATE TABLE IF NOT EXISTS settings (
                                         FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-# -- 昵称索引
-# CREATE INDEX relation_setting_nickname ON settings (nick_name);
-#
-# -- 账户ID和关系ID的符合索引
-# CREATE INDEX setting_idx_account_id_relation_id ON settings (account_id, relation_id);
-#
 # -- 好友申请
-# CREATE TABLE IF NOT EXISTS applications (
-#                                             account1_id BIGINT NOT NULL, -- 申请者账号 id（外键）
-#                                             account2_id BIGINT NOT NULL, -- 被申请者账号 id（外键）
-#                                             apply_msg TEXT NOT NULL, -- 申请信息
-#                                             refuse_msg TEXT NOT NULL, -- 拒绝信息
-#                                             status ENUM('已申请', '已同意', '已拒绝') NOT NULL DEFAULT '已申请', -- 申请状态
-#                                             create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
-#                                             update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 更新时间
-#                                             PRIMARY KEY (account1_id, account2_id),
-#                                             FOREIGN KEY (account1_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE,
-#                                             FOREIGN KEY (account2_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
-# );
-#
+CREATE TABLE IF NOT EXISTS applications (
+#                                             id int primary key not null ,
+                                            account1_id BIGINT NOT NULL, -- 申请者账号 id（外键）
+                                            account2_id BIGINT NOT NULL, -- 被申请者账号 id（外键）
+                                            apply_msg TEXT NOT NULL, -- 申请信息
+                                            refuse_msg TEXT NOT NULL, -- 拒绝信息
+                                            status ENUM('已申请', '已同意', '已拒绝') NOT NULL DEFAULT '已申请', -- 申请状态
+                                            create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
+                                            update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 更新时间
+                                            PRIMARY KEY (account1_id, account2_id),
+                                            FOREIGN KEY (account1_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                                            FOREIGN KEY (account2_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # -- 文件记录
 # CREATE TABLE IF NOT EXISTS files (
 #                                      id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 文件 id

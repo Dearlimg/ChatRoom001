@@ -35,7 +35,7 @@ func (account) CreateAccount(ctx *gin.Context) {
 func (account) GetAccountToken(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := new(request.ParamGetAccountToken)
-	if err := ctx.ShouldBindBodyWithJSON(params); err != nil {
+	if err := ctx.ShouldBind(params); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}
@@ -117,7 +117,7 @@ func (account) GetAccountByID(ctx *gin.Context) {
 func (account) DeleteAccount(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	param := new(request.ParamDeleteAccount)
-	if err := ctx.ShouldBind(param); err != nil {
+	if err := ctx.ShouldBindBodyWithJSON(param); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}

@@ -16,8 +16,8 @@ value ('friend',?,?)
 `
 
 type CreateFriendRelationParams struct {
-	Account1ID sql.NullInt64 `json:"account1_id"`
-	Account2ID sql.NullInt64 `json:"account2_id"`
+	Account1ID sql.NullInt64
+	Account2ID sql.NullInt64
 }
 
 func (q *Queries) CreateFriendRelation(ctx context.Context, arg *CreateFriendRelationParams) error {
@@ -31,9 +31,9 @@ value ('group',?,?,?)
 `
 
 type CreateGroupRelationParams struct {
-	GroupName        sql.NullString `json:"group_name"`
-	GroupDescription sql.NullString `json:"group_description"`
-	GroupAvatar      sql.NullString `json:"group_avatar"`
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	GroupAvatar      sql.NullString
 }
 
 func (q *Queries) CreateGroupRelation(ctx context.Context, arg *CreateGroupRelationParams) error {
@@ -47,8 +47,8 @@ value ('friend',?,?)
 `
 
 type DeleteFriendRelationParams struct {
-	Account1ID sql.NullInt64 `json:"account1_id"`
-	Account2ID sql.NullInt64 `json:"account2_id"`
+	Account1ID sql.NullInt64
+	Account2ID sql.NullInt64
 }
 
 func (q *Queries) DeleteFriendRelation(ctx context.Context, arg *DeleteFriendRelationParams) error {
@@ -88,8 +88,8 @@ select exists(select 1
 `
 
 type ExistsFriendRelationParams struct {
-	Account1ID sql.NullInt64 `json:"account1_id"`
-	Account2ID sql.NullInt64 `json:"account2_id"`
+	Account1ID sql.NullInt64
+	Account2ID sql.NullInt64
 }
 
 func (q *Queries) ExistsFriendRelation(ctx context.Context, arg *ExistsFriendRelationParams) (bool, error) {
@@ -113,7 +113,7 @@ func (q *Queries) GetAllGroupRelation(ctx context.Context) ([]int64, error) {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []int64
+	items := []int64{}
 	for rows.Next() {
 		var id int64
 		if err := rows.Scan(&id); err != nil {
@@ -141,7 +141,7 @@ func (q *Queries) GetAllRelationIDs(ctx context.Context) ([]int64, error) {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []int64
+	items := []int64{}
 	for rows.Next() {
 		var id int64
 		if err := rows.Scan(&id); err != nil {
@@ -169,7 +169,7 @@ func (q *Queries) GetAllRelationOnRelation(ctx context.Context) ([]*Relation, er
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*Relation
+	items := []*Relation{}
 	for rows.Next() {
 		var i Relation
 		if err := rows.Scan(
@@ -216,11 +216,11 @@ where relation_type = 'group' and id = ?
 `
 
 type GetGroupRelationByIDRow struct {
-	ID               int64                 `json:"id"`
-	RelationType     RelationsRelationType `json:"relation_type"`
-	GroupName        sql.NullString        `json:"group_name"`
-	GroupDescription sql.NullString        `json:"group_description"`
-	GroupAvatar      sql.NullString        `json:"group_avatar"`
+	ID               int64
+	RelationType     RelationsRelationType
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	GroupAvatar      sql.NullString
 }
 
 func (q *Queries) GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error) {
@@ -244,8 +244,8 @@ and account1_id=?
 `
 
 type GetRelationIDByAccountIDParams struct {
-	Account2ID sql.NullInt64 `json:"account2_id"`
-	Account1ID sql.NullInt64 `json:"account1_id"`
+	Account2ID sql.NullInt64
+	Account1ID sql.NullInt64
 }
 
 func (q *Queries) GetRelationIDByAccountID(ctx context.Context, arg *GetRelationIDByAccountIDParams) (int64, error) {
@@ -264,8 +264,8 @@ and account2_id=?
 `
 
 type GetRelationIDByInfoParams struct {
-	Account1ID sql.NullInt64 `json:"account1_id"`
-	Account2ID sql.NullInt64 `json:"account2_id"`
+	Account1ID sql.NullInt64
+	Account2ID sql.NullInt64
 }
 
 func (q *Queries) GetRelationIDByInfo(ctx context.Context, arg *GetRelationIDByInfoParams) (int64, error) {
@@ -283,10 +283,10 @@ AND id = ?
 `
 
 type UpdateGroupRelationParams struct {
-	GroupName        sql.NullString `json:"group_name"`
-	GroupDescription sql.NullString `json:"group_description"`
-	GroupAvatar      sql.NullString `json:"group_avatar"`
-	ID               int64          `json:"id"`
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	GroupAvatar      sql.NullString
+	ID               int64
 }
 
 func (q *Queries) UpdateGroupRelation(ctx context.Context, arg *UpdateGroupRelationParams) error {

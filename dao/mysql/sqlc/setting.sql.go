@@ -17,9 +17,9 @@ VALUES (?, ?, ?)
 `
 
 type CreateManySettingParams struct {
-	AccountID  int64  `json:"account_id"`
-	RelationID int64  `json:"relation_id"`
-	NickName   string `json:"nick_name"`
+	AccountID  int64
+	RelationID int64
+	NickName   string
 }
 
 func (q *Queries) CreateManySetting(ctx context.Context, arg *CreateManySettingParams) error {
@@ -33,10 +33,10 @@ values (?,?,'',?,?)
 `
 
 type CreateSettingParams struct {
-	AccountID  int64 `json:"account_id"`
-	RelationID int64 `json:"relation_id"`
-	IsLeader   bool  `json:"is_leader"`
-	IsSelf     bool  `json:"is_self"`
+	AccountID  int64
+	RelationID int64
+	IsLeader   bool
+	IsSelf     bool
 }
 
 func (q *Queries) CreateSetting(ctx context.Context, arg *CreateSettingParams) error {
@@ -67,8 +67,8 @@ and relation_id = ?
 `
 
 type DeleteSettingParams struct {
-	AccountID  int64 `json:"account_id"`
-	RelationID int64 `json:"relation_id"`
+	AccountID  int64
+	RelationID int64
 }
 
 func (q *Queries) DeleteSetting(ctx context.Context, arg *DeleteSettingParams) error {
@@ -117,11 +117,11 @@ SELECT EXISTS (
 `
 
 type ExistsFriendSettingParams struct {
-	Account1ID   sql.NullInt64 `json:"account1_id"`
-	Account2ID   sql.NullInt64 `json:"account2_id"`
-	Account1ID_2 sql.NullInt64 `json:"account1_id_2"`
-	Account2ID_2 sql.NullInt64 `json:"account2_id_2"`
-	AccountID    int64         `json:"account_id"`
+	Account1ID   sql.NullInt64
+	Account2ID   sql.NullInt64
+	Account1ID_2 sql.NullInt64
+	Account2ID_2 sql.NullInt64
+	AccountID    int64
 }
 
 func (q *Queries) ExistsFriendSetting(ctx context.Context, arg *ExistsFriendSettingParams) (bool, error) {
@@ -146,8 +146,8 @@ SELECT EXISTS (
 `
 
 type ExistsIsLeaderParams struct {
-	RelationID int64 `json:"relation_id"`
-	AccountID  int64 `json:"account_id"`
+	RelationID int64
+	AccountID  int64
 }
 
 func (q *Queries) ExistsIsLeader(ctx context.Context, arg *ExistsIsLeaderParams) (bool, error) {
@@ -166,8 +166,8 @@ SELECT EXISTS (
 `
 
 type ExistsSettingParams struct {
-	AccountID  int64 `json:"account_id"`
-	RelationID int64 `json:"relation_id"`
+	AccountID  int64
+	RelationID int64
 }
 
 func (q *Queries) ExistsSetting(ctx context.Context, arg *ExistsSettingParams) (bool, error) {
@@ -189,7 +189,7 @@ func (q *Queries) GetAccountIDsByRelationID(ctx context.Context, relationID int6
 		return nil, err
 	}
 	defer rows.Close()
-	var items []int64
+	items := []int64{}
 	for rows.Next() {
 		var account_id int64
 		if err := rows.Scan(&account_id); err != nil {
@@ -224,17 +224,17 @@ order by s.pin_time
 `
 
 type GetFriendPinSettingsOrderByPinTimeParams struct {
-	AccountID   int64 `json:"account_id"`
-	AccountID_2 int64 `json:"account_id_2"`
+	AccountID   int64
+	AccountID_2 int64
 }
 
 type GetFriendPinSettingsOrderByPinTimeRow struct {
-	RelationID    int64     `json:"relation_id"`
-	NickName      string    `json:"nick_name"`
-	PinTime       time.Time `json:"pin_time"`
-	AccountID     int64     `json:"account_id"`
-	AccountName   string    `json:"account_name"`
-	AccountAvatar string    `json:"account_avatar"`
+	RelationID    int64
+	NickName      string
+	PinTime       time.Time
+	AccountID     int64
+	AccountName   string
+	AccountAvatar string
 }
 
 func (q *Queries) GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *GetFriendPinSettingsOrderByPinTimeParams) ([]*GetFriendPinSettingsOrderByPinTimeRow, error) {
@@ -243,7 +243,7 @@ func (q *Queries) GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *G
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetFriendPinSettingsOrderByPinTimeRow
+	items := []*GetFriendPinSettingsOrderByPinTimeRow{}
 	for rows.Next() {
 		var i GetFriendPinSettingsOrderByPinTimeRow
 		if err := rows.Scan(
@@ -308,27 +308,27 @@ LIMIT ? OFFSET ?
 `
 
 type GetFriendSettingsByNameParams struct {
-	AccountID   int64       `json:"account_id"`
-	AccountID_2 int64       `json:"account_id_2"`
-	CONCAT      interface{} `json:"CONCAT"`
-	CONCAT_2    interface{} `json:"CONCAT_2"`
-	Limit       int32       `json:"limit"`
-	Offset      int32       `json:"offset"`
+	AccountID   int64
+	AccountID_2 int64
+	CONCAT      interface{}
+	CONCAT_2    interface{}
+	Limit       int32
+	Offset      int32
 }
 
 type GetFriendSettingsByNameRow struct {
-	RelationID    int64       `json:"relation_id"`
-	NickName      string      `json:"nick_name"`
-	IsNotDisturb  bool        `json:"is_not_disturb"`
-	IsPin         bool        `json:"is_pin"`
-	PinTime       time.Time   `json:"pin_time"`
-	IsShow        bool        `json:"is_show"`
-	LastShow      time.Time   `json:"last_show"`
-	IsSelf        bool        `json:"is_self"`
-	AccountID     int64       `json:"account_id"`
-	AccountName   string      `json:"account_name"`
-	AccountAvatar string      `json:"account_avatar"`
-	Total         interface{} `json:"total"`
+	RelationID    int64
+	NickName      string
+	IsNotDisturb  bool
+	IsPin         bool
+	PinTime       time.Time
+	IsShow        bool
+	LastShow      time.Time
+	IsSelf        bool
+	AccountID     int64
+	AccountName   string
+	AccountAvatar string
+	Total         interface{}
 }
 
 func (q *Queries) GetFriendSettingsByName(ctx context.Context, arg *GetFriendSettingsByNameParams) ([]*GetFriendSettingsByNameRow, error) {
@@ -344,7 +344,7 @@ func (q *Queries) GetFriendSettingsByName(ctx context.Context, arg *GetFriendSet
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetFriendSettingsByNameRow
+	items := []*GetFriendSettingsByNameRow{}
 	for rows.Next() {
 		var i GetFriendSettingsByNameRow
 		if err := rows.Scan(
@@ -398,22 +398,22 @@ order by a.name
 `
 
 type GetFriendSettingsOrderByNameParams struct {
-	AccountID   int64 `json:"account_id"`
-	AccountID_2 int64 `json:"account_id_2"`
+	AccountID   int64
+	AccountID_2 int64
 }
 
 type GetFriendSettingsOrderByNameRow struct {
-	RelationID    int64     `json:"relation_id"`
-	NickName      string    `json:"nick_name"`
-	IsNotDisturb  bool      `json:"is_not_disturb"`
-	IsPin         bool      `json:"is_pin"`
-	PinTime       time.Time `json:"pin_time"`
-	IsShow        bool      `json:"is_show"`
-	LastShow      time.Time `json:"last_show"`
-	IsSelf        bool      `json:"is_self"`
-	AccountID     int64     `json:"account_id"`
-	AccountName   string    `json:"account_name"`
-	AccountAvatar string    `json:"account_avatar"`
+	RelationID    int64
+	NickName      string
+	IsNotDisturb  bool
+	IsPin         bool
+	PinTime       time.Time
+	IsShow        bool
+	LastShow      time.Time
+	IsSelf        bool
+	AccountID     int64
+	AccountName   string
+	AccountAvatar string
 }
 
 func (q *Queries) GetFriendSettingsOrderByName(ctx context.Context, arg *GetFriendSettingsOrderByNameParams) ([]*GetFriendSettingsOrderByNameRow, error) {
@@ -422,7 +422,7 @@ func (q *Queries) GetFriendSettingsOrderByName(ctx context.Context, arg *GetFrie
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetFriendSettingsOrderByNameRow
+	items := []*GetFriendSettingsOrderByNameRow{}
 	for rows.Next() {
 		var i GetFriendSettingsOrderByNameRow
 		if err := rows.Scan(
@@ -476,22 +476,22 @@ order by s.last_show desc
 `
 
 type GetFriendShowSettingsOrderByShowTimeParams struct {
-	AccountID   int64 `json:"account_id"`
-	AccountID_2 int64 `json:"account_id_2"`
+	AccountID   int64
+	AccountID_2 int64
 }
 
 type GetFriendShowSettingsOrderByShowTimeRow struct {
-	RelationID    int64     `json:"relation_id"`
-	NickName      string    `json:"nick_name"`
-	IsNotDisturb  bool      `json:"is_not_disturb"`
-	IsPin         bool      `json:"is_pin"`
-	PinTime       time.Time `json:"pin_time"`
-	IsShow        bool      `json:"is_show"`
-	LastShow      time.Time `json:"last_show"`
-	IsSelf        bool      `json:"is_self"`
-	AccountID     int64     `json:"account_id"`
-	AccountName   string    `json:"account_name"`
-	AccountAvatar string    `json:"account_avatar"`
+	RelationID    int64
+	NickName      string
+	IsNotDisturb  bool
+	IsPin         bool
+	PinTime       time.Time
+	IsShow        bool
+	LastShow      time.Time
+	IsSelf        bool
+	AccountID     int64
+	AccountName   string
+	AccountAvatar string
 }
 
 func (q *Queries) GetFriendShowSettingsOrderByShowTime(ctx context.Context, arg *GetFriendShowSettingsOrderByShowTimeParams) ([]*GetFriendShowSettingsOrderByShowTimeRow, error) {
@@ -500,7 +500,7 @@ func (q *Queries) GetFriendShowSettingsOrderByShowTime(ctx context.Context, arg 
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetFriendShowSettingsOrderByShowTimeRow
+	items := []*GetFriendShowSettingsOrderByShowTimeRow{}
 	for rows.Next() {
 		var i GetFriendShowSettingsOrderByShowTimeRow
 		if err := rows.Scan(
@@ -555,24 +555,24 @@ order by s.last_show
 `
 
 type GetGroupListParams struct {
-	AccountID   int64 `json:"account_id"`
-	AccountID_2 int64 `json:"account_id_2"`
+	AccountID   int64
+	AccountID_2 int64
 }
 
 type GetGroupListRow struct {
-	RelationID       int64          `json:"relation_id"`
-	NickName         string         `json:"nick_name"`
-	IsNotDisturb     bool           `json:"is_not_disturb"`
-	IsPin            bool           `json:"is_pin"`
-	PinTime          time.Time      `json:"pin_time"`
-	IsShow           bool           `json:"is_show"`
-	LastShow         time.Time      `json:"last_show"`
-	IsSelf           bool           `json:"is_self"`
-	RelationID_2     int64          `json:"relation_id_2"`
-	GroupName        sql.NullString `json:"group_name"`
-	GroupDiscription sql.NullString `json:"group_discription"`
-	GroupAvatar      sql.NullString `json:"group_avatar"`
-	Total            interface{}    `json:"total"`
+	RelationID       int64
+	NickName         string
+	IsNotDisturb     bool
+	IsPin            bool
+	PinTime          time.Time
+	IsShow           bool
+	LastShow         time.Time
+	IsSelf           bool
+	RelationID_2     int64
+	GroupName        sql.NullString
+	GroupDiscription sql.NullString
+	GroupAvatar      sql.NullString
+	Total            interface{}
 }
 
 func (q *Queries) GetGroupList(ctx context.Context, arg *GetGroupListParams) ([]*GetGroupListRow, error) {
@@ -581,7 +581,7 @@ func (q *Queries) GetGroupList(ctx context.Context, arg *GetGroupListParams) ([]
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetGroupListRow
+	items := []*GetGroupListRow{}
 	for rows.Next() {
 		var i GetGroupListRow
 		if err := rows.Scan(
@@ -624,7 +624,7 @@ func (q *Queries) GetGroupMembers(ctx context.Context, relationID int64) ([]int6
 		return nil, err
 	}
 	defer rows.Close()
-	var items []int64
+	items := []int64{}
 	for rows.Next() {
 		var account_id int64
 		if err := rows.Scan(&account_id); err != nil {
@@ -655,17 +655,17 @@ LIMIT ? OFFSET ?
 `
 
 type GetGroupMembersByIDParams struct {
-	RelationID int64 `json:"relation_id"`
-	Limit      int32 `json:"limit"`
-	Offset     int32 `json:"offset"`
+	RelationID int64
+	Limit      int32
+	Offset     int32
 }
 
 type GetGroupMembersByIDRow struct {
-	ID       int64          `json:"id"`
-	Name     string         `json:"name"`
-	Avatar   string         `json:"avatar"`
-	NickName sql.NullString `json:"nick_name"`
-	IsLeader sql.NullBool   `json:"is_leader"`
+	ID       int64
+	Name     string
+	Avatar   string
+	NickName sql.NullString
+	IsLeader sql.NullBool
 }
 
 func (q *Queries) GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersByIDParams) ([]*GetGroupMembersByIDRow, error) {
@@ -674,7 +674,7 @@ func (q *Queries) GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersB
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetGroupMembersByIDRow
+	items := []*GetGroupMembersByIDRow{}
 	for rows.Next() {
 		var i GetGroupMembersByIDRow
 		if err := rows.Scan(
@@ -721,18 +721,18 @@ order by s.pin_time
 `
 
 type GetGroupPinSettingsOrderByPinTimeParams struct {
-	AccountID   int64 `json:"account_id"`
-	AccountID_2 int64 `json:"account_id_2"`
+	AccountID   int64
+	AccountID_2 int64
 }
 
 type GetGroupPinSettingsOrderByPinTimeRow struct {
-	RelationID       int64          `json:"relation_id"`
-	NickName         string         `json:"nick_name"`
-	PinTime          time.Time      `json:"pin_time"`
-	ID               int64          `json:"id"`
-	GroupName        sql.NullString `json:"group_name"`
-	GroupDescription sql.NullString `json:"group_description"`
-	GroupAvatar      sql.NullString `json:"group_avatar"`
+	RelationID       int64
+	NickName         string
+	PinTime          time.Time
+	ID               int64
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	GroupAvatar      sql.NullString
 }
 
 func (q *Queries) GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *GetGroupPinSettingsOrderByPinTimeParams) ([]*GetGroupPinSettingsOrderByPinTimeRow, error) {
@@ -741,7 +741,7 @@ func (q *Queries) GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *Ge
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetGroupPinSettingsOrderByPinTimeRow
+	items := []*GetGroupPinSettingsOrderByPinTimeRow{}
 	for rows.Next() {
 		var i GetGroupPinSettingsOrderByPinTimeRow
 		if err := rows.Scan(
@@ -794,26 +794,26 @@ limit ? offset ?
 `
 
 type GetGroupSettingsByNameParams struct {
-	AccountID   int64 `json:"account_id"`
-	AccountID_2 int64 `json:"account_id_2"`
-	Limit       int32 `json:"limit"`
-	Offset      int32 `json:"offset"`
+	AccountID   int64
+	AccountID_2 int64
+	Limit       int32
+	Offset      int32
 }
 
 type GetGroupSettingsByNameRow struct {
-	RelationID   int64          `json:"relation_id"`
-	NickName     string         `json:"nick_name"`
-	IsNotDisturb bool           `json:"is_not_disturb"`
-	IsPin        bool           `json:"is_pin"`
-	PinTime      time.Time      `json:"pin_time"`
-	IsShow       bool           `json:"is_show"`
-	LastShow     time.Time      `json:"last_show"`
-	IsSelf       bool           `json:"is_self"`
-	RealtionID   int64          `json:"realtion_id"`
-	GroupName    sql.NullString `json:"group_name"`
-	GroupAvatar  sql.NullString `json:"group_avatar"`
-	Description  sql.NullString `json:"description"`
-	Total        interface{}    `json:"total"`
+	RelationID   int64
+	NickName     string
+	IsNotDisturb bool
+	IsPin        bool
+	PinTime      time.Time
+	IsShow       bool
+	LastShow     time.Time
+	IsSelf       bool
+	RealtionID   int64
+	GroupName    sql.NullString
+	GroupAvatar  sql.NullString
+	Description  sql.NullString
+	Total        interface{}
 }
 
 func (q *Queries) GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error) {
@@ -827,7 +827,7 @@ func (q *Queries) GetGroupSettingsByName(ctx context.Context, arg *GetGroupSetti
 		return nil, err
 	}
 	defer rows.Close()
-	var items []*GetGroupSettingsByNameRow
+	items := []*GetGroupSettingsByNameRow{}
 	for rows.Next() {
 		var i GetGroupSettingsByNameRow
 		if err := rows.Scan(
@@ -870,7 +870,7 @@ func (q *Queries) GetRelationIDByAccountIDFromSettings(ctx context.Context, acco
 		return nil, err
 	}
 	defer rows.Close()
-	var items []int64
+	items := []int64{}
 	for rows.Next() {
 		var relation_id int64
 		if err := rows.Scan(&relation_id); err != nil {
@@ -895,8 +895,8 @@ and relation_id =?
 `
 
 type GetSettingByIDParams struct {
-	AccountID  int64 `json:"account_id"`
-	RelationID int64 `json:"relation_id"`
+	AccountID  int64
+	RelationID int64
 }
 
 func (q *Queries) GetSettingByID(ctx context.Context, arg *GetSettingByIDParams) (*Setting, error) {
@@ -924,8 +924,8 @@ WHERE relation_id = ? AND account_id = ?
 `
 
 type TransferIsLeaderFalseParams struct {
-	RelationID int64 `json:"relation_id"`
-	AccountID  int64 `json:"account_id"`
+	RelationID int64
+	AccountID  int64
 }
 
 func (q *Queries) TransferIsLeaderFalse(ctx context.Context, arg *TransferIsLeaderFalseParams) error {
@@ -940,8 +940,8 @@ WHERE relation_id = ? AND account_id = ?
 `
 
 type TransferIsLeaderTrueParams struct {
-	RelationID int64 `json:"relation_id"`
-	AccountID  int64 `json:"account_id"`
+	RelationID int64
+	AccountID  int64
 }
 
 func (q *Queries) TransferIsLeaderTrue(ctx context.Context, arg *TransferIsLeaderTrueParams) error {
@@ -957,9 +957,9 @@ and relation_id =?
 `
 
 type UpdateSettingDisturbParams struct {
-	IsNotDisturb bool  `json:"is_not_disturb"`
-	AccountID    int64 `json:"account_id"`
-	RelationID   int64 `json:"relation_id"`
+	IsNotDisturb bool
+	AccountID    int64
+	RelationID   int64
 }
 
 func (q *Queries) UpdateSettingDisturb(ctx context.Context, arg *UpdateSettingDisturbParams) error {
@@ -975,9 +975,9 @@ and relation_id =?
 `
 
 type UpdateSettingNickNameParams struct {
-	NickName   string `json:"nick_name"`
-	AccountID  int64  `json:"account_id"`
-	RelationID int64  `json:"relation_id"`
+	NickName   string
+	AccountID  int64
+	RelationID int64
 }
 
 func (q *Queries) UpdateSettingNickName(ctx context.Context, arg *UpdateSettingNickNameParams) error {
@@ -993,9 +993,9 @@ and relation_id =?
 `
 
 type UpdateSettingShowParams struct {
-	IsShow     bool  `json:"is_show"`
-	AccountID  int64 `json:"account_id"`
-	RelationID int64 `json:"relation_id"`
+	IsShow     bool
+	AccountID  int64
+	RelationID int64
 }
 
 func (q *Queries) UpdateSettingShow(ctx context.Context, arg *UpdateSettingShowParams) error {

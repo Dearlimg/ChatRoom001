@@ -6,7 +6,6 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
-	"fmt"
 	"github.com/pkg/errors"
 )
 
@@ -89,7 +88,6 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 			isLeader, err = queries.ExistGroupLeaderByAccountIDWithLock(ctx, accountID)
 			return err
 		})
-		fmt.Println("account 92", err)
 		if isLeader {
 			return ErrAccountGroupLeader
 		}
@@ -109,7 +107,7 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 			err = queries.DeleteSettingsByAccountID(ctx, accountID)
 			return err
 		})
-		fmt.Println("account 112", err)
+
 		// 删除relation
 		err = tool.DoThat(err, func() error {
 			err = queries.DeleteRelation(ctx, accountID)
@@ -120,7 +118,7 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 		err = tool.DoThat(err, func() error {
 			return rdb.DeleteRelations(ctx, friendRelationIDs...)
 		})
-		fmt.Println("account 123", err)
+
 		err = tool.DoThat(err, func() error {
 			return rdb.DeleteAccountFromRelations(ctx, accountID, groupRelationIDs...)
 		})
@@ -133,7 +131,7 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 			err = queries.DeleteAccount(ctx, accountID)
 			return err
 		})
-		fmt.Println("account 132", err)
+
 		// 从 redis 中删除对应的关系
 		// 从 redis 中删除该账户的好友关系
 		//err = tool.DoThat(err, func() error {
@@ -144,7 +142,7 @@ func (store *SqlStore) DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB
 		//err = tool.DoThat(err, func() error {
 		//	return rdb.DeleteAccountFromRelations(ctx, accountID, groupRelationIDs...)
 		//})
-		fmt.Println("account 143", err)
+
 		return err
 	})
 }

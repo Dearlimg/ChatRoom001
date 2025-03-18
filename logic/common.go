@@ -50,3 +50,11 @@ func GetTokenAndPayload(ctx *gin.Context) (string, *token.Payload, error) {
 	}
 	return tokenString, payload, nil
 }
+
+// 将 id 从小到大排序返回
+func sortID(id1, id2 int64) (_, _ int64) {
+	if id1 > id2 {
+		return id2, id1
+	}
+	return id1, id2
+}
