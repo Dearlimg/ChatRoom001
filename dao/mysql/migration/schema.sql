@@ -85,13 +85,6 @@ CREATE TABLE relations (
 );
 
 
--- 创建申请状态表（示例：可以根据需要将此列放入用户或好友申请表中）
-# CREATE TABLE IF NOT EXISTS application (
-#                                             id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 申请 id
-#                                             status ENUM('已申请', '已同意', '已拒绝') NOT NULL, -- 申请状态
-#                                             create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
-# );
-
 -- 创建文件类型表（示例：可以根据需要使用此列存储文件信息）
 CREATE TABLE IF NOT EXISTS files (
                                      id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 文件 id
@@ -140,24 +133,48 @@ CREATE TABLE IF NOT EXISTS applications (
                                             FOREIGN KEY (account2_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-# -- 文件记录
-# CREATE TABLE IF NOT EXISTS files (
-#                                      id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 文件 id
-#                                      file_name VARCHAR(255) NOT NULL, -- 文件名称
-#                                      file_type ENUM('img', 'file') NOT NULL, -- 文件类型
-#                                      file_size BIGINT NOT NULL, -- 文件大小 byte
-#                                      `key` VARCHAR(255) NOT NULL, -- 文件 key 用于删除文件
-#                                      url VARCHAR(255) NOT NULL, -- 文件 url
-#                                      relation_id BIGINT, -- 关系 id（外键）
-#                                      account_id BIGINT, -- 发送账号 id（外键）
-#                                      create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
-#                                      FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE,
-#                                      FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
-# );
+-- 文件记录
+CREATE TABLE IF NOT EXISTS files (
+                                     id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 文件 id
+                                     file_name VARCHAR(255) NOT NULL, -- 文件名称
+                                     file_type ENUM('img', 'file') NOT NULL, -- 文件类型
+                                     file_size BIGINT NOT NULL, -- 文件大小 byte
+                                     `key` VARCHAR(255) NOT NULL, -- 文件 key 用于删除文件
+                                     url VARCHAR(255) NOT NULL, -- 文件 url
+                                     relation_id BIGINT, -- 关系 id（外键）
+                                     account_id BIGINT, -- 发送账号 id（外键）
+                                     create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
+                                     FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                                     FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 #
 # -- 文件关系id索引
 # CREATE INDEX file_relation_id ON files (relation_id);
 #
+
+CREATE TABLE IF NOT EXISTS messages (
+                                        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                                        notify_type ENUM('system', 'common') NOT NULL,
+                                        msg_type ENUM('text', 'file') NOT NULL,
+                                        msg_content TEXT NOT NULL,
+                                        msg_extend JSON,
+                                        file_id BIGINT,
+                                        account_id BIGINT,
+                                        rly_msg_id BIGINT,
+                                        relation_id BIGINT NOT NULL,
+                                        create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                        is_revoke BOOLEAN NOT NULL DEFAULT FALSE,
+                                        is_top BOOLEAN NOT NULL DEFAULT FALSE,
+                                        is_pin BOOLEAN NOT NULL DEFAULT FALSE,
+                                        pin_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                        read_ids JSON NOT NULL, -- 移除 DEFAULT '[]'
+                                        msg_content_tsy TEXT,
+                                        FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                                        FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE SET NULL ON UPDATE CASCADE,
+                                        FOREIGN KEY (rly_msg_id) REFERENCES messages(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                                        FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 # -- 消息
 # CREATE TABLE IF NOT EXISTS messages (
 #                                         id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 消息 id

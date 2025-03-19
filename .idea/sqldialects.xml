@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/dao/mysql/migration/schema.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/dao/mysql/queries/account.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/dao/mysql/queries/application.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/dao/mysql/queries/message.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/dao/mysql/queries/relation.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/dao/mysql/queries/setting.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/dao/mysql/queries/user.sql" dialect="MySQL" />
