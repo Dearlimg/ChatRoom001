@@ -249,6 +249,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.updateMsgReadsStmt, err = db.PrepareContext(ctx, updateMsgReads); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateMsgReads: %w", err)
 	}
+	if q.updateMsgReadsReturnStmt, err = db.PrepareContext(ctx, updateMsgReadsReturn); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateMsgReadsReturn: %w", err)
+	}
 	if q.updateMsgRevokeStmt, err = db.PrepareContext(ctx, updateMsgRevoke); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateMsgRevoke: %w", err)
 	}
@@ -647,6 +650,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing updateMsgReadsStmt: %w", cerr)
 		}
 	}
+	if q.updateMsgReadsReturnStmt != nil {
+		if cerr := q.updateMsgReadsReturnStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateMsgReadsReturnStmt: %w", cerr)
+		}
+	}
 	if q.updateMsgRevokeStmt != nil {
 		if cerr := q.updateMsgRevokeStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing updateMsgRevokeStmt: %w", cerr)
@@ -791,6 +799,7 @@ type Queries struct {
 	updateGroupRelationStmt                  *sql.Stmt
 	updateMsgPinStmt                         *sql.Stmt
 	updateMsgReadsStmt                       *sql.Stmt
+	updateMsgReadsReturnStmt                 *sql.Stmt
 	updateMsgRevokeStmt                      *sql.Stmt
 	updateMsgTopStmt                         *sql.Stmt
 	updateSettingDisturbStmt                 *sql.Stmt
@@ -878,6 +887,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		updateGroupRelationStmt:                  q.updateGroupRelationStmt,
 		updateMsgPinStmt:                         q.updateMsgPinStmt,
 		updateMsgReadsStmt:                       q.updateMsgReadsStmt,
+		updateMsgReadsReturnStmt:                 q.updateMsgReadsReturnStmt,
 		updateMsgRevokeStmt:                      q.updateMsgRevokeStmt,
 		updateMsgTopStmt:                         q.updateMsgTopStmt,
 		updateSettingDisturbStmt:                 q.updateSettingDisturbStmt,

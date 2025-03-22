@@ -7,6 +7,7 @@ type routers struct {
 	Email       email
 	Group       group
 	Application application
+	Message     message
 }
 
 var Routers = new(routers)

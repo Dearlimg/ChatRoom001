@@ -761,20 +761,77 @@ func (q *Queries) UpdateMsgPin(ctx context.Context, arg *UpdateMsgPinParams) err
 }
 
 const updateMsgReads = `-- name: UpdateMsgReads :exec
-UPDATE messages AS m
-SET read_ids =
-        CASE
-            WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
-                THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
-            ELSE read_ids
-            END
-WHERE relation_id = ?
-  AND JSON_CONTAINS(@target_ids, CAST(m.id AS JSON))
+
+UPDATE messages
+SET read_ids = CASE
+                   WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
+                       THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
+                   ELSE read_ids
+    END
+WHERE
+    relation_id = ?
+  AND JSON_CONTAINS(@msgIDs, CAST(id AS JSON))
+  AND JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
 `
 
+// -- name: UpdateMsgReads :exec
+// UPDATE messages AS m
+// SET read_ids =
+//
+//	CASE
+//	    WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
+//	        THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
+//	    ELSE read_ids
+//	    END
+//
+// WHERE relation_id = ?
+//
+//	AND JSON_CONTAINS(@target_ids, CAST(m.id AS JSON));
+//
+// 先执行更新操作
 func (q *Queries) UpdateMsgReads(ctx context.Context, relationID int64) error {
 	_, err := q.exec(ctx, q.updateMsgReadsStmt, updateMsgReads, relationID)
 	return err
+}
+
+const updateMsgReadsReturn = `-- name: UpdateMsgReadsReturn :many
+
+SELECT id, CAST(@accountID AS UNSIGNED) AS account_id,relation_id
+FROM messages
+WHERE
+    relation_id = ?
+  AND JSON_CONTAINS(@msgIDs, CAST(id AS JSON))
+  AND JSON_SEARCH(read_ids, 'one', CAST(@accountID AS CHAR)) IS NOT NULL
+`
+
+type UpdateMsgReadsReturnRow struct {
+	ID         int64
+	AccountID  int64
+	RelationID int64
+}
+
+// 再查询受影响的行
+func (q *Queries) UpdateMsgReadsReturn(ctx context.Context, relationID int64) ([]*UpdateMsgReadsReturnRow, error) {
+	rows, err := q.query(ctx, q.updateMsgReadsReturnStmt, updateMsgReadsReturn, relationID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []*UpdateMsgReadsReturnRow{}
+	for rows.Next() {
+		var i UpdateMsgReadsReturnRow
+		if err := rows.Scan(&i.ID, &i.AccountID, &i.RelationID); err != nil {
+			return nil, err
+		}
+		items = append(items, &i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }
 
 const updateMsgRevoke = `-- name: UpdateMsgRevoke :exec

@@ -1,12 +1,12 @@
 package api
 
 import (
-	"ChatRoom001/dao"
 	"ChatRoom001/errcodes"
 	"ChatRoom001/logic"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/request"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
@@ -77,4 +77,5 @@ func (application) AcceptApplication(ctx *gin.Context) {
 		return
 	}
 	err := logic.Logics.Application.AcceptApplication(ctx, content.ID, param.AccountID)
+	fmt.Println(err)
 }

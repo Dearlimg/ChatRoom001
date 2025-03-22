@@ -69,6 +69,7 @@ func (c *ChatMap) Leave(s socketio.Conn) {
 	}
 }
 
+// Send 给指定账号的全部设备推送消息
 func (c *ChatMap) Send(accountID int64, event string, args ...interface{}) {
 	cm, ok := c.m.Load(accountID)
 	if !ok {
@@ -83,3 +84,24 @@ func (c *ChatMap) Send(accountID int64, event string, args ...interface{}) {
 }
 
 type EachFunc socketio.EachFunc
+
+func (c *ChatMap) ForEach(accountID int64, f EachFunc) {
+	cm, ok := c.m.Load(accountID)
+	if !ok {
+		return
+	}
+	cm.(*ConnMap).m.Range(func(key, value any) bool {
+		f(value.(*ActiveConn).s)
+		return true
+	})
+}
+
+func (c *ChatMap) CheckIsOnConnection(accountID int64) bool {
+	_, ok := c.m.Load(accountID)
+	return ok
+}
+
+func (c *ChatMap) HasSID(sID string) bool {
+	_, ok := c.sID.Load(sID)
+	return ok
+}

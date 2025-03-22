@@ -8,6 +8,7 @@ import (
 	"ChatRoom001/middlewares"
 	"ChatRoom001/task"
 	"database/sql"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"github.com/jackc/pgx/v4"
@@ -133,10 +134,11 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 	if myerr != nil {
 		return myerr
 	}
-	msgInfo, err := dao.Database.DB.AcceptApplicationTx(ctx, dao.Database.Redis, accountInfo1, accountInfo2)
+	fmt.Println(accountInfo1, accountInfo2)
+	//msgInfo, err := dao.Database.DB.AcceptApplicationTx(ctx, dao.Database.Redis, accountInfo1, accountInfo2)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
 	}
-
+	return nil
 }

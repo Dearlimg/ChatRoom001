@@ -102,7 +102,20 @@ type Querier interface {
 	UpdateApplication(ctx context.Context, arg *UpdateApplicationParams) error
 	UpdateGroupRelation(ctx context.Context, arg *UpdateGroupRelationParams) error
 	UpdateMsgPin(ctx context.Context, arg *UpdateMsgPinParams) error
+	// -- name: UpdateMsgReads :exec
+	// UPDATE messages AS m
+	// SET read_ids =
+	//         CASE
+	//             WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
+	//                 THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
+	//             ELSE read_ids
+	//             END
+	// WHERE relation_id = ?
+	//   AND JSON_CONTAINS(@target_ids, CAST(m.id AS JSON));
+	// 先执行更新操作
 	UpdateMsgReads(ctx context.Context, relationID int64) error
+	// 再查询受影响的行
+	UpdateMsgReadsReturn(ctx context.Context, relationID int64) ([]*UpdateMsgReadsReturnRow, error)
 	UpdateMsgRevoke(ctx context.Context, arg *UpdateMsgRevokeParams) error
 	UpdateMsgTop(ctx context.Context, arg *UpdateMsgTopParams) error
 	UpdateSettingDisturb(ctx context.Context, arg *UpdateSettingDisturbParams) error

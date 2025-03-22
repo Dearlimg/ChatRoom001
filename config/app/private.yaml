@@ -96,6 +96,9 @@ HuaWeiOBS:
   AvatarType: NotAvatar
   AccountAvatarUrl: account_avatars/
   GroupAvatarUrl: group_avatars/ # 群组头像 URL
+#RocketMQ:
+#  Addr: "123.249.32.125"
+#  Port: 9876
 RocketMQ:
   Addr: "123.249.32.125"
-  Port: 9876
+  Port: 9092

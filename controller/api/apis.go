@@ -9,6 +9,7 @@ type apis struct {
 	Email       email
 	Group       group
 	Application application
+	Message     message
 }
 
 var Apis = new(apis)

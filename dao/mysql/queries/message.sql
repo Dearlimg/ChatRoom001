@@ -27,18 +27,39 @@ where id = ?
 limit 1;
 
 
+# -- name: UpdateMsgReads :exec
+# UPDATE messages AS m
+# SET read_ids =
+#         CASE
+#             WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
+#                 THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
+#             ELSE read_ids
+#             END
+# WHERE relation_id = ?
+#   AND JSON_CONTAINS(@target_ids, CAST(m.id AS JSON));
+-- 先执行更新操作
+
 -- name: UpdateMsgReads :exec
-UPDATE messages AS m
-SET read_ids =
-        CASE
-            WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
-                THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
-            ELSE read_ids
-            END
-WHERE relation_id = ?
-  AND JSON_CONTAINS(@target_ids, CAST(m.id AS JSON));
+UPDATE messages
+SET read_ids = CASE
+                   WHEN JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0
+                       THEN JSON_ARRAY_APPEND(read_ids, '$', @accountID)
+                   ELSE read_ids
+    END
+WHERE
+    relation_id = ?
+  AND JSON_CONTAINS(@msgIDs, CAST(id AS JSON))
+  AND JSON_CONTAINS(read_ids, CAST(@accountID AS JSON)) = 0;
 
+-- 再查询受影响的行
 
+-- name: UpdateMsgReadsReturn :many
+SELECT id, CAST(@accountID AS UNSIGNED) AS account_id,relation_id
+FROM messages
+WHERE
+    relation_id = ?
+  AND JSON_CONTAINS(@msgIDs, CAST(id AS JSON))
+  AND JSON_SEARCH(read_ids, 'one', CAST(@accountID AS CHAR)) IS NOT NULL;
 
 -- name: GetMsgByRelationIDAndTime :many
 select m1.id,
