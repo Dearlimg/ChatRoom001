@@ -15,6 +15,7 @@ func (ws) Init(router *gin.Engine) *socketio.Server {
 	{
 		server.OnConnect("/", api.Apis.Chat.Handle.OnConnect)
 		server.OnError("/", api.Apis.Chat.Handle.OnError)
+		server.OnDisconnect("/", api.Apis.Chat.Handle.OnDisconnect)
 	}
 	chatHande(server)
 	router.GET("/socket.io/*any", gin.WrapH(server))

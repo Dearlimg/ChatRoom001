@@ -33,6 +33,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.createApplicationStmt, err = db.PrepareContext(ctx, createApplication); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateApplication: %w", err)
 	}
+	if q.createFileStmt, err = db.PrepareContext(ctx, createFile); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateFile: %w", err)
+	}
+	if q.createFileReturnStmt, err = db.PrepareContext(ctx, createFileReturn); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateFileReturn: %w", err)
+	}
 	if q.createFriendRelationStmt, err = db.PrepareContext(ctx, createFriendRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateFriendRelation: %w", err)
 	}
@@ -65,6 +71,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.deleteApplicationStmt, err = db.PrepareContext(ctx, deleteApplication); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteApplication: %w", err)
+	}
+	if q.deleteFileByIDStmt, err = db.PrepareContext(ctx, deleteFileByID); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteFileByID: %w", err)
 	}
 	if q.deleteFriendRelationStmt, err = db.PrepareContext(ctx, deleteFriendRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteFriendRelation: %w", err)
@@ -150,6 +159,18 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getApplicationsStmt, err = db.PrepareContext(ctx, getApplications); err != nil {
 		return nil, fmt.Errorf("error preparing query GetApplications: %w", err)
 	}
+	if q.getFileByRelationStmt, err = db.PrepareContext(ctx, getFileByRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query GetFileByRelation: %w", err)
+	}
+	if q.getFileByRelationIDIsNULLStmt, err = db.PrepareContext(ctx, getFileByRelationIDIsNULL); err != nil {
+		return nil, fmt.Errorf("error preparing query GetFileByRelationIDIsNULL: %w", err)
+	}
+	if q.getFileDetailsByIDStmt, err = db.PrepareContext(ctx, getFileDetailsByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetFileDetailsByID: %w", err)
+	}
+	if q.getFileKeyByIDStmt, err = db.PrepareContext(ctx, getFileKeyByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetFileKeyByID: %w", err)
+	}
 	if q.getFriendPinSettingsOrderByPinTimeStmt, err = db.PrepareContext(ctx, getFriendPinSettingsOrderByPinTime); err != nil {
 		return nil, fmt.Errorf("error preparing query GetFriendPinSettingsOrderByPinTime: %w", err)
 	}
@@ -164,6 +185,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.getFriendShowSettingsOrderByShowTimeStmt, err = db.PrepareContext(ctx, getFriendShowSettingsOrderByShowTime); err != nil {
 		return nil, fmt.Errorf("error preparing query GetFriendShowSettingsOrderByShowTime: %w", err)
+	}
+	if q.getGroupAvatarStmt, err = db.PrepareContext(ctx, getGroupAvatar); err != nil {
+		return nil, fmt.Errorf("error preparing query GetGroupAvatar: %w", err)
 	}
 	if q.getGroupListStmt, err = db.PrepareContext(ctx, getGroupList); err != nil {
 		return nil, fmt.Errorf("error preparing query GetGroupList: %w", err)
@@ -240,6 +264,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.updateApplicationStmt, err = db.PrepareContext(ctx, updateApplication); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateApplication: %w", err)
 	}
+	if q.updateGroupAvatarStmt, err = db.PrepareContext(ctx, updateGroupAvatar); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateGroupAvatar: %w", err)
+	}
 	if q.updateGroupRelationStmt, err = db.PrepareContext(ctx, updateGroupRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateGroupRelation: %w", err)
 	}
@@ -288,6 +315,16 @@ func (q *Queries) Close() error {
 	if q.createApplicationStmt != nil {
 		if cerr := q.createApplicationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createApplicationStmt: %w", cerr)
+		}
+	}
+	if q.createFileStmt != nil {
+		if cerr := q.createFileStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createFileStmt: %w", cerr)
+		}
+	}
+	if q.createFileReturnStmt != nil {
+		if cerr := q.createFileReturnStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createFileReturnStmt: %w", cerr)
 		}
 	}
 	if q.createFriendRelationStmt != nil {
@@ -343,6 +380,11 @@ func (q *Queries) Close() error {
 	if q.deleteApplicationStmt != nil {
 		if cerr := q.deleteApplicationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing deleteApplicationStmt: %w", cerr)
+		}
+	}
+	if q.deleteFileByIDStmt != nil {
+		if cerr := q.deleteFileByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteFileByIDStmt: %w", cerr)
 		}
 	}
 	if q.deleteFriendRelationStmt != nil {
@@ -485,6 +527,26 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getApplicationsStmt: %w", cerr)
 		}
 	}
+	if q.getFileByRelationStmt != nil {
+		if cerr := q.getFileByRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getFileByRelationStmt: %w", cerr)
+		}
+	}
+	if q.getFileByRelationIDIsNULLStmt != nil {
+		if cerr := q.getFileByRelationIDIsNULLStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getFileByRelationIDIsNULLStmt: %w", cerr)
+		}
+	}
+	if q.getFileDetailsByIDStmt != nil {
+		if cerr := q.getFileDetailsByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getFileDetailsByIDStmt: %w", cerr)
+		}
+	}
+	if q.getFileKeyByIDStmt != nil {
+		if cerr := q.getFileKeyByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getFileKeyByIDStmt: %w", cerr)
+		}
+	}
 	if q.getFriendPinSettingsOrderByPinTimeStmt != nil {
 		if cerr := q.getFriendPinSettingsOrderByPinTimeStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getFriendPinSettingsOrderByPinTimeStmt: %w", cerr)
@@ -508,6 +570,11 @@ func (q *Queries) Close() error {
 	if q.getFriendShowSettingsOrderByShowTimeStmt != nil {
 		if cerr := q.getFriendShowSettingsOrderByShowTimeStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getFriendShowSettingsOrderByShowTimeStmt: %w", cerr)
+		}
+	}
+	if q.getGroupAvatarStmt != nil {
+		if cerr := q.getGroupAvatarStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getGroupAvatarStmt: %w", cerr)
 		}
 	}
 	if q.getGroupListStmt != nil {
@@ -635,6 +702,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing updateApplicationStmt: %w", cerr)
 		}
 	}
+	if q.updateGroupAvatarStmt != nil {
+		if cerr := q.updateGroupAvatarStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateGroupAvatarStmt: %w", cerr)
+		}
+	}
 	if q.updateGroupRelationStmt != nil {
 		if cerr := q.updateGroupRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing updateGroupRelationStmt: %w", cerr)
@@ -727,6 +799,8 @@ type Queries struct {
 	countAccountByUserIDStmt                 *sql.Stmt
 	createAccountStmt                        *sql.Stmt
 	createApplicationStmt                    *sql.Stmt
+	createFileStmt                           *sql.Stmt
+	createFileReturnStmt                     *sql.Stmt
 	createFriendRelationStmt                 *sql.Stmt
 	createGetStmt                            *sql.Stmt
 	createGroupRelationStmt                  *sql.Stmt
@@ -738,6 +812,7 @@ type Queries struct {
 	deleteAccountStmt                        *sql.Stmt
 	deleteAccountByUserIDStmt                *sql.Stmt
 	deleteApplicationStmt                    *sql.Stmt
+	deleteFileByIDStmt                       *sql.Stmt
 	deleteFriendRelationStmt                 *sql.Stmt
 	deleteFriendRelationByAccountIDStmt      *sql.Stmt
 	deleteGroupStmt                          *sql.Stmt
@@ -766,11 +841,16 @@ type Queries struct {
 	getAllRelationOnRelationStmt             *sql.Stmt
 	getApplicationByIDStmt                   *sql.Stmt
 	getApplicationsStmt                      *sql.Stmt
+	getFileByRelationStmt                    *sql.Stmt
+	getFileByRelationIDIsNULLStmt            *sql.Stmt
+	getFileDetailsByIDStmt                   *sql.Stmt
+	getFileKeyByIDStmt                       *sql.Stmt
 	getFriendPinSettingsOrderByPinTimeStmt   *sql.Stmt
 	getFriendRelationByIDStmt                *sql.Stmt
 	getFriendSettingsByNameStmt              *sql.Stmt
 	getFriendSettingsOrderByNameStmt         *sql.Stmt
 	getFriendShowSettingsOrderByShowTimeStmt *sql.Stmt
+	getGroupAvatarStmt                       *sql.Stmt
 	getGroupListStmt                         *sql.Stmt
 	getGroupMembersStmt                      *sql.Stmt
 	getGroupMembersByIDStmt                  *sql.Stmt
@@ -796,6 +876,7 @@ type Queries struct {
 	updateAccountStmt                        *sql.Stmt
 	updateAccountAvatarStmt                  *sql.Stmt
 	updateApplicationStmt                    *sql.Stmt
+	updateGroupAvatarStmt                    *sql.Stmt
 	updateGroupRelationStmt                  *sql.Stmt
 	updateMsgPinStmt                         *sql.Stmt
 	updateMsgReadsStmt                       *sql.Stmt
@@ -815,6 +896,8 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		countAccountByUserIDStmt:                 q.countAccountByUserIDStmt,
 		createAccountStmt:                        q.createAccountStmt,
 		createApplicationStmt:                    q.createApplicationStmt,
+		createFileStmt:                           q.createFileStmt,
+		createFileReturnStmt:                     q.createFileReturnStmt,
 		createFriendRelationStmt:                 q.createFriendRelationStmt,
 		createGetStmt:                            q.createGetStmt,
 		createGroupRelationStmt:                  q.createGroupRelationStmt,
@@ -826,6 +909,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		deleteAccountStmt:                        q.deleteAccountStmt,
 		deleteAccountByUserIDStmt:                q.deleteAccountByUserIDStmt,
 		deleteApplicationStmt:                    q.deleteApplicationStmt,
+		deleteFileByIDStmt:                       q.deleteFileByIDStmt,
 		deleteFriendRelationStmt:                 q.deleteFriendRelationStmt,
 		deleteFriendRelationByAccountIDStmt:      q.deleteFriendRelationByAccountIDStmt,
 		deleteGroupStmt:                          q.deleteGroupStmt,
@@ -854,11 +938,16 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getAllRelationOnRelationStmt:             q.getAllRelationOnRelationStmt,
 		getApplicationByIDStmt:                   q.getApplicationByIDStmt,
 		getApplicationsStmt:                      q.getApplicationsStmt,
+		getFileByRelationStmt:                    q.getFileByRelationStmt,
+		getFileByRelationIDIsNULLStmt:            q.getFileByRelationIDIsNULLStmt,
+		getFileDetailsByIDStmt:                   q.getFileDetailsByIDStmt,
+		getFileKeyByIDStmt:                       q.getFileKeyByIDStmt,
 		getFriendPinSettingsOrderByPinTimeStmt:   q.getFriendPinSettingsOrderByPinTimeStmt,
 		getFriendRelationByIDStmt:                q.getFriendRelationByIDStmt,
 		getFriendSettingsByNameStmt:              q.getFriendSettingsByNameStmt,
 		getFriendSettingsOrderByNameStmt:         q.getFriendSettingsOrderByNameStmt,
 		getFriendShowSettingsOrderByShowTimeStmt: q.getFriendShowSettingsOrderByShowTimeStmt,
+		getGroupAvatarStmt:                       q.getGroupAvatarStmt,
 		getGroupListStmt:                         q.getGroupListStmt,
 		getGroupMembersStmt:                      q.getGroupMembersStmt,
 		getGroupMembersByIDStmt:                  q.getGroupMembersByIDStmt,
@@ -884,6 +973,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		updateAccountStmt:                        q.updateAccountStmt,
 		updateAccountAvatarStmt:                  q.updateAccountAvatarStmt,
 		updateApplicationStmt:                    q.updateApplicationStmt,
+		updateGroupAvatarStmt:                    q.updateGroupAvatarStmt,
 		updateGroupRelationStmt:                  q.updateGroupRelationStmt,
 		updateMsgPinStmt:                         q.updateMsgPinStmt,
 		updateMsgReadsStmt:                       q.updateMsgReadsStmt,

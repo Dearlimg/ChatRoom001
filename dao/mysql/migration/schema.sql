@@ -85,14 +85,6 @@ CREATE TABLE relations (
 );
 
 
--- 创建文件类型表（示例：可以根据需要使用此列存储文件信息）
-CREATE TABLE IF NOT EXISTS files (
-                                     id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 文件 id
-                                     file_type ENUM('img', 'file') NOT NULL, -- 文件类型
-                                     file_path VARCHAR(255) NOT NULL, -- 文件路径
-                                     create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP -- 创建时间
-);
-
 -- 创建消息通知类型表（示例：可以根据需要将此列放入消息通知表中）
 CREATE TABLE IF NOT EXISTS msg_notifications (
                                                  id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 消息通知 id

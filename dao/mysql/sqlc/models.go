@@ -329,10 +329,15 @@ type Application struct {
 }
 
 type File struct {
-	ID       int64
-	FileType FilesFileType
-	FilePath string
-	CreateAt time.Time
+	ID         int64
+	FileName   string
+	FileType   FilesFileType
+	FileSize   int64
+	Key        string
+	Url        string
+	RelationID sql.NullInt64
+	AccountID  sql.NullInt64
+	CreateAt   time.Time
 }
 
 type Group struct {

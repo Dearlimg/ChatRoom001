@@ -35,7 +35,7 @@ func (handle) OnError(s socketio.Conn, err error) {
 		return
 	}
 	global.ChatMap.Leave(s)
-	log.Println("disconnected:", s.RemoteAddr().String(), s.ID())
+	log.Println("disconnected: ", s.RemoteAddr().String(), s.ID())
 	_ = s.Close()
 }
 
@@ -70,4 +70,9 @@ func (handle) Test(s socketio.Conn, msg string) string {
 	}).MustJson()
 	s.Emit("test", "test")
 	return result
+}
+
+func (handle) OnDisconnect(s socketio.Conn, _ string) {
+	global.ChatMap.Leave(s)
+	log.Println("disconnect:", s.RemoteAddr().String(), s.ID())
 }

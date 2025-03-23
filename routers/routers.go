@@ -8,6 +8,7 @@ type routers struct {
 	Group       group
 	Application application
 	Message     message
+	File        file
 }
 
 var Routers = new(routers)

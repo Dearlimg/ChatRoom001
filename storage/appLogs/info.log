@@ -3196,3 +3196,195 @@
 2025-03-20T22:56:42.215+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
 2025-03-21T11:12:41.736+0800	INFO	ChatRoom001/main.go:34	server start success
 2025-03-21T11:28:53.982+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-22T17:26:03.028+0800	INFO	ChatRoom001/main.go:33	server start success
+2025-03-22T17:26:56.610+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:26:56.610+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:26:56.641+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:26:56.641+0800	INFO	middlewares/logger.go:60	/favicon.ico	{"status": 404, "method": "GET", "path": "/favicon.ico", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:27:22.474+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:27:22.475+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-22T17:28:46.890+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:28:46.890+0800	INFO	middlewares/logger.go:60	/socket.io/hah	{"status": 400, "method": "GET", "path": "/socket.io/hah", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-22T17:28:59.010+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:28:59.010+0800	INFO	middlewares/logger.go:60	/socket.io/hah	{"status": 400, "method": "POST", "path": "/socket.io/hah", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-22T17:29:21.806+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:29:21.806+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:29:32.394+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T17:29:32.394+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:36:09.447+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:36:09.447+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:36:23.517+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:36:23.517+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:36:27.525+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:36:27.525+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:36:29.509+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:36:29.509+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:36:34.173+0800	INFO	ChatRoom001/main.go:59	Shutdown Server.
+2025-03-22T17:36:45.022+0800	INFO	ChatRoom001/main.go:33	server start success
+2025-03-22T17:36:48.511+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:36:48.511+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:37:11.325+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:37:11.325+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:37:25.894+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:37:25.894+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:38:29.148+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:38:29.156+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:39:45.411+0800	INFO	ChatRoom001/main.go:59	Shutdown Server.
+2025-03-22T17:39:49.094+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T17:40:23.096+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:40:23.097+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:40:32.397+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:40:32.397+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:41:47.054+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:41:47.054+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:42:11.445+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:42:11.445+0800	INFO	middlewares/logger.go:60	/socket.io/wda	{"status": 400, "method": "GET", "path": "/socket.io/wda", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:46:20.331+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-22T17:46:23.323+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T17:48:34.592+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T17:49:08.428+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:49:08.429+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:49:22.252+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T17:49:22.252+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T17:49:37.171+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:49:37.171+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:49:52.641+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:49:52.641+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:50:56.469+0800	INFO	ChatRoom001/main.go:61	Shutdown Server.
+2025-03-22T17:50:58.709+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T17:52:20.794+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T17:52:29.152+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:52:29.153+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0.0005055}
+2025-03-22T17:52:35.463+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T17:52:35.463+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T17:55:23.781+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-22T17:59:32.997+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T18:02:04.165+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:02:04.166+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:02:44.314+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:02:44.314+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:02:47.301+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:02:47.301+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:03:42.057+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:03:42.058+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:04:34.697+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:04:34.697+0800	INFO	middlewares/logger.go:60	/socket.io/namespace=/chat	{"status": 400, "method": "GET", "path": "/socket.io/namespace=/chat", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:05:57.846+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:05:57.846+0800	INFO	middlewares/logger.go:60	/chat	{"status": 404, "method": "GET", "path": "/chat", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:06:00.733+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:06:00.733+0800	INFO	middlewares/logger.go:60	/chat/	{"status": 404, "method": "GET", "path": "/chat/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:09:23.180+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:09:23.202+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 403, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0.00157}
+2025-03-22T18:10:12.864+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:10:12.864+0800	INFO	middlewares/logger.go:60	/chat/	{"status": 404, "method": "GET", "path": "/chat/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:10:23.714+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://devtest.run
+2025-03-22T18:10:23.715+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:11:41.810+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:11:41.810+0800	INFO	middlewares/logger.go:60	/socket.io/chat	{"status": 400, "method": "POST", "path": "/socket.io/chat", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-22T18:11:44.667+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:11:44.667+0800	INFO	middlewares/logger.go:60	/socket.io/chat	{"status": 400, "method": "GET", "path": "/socket.io/chat", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-22T18:11:58.987+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:11:58.987+0800	INFO	middlewares/logger.go:60	/socket.io/chat	{"status": 400, "method": "GET", "path": "/socket.io/chat", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0}
+2025-03-22T18:14:00.797+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:14:00.797+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:14:10.397+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:14:10.397+0800	INFO	middlewares/logger.go:60	/socket.io/chat	{"status": 400, "method": "GET", "path": "/socket.io/chat", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:24:54.011+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.
+2025-03-22T18:24:57.961+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T18:25:12.889+0800	INFO	ChatRoom001/main.go:61	Shutdown Server.
+2025-03-22T18:25:15.234+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T18:53:28.885+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:53:28.885+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 403, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:53:40.700+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:53:40.700+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 403, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:55:19.385+0800	INFO	ChatRoom001/main.go:62	Shutdown Server.
+2025-03-22T18:55:21.854+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T18:55:33.755+0800	INFO	ChatRoom001/main.go:62	Shutdown Server.
+2025-03-22T18:55:35.681+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T18:56:06.641+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:56:06.641+0800	INFO	middlewares/logger.go:60	/hello	{"status": 404, "method": "GET", "path": "/hello", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:56:10.257+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:56:10.257+0800	INFO	middlewares/logger.go:60	/chat	{"status": 404, "method": "GET", "path": "/chat", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:56:20.571+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T18:56:20.571+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 0}
+2025-03-22T18:58:24.311+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:58:24.312+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:58:26.442+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:58:26.442+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:58:33.849+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:58:33.849+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:58:43.828+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:58:43.828+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:59:40.899+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:59:40.899+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T18:59:49.081+0800	INFO	middlewares/cors.go:46	---------------------------------------------https://wstool.js.org
+2025-03-22T18:59:49.081+0800	INFO	middlewares/logger.go:60	/	{"status": 404, "method": "GET", "path": "/", "query": "", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.0", "errors": "", "cost": 0}
+2025-03-22T19:02:35.361+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:8000
+2025-03-22T19:02:45.361+0800	INFO	chat/handle.go:25	auth failed: [::1]:12365 1
+
+2025-03-22T19:02:45.362+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 10.0014225}
+2025-03-22T19:03:06.175+0800	INFO	middlewares/cors.go:46	---------------------------------------------http://localhost:8000
+2025-03-22T19:03:16.176+0800	INFO	chat/handle.go:25	auth failed: [::1]:12395 2
+
+2025-03-22T19:03:16.176+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "::1", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "errors": "", "cost": 10.0009635}
+2025-03-22T19:07:38.490+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:07:48.491+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12733 3
+
+2025-03-22T19:07:48.491+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0006889}
+2025-03-22T19:09:09.863+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:09:19.864+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12886 4
+
+2025-03-22T19:09:19.864+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.000993}
+2025-03-22T19:09:22.318+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:09:30.065+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 7.7469674}
+2025-03-22T19:09:31.397+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:09:32.318+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12894 5
+
+2025-03-22T19:09:41.397+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12902 6
+
+2025-03-22T19:09:41.397+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0004516}
+2025-03-22T19:09:46.137+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:09:56.137+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12911 7
+
+2025-03-22T19:09:56.137+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0000243}
+2025-03-22T19:10:21.732+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:10:31.732+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12934 8
+
+2025-03-22T19:10:31.732+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0000612}
+2025-03-22T19:10:45.873+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:10:55.873+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:12952 9
+
+2025-03-22T19:10:55.873+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0001051}
+2025-03-22T19:12:57.845+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:13:07.845+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:13065 a
+
+2025-03-22T19:13:07.845+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0006288}
+2025-03-22T19:14:23.491+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:14:33.492+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:13209 b
+
+2025-03-22T19:14:33.492+0800	INFO	middlewares/logger.go:60	/socket.io/dwad	{"status": 200, "method": "GET", "path": "/socket.io/dwad", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0003721}
+2025-03-22T19:15:57.247+0800	INFO	ChatRoom001/main.go:62	Shutdown Server.
+2025-03-22T19:16:00.021+0800	INFO	ChatRoom001/main.go:34	server start success
+2025-03-22T19:16:01.148+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:16:11.149+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:13288 1
+
+2025-03-22T19:16:11.149+0800	INFO	middlewares/logger.go:60	/socket.io/dwad	{"status": 200, "method": "GET", "path": "/socket.io/dwad", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0008212}
+2025-03-22T19:24:40.485+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:24:50.485+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:13998 2
+
+2025-03-22T19:24:50.485+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0006104}
+2025-03-22T19:36:28.998+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:36:29.193+0800	INFO	middlewares/logger.go:60	/api/account/token	{"status": 200, "method": "GET", "path": "/api/account/token", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "errors": "", "cost": 0.194915}
+2025-03-22T19:36:48.503+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:36:58.504+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:14672 3
+
+2025-03-22T19:36:58.504+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.000883}
+2025-03-22T19:37:39.239+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:37:39.239+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocketws://localhost:8000/socket.io/?EIO=4&transport=websocket&token=v2.local.2FWiHrNemXc20N04r_A6HedRdhEw6gOe5QkKpeoSWVqJwf_uBd7GvBqaW6NbKP-mcakvBdOyMBzftZ3FxPeaeit42TPWGB46vV7a68ZxfACg4Y32gzGp1aWGBC9zvB-pmyiaiszWBijZknFP9GIsIGFWdI84uxwMFyoTcBq_48nINJUkACtc3ZRhPHZgU4DK80iMLh5romvLP1akEOUnid26NTOdTvsiK7-nF2h2dQWx6tKsOHcWWlALt6ZYz1EqfvqzkvOGM_6NtvtFLKYlwUG4STuiQ3-nZz9qU21NdG0J.bnVsbA", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 0}
+2025-03-22T19:37:43.535+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:37:43.535+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 400, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocketws://localhost:8000/socket.io/?EIO=4&transport=websocket&token=v2.local.2FWiHrNemXc20N04r_A6HedRdhEw6gOe5QkKpeoSWVqJwf_uBd7GvBqaW6NbKP-mcakvBdOyMBzftZ3FxPeaeit42TPWGB46vV7a68ZxfACg4Y32gzGp1aWGBC9zvB-pmyiaiszWBijZknFP9GIsIGFWdI84uxwMFyoTcBq_48nINJUkACtc3ZRhPHZgU4DK80iMLh5romvLP1akEOUnid26NTOdTvsiK7-nF2h2dQWx6tKsOHcWWlALt6ZYz1EqfvqzkvOGM_6NtvtFLKYlwUG4STuiQ3-nZz9qU21NdG0J.bnVsbA", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 0}
+2025-03-22T19:37:47.593+0800	INFO	middlewares/cors.go:46	---------------------------------------------
+2025-03-22T19:37:57.593+0800	INFO	chat/handle.go:25	auth failed: 127.0.0.1:14713 4
+
+2025-03-22T19:37:57.593+0800	INFO	middlewares/logger.go:60	/socket.io/	{"status": 200, "method": "GET", "path": "/socket.io/", "query": "EIO=4&transport=websocket", "ip": "127.0.0.1", "user-agent": "", "errors": "", "cost": 10.0001428}
+2025-03-22T19:46:22.276+0800	INFO	ChatRoom001/main.go:60	Shutdown Server.

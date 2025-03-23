@@ -10,6 +10,7 @@ type apis struct {
 	Group       group
 	Application application
 	Message     message
+	File        file
 }
 
 var Apis = new(apis)

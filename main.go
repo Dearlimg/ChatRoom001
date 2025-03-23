@@ -25,6 +25,7 @@ func main() {
 		_ = v.RegisterValidation("email", common.ValidatorEmail)
 	}
 	r, ws := router.NewRouter()
+
 	server := &http.Server{
 		Addr:           global.PublicSetting.Server.HttpPort,
 		Handler:        r,
