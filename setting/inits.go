@@ -10,6 +10,7 @@ type group struct {
 	GenerateID generateID
 	Chat       chat
 	Page       page
+	OSS        oss
 }
 
 var Group group
@@ -24,4 +25,5 @@ func Inits() {
 	Group.GenerateID.Init()
 	Group.Chat.Init()
 	Group.Page.Init()
+	Group.OSS.Init()
 }

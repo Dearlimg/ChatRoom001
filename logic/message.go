@@ -24,3 +24,14 @@ func GetMsgInfoByID(ctx context.Context, msgID int64) (*db.GetMessageByIDRow, er
 	}
 	return result, nil
 }
+
+//func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*reply.ParamCreateFileMsg, errcode.Err) {
+//	ok, myErr := ExistsSetting(ctx, params.AccountID, params.RelationID)
+//	if myErr != nil {
+//		return nil, myErr
+//	}
+//	if !ok {
+//		return nil, errcodes.AuthPermissionsInsufficient
+//	}
+//	fileInfo, myErr := Logics.File.Publish(ctx)
+//}

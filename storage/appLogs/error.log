@@ -130,3 +130,65 @@
 2025-03-18T20:33:38.559+0800	ERROR	logic/application.go:60	Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`chatroom`.`applications`, CONSTRAINT `applications_ibfk_1` FOREIGN KEY (`account1_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)	{"status": 200, "method": "POST", "path": "/api/application/create", "query": "", "ip": "::1", "user-agent": "PostmanRuntime/7.43.2", "body": "{\r\n  \"account_id\": 1021631791104,\r\n  \"application_msg\": \"你好呀~\"\r\n}"}
 2025-03-22T17:46:23.329+0800	ERROR	ChatRoom001/main.go:59	listen tcp: address :0.0.0.0:8000: too many colons in address
 2025-03-22T17:50:58.714+0800	ERROR	ChatRoom001/main.go:58	listen tcp: address 8000: missing port in address
+2025-03-23T22:35:34.614+0800	ERROR	chat/handle.go:39	连接错误 | ID=6 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:3174: use of closed network connection
+2025-03-24T10:12:12.736+0800	ERROR	chat/handle.go:39	连接错误 | ID=2 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:13026: use of closed network connection
+2025-03-24T10:12:46.835+0800	ERROR	chat/handle.go:39	连接错误 | ID=3 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:13089: use of closed network connection
+2025-03-24T10:15:56.220+0800	ERROR	chat/handle.go:39	连接错误 | ID=4 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:13367: use of closed network connection
+2025-03-24T10:16:52.363+0800	ERROR	chat/handle.go:39	连接错误 | ID=5 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:13410: use of closed network connection
+2025-03-24T10:51:08.706+0800	ERROR	chat/handle.go:39	连接错误 | ID=n | 错误=websocket: close 1000 (normal)
+2025-03-24T15:43:54.560+0800	ERROR	chat/handle.go:39	连接错误 | ID=1a | 错误=websocket: close 1005 (no status)
+2025-03-24T16:21:49.170+0800	ERROR	chat/handle.go:39	连接错误 | ID=2 | 错误=read tcp [::1]:8000->[::1]:9994: use of closed network connection
+2025-03-24T16:25:55.845+0800	ERROR	chat/handle.go:46	连接错误 | ID=7 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:10328: i/o timeout
+2025-03-24T16:41:21.445+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:11557: use of closed network connection
+2025-03-24T21:13:42.703+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:13:44.007+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:13:45.085+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:13:47.147+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:13:50.633+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:13:55.692+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:14:00.739+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:14:05.772+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:14:10.834+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:14:15.893+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:17:45.688+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:17:51.672+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:17:57.675+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:03.692+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:09.661+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:15.713+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:21.679+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:27.703+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:33.770+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:39.815+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:48.709+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:18:56.888+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:19:04.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:23:11.941+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:23:16.338+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:23:25.559+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:24:03.716+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read tcp 127.0.0.1:8001->127.0.0.1:7423: use of closed network connection
+2025-03-24T21:27:48.516+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read tcp 127.0.0.1:8001->127.0.0.1:7864: use of closed network connection
+2025-03-24T21:30:02.827+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1000 (normal)
+2025-03-24T21:30:16.659+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:30:39.989+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:30:52.803+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:31:05.921+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:8179: use of closed network connection
+2025-03-24T21:32:24.872+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:8333: use of closed network connection
+2025-03-24T21:33:48.524+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:8476: use of closed network connection
+2025-03-24T21:39:35.313+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read tcp [::1]:8000->[::1]:8994: wsarecv: An established connection was aborted by the software in your host machine.
+2025-03-24T21:40:02.536+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:40:04.896+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=websocket: close 1005 (no status)
+2025-03-24T21:42:16.711+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:17.333+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:17.413+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:18.893+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:19.508+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:19.724+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:20.595+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:22.180+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:27.009+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:32.033+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:37.113+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:42:42.253+0800	ERROR	chat/handle.go:45	连接错误 | ID=w | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T21:47:03.647+0800	ERROR	chat/handle.go:45	连接错误 | ID=v | 错误=websocket: close 1005 (no status)
+2025-03-24T21:47:10.714+0800	ERROR	chat/handle.go:45	连接错误 | ID=y | 错误=websocket: close 1005 (no status)

@@ -5,6 +5,8 @@ type Logic struct {
 	User        user
 	Account     account
 	Application application
+	File        file
+	Message     message
 }
 
 var Logics = new(Logic)

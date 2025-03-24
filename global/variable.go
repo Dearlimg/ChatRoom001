@@ -9,6 +9,7 @@ import (
 	"github.com/Dearlimg/Goutils/pkg/goroutine/work"
 	"github.com/Dearlimg/Goutils/pkg/logger"
 	"github.com/Dearlimg/Goutils/pkg/token"
+	upload "github.com/Dearlimg/Goutils/pkg/upload/obs"
 )
 
 var (
@@ -21,4 +22,5 @@ var (
 	GenerateID     *snowflake.Snowflake //snowflake 雪花算法生成的 ID
 	ChatMap        *manager.ChatMap     // 聊天链接管理器
 	Page           *app.Page
+	OSS            upload.OSS
 )

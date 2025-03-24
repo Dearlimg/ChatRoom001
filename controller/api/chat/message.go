@@ -6,6 +6,7 @@ import (
 	"ChatRoom001/model"
 	"ChatRoom001/model/chat/client"
 	"ChatRoom001/model/common"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	socketio "github.com/googollee/go-socket.io"
 )
@@ -14,6 +15,7 @@ type message struct {
 }
 
 func (message) SendMsg(s socketio.Conn, msg string) string {
+	fmt.Println("send msg:", msg)
 	token, ok := CheckAuth(s)
 	if !ok {
 		return ""

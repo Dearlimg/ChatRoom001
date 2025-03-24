@@ -31,22 +31,23 @@ func NewChatMap() *ChatMap {
 	return &ChatMap{m: sync.Map{}}
 }
 
+// Link 添加设备
 func (c *ChatMap) Link(s socketio.Conn, accountID int64) {
-	c.m.Store(s.ID(), accountID)
+	c.sID.Store(s.ID(), accountID) // 存入 SID 和 accountID 的对应关系
 	cm, ok := c.m.Load(accountID)
-	if !ok {
+	if !ok { // 没有找到对应的 ConnMap 对象，创建一个新的
 		cm := &ConnMap{}
 		activeConn := &ActiveConn{}
 		activeConn.s = s
 		activeConn.activeTime = time.Now()
-		cm.m.Store(s.ID(), activeConn)
-		c.m.Store(accountID, cm)
+		cm.m.Store(s.ID(), activeConn) // 将新连接存储在 ConnMap 中
+		c.m.Store(accountID, cm)       // 将 ConnMap 存储在 c.m 中，以 accountID 为键
 		return
 	}
 	activeConn := &ActiveConn{}
 	activeConn.s = s
 	activeConn.activeTime = time.Now()
-	cm.(*ConnMap).m.Store(s.ID(), activeConn)
+	cm.(*ConnMap).m.Store(s.ID(), activeConn) // 将新的连接存储在 ConnMap 对象中
 }
 
 func (c *ChatMap) Leave(s socketio.Conn) {
