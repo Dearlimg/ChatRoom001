@@ -2,6 +2,7 @@ package api
 
 import (
 	"ChatRoom001/errcodes"
+	"ChatRoom001/global"
 	"ChatRoom001/logic"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
@@ -78,4 +79,17 @@ func (application) AcceptApplication(ctx *gin.Context) {
 	}
 	err := logic.Logics.Application.AcceptApplication(ctx, content.ID, param.AccountID)
 	fmt.Println(err)
+}
+
+func (application) ListApplications(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
+	result, err := logic.Logics.Application.ListApplications(ctx, content.ID, limit, offset)
+	reply.Reply(err, result)
+
 }

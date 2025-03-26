@@ -15,5 +15,6 @@ func (application) Init(routers *gin.RouterGroup) {
 		r.DELETE("delete", api.Apis.Application.DeleteApplication)
 		r.PUT("refuse", api.Apis.Application.RefuseApplication)
 		r.PUT("accept", api.Apis.Application.AcceptApplication)
+		r.GET("list", api.Apis.Application.ListApplications)
 	}
 }

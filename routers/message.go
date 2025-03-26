@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"ChatRoom001/controller/api"
 	"ChatRoom001/middlewares"
 	"github.com/gin-gonic/gin"
 )
@@ -10,7 +11,7 @@ type message struct{}
 func (message) Init(router *gin.RouterGroup) {
 	r := router.Group("message", middlewares.MustAccount())
 	{
-		r.POST("file")
+		r.POST("file", api.Apis.Message.CreateFileMsg)
 		//update := r.Group("update")
 		//{
 		//	update.PUT("pin", api.Apis.Message.UpdateMsgPin)

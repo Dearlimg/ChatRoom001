@@ -16,9 +16,10 @@ type file struct {
 //		fileType = "img"
 //	}
 //	input := new(oss.PutBucketCname)
+//	url, key, err := global.OSS.UploadFile(params.File, input)
 //}
 
-//// PublishFile 上传文件，传出 context 与 relationID，accountID，file(*multipart.FileHeader)，返回 model.PublishFileRe
+// PublishFile 上传文件，传出 context 与 relationID，accountID，file(*multipart.FileHeader)，返回 model.PublishFileRe
 //func (file) PublishFile(ctx *gin.Context, params model.PublishFile) (model.PublishFileReply, errcode.Err) {
 //	// 文件类型验证逻辑保持不变
 //	fileType, myErr := gtype.GetFileType(params.File)
@@ -60,6 +61,7 @@ type file struct {
 //
 //	// 执行上传
 //	err = global.OSSBucket.PutObject(key, file, options...)
+//	err = global
 //	if err != nil {
 //		global.Logger.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 //		return model.PublishFileReply{}, errcode.ErrServer

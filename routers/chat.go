@@ -42,7 +42,7 @@ func (ws) Init(router *gin.Engine) *socketio.Server {
 }
 
 func chatHande(server *socketio.Server) {
-	namespace := "/"
+	namespace := "/chat"
 	server.OnEvent(namespace, chat2.ClientSendMsg, api.Apis.Chat.Message.SendMsg)
 	server.OnEvent(namespace, chat2.ClientReadMsg, api.Apis.Chat.Message.ReadMsg)
 	server.OnEvent(namespace, chat2.ClientAuth, api.Apis.Chat.Handle.Auth) // 账户登录

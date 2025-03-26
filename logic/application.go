@@ -142,3 +142,5 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 	}
 	return nil
 }
+
+func (application) ListApplications(ctx *gin.Context) {}

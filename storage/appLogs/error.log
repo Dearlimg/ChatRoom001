@@ -192,3 +192,185 @@
 2025-03-24T21:42:42.253+0800	ERROR	chat/handle.go:45	连接错误 | ID=w | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
 2025-03-24T21:47:03.647+0800	ERROR	chat/handle.go:45	连接错误 | ID=v | 错误=websocket: close 1005 (no status)
 2025-03-24T21:47:10.714+0800	ERROR	chat/handle.go:45	连接错误 | ID=y | 错误=websocket: close 1005 (no status)
+2025-03-24T22:03:07.794+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read tcp 192.168.0.197:8000->192.168.0.197:13096: use of closed network connection
+2025-03-24T22:03:41.026+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read tcp 192.168.0.197:8000->192.168.0.197:13163: use of closed network connection
+2025-03-24T22:05:09.910+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:11.105+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:13.296+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:17.652+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:22.692+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:27.747+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:32.774+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:37.812+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:42.842+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:54.976+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:05:59.992+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:05.031+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:10.073+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:15.113+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:20.176+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:25.204+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:30.238+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:35.281+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:40.305+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:45.019+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:46.343+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:47.645+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:50.569+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:55.617+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:06:59.070+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:04.130+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:09.163+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:14.203+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:19.254+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:24.311+0800	ERROR	chat/handle.go:45	连接错误 | ID=l | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:26.426+0800	ERROR	chat/handle.go:45	连接错误 | ID=m | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:27.845+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:29.362+0800	ERROR	chat/handle.go:45	连接错误 | ID=o | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:30.420+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:33.975+0800	ERROR	chat/handle.go:45	连接错误 | ID=r | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:34.429+0800	ERROR	chat/handle.go:45	连接错误 | ID=s | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:39.011+0800	ERROR	chat/handle.go:45	连接错误 | ID=v | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:07:39.479+0800	ERROR	chat/handle.go:45	连接错误 | ID=w | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:12:28.205+0800	ERROR	chat/handle.go:45	连接错误 | ID=50 | 错误=read tcp 192.168.0.197:8000->192.168.0.197:1564: use of closed network connection
+2025-03-24T22:16:31.171+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=json: cannot unmarshal object into Go value of type string
+2025-03-24T22:16:48.587+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=json: cannot unmarshal object into Go value of type string
+2025-03-24T22:16:49.368+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=json: cannot unmarshal object into Go value of type string
+2025-03-24T22:16:49.912+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=json: cannot unmarshal object into Go value of type string
+2025-03-24T22:17:27.615+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=read tcp 192.168.0.197:8000->192.168.0.197:2862: use of closed network connection
+2025-03-24T22:18:40.007+0800	ERROR	chat/handle.go:45	连接错误 | ID=1d | 错误=json: cannot unmarshal object into Go value of type string
+2025-03-24T22:26:50.701+0800	ERROR	chat/handle.go:45	连接错误 | ID=7s | 错误=websocket: close 1005 (no status)
+2025-03-24T22:28:53.284+0800	ERROR	chat/handle.go:45	连接错误 | ID=8j | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:28:56.568+0800	ERROR	chat/handle.go:45	连接错误 | ID=8n | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:01.056+0800	ERROR	chat/handle.go:45	连接错误 | ID=8r | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:03.431+0800	ERROR	chat/handle.go:45	连接错误 | ID=8s | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:08.486+0800	ERROR	chat/handle.go:45	连接错误 | ID=8t | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:13.528+0800	ERROR	chat/handle.go:45	连接错误 | ID=8u | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:18.168+0800	ERROR	chat/handle.go:45	连接错误 | ID=8v | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:18.550+0800	ERROR	chat/handle.go:45	连接错误 | ID=8w | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:23.213+0800	ERROR	chat/handle.go:45	连接错误 | ID=8x | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:23.589+0800	ERROR	chat/handle.go:45	连接错误 | ID=8y | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:27.535+0800	ERROR	chat/handle.go:45	连接错误 | ID=8z | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:30.937+0800	ERROR	chat/handle.go:45	连接错误 | ID=90 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:35.972+0800	ERROR	chat/handle.go:45	连接错误 | ID=91 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:41.126+0800	ERROR	chat/handle.go:45	连接错误 | ID=92 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:46.103+0800	ERROR	chat/handle.go:45	连接错误 | ID=93 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:51.136+0800	ERROR	chat/handle.go:45	连接错误 | ID=94 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:29:56.174+0800	ERROR	chat/handle.go:45	连接错误 | ID=95 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:01.219+0800	ERROR	chat/handle.go:45	连接错误 | ID=96 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:04.055+0800	ERROR	chat/handle.go:45	连接错误 | ID=97 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:06.230+0800	ERROR	chat/handle.go:45	连接错误 | ID=98 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:07.465+0800	ERROR	chat/handle.go:45	连接错误 | ID=99 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:09.759+0800	ERROR	chat/handle.go:45	连接错误 | ID=9a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:11.285+0800	ERROR	chat/handle.go:45	连接错误 | ID=9b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:12.494+0800	ERROR	chat/handle.go:45	连接错误 | ID=9c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:13.405+0800	ERROR	chat/handle.go:45	连接错误 | ID=9d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:18.111+0800	ERROR	chat/handle.go:45	连接错误 | ID=9e | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:19.258+0800	ERROR	chat/handle.go:45	连接错误 | ID=9f | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:20.029+0800	ERROR	chat/handle.go:45	连接错误 | ID=9g | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:21.074+0800	ERROR	chat/handle.go:45	连接错误 | ID=9h | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:22.095+0800	ERROR	chat/handle.go:45	连接错误 | ID=9i | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:22.749+0800	ERROR	chat/handle.go:45	连接错误 | ID=9j | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:27.797+0800	ERROR	chat/handle.go:45	连接错误 | ID=9k | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:32.823+0800	ERROR	chat/handle.go:45	连接错误 | ID=9l | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:37.886+0800	ERROR	chat/handle.go:45	连接错误 | ID=9m | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:42.902+0800	ERROR	chat/handle.go:45	连接错误 | ID=9n | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:47.936+0800	ERROR	chat/handle.go:45	连接错误 | ID=9o | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:53.864+0800	ERROR	chat/handle.go:45	连接错误 | ID=9p | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:30:59.857+0800	ERROR	chat/handle.go:45	连接错误 | ID=9q | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:05.868+0800	ERROR	chat/handle.go:45	连接错误 | ID=9r | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:13.409+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:18.862+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:24.844+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:30.865+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:36.870+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:42.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:48.867+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:31:54.850+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:00.861+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:06.874+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:12.867+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:17.260+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:18.859+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:24.605+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:29.712+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:30.574+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:35.894+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:41.852+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:47.868+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:53.868+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:32:59.867+0800	ERROR	chat/handle.go:45	连接错误 | ID=l | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:05.882+0800	ERROR	chat/handle.go:45	连接错误 | ID=m | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:11.888+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:17.874+0800	ERROR	chat/handle.go:45	连接错误 | ID=o | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:23.887+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:29.873+0800	ERROR	chat/handle.go:45	连接错误 | ID=q | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:35.896+0800	ERROR	chat/handle.go:45	连接错误 | ID=r | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:41.886+0800	ERROR	chat/handle.go:45	连接错误 | ID=s | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:47.881+0800	ERROR	chat/handle.go:45	连接错误 | ID=t | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:53.882+0800	ERROR	chat/handle.go:45	连接错误 | ID=u | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:33:59.889+0800	ERROR	chat/handle.go:45	连接错误 | ID=v | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:05.953+0800	ERROR	chat/handle.go:45	连接错误 | ID=w | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:11.870+0800	ERROR	chat/handle.go:45	连接错误 | ID=x | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:17.874+0800	ERROR	chat/handle.go:45	连接错误 | ID=y | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:23.876+0800	ERROR	chat/handle.go:45	连接错误 | ID=z | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:29.902+0800	ERROR	chat/handle.go:45	连接错误 | ID=10 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:35.886+0800	ERROR	chat/handle.go:45	连接错误 | ID=11 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:41.898+0800	ERROR	chat/handle.go:45	连接错误 | ID=12 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:47.873+0800	ERROR	chat/handle.go:45	连接错误 | ID=13 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:53.895+0800	ERROR	chat/handle.go:45	连接错误 | ID=14 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:34:59.887+0800	ERROR	chat/handle.go:45	连接错误 | ID=15 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:00.861+0800	ERROR	chat/handle.go:45	连接错误 | ID=16 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:00.929+0800	ERROR	chat/handle.go:45	连接错误 | ID=17 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:01.895+0800	ERROR	chat/handle.go:45	连接错误 | ID=18 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:02.861+0800	ERROR	chat/handle.go:45	连接错误 | ID=19 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:04.327+0800	ERROR	chat/handle.go:45	连接错误 | ID=1a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:05.230+0800	ERROR	chat/handle.go:45	连接错误 | ID=1b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:06.817+0800	ERROR	chat/handle.go:45	连接错误 | ID=1c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:07.671+0800	ERROR	chat/handle.go:45	连接错误 | ID=1d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:08.320+0800	ERROR	chat/handle.go:45	连接错误 | ID=1e | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:08.496+0800	ERROR	chat/handle.go:45	连接错误 | ID=1f | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:10.026+0800	ERROR	chat/handle.go:45	连接错误 | ID=1g | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:11.660+0800	ERROR	chat/handle.go:45	连接错误 | ID=1h | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:15.531+0800	ERROR	chat/handle.go:45	连接错误 | ID=1i | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:20.354+0800	ERROR	chat/handle.go:45	连接错误 | ID=1j | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:25.395+0800	ERROR	chat/handle.go:45	连接错误 | ID=1k | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:30.441+0800	ERROR	chat/handle.go:45	连接错误 | ID=1l | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:35.492+0800	ERROR	chat/handle.go:45	连接错误 | ID=1m | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:40.553+0800	ERROR	chat/handle.go:45	连接错误 | ID=1n | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:42.421+0800	ERROR	chat/handle.go:45	连接错误 | ID=1o | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:44.018+0800	ERROR	chat/handle.go:45	连接错误 | ID=1p | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:44.840+0800	ERROR	chat/handle.go:45	连接错误 | ID=1q | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:46.398+0800	ERROR	chat/handle.go:45	连接错误 | ID=1r | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:47.851+0800	ERROR	chat/handle.go:45	连接错误 | ID=1s | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:51.734+0800	ERROR	chat/handle.go:45	连接错误 | ID=1t | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:35:56.774+0800	ERROR	chat/handle.go:45	连接错误 | ID=1u | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:01.833+0800	ERROR	chat/handle.go:45	连接错误 | ID=1v | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:06.888+0800	ERROR	chat/handle.go:45	连接错误 | ID=1w | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:11.932+0800	ERROR	chat/handle.go:45	连接错误 | ID=1x | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:16.988+0800	ERROR	chat/handle.go:45	连接错误 | ID=1y | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:22.041+0800	ERROR	chat/handle.go:45	连接错误 | ID=1z | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:27.112+0800	ERROR	chat/handle.go:45	连接错误 | ID=20 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:32.154+0800	ERROR	chat/handle.go:45	连接错误 | ID=21 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:37.203+0800	ERROR	chat/handle.go:45	连接错误 | ID=22 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:41.242+0800	ERROR	chat/handle.go:45	连接错误 | ID=23 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:42.148+0800	ERROR	chat/handle.go:45	连接错误 | ID=24 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:43.883+0800	ERROR	chat/handle.go:45	连接错误 | ID=25 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:46.673+0800	ERROR	chat/handle.go:45	连接错误 | ID=26 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:51.730+0800	ERROR	chat/handle.go:45	连接错误 | ID=27 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:36:56.772+0800	ERROR	chat/handle.go:45	连接错误 | ID=28 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:37:01.835+0800	ERROR	chat/handle.go:45	连接错误 | ID=29 | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:37:06.879+0800	ERROR	chat/handle.go:45	连接错误 | ID=2a | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:37:11.934+0800	ERROR	chat/handle.go:45	连接错误 | ID=2b | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:37:16.994+0800	ERROR	chat/handle.go:45	连接错误 | ID=2c | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:37:22.024+0800	ERROR	chat/handle.go:45	连接错误 | ID=2d | 错误=websocket: close 1006 (abnormal closure): unexpected EOF
+2025-03-24T22:39:41.979+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1005 (no status)
+2025-03-24T22:40:44.418+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read tcp 192.168.0.197:8000->192.168.0.197:11642: use of closed network connection
+2025-03-24T22:44:43.710+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=websocket: close 1005 (no status)
+2025-03-24T22:44:49.617+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=websocket: close 1005 (no status)
+2025-03-25T19:39:13.287+0800	ERROR	ChatRoom001/main.go:58	listen tcp :8000: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2025-03-26T19:33:13.017+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=websocket: close 1005 (no status)
+2025-03-26T19:33:39.612+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:6946: use of closed network connection
+2025-03-26T19:58:07.252+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=websocket: close 1005 (no status)
+2025-03-26T19:59:31.122+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read tcp 127.0.0.1:8000->127.0.0.1:8819: use of closed network connection
+2025-03-26T20:52:56.946+0800	ERROR	chat/handle.go:45	连接错误 | ID=1c | 错误=websocket: close 1005 (no status)

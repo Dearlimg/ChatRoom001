@@ -5,9 +5,12 @@ import (
 	db "ChatRoom001/dao/mysql/sqlc"
 	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
+	"ChatRoom001/model"
+	"ChatRoom001/model/reply"
 	"context"
 	"database/sql"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
+	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 )
 
@@ -25,13 +28,15 @@ func GetMsgInfoByID(ctx context.Context, msgID int64) (*db.GetMessageByIDRow, er
 	return result, nil
 }
 
-//func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*reply.ParamCreateFileMsg, errcode.Err) {
-//	ok, myErr := ExistsSetting(ctx, params.AccountID, params.RelationID)
-//	if myErr != nil {
-//		return nil, myErr
-//	}
-//	if !ok {
-//		return nil, errcodes.AuthPermissionsInsufficient
-//	}
-//	fileInfo, myErr := Logics.File.Publish(ctx)
-//}
+func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*reply.ParamCreateFileMsg, errcode.Err) {
+	ok, myErr := ExistsSetting(ctx, params.AccountID, params.RelationID)
+	if myErr != nil {
+		return nil, myErr
+	}
+	if !ok {
+		return nil, errcodes.AuthPermissionsInsufficient
+	}
+	//fileInfo, myErr := Logics.File.PublishFile()
+	return &reply.ParamCreateFileMsg{}, nil
+
+}
