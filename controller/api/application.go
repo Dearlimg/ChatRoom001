@@ -91,5 +91,4 @@ func (application) ListApplications(ctx *gin.Context) {
 	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
 	result, err := logic.Logics.Application.ListApplications(ctx, content.ID, limit, offset)
 	reply.Reply(err, result)
-
 }

@@ -6,6 +6,7 @@ import (
 	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
 	"ChatRoom001/middlewares"
+	"ChatRoom001/model/reply"
 	"ChatRoom001/task"
 	"database/sql"
 	"fmt"
@@ -143,4 +144,40 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 	return nil
 }
 
-func (application) ListApplications(ctx *gin.Context) {}
+func (application) ListApplications(ctx *gin.Context, accountID int64, limit int32, offset int32) (reply.ParamListApplications, errcode.Err) {
+	list, err := dao.Database.DB.GetApplications(ctx, &db.GetApplicationsParams{
+		Limit:      limit,
+		Offset:     offset,
+		Account1ID: accountID,
+		Account2ID: accountID,
+	})
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return reply.ParamListApplications{}, errcode.ErrServer
+	}
+	if len(list) == 0 {
+		return reply.ParamListApplications{List: make([]*reply.ParamApplicationInfo, 0)}, nil
+	}
+	data := make([]*reply.ParamApplicationInfo, len(list))
+	for i, row := range list {
+		name, avatar := row.Account1Name, row.Account1Avatar
+		if row.Account1ID == accountID {
+			name, avatar = row.Account2Name, row.Account2Avatar
+		}
+		data[i] = &reply.ParamApplicationInfo{
+			AccountID1: row.Account1ID,
+			AccountID2: row.Account2ID,
+			ApplyMsg:   row.ApplyMsg,
+			Refuse:     row.RefuseMsg,
+			Status:     string(row.Status),
+			CreateAt:   row.CreateAt,
+			UpdateAt:   row.UpdateAt,
+			Name:       name,
+			Avatar:     avatar,
+		}
+	}
+	return reply.ParamListApplications{
+		List:  data,
+		Total: list[0].Total.(int64),
+	}, nil
+}
