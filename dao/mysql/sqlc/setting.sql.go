@@ -704,6 +704,9 @@ select s.relation_id,
         r.id,
         r.group_name,
         r.group_description,
+        r.group_avatar,
+        r.group_name,
+        r.group_description,
         r.group_avatar
 from (select settings.relation_id,settings.nick_name,settings.pin_time
       from settings,
@@ -726,13 +729,16 @@ type GetGroupPinSettingsOrderByPinTimeParams struct {
 }
 
 type GetGroupPinSettingsOrderByPinTimeRow struct {
-	RelationID       int64
-	NickName         string
-	PinTime          time.Time
-	ID               int64
-	GroupName        sql.NullString
-	GroupDescription sql.NullString
-	GroupAvatar      sql.NullString
+	RelationID         int64
+	NickName           string
+	PinTime            time.Time
+	ID                 int64
+	GroupName          sql.NullString
+	GroupDescription   sql.NullString
+	GroupAvatar        sql.NullString
+	GroupName_2        sql.NullString
+	GroupDescription_2 sql.NullString
+	GroupAvatar_2      sql.NullString
 }
 
 func (q *Queries) GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *GetGroupPinSettingsOrderByPinTimeParams) ([]*GetGroupPinSettingsOrderByPinTimeRow, error) {
@@ -752,6 +758,9 @@ func (q *Queries) GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *Ge
 			&i.GroupName,
 			&i.GroupDescription,
 			&i.GroupAvatar,
+			&i.GroupName_2,
+			&i.GroupDescription_2,
+			&i.GroupAvatar_2,
 		); err != nil {
 			return nil, err
 		}
@@ -844,6 +853,86 @@ func (q *Queries) GetGroupSettingsByName(ctx context.Context, arg *GetGroupSetti
 			&i.GroupAvatar,
 			&i.Description,
 			&i.Total,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, &i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const getGroupShowSettingsOrderByShowTime = `-- name: GetGroupShowSettingsOrderByShowTime :many
+select s.relation_id, s.nick_name, s.is_not_disturb, s.is_pin, s.pin_time, s.is_show, s.last_show, s.is_self,
+       r.id,r.group_avatar,r.group_name,r.group_description,r.created_at
+from (select relation_id,
+             nick_name,
+             is_not_disturb,
+             is_pin,
+             pin_time,
+             is_show,
+             last_show,
+             is_self
+      from settings,
+           relations
+      where settings.account_id = ?
+        and settings.relation_id = relations.id
+        and settings.is_show = true
+        and relations.relation_type = 'group') as s,
+     relations r
+where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ?)
+order by s.last_show desc
+`
+
+type GetGroupShowSettingsOrderByShowTimeParams struct {
+	AccountID   int64
+	AccountID_2 int64
+}
+
+type GetGroupShowSettingsOrderByShowTimeRow struct {
+	RelationID       int64
+	NickName         string
+	IsNotDisturb     bool
+	IsPin            bool
+	PinTime          time.Time
+	IsShow           bool
+	LastShow         time.Time
+	IsSelf           bool
+	ID               int64
+	GroupAvatar      sql.NullString
+	GroupName        sql.NullString
+	GroupDescription sql.NullString
+	CreatedAt        sql.NullTime
+}
+
+func (q *Queries) GetGroupShowSettingsOrderByShowTime(ctx context.Context, arg *GetGroupShowSettingsOrderByShowTimeParams) ([]*GetGroupShowSettingsOrderByShowTimeRow, error) {
+	rows, err := q.query(ctx, q.getGroupShowSettingsOrderByShowTimeStmt, getGroupShowSettingsOrderByShowTime, arg.AccountID, arg.AccountID_2)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []*GetGroupShowSettingsOrderByShowTimeRow{}
+	for rows.Next() {
+		var i GetGroupShowSettingsOrderByShowTimeRow
+		if err := rows.Scan(
+			&i.RelationID,
+			&i.NickName,
+			&i.IsNotDisturb,
+			&i.IsPin,
+			&i.PinTime,
+			&i.IsShow,
+			&i.LastShow,
+			&i.IsSelf,
+			&i.ID,
+			&i.GroupAvatar,
+			&i.GroupName,
+			&i.GroupDescription,
+			&i.CreatedAt,
 		); err != nil {
 			return nil, err
 		}

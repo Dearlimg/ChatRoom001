@@ -7,6 +7,7 @@ type Logic struct {
 	Application application
 	File        file
 	Message     message
+	Setting     setting
 }
 
 var Logics = new(Logic)

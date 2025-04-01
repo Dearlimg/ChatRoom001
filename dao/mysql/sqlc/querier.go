@@ -13,14 +13,24 @@ type Querier interface {
 	CountAccountByUserID(ctx context.Context, userID int64) (int64, error)
 	CreateAccount(ctx context.Context, arg *CreateAccountParams) error
 	CreateApplication(ctx context.Context, arg *CreateApplicationParams) error
+	// -- name: CreateFile :one
+	// START TRANSACTION;
+	// INSERT INTO files (
+	//     file_name, file_type, file_size, `key`, url, relation_id, account_id
+	// ) VALUES (
+	//              ?, ?, ?, ?, ?, ?, ?
+	//          );
+	// SELECT * FROM files
+	// WHERE file_id = LAST_INSERT_ID();
+	// COMMIT;
 	CreateFile(ctx context.Context, arg *CreateFileParams) error
-	CreateFileReturn(ctx context.Context) (interface{}, error)
 	CreateFriendRelation(ctx context.Context, arg *CreateFriendRelationParams) error
 	CreateGet(ctx context.Context, account1ID int64) (*Application, error)
 	CreateGroupRelation(ctx context.Context, arg *CreateGroupRelationParams) error
 	CreateManySetting(ctx context.Context, arg *CreateManySettingParams) error
 	CreateMessage(ctx context.Context, arg *CreateMessageParams) error
 	CreateMessageReturn(ctx context.Context) (*CreateMessageReturnRow, error)
+	CreateRelationReturn(ctx context.Context) (int64, error)
 	CreateSetting(ctx context.Context, arg *CreateSettingParams) error
 	CreateUser(ctx context.Context, arg *CreateUserParams) error
 	DeleteAccount(ctx context.Context, id int64) error
@@ -71,8 +81,15 @@ type Querier interface {
 	GetAllGroupRelation(ctx context.Context) ([]int64, error)
 	GetAllRelationIDs(ctx context.Context) ([]int64, error)
 	GetAllRelationOnRelation(ctx context.Context) ([]*Relation, error)
+	// -- name: GetApplicationByID :one
+	// select *
+	// from applications
+	// where account1_id = ?
+	//   and account2_id = ?
+	// limit  1;
 	GetApplicationByID(ctx context.Context, arg *GetApplicationByIDParams) (*Application, error)
 	GetApplications(ctx context.Context, arg *GetApplicationsParams) ([]*GetApplicationsRow, error)
+	GetCreateFile(ctx context.Context) (*File, error)
 	GetFileByRelation(ctx context.Context, relationID sql.NullInt64) ([]*File, error)
 	GetFileByRelationIDIsNULL(ctx context.Context) ([]*GetFileByRelationIDIsNULLRow, error)
 	GetFileDetailsByID(ctx context.Context, id int64) (*File, error)
@@ -89,6 +106,7 @@ type Querier interface {
 	GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *GetGroupPinSettingsOrderByPinTimeParams) ([]*GetGroupPinSettingsOrderByPinTimeRow, error)
 	GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error)
 	GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error)
+	GetGroupShowSettingsOrderByShowTime(ctx context.Context, arg *GetGroupShowSettingsOrderByShowTimeParams) ([]*GetGroupShowSettingsOrderByShowTimeRow, error)
 	GetMessageByID(ctx context.Context, id int64) (*GetMessageByIDRow, error)
 	GetMsgByRelationIDAndTime(ctx context.Context, arg *GetMsgByRelationIDAndTimeParams) ([]*GetMsgByRelationIDAndTimeRow, error)
 	GetMsgsByContent(ctx context.Context, arg *GetMsgsByContentParams) ([]*GetMsgsByContentRow, error)

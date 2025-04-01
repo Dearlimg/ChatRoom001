@@ -70,7 +70,7 @@ func (application) DeleteApplication(ctx *gin.Context, accountID1, accountID2 in
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
 	}
-	if apply.Account1ID != accountID1 {
+	if apply.Account2ID != accountID2 {
 		return errcodes.AuthPermissionsInsufficient
 	}
 	if err := dao.Database.DB.DeleteApplication(ctx, &db.DeleteApplicationParams{
@@ -135,12 +135,23 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 	if myerr != nil {
 		return myerr
 	}
-	fmt.Println(accountInfo1, accountInfo2)
-	//msgInfo, err := dao.Database.DB.AcceptApplicationTx(ctx, dao.Database.Redis, accountInfo1, accountInfo2)
-	if err != nil {
+	fmt.Println(accountInfo1, accountInfo2, dao.Database.Redis, ctx)
+	msgInfo, err1 := dao.Database.DB.AcceptApplicationTx(ctx, dao.Database.Redis, accountInfo1, accountInfo2)
+	if err1 != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
 	}
+	global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
+		ParamMsgInfo: reply.ParamMsgInfo{
+			ID:         msgInfo.ID,
+			NotifyType: string(msgInfo.NotifyType),
+			MsgType:    string(msgInfo.MsgType),
+			MsgContent: msgInfo.MsgContent,
+			RelationID: msgInfo.RelationID,
+			CreateAt:   msgInfo.CreateAt,
+		},
+		RlyMsg: nil,
+	}))
 	return nil
 }
 

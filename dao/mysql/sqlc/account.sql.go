@@ -115,7 +115,7 @@ SELECT
 FROM (
          SELECT id, user_id, name, avatar, gender, signature, create_at
          FROM accounts
-         WHERE accounts.user_id = ?
+         WHERE accounts.id = ?
      ) a
          LEFT JOIN relations r
                    ON r.relation_type = 'friend'
@@ -128,7 +128,7 @@ LIMIT 1
 `
 
 type GetAccountByIDParams struct {
-	UserID     int64
+	ID         int64
 	Account2ID sql.NullInt64
 	Account1ID sql.NullInt64
 }
@@ -145,7 +145,7 @@ type GetAccountByIDRow struct {
 }
 
 func (q *Queries) GetAccountByID(ctx context.Context, arg *GetAccountByIDParams) (*GetAccountByIDRow, error) {
-	row := q.queryRow(ctx, q.getAccountByIDStmt, getAccountByID, arg.UserID, arg.Account2ID, arg.Account1ID)
+	row := q.queryRow(ctx, q.getAccountByIDStmt, getAccountByID, arg.ID, arg.Account2ID, arg.Account1ID)
 	var i GetAccountByIDRow
 	err := row.Scan(
 		&i.ID,

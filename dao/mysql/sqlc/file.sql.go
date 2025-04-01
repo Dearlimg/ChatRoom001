@@ -11,6 +11,8 @@ import (
 )
 
 const createFile = `-- name: CreateFile :exec
+
+
 insert into files (file_name, file_type, file_size, ` + "`" + `key` + "`" + `, url, relation_id, account_id)
 values(?,?,?,?,?,?,?)
 `
@@ -25,6 +27,20 @@ type CreateFileParams struct {
 	AccountID  sql.NullInt64
 }
 
+// -- name: CreateFile :one
+// START TRANSACTION;
+// INSERT INTO files (
+//
+//	file_name, file_type, file_size, `key`, url, relation_id, account_id
+//
+// ) VALUES (
+//
+//	    ?, ?, ?, ?, ?, ?, ?
+//	);
+//
+// SELECT * FROM files
+// WHERE file_id = LAST_INSERT_ID();
+// COMMIT;
 func (q *Queries) CreateFile(ctx context.Context, arg *CreateFileParams) error {
 	_, err := q.exec(ctx, q.createFileStmt, createFile,
 		arg.FileName,
@@ -38,19 +54,6 @@ func (q *Queries) CreateFile(ctx context.Context, arg *CreateFileParams) error {
 	return err
 }
 
-const createFileReturn = `-- name: CreateFileReturn :one
-select (file_name, file_type, file_size, ` + "`" + `key` + "`" + `, url, relation_id, account_id)
-from files
-where last_insert_id()
-`
-
-func (q *Queries) CreateFileReturn(ctx context.Context) (interface{}, error) {
-	row := q.queryRow(ctx, q.createFileReturnStmt, createFileReturn)
-	var column_1 interface{}
-	err := row.Scan(&column_1)
-	return column_1, err
-}
-
 const deleteFileByID = `-- name: DeleteFileByID :exec
 delete
 from files
@@ -60,6 +63,29 @@ where id = ?
 func (q *Queries) DeleteFileByID(ctx context.Context, id int64) error {
 	_, err := q.exec(ctx, q.deleteFileByIDStmt, deleteFileByID, id)
 	return err
+}
+
+const getCreateFile = `-- name: GetCreateFile :one
+select id, file_name, file_type, file_size, ` + "`" + `key` + "`" + `, url, relation_id, account_id, create_at
+from files
+where last_insert_id()
+`
+
+func (q *Queries) GetCreateFile(ctx context.Context) (*File, error) {
+	row := q.queryRow(ctx, q.getCreateFileStmt, getCreateFile)
+	var i File
+	err := row.Scan(
+		&i.ID,
+		&i.FileName,
+		&i.FileType,
+		&i.FileSize,
+		&i.Key,
+		&i.Url,
+		&i.RelationID,
+		&i.AccountID,
+		&i.CreateAt,
+	)
+	return &i, err
 }
 
 const getFileByRelation = `-- name: GetFileByRelation :many

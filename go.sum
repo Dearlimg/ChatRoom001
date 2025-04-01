@@ -13,6 +13,8 @@ github.com/Dearlimg/Goutils v1.0.3 h1:0ZG5k/4+xAYDGZ4nInPkKL8KzGJVZGHEA627YWqqB6
 github.com/Dearlimg/Goutils v1.0.3/go.mod h1:H0iiN9s5zCmCBBBgQEBUeFp67oqbQ8GV1yGhXskiMRY=
 github.com/Dearlimg/Goutils v1.0.4 h1:CxKMiUQCwkl1fLMRPBeHeM18wdmCi3A0BHLm515qRTI=
 github.com/Dearlimg/Goutils v1.0.4/go.mod h1:H0iiN9s5zCmCBBBgQEBUeFp67oqbQ8GV1yGhXskiMRY=
+github.com/Dearlimg/Goutils v1.0.5 h1:9U5lvNcTOx5QdHQlpElTrENShyjLOWQx7/6mHr6WXG8=
+github.com/Dearlimg/Goutils v1.0.5/go.mod h1:uvWNenOrCDEUXH2o1SWXB5Xej7H1nd3gk/f4bDyrULs=
 github.com/IBM/sarama v1.45.1 h1:nY30XqYpqyXOXSNoe2XCgjj9jklGM1Ye94ierUb1jQ0=
 github.com/IBM/sarama v1.45.1/go.mod h1:qifDhA3VWSrQ1TjSMyxDl3nYL3oX2C83u+G6L79sq4w=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
@@ -202,6 +204,8 @@ github.com/jcmturner/rpc/v2 v2.0.3 h1:7FXXj8Ti1IaVFpSAziCZWNzbNuZmnvw/i6CqLNdWfZ
 github.com/jcmturner/rpc/v2 v2.0.3/go.mod h1:VUJYCIDm3PVOEHw8sgt091/20OJjskO/YJki3ELg/Hc=
 github.com/jinzhu/copier v0.4.0 h1:w3ciUoD19shMCRargcpm0cm91ytaBhDvuRpz1ODO/U8=
 github.com/jinzhu/copier v0.4.0/go.mod h1:DfbEm0FYsaqBcKcFuvmOZb218JkPGtvSHsKg8S8hyyg=
+github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
+github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
 github.com/josharian/intern v1.0.0 h1:vlS4z54oSdjm0bgjRigI+G1HpF+tI+9rE5LLzOg8HmY=
 github.com/josharian/intern v1.0.0/go.mod h1:5DoeVV0s6jJacbCEi61lwdGj/aVlrQvzHFFd8Hwg//Y=
 github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=

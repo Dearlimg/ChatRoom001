@@ -92,10 +92,12 @@ func (q *Queries) ExistsApplicationByIDWithLock(ctx context.Context, arg *Exists
 }
 
 const getApplicationByID = `-- name: GetApplicationByID :one
+
+
 select account1_id, account2_id, apply_msg, refuse_msg, status, create_at, update_at
 from applications
 where account1_id = ?
-  and account2_id = ?
+  or account2_id = ?
 limit  1
 `
 
@@ -104,6 +106,14 @@ type GetApplicationByIDParams struct {
 	Account2ID int64
 }
 
+// -- name: GetApplicationByID :one
+// select *
+// from applications
+// where account1_id = ?
+//
+//	and account2_id = ?
+//
+// limit  1;
 func (q *Queries) GetApplicationByID(ctx context.Context, arg *GetApplicationByIDParams) (*Application, error) {
 	row := q.queryRow(ctx, q.getApplicationByIDStmt, getApplicationByID, arg.Account1ID, arg.Account2ID)
 	var i Application

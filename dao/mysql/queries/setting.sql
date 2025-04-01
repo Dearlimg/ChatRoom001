@@ -72,6 +72,9 @@ select s.relation_id,
         r.id,
         r.group_name,
         r.group_description,
+        r.group_avatar,
+        r.group_name,
+        r.group_description,
         r.group_avatar
 from (select settings.relation_id,settings.nick_name,settings.pin_time
       from settings,
@@ -86,6 +89,27 @@ where r.id=(select relation_id
             where relation_id = s.relation_id
             and settings.account_id = ?)
 order by s.pin_time;
+
+-- name: GetGroupShowSettingsOrderByShowTime :many
+select s.*,
+       r.id,r.group_avatar,r.group_name,r.group_description,r.created_at
+from (select relation_id,
+             nick_name,
+             is_not_disturb,
+             is_pin,
+             pin_time,
+             is_show,
+             last_show,
+             is_self
+      from settings,
+           relations
+      where settings.account_id = ?
+        and settings.relation_id = relations.id
+        and settings.is_show = true
+        and relations.relation_type = 'group') as s,
+     relations r
+where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ?)
+order by s.last_show desc;
 
 -- name: GetFriendShowSettingsOrderByShowTime :many
 select s.*,

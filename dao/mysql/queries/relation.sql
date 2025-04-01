@@ -2,6 +2,11 @@
 INSERT INTO relations (relation_type, group_name, group_description, group_avatar)
 value ('group',?,?,?);
 
+-- name: CreateRelationReturn :one
+select id
+from relations
+where last_insert_id();
+
 -- name: CreateFriendRelation :exec
 insert into relations(relation_type,account1_id,account2_id)
 value ('friend',?,?);

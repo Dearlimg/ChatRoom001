@@ -9,6 +9,7 @@ type routers struct {
 	Application application
 	Message     message
 	File        file
+	Setting     setting
 }
 
 var Routers = new(routers)

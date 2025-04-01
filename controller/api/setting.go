@@ -1,0 +1,69 @@
+package api
+
+import (
+	"ChatRoom001/errcodes"
+	"ChatRoom001/global"
+	"ChatRoom001/logic"
+	"ChatRoom001/middlewares"
+	"ChatRoom001/model"
+	"ChatRoom001/model/request"
+	"github.com/Dearlimg/Goutils/pkg/app"
+	"github.com/Dearlimg/Goutils/pkg/app/errcode"
+	"github.com/gin-gonic/gin"
+)
+
+type setting struct{}
+
+func (setting) GetFriends(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	result, err := logic.Logics.Setting.GetFriends(ctx, content.ID)
+	reply.Reply(err, result)
+}
+
+func (setting) GetFriendsByName(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamGetFriendsByName)
+	if err := ctx.ShouldBindQuery(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
+	result, err := logic.Logics.Setting.GetFriendsByName(ctx, content.ID, params.Name, limit, offset)
+	reply.Reply(err, result)
+}
+
+func (setting) GetShows(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	result, err := logic.Logics.Setting.GetShows(ctx, content.ID)
+	reply.Reply(err, result)
+}
+
+func (setting) GetPins(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	result, err := logic.Logics.Setting.GetPins(ctx, content.ID)
+	reply.Reply(err, result)
+}
+
+func (setting) UpdateSettingPin(ctx *gin.Context) {
+
+}

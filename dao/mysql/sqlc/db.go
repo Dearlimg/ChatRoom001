@@ -36,9 +36,6 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.createFileStmt, err = db.PrepareContext(ctx, createFile); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateFile: %w", err)
 	}
-	if q.createFileReturnStmt, err = db.PrepareContext(ctx, createFileReturn); err != nil {
-		return nil, fmt.Errorf("error preparing query CreateFileReturn: %w", err)
-	}
 	if q.createFriendRelationStmt, err = db.PrepareContext(ctx, createFriendRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateFriendRelation: %w", err)
 	}
@@ -56,6 +53,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.createMessageReturnStmt, err = db.PrepareContext(ctx, createMessageReturn); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateMessageReturn: %w", err)
+	}
+	if q.createRelationReturnStmt, err = db.PrepareContext(ctx, createRelationReturn); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateRelationReturn: %w", err)
 	}
 	if q.createSettingStmt, err = db.PrepareContext(ctx, createSetting); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateSetting: %w", err)
@@ -159,6 +159,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getApplicationsStmt, err = db.PrepareContext(ctx, getApplications); err != nil {
 		return nil, fmt.Errorf("error preparing query GetApplications: %w", err)
 	}
+	if q.getCreateFileStmt, err = db.PrepareContext(ctx, getCreateFile); err != nil {
+		return nil, fmt.Errorf("error preparing query GetCreateFile: %w", err)
+	}
 	if q.getFileByRelationStmt, err = db.PrepareContext(ctx, getFileByRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query GetFileByRelation: %w", err)
 	}
@@ -206,6 +209,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.getGroupSettingsByNameStmt, err = db.PrepareContext(ctx, getGroupSettingsByName); err != nil {
 		return nil, fmt.Errorf("error preparing query GetGroupSettingsByName: %w", err)
+	}
+	if q.getGroupShowSettingsOrderByShowTimeStmt, err = db.PrepareContext(ctx, getGroupShowSettingsOrderByShowTime); err != nil {
+		return nil, fmt.Errorf("error preparing query GetGroupShowSettingsOrderByShowTime: %w", err)
 	}
 	if q.getMessageByIDStmt, err = db.PrepareContext(ctx, getMessageByID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetMessageByID: %w", err)
@@ -322,11 +328,6 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing createFileStmt: %w", cerr)
 		}
 	}
-	if q.createFileReturnStmt != nil {
-		if cerr := q.createFileReturnStmt.Close(); cerr != nil {
-			err = fmt.Errorf("error closing createFileReturnStmt: %w", cerr)
-		}
-	}
 	if q.createFriendRelationStmt != nil {
 		if cerr := q.createFriendRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createFriendRelationStmt: %w", cerr)
@@ -355,6 +356,11 @@ func (q *Queries) Close() error {
 	if q.createMessageReturnStmt != nil {
 		if cerr := q.createMessageReturnStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createMessageReturnStmt: %w", cerr)
+		}
+	}
+	if q.createRelationReturnStmt != nil {
+		if cerr := q.createRelationReturnStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createRelationReturnStmt: %w", cerr)
 		}
 	}
 	if q.createSettingStmt != nil {
@@ -527,6 +533,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getApplicationsStmt: %w", cerr)
 		}
 	}
+	if q.getCreateFileStmt != nil {
+		if cerr := q.getCreateFileStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getCreateFileStmt: %w", cerr)
+		}
+	}
 	if q.getFileByRelationStmt != nil {
 		if cerr := q.getFileByRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getFileByRelationStmt: %w", cerr)
@@ -605,6 +616,11 @@ func (q *Queries) Close() error {
 	if q.getGroupSettingsByNameStmt != nil {
 		if cerr := q.getGroupSettingsByNameStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getGroupSettingsByNameStmt: %w", cerr)
+		}
+	}
+	if q.getGroupShowSettingsOrderByShowTimeStmt != nil {
+		if cerr := q.getGroupShowSettingsOrderByShowTimeStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getGroupShowSettingsOrderByShowTimeStmt: %w", cerr)
 		}
 	}
 	if q.getMessageByIDStmt != nil {
@@ -800,13 +816,13 @@ type Queries struct {
 	createAccountStmt                        *sql.Stmt
 	createApplicationStmt                    *sql.Stmt
 	createFileStmt                           *sql.Stmt
-	createFileReturnStmt                     *sql.Stmt
 	createFriendRelationStmt                 *sql.Stmt
 	createGetStmt                            *sql.Stmt
 	createGroupRelationStmt                  *sql.Stmt
 	createManySettingStmt                    *sql.Stmt
 	createMessageStmt                        *sql.Stmt
 	createMessageReturnStmt                  *sql.Stmt
+	createRelationReturnStmt                 *sql.Stmt
 	createSettingStmt                        *sql.Stmt
 	createUserStmt                           *sql.Stmt
 	deleteAccountStmt                        *sql.Stmt
@@ -841,6 +857,7 @@ type Queries struct {
 	getAllRelationOnRelationStmt             *sql.Stmt
 	getApplicationByIDStmt                   *sql.Stmt
 	getApplicationsStmt                      *sql.Stmt
+	getCreateFileStmt                        *sql.Stmt
 	getFileByRelationStmt                    *sql.Stmt
 	getFileByRelationIDIsNULLStmt            *sql.Stmt
 	getFileDetailsByIDStmt                   *sql.Stmt
@@ -857,6 +874,7 @@ type Queries struct {
 	getGroupPinSettingsOrderByPinTimeStmt    *sql.Stmt
 	getGroupRelationByIDStmt                 *sql.Stmt
 	getGroupSettingsByNameStmt               *sql.Stmt
+	getGroupShowSettingsOrderByShowTimeStmt  *sql.Stmt
 	getMessageByIDStmt                       *sql.Stmt
 	getMsgByRelationIDAndTimeStmt            *sql.Stmt
 	getMsgsByContentStmt                     *sql.Stmt
@@ -897,13 +915,13 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		createAccountStmt:                        q.createAccountStmt,
 		createApplicationStmt:                    q.createApplicationStmt,
 		createFileStmt:                           q.createFileStmt,
-		createFileReturnStmt:                     q.createFileReturnStmt,
 		createFriendRelationStmt:                 q.createFriendRelationStmt,
 		createGetStmt:                            q.createGetStmt,
 		createGroupRelationStmt:                  q.createGroupRelationStmt,
 		createManySettingStmt:                    q.createManySettingStmt,
 		createMessageStmt:                        q.createMessageStmt,
 		createMessageReturnStmt:                  q.createMessageReturnStmt,
+		createRelationReturnStmt:                 q.createRelationReturnStmt,
 		createSettingStmt:                        q.createSettingStmt,
 		createUserStmt:                           q.createUserStmt,
 		deleteAccountStmt:                        q.deleteAccountStmt,
@@ -938,6 +956,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getAllRelationOnRelationStmt:             q.getAllRelationOnRelationStmt,
 		getApplicationByIDStmt:                   q.getApplicationByIDStmt,
 		getApplicationsStmt:                      q.getApplicationsStmt,
+		getCreateFileStmt:                        q.getCreateFileStmt,
 		getFileByRelationStmt:                    q.getFileByRelationStmt,
 		getFileByRelationIDIsNULLStmt:            q.getFileByRelationIDIsNULLStmt,
 		getFileDetailsByIDStmt:                   q.getFileDetailsByIDStmt,
@@ -954,6 +973,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getGroupPinSettingsOrderByPinTimeStmt:    q.getGroupPinSettingsOrderByPinTimeStmt,
 		getGroupRelationByIDStmt:                 q.getGroupRelationByIDStmt,
 		getGroupSettingsByNameStmt:               q.getGroupSettingsByNameStmt,
+		getGroupShowSettingsOrderByShowTimeStmt:  q.getGroupShowSettingsOrderByShowTimeStmt,
 		getMessageByIDStmt:                       q.getMessageByIDStmt,
 		getMsgByRelationIDAndTimeStmt:            q.getMsgByRelationIDAndTimeStmt,
 		getMsgsByContentStmt:                     q.getMsgsByContentStmt,

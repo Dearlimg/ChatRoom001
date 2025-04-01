@@ -186,7 +186,6 @@ type Token struct {
 	RefreshTokenExpire   time.Duration `yaml:"RefreshTokenExpire"`   // 用户 token 的刷新令牌
 	AccountTokenDuration time.Duration `yaml:"AccountTokenDuration"` // 账户 token 的有效期限
 	AuthorizationKey     string        `yaml:"AuthorizationKey"`     // 授权密钥，用于进行授权验证
-	NewAuthorizationKey  string        `yaml:"NewAuthorizationKey"`  //account token test  durlimg
 	AuthorizationType    string        `yaml:"AuthorizationType"`    // 授权类型，指定授权的具体方式或策略
 }
 

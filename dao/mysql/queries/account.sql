@@ -32,7 +32,7 @@ SELECT
 FROM (
          SELECT *
          FROM accounts
-         WHERE accounts.user_id = ?
+         WHERE accounts.id = ?
      ) a
          LEFT JOIN relations r
                    ON r.relation_type = 'friend'

@@ -11,6 +11,7 @@ type apis struct {
 	Application application
 	Message     message
 	File        file
+	Setting     setting
 }
 
 var Apis = new(apis)

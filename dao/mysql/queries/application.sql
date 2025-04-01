@@ -20,11 +20,19 @@ from applications
 where account1_id = ?
   and account2_id = ?;
 
+# -- name: GetApplicationByID :one
+# select *
+# from applications
+# where account1_id = ?
+#   and account2_id = ?
+# limit  1;
+
+
 -- name: GetApplicationByID :one
 select *
 from applications
 where account1_id = ?
-  and account2_id = ?
+  or account2_id = ?
 limit  1;
 
 -- name: UpdateApplication :exec

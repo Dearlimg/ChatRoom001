@@ -37,6 +37,7 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 		rg.Application.Init(root)
 		rg.File.Init(root)
 		rg.Message.Init(root)
+		rg.Setting.Init(root)
 	}
 	return r, routers.Routers.Chat.Init(r)
 }

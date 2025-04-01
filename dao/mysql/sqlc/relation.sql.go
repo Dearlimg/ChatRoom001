@@ -41,6 +41,19 @@ func (q *Queries) CreateGroupRelation(ctx context.Context, arg *CreateGroupRelat
 	return err
 }
 
+const createRelationReturn = `-- name: CreateRelationReturn :one
+select id
+from relations
+where last_insert_id()
+`
+
+func (q *Queries) CreateRelationReturn(ctx context.Context) (int64, error) {
+	row := q.queryRow(ctx, q.createRelationReturnStmt, createRelationReturn)
+	var id int64
+	err := row.Scan(&id)
+	return id, err
+}
+
 const deleteFriendRelation = `-- name: DeleteFriendRelation :exec
 insert into relations(relation_type,account1_id,account2_id)
 value ('friend',?,?)

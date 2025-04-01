@@ -3,6 +3,7 @@ package gtype
 import (
 	"bytes"
 	"encoding/hex"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"io"
 	"mime/multipart"
@@ -94,6 +95,7 @@ func bytesToHexString(src []byte) string {
 func GetFileType(file *multipart.FileHeader) (string, errcode.Err) {
 	f, err := file.Open()
 	if err != nil {
+		fmt.Println("无法打开文件")
 		return "", errcode.ErrServer
 	}
 	fSrc := make([]byte, 10)

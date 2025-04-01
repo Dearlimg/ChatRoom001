@@ -64,7 +64,7 @@ func (account) CreateAccount(ctx *gin.Context, userID int64, name, avatar, gende
 }
 
 func (account) GetAccountToken(ctx *gin.Context, userID, accountID int64) (*reply.ParamGetAccountToken, errcode.Err) {
-	accountInfo, err := GetAccountInfoByID(ctx, userID, accountID)
+	accountInfo, err := GetAccountInfoByID(ctx, accountID, accountID)
 	if err != nil {
 		return nil, err
 	}
@@ -85,11 +85,13 @@ func (account) GetAccountToken(ctx *gin.Context, userID, accountID int64) (*repl
 func GetAccountInfoByID(ctx *gin.Context, userID, accountID int64) (*db.GetAccountByIDRow, errcode.Err) {
 	var ID sql.NullInt64
 	ID.Int64 = accountID
+
 	accountInfo, err := dao.Database.DB.GetAccountByID(ctx, &db.GetAccountByIDParams{
-		UserID:     userID,
+		ID:         userID,
 		Account2ID: ID,
 		Account1ID: ID,
 	})
+	fmt.Println("GetAccountInfoByID ", userID, accountID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, errcodes.AccountNotFound
@@ -99,6 +101,25 @@ func GetAccountInfoByID(ctx *gin.Context, userID, accountID int64) (*db.GetAccou
 	}
 	return accountInfo, nil
 }
+
+//func GetAccountInfoByID(ctx *gin.Context, accountID, selfID int64) (*db.GetAccountByIDRow, errcode.Err) {
+//		var ID sql.NullInt64
+//		ID.Int64 = accountID
+//
+//	accountInfo, err := dao.Database.DB.GetAccountByID(ctx, &db.GetAccountByIDParams{
+//				ID:         selfID,
+//				Account2ID: ID,
+//				Account1ID: ID,
+//	})
+//	if err != nil {
+//		if errors.Is(err, pgx.ErrNoRows) {
+//			return nil, errcodes.AccountNotFound
+//		}
+//		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+//		return nil, errcode.ErrServer
+//	}
+//	return accountInfo, nil
+//}
 
 func (account) GetAccountsByUserID(ctx *gin.Context, userID int64) (reply.ParamGetAccountByUserID, errcode.Err) {
 	accountInfos, err := dao.Database.DB.GetAccountByUserID(ctx, userID)
@@ -174,8 +195,8 @@ func (account) GetAccountsByName(ctx *gin.Context, accountID int64, name string,
 }
 
 func (account) GetAccountByID(ctx *gin.Context, accountID, selfID int64) (*reply.ParamGetAccountByID, errcode.Err) {
+	fmt.Println("GetAccountByID ACCOUNTID:", accountID, "SELFID", selfID)
 	info, err := GetAccountInfoByID(ctx, selfID, accountID)
-
 	if err != nil {
 		return nil, err
 	}
