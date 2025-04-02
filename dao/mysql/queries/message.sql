@@ -15,7 +15,7 @@ INSERT INTO messages (
 
 -- name: CreateMessageReturn :one
 SELECT
-    id, msg_content, msg_extend, file_id, create_at
+    id, msg_content, COALESCE(msg_extend,'{}'), file_id, create_at
 FROM messages
 WHERE id = LAST_INSERT_ID();
 

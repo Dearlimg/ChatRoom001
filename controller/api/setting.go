@@ -67,3 +67,19 @@ func (setting) GetPins(ctx *gin.Context) {
 func (setting) UpdateSettingPin(ctx *gin.Context) {
 
 }
+
+func (setting) UpdateNickName(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := &request.ParamUpdateNickName{}
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.Setting.UpdateNickName(ctx, content.ID, params.RelationID, params.NickName)
+	reply.Reply(err)
+}

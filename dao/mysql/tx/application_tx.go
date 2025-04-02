@@ -7,8 +7,6 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
-	"encoding/json"
-	"fmt"
 )
 
 func (store *SqlStore) CreateApplicationTx(ctx context.Context, param *db.CreateApplicationParams) error {
@@ -30,8 +28,9 @@ func (store *SqlStore) CreateApplicationTx(ctx context.Context, param *db.Create
 
 func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB, account1, account2 *db.GetAccountByIDRow) (*db.Message, error) {
 	var result *db.Message
-	fmt.Println("AcceptApplicationTx is hrr ")
+	//fmt.Println("AcceptApplicationTx is hrr 0")
 	err := store.execTx(ctx, func(queries *db.Queries) error {
+		//fmt.Println("AcceptApplicationTx is hrr 0.5")
 		var err error
 		err = tool.DoThat(err, func() error {
 			return queries.UpdateApplication(ctx, &db.UpdateApplicationParams{
@@ -40,6 +39,7 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				Account2ID: account2.ID,
 			})
 		})
+		//fmt.Println("AcceptApplicationTx is hrr 1", err)
 		id1, id2 := account1.ID, account2.ID
 		if id1 > id2 {
 			id1, id2 = id2, id1
@@ -60,7 +60,7 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 			})
 			return err
 		})
-
+		//fmt.Println("AcceptApplicationTx is hrr 2", err)
 		relationID, err = queries.CreateRelationReturn(ctx)
 		// 建立双方关系
 		err = tool.DoThat(err, func() error {
@@ -71,6 +71,7 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     false,
 			})
 		})
+		//fmt.Println("AcceptApplicationTx is hrr 3", err)
 		err = tool.DoThat(err, func() error {
 			return queries.CreateSetting(ctx, &db.CreateSettingParams{
 				AccountID:  account2.ID,
@@ -79,17 +80,21 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     false,
 			})
 		})
+		//fmt.Println("AcceptApplicationTx is hrr 4", err)
 		// 新建一个系统通知消息作为好友的第一条消息
+		//var tempjson json.RawMessage
+		//tempjson = json.RawMessage{}
 		err = tool.DoThat(err, func() error {
 			arg := &db.CreateMessageParams{
 				NotifyType: db.MessagesNotifyTypeCommon,
 				MsgType:    db.MessagesMsgTypeText,
 				MsgContent: "我们已经成为好友啦，现在可以开始聊天啦！",
-				MsgExtend:  json.RawMessage{},
+				//MsgExtend:  tempjson,
 				AccountID:  sql.NullInt64{Int64: account2.ID, Valid: true},
 				RelationID: relationID,
 			}
 			err := queries.CreateMessage(ctx, arg)
+			//fmt.Println("AcceptApplicationTx is hrr 4.1", err)
 			msgInfo, err := queries.CreateMessageReturn(ctx)
 			result = &db.Message{
 				ID:         msgInfo.ID,
@@ -99,11 +104,14 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				RelationID: relationID,
 				CreateAt:   msgInfo.CreateAt,
 			}
+			//fmt.Println("AcceptApplicationTx is hrr 4.2", result)
 			return err
 		})
+		//fmt.Println("AcceptApplicationTx is hrr 5", err)
 		err = tool.DoThat(err, func() error {
 			return rdb.AddRelationAccount(ctx, relationID, account1.ID, account2.ID)
 		})
+		//fmt.Println("AcceptApplicationTx is hrr 6", err)
 		return err
 	})
 	return result, err

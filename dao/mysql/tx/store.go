@@ -37,12 +37,12 @@ type SqlStore struct {
 	Pool        *sql.DB
 }
 
-func (store *SqlStore) UploadGroupAvatarWithTx(ctx context.Context, arg db.CreateFileParams) error {
+func (store *SqlStore) AddSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64, isLeader bool) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (store *SqlStore) AddSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64, isLeader bool) error {
+func (store *SqlStore) UploadGroupAvatarWithTx(ctx context.Context, arg db.CreateFileParams) error {
 	//TODO implement me
 	panic("implement me")
 }

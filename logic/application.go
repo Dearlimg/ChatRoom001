@@ -135,12 +135,12 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 	if myerr != nil {
 		return myerr
 	}
-	fmt.Println(accountInfo1, accountInfo2, dao.Database.Redis, ctx)
 	msgInfo, err1 := dao.Database.DB.AcceptApplicationTx(ctx, dao.Database.Redis, accountInfo1, accountInfo2)
 	if err1 != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
 	}
+	fmt.Println("acceptApplication da w", msgInfo)
 	global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
 		ParamMsgInfo: reply.ParamMsgInfo{
 			ID:         msgInfo.ID,

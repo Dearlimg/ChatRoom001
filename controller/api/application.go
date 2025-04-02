@@ -69,7 +69,7 @@ func (application) RefuseApplication(ctx *gin.Context) {
 func (application) AcceptApplication(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	param := new(request.ParamAcceptApplication)
-	if err := ctx.ShouldBindJSON(param); err != nil {
+	if err := ctx.ShouldBindBodyWithJSON(param); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}

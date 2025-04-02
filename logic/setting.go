@@ -3,13 +3,17 @@ package logic
 import (
 	"ChatRoom001/dao"
 	db "ChatRoom001/dao/mysql/sqlc"
+	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/reply"
+	"ChatRoom001/task"
 	"context"
+	"database/sql"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
+	"github.com/pkg/errors"
 )
 
 type setting struct{}
@@ -234,4 +238,34 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 		List:  result,
 		Total: int64(len(result)),
 	}, nil
+}
+
+func (setting) UpdateNickName(ctx *gin.Context, accountID, relationID int64, nickName string) errcode.Err {
+	settingInfo, err := dao.Database.DB.GetSettingByID(ctx, &db.GetSettingByIDParams{
+		AccountID:  accountID,
+		RelationID: relationID,
+	})
+	switch {
+	case errors.Is(err, sql.ErrNoRows):
+		return errcodes.RelationNotExists
+	case errors.Is(err, nil):
+		if settingInfo.NickName == nickName {
+			return nil
+		}
+		if err := dao.Database.DB.UpdateSettingNickName(ctx, &db.UpdateSettingNickNameParams{
+			NickName:   nickName,
+			AccountID:  accountID,
+			RelationID: relationID,
+		}); err != nil {
+			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			return errcode.ErrServer
+		}
+		// 向自己推送更改昵称的通知
+		accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+		global.Worker.SendTask(task.UpdateNickName(accessToken, accountID, relationID, nickName))
+		return nil
+	default:
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
 }

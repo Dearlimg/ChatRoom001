@@ -15,5 +15,5 @@ type ParamRefuseApplication struct {
 }
 
 type ParamAcceptApplication struct {
-	AccountID int64 `json:"account_id" binding:"required,gte=1"`
+	AccountID int64 `json:"account_id"`
 }

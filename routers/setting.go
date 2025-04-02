@@ -21,6 +21,7 @@ func (setting) Init(router *gin.RouterGroup) {
 		updateGroup := r.Group("update")
 		{
 			updateGroup.PUT("pin", api.Apis.Setting.UpdateSettingPin)
+			updateGroup.PUT("nick_name", api.Apis.Setting.UpdateNickName)
 		}
 	}
 }
