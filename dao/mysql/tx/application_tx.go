@@ -30,16 +30,16 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 	var result *db.Message
 	//fmt.Println("AcceptApplicationTx is hrr 0")
 	err := store.execTx(ctx, func(queries *db.Queries) error {
-		//fmt.Println("AcceptApplicationTx is hrr 0.5")
+		//fmt.Println("AcceptApplicationTx is hrr 0.5", account1.ID, account2.ID)
 		var err error
 		err = tool.DoThat(err, func() error {
 			return queries.UpdateApplication(ctx, &db.UpdateApplicationParams{
 				Status:     db.ApplicationsStatusValue1,
-				Account1ID: account1.ID,
-				Account2ID: account2.ID,
+				RefuseMsg:  "我已通过你的好友请求,让我们开始聊天吧!  ",
+				Account1ID: account2.ID,
+				Account2ID: account1.ID,
 			})
 		})
-		//fmt.Println("AcceptApplicationTx is hrr 1", err)
 		id1, id2 := account1.ID, account2.ID
 		if id1 > id2 {
 			id1, id2 = id2, id1

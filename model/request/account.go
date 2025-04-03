@@ -9,7 +9,7 @@ type ParamsCreateAccount struct {
 }
 
 type ParamGetAccountToken struct {
-	AccountID int64 `json:"account_id" form:"account_id" binding:"required,gte=1"` // 账号 ID
+	AccountID int64 `json:"account_id" form:"account_id"` // 账号 ID
 }
 
 type ParamDeleteAccount struct {

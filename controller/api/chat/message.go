@@ -17,13 +17,16 @@ type message struct {
 func (message) SendMsg(s socketio.Conn, msg string) string {
 	fmt.Println("send msg:", msg)
 	token, ok := CheckAuth(s)
+	fmt.Println("token in sendmsgh:", token)
 	if !ok {
 		return ""
 	}
 	param := new(client.HandleSendMsgParams)
 	if err := common.Decode(msg, param); err != nil {
+		fmt.Println("token in sendmsgh:", err)
 		return common.NewState(errcode.ErrParamsNotValid.WithDetails(err.Error())).MustJson()
 	}
+	fmt.Println("token in sendmsgh yes:")
 	ctx, cancel := global.DefaultContextWithTimeout()
 	defer cancel()
 	result, myErr := chat.Group.Message.SendMsg(ctx, &model.HandleSendMsg{

@@ -12,7 +12,6 @@ import (
 	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
-	"github.com/jackc/pgx/v4"
 	"github.com/pkg/errors"
 )
 
@@ -85,13 +84,13 @@ func (application) DeleteApplication(ctx *gin.Context, accountID1, accountID2 in
 
 func getApplication(ctx *gin.Context, accountID1, accountID2 int64) (*db.Application, errcode.Err) {
 	apply, err := dao.Database.DB.GetApplicationByID(ctx, &db.GetApplicationByIDParams{
-		Account1ID: accountID1,
-		Account2ID: accountID2,
+		Account1ID: accountID2,
+		Account2ID: accountID1,
 	})
 	switch {
 	case errors.Is(err, nil):
 		return apply, nil
-	case errors.Is(err, pgx.ErrNoRows):
+	case errors.Is(err, sql.ErrNoRows):
 		return nil, errcodes.ApplicationNotExists
 	default:
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
@@ -121,17 +120,18 @@ func (application) RefuseApplication(ctx *gin.Context, accountID1, accountID2 in
 
 func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 int64) errcode.Err {
 	apply, err := getApplication(ctx, accountID1, accountID2)
+	fmt.Println("AcceptApplication res apply :", apply)
 	if err != nil {
 		return err
 	}
 	if apply.Status == db.ApplicationsStatusValue1 {
 		return errcodes.ApplicationRepeatOpt
 	}
-	accountInfo1, myerr := GetAccountInfoByID(ctx, accountID1, accountID2)
+	accountInfo1, myerr := GetAccountInfoByID(ctx, accountID1, accountID1)
 	if myerr != nil {
 		return myerr
 	}
-	accountInfo2, myerr := GetAccountInfoByID(ctx, accountID1, accountID2)
+	accountInfo2, myerr := GetAccountInfoByID(ctx, accountID2, accountID2)
 	if myerr != nil {
 		return myerr
 	}
@@ -140,7 +140,7 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
 	}
-	fmt.Println("acceptApplication da w", msgInfo)
+	//fmt.Println("acceptApplication da w", msgInfo)
 	global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
 		ParamMsgInfo: reply.ParamMsgInfo{
 			ID:         msgInfo.ID,

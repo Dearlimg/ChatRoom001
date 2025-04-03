@@ -69,7 +69,7 @@ func (application) RefuseApplication(ctx *gin.Context) {
 func (application) AcceptApplication(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	param := new(request.ParamAcceptApplication)
-	if err := ctx.ShouldBindBodyWithJSON(param); err != nil {
+	if err := ctx.ShouldBindJSON(param); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}
@@ -78,7 +78,7 @@ func (application) AcceptApplication(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
-	fmt.Println("AcceptApplication  ", content.ID, param.AccountID)
+	fmt.Println("AcceptApplication  ", content.ID, param.AccountID, param)
 	err := logic.Logics.Application.AcceptApplication(ctx, content.ID, param.AccountID)
 	fmt.Println(err)
 }

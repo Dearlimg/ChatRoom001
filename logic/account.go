@@ -91,7 +91,7 @@ func GetAccountInfoByID(ctx *gin.Context, userID, accountID int64) (*db.GetAccou
 		Account2ID: ID,
 		Account1ID: ID,
 	})
-	fmt.Println("GetAccountInfoByID ", userID, accountID)
+	//fmt.Println("GetAccountInfoByID ", userID, accountID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
 			return nil, errcodes.AccountNotFound

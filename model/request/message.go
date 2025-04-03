@@ -12,13 +12,13 @@ type ParamCreateFileMsg struct {
 }
 
 type ParamGetMsgsByRelationIDAndTime struct {
-	RelationID int64 `form:"relation_id" binding:"required,gte=1"` // 关系 ID
-	LastTime   int32 `form:"last_time" binding:"required,gte=1"`   // 拉取消息最晚的时间戳（精确到秒）
+	RelationID int64 `json:"relation_id" form:"relation_id"` // 关系 ID
+	LastTime   int64 `json:"last_time" form:"last_time"`     // 拉取消息最晚的时间戳（精确到秒）
 	common.Page
 }
 
 type ParamOfferMsgsByAccountIDAndTime struct {
-	LastTime int32 `form:"last_time" binding:"required,gte=1"` // 拉取消息的最晚时间戳（精确到秒）
+	LastTime int32 `form:"last_time" json:"last_time"` // 拉取消息的最晚时间戳（精确到秒）
 	common.Page
 }
 

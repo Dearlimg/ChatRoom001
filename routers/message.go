@@ -22,13 +22,13 @@ func (message) Init(router *gin.RouterGroup) {
 		//{
 		//	info.GET("top", api.Apis.Message.GetTopMsgByRelationID)
 		//}
-		//list := r.Group("list")
-		//{
-		//	list.GET("time", api.Apis.Message.GetMsgsByRelationIDAndTime)
-		//	list.GET("offer", api.Apis.Message.OfferMsgsByAccountIDAndTime)
-		//	list.GET("pin", api.Apis.Message.GetPinMsgsByRelationID)
-		//	list.GET("reply", api.Apis.Message.GetRlyMsgsInfoByMsgID)
-		//	list.GET("content", api.Apis.Message.GetMsgsByContent)
-		//}
+		list := r.Group("list")
+		{
+			list.GET("time", api.Apis.Message.GetMsgsByRelationIDAndTime)
+			list.GET("offer", api.Apis.Message.OfferMsgsByAccountIDAndTime)
+			list.GET("pin", api.Apis.Message.GetPinMsgsByRelationID)
+			//list.GET("reply", api.Apis.Message.GetRlyMsgsInfoByMsgID)
+			//list.GET("content", api.Apis.Message.GetMsgsByContent)
+		}
 	}
 }

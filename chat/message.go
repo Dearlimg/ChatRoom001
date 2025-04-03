@@ -12,27 +12,34 @@ import (
 	"ChatRoom001/task"
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 )
 
 type message struct{}
 
 func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client.HandleSendMsgRly, errcode.Err) {
+	//fmt.Println("SendMsg0")
 	ok, myErr := logic.ExistsSetting(ctx, param.AccountID, param.RelationID)
 	if myErr != nil {
+		//fmt.Println("SendMsg2", myErr)
 		return nil, myErr
 	}
 	if !ok {
+		//fmt.Println("SendMsg3", param)
 		return nil, errcodes.AuthPermissionsInsufficient
 	}
 	var rlyMsgID int64
 	var rlyMsg *reply.ParamRlyMsg
-	if rlyMsg.MsgID > 0 {
-		rlyInfo, myErr := logic.GetMsgInfoByID(ctx, rlyMsg.MsgID)
+	//fmt.Println("SendMsg4")
+	if param.RlyMsgID > 0 {
+		rlyInfo, myErr := logic.GetMsgInfoByID(ctx, param.RlyMsgID)
 		if myErr != nil {
+			fmt.Println("SendMsg5", myErr)
 			return nil, myErr
 		}
 		if rlyInfo.RelationID != param.RelationID {
+			//fmt.Println("SendMsg6")
 			return nil, errcodes.RlyMsgNotOneRelation
 		}
 		if rlyInfo.IsRevoke {
@@ -44,6 +51,7 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 			global.Logger.Error(err.Error())
 			return nil, errcode.ErrServer
 		}
+		//fmt.Println("SendMsg7", err)
 		rlyMsg = &reply.ParamRlyMsg{
 			MsgID:      rlyInfo.ID,
 			MsgType:    string(rlyInfo.MsgType),
@@ -52,11 +60,13 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 			IsRevoked:  rlyInfo.IsRevoke,
 		}
 	}
+	//fmt.Println("SendMsg4.8")
 	msgExtend, err := model.ExtendToJson(param.MsgExtend)
 	if err != nil {
 		global.Logger.Error(err.Error())
 		return nil, errcode.ErrServer
 	}
+	//fmt.Println("SendMsg8")
 	err = dao.Database.DB.CreateMessage(ctx, &db.CreateMessageParams{
 		NotifyType: db.MessagesNotifyTypeCommon,
 		MsgType:    db.MessagesMsgType(model.MsgTypeText),
@@ -70,6 +80,7 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 		global.Logger.Error(err.Error())
 		return nil, errcode.ErrServer
 	}
+	//fmt.Println("SendMsg9")
 	result, err := dao.Database.DB.CreateMessageReturn(ctx)
 	global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
 		ParamMsgInfo: reply.ParamMsgInfo{
@@ -84,6 +95,7 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 		},
 		RlyMsg: rlyMsg,
 	}))
+	//fmt.Println("SendMsg10")
 	return &client.HandleSendMsgRly{
 		MsgID:    result.ID,
 		CreateAt: result.CreateAt,
