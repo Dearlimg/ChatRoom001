@@ -885,7 +885,7 @@ from (select relation_id,
         and settings.is_show = true
         and relations.relation_type = 'group') as s,
      relations r
-where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ?)
+where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ? limit 1)
 order by s.last_show desc
 `
 

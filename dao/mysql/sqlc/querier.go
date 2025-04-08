@@ -30,7 +30,11 @@ type Querier interface {
 	CreateManySetting(ctx context.Context, arg *CreateManySettingParams) error
 	CreateMessage(ctx context.Context, arg *CreateMessageParams) error
 	CreateMessageReturn(ctx context.Context) (*CreateMessageReturnRow, error)
-	CreateRelationReturn(ctx context.Context) (int64, error)
+	// -- name: CreateRelationReturn :one
+	// select id
+	// from relations
+	// where last_insert_id();
+	CreateRelationReturn(ctx context.Context, arg *CreateRelationReturnParams) (int64, error)
 	CreateSetting(ctx context.Context, arg *CreateSettingParams) error
 	CreateUser(ctx context.Context, arg *CreateUserParams) error
 	DeleteAccount(ctx context.Context, id int64) error

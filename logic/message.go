@@ -7,7 +7,11 @@ import (
 	"ChatRoom001/global"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
+	"ChatRoom001/model/chat/server"
+	format2 "ChatRoom001/model/format"
 	"ChatRoom001/model/reply"
+	"ChatRoom001/model/request"
+	"ChatRoom001/task"
 	"context"
 	"database/sql"
 	"encoding/json"
@@ -39,7 +43,7 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 	if !ok {
 		return nil, errcodes.AuthPermissionsInsufficient
 	}
-	//fileInfo, myErr := Logics.File.PublishFile()
+	//fileInfo, myErr := Logics.File.PublishFile(ctx,params)
 	return &reply.ParamCreateFileMsg{}, nil
 }
 
@@ -69,7 +73,7 @@ func (message) GetMsgsByRelationIDAndTime(ctx *gin.Context, params model.GetMsgs
 			List: []*reply.ParamMsgInfoWithRly{},
 		}, nil
 	}
-	result := make([]*reply.ParamMsgInfoWithRly, len(data))
+	result := make([]*reply.ParamMsgInfoWithRly, 0, len(data))
 	for _, v := range data {
 		var content string
 		var extend *model.MsgExtend
@@ -260,10 +264,6 @@ func (message) GetPinMsgsByRelationID(ctx *gin.Context, accountID, relationID in
 				return nil, errcode.ErrServer
 			}
 		}
-		//var readIDs []int64
-		//if accountID == v.AccountID.Int64 {
-		//	readIDs = v.ReadIds
-		//}
 		result = append(result, &reply.ParamMsgInfo{
 			ID:         v.ID,
 			NotifyType: string(v.NotifyType),
@@ -286,4 +286,230 @@ func (message) GetPinMsgsByRelationID(ctx *gin.Context, accountID, relationID in
 		List:  result,
 		Total: data[0].Total.(int64),
 	}, nil
+}
+
+func (message) GetRlyMsgsInfoByMsgID(ctx *gin.Context, accountID, relationID, msgID int64, limit, offset int32) (*reply.ParamGetRlyMsgsInfoByMsgID, errcode.Err) {
+	ok, err := ExistsSetting(ctx, accountID, relationID)
+	if err != nil {
+		return &reply.ParamGetRlyMsgsInfoByMsgID{}, err
+	}
+	if !ok {
+		return &reply.ParamGetRlyMsgsInfoByMsgID{}, errcodes.AuthPermissionsInsufficient
+	}
+	data, myErr := dao.Database.DB.GetRlyMsgsInfoByMsgID(ctx, &db.GetRlyMsgsInfoByMsgIDParams{
+		RelationID:   relationID,
+		RelationID_2: relationID,
+		Limit:        limit,
+		Offset:       offset,
+		Column3:      msgID,
+	})
+	if myErr != nil {
+		global.Logger.Error(myErr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return &reply.ParamGetRlyMsgsInfoByMsgID{Total: 0}, errcode.ErrServer
+	}
+	if len(data) == 0 {
+		return &reply.ParamGetRlyMsgsInfoByMsgID{List: []*reply.ParamMsgInfo{}}, nil
+	}
+	result := make([]*reply.ParamMsgInfo, 0, len(data))
+	for _, v := range data {
+		var content string
+		var extend *model.MsgExtend
+		if !v.IsRevoke {
+			content = v.MsgContent
+			extend, myErr = model.JsonToExtend(v.MsgExtend)
+			if myErr != nil {
+				global.Logger.Error(myErr.Error(), middlewares.ErrLogMsg(ctx)...)
+				return &reply.ParamGetRlyMsgsInfoByMsgID{Total: 0}, errcode.ErrServer
+			}
+		}
+		var readIDs []int64
+		if accountID == v.AccountID.Int64 {
+			if err := json.Unmarshal(v.ReadIds, &readIDs); err != nil {
+				return nil, errcode.ErrServer
+			}
+		}
+		result = append(result, &reply.ParamMsgInfo{
+			ID:         v.ID,
+			NotifyType: string(v.NotifyType),
+			MsgType:    string(v.MsgType),
+			MsgContent: content,
+			MsgExtend:  extend,
+			FileID:     v.FileID.Int64,
+			AccountID:  v.AccountID.Int64,
+			RelationID: v.RelationID,
+			CreateAt:   v.CreateAt,
+			IsRevoke:   v.IsRevoke,
+			IsTop:      v.IsTop,
+			IsPin:      v.IsPin,
+			PinTime:    v.PinTime,
+			ReadIds:    readIDs,
+			ReplyCount: v.ReplyCount,
+		})
+	}
+	return &reply.ParamGetRlyMsgsInfoByMsgID{
+		List:  result,
+		Total: data[0].Total.(int64),
+	}, nil
+}
+
+func (message) GetMsgsByContent(ctx *gin.Context, accountID, relationID int64, content string, limit, offset int32) (*reply.ParamGetMsgsByContent, errcode.Err) {
+	return &reply.ParamGetMsgsByContent{}, errcode.ErrServer
+}
+
+func (message) GetTopMsgByRelationID(ctx *gin.Context, accountID, relationID int64) (*reply.ParamGetTopMsgByRelationID, errcode.Err) {
+	ok, err := ExistsSetting(ctx, accountID, relationID)
+	if err != nil {
+		return &reply.ParamGetTopMsgByRelationID{}, err
+	}
+	if !ok {
+		return &reply.ParamGetTopMsgByRelationID{}, errcodes.AuthPermissionsInsufficient
+	}
+	data, myerr := dao.Database.DB.GetTopMsgByRelationID(ctx, &db.GetTopMsgByRelationIDParams{
+		RelationID:   relationID,
+		RelationID_2: relationID,
+	})
+	if myerr != nil {
+		if errors.Is(myerr, sql.ErrNoRows) {
+			return nil, nil
+		}
+		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+	var content string
+	var extend *model.MsgExtend
+	if !data.IsRevoke {
+		content = data.MsgContent
+		extend, myerr = model.JsonToExtend(data.MsgExtend)
+		if myerr != nil {
+			global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+			return nil, errcode.ErrServer
+		}
+	}
+	var readIDs []int64
+	if accountID == relationID {
+		if err := json.Unmarshal(data.ReadIds, &readIDs); err != nil {
+			return nil, errcode.ErrServer
+		}
+	}
+	return &reply.ParamGetTopMsgByRelationID{MsgInfo: reply.ParamMsgInfo{
+		ID:         data.ID,
+		NotifyType: string(data.NotifyType),
+		MsgType:    string(data.MsgType),
+		MsgContent: content,
+		MsgExtend:  extend,
+		FileID:     data.FileID.Int64,
+		AccountID:  data.AccountID.Int64,
+		RelationID: data.RelationID,
+		CreateAt:   data.CreateAt,
+		IsRevoke:   data.IsRevoke,
+		IsTop:      data.IsTop,
+		IsPin:      data.IsPin,
+		PinTime:    data.PinTime,
+		ReadIds:    readIDs,
+		ReplyCount: data.ReplyCount,
+	}}, nil
+}
+
+func (message) UpdateMsgPin(ctx *gin.Context, accountID int64, param *request.ParamUpdateMsgPin) errcode.Err {
+	ok, err := ExistsSetting(ctx, accountID, param.RelationID)
+	if err != nil {
+		return err
+	}
+	if !ok {
+		return errcodes.AuthPermissionsInsufficient
+	}
+	msgInfo, err := GetMsgInfoByID(ctx, param.ID)
+	if err != nil {
+		return err
+	}
+	if msgInfo.IsPin == param.IsPin {
+		return nil
+	}
+	myerr := dao.Database.DB.UpdateMsgPin(ctx, &db.UpdateMsgPinParams{
+		ID:    param.ID,
+		IsPin: param.IsPin,
+	})
+	if myerr != nil {
+		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+
+	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+	global.Worker.SendTask(task.UpdateMsgState(accessToken, param.RelationID, param.ID, server.MsgPin, param.IsPin))
+	return nil
+}
+
+func (message) UpdateMsgTop(ctx *gin.Context, accountID int64, param *request.ParamUpdateMsgTop) errcode.Err {
+	ok, err := ExistsSetting(ctx, accountID, param.RelationID)
+	if err != nil {
+		return err
+	}
+	if !ok {
+		return errcodes.AuthPermissionsInsufficient
+	}
+	msgInfo, err := GetMsgInfoByID(ctx, param.ID)
+	if err != nil {
+		return err
+	}
+	if msgInfo.IsTop == param.IsTop {
+		return nil
+	}
+	myerr := dao.Database.DB.UpdateMsgTop(ctx, &db.UpdateMsgTopParams{
+		ID:    param.ID,
+		IsTop: param.IsTop,
+	})
+	if myerr != nil {
+		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+	global.Worker.SendTask(task.UpdateMsgState(accessToken, param.RelationID, param.ID, server.MsgTop, param.IsTop))
+	f := func() error {
+		//var temp json.RawMessage
+		arg := &db.CreateMessageParams{
+			NotifyType: db.MessagesNotifyTypeSystem,
+			MsgType:    db.MessagesMsgType(model.MsgTypeText),
+			MsgContent: fmt.Sprintf(format2.UnTopMessage, accountID),
+			//MsgExtend:  temp,
+			RelationID: msgInfo.RelationID,
+		}
+		err := dao.Database.DB.CreateMessage(ctx, arg)
+		if err != nil {
+			return err
+		}
+		msgRly, err := dao.Database.DB.CreateMessageReturn(ctx)
+		global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
+			ParamMsgInfo: reply.ParamMsgInfo{
+				ID:         msgRly.ID,
+				NotifyType: string(arg.NotifyType),
+				MsgType:    string(arg.MsgType),
+				MsgContent: arg.MsgContent,
+				RelationID: arg.RelationID,
+				CreateAt:   msgRly.CreateAt,
+			},
+			RlyMsg: nil,
+		}))
+		return nil
+	}
+	if err := f(); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		reTry("UpdateMsgTop", f)
+	}
+	return nil
+}
+
+func (message) RevokeMsg(ctx *gin.Context, accountID int64, param *request.ParamRevokeMsg) errcode.Err {
+	ok, err := ExistsSetting(ctx, accountID, param.ID)
+	if err != nil {
+		return err
+	}
+	if !ok {
+		return errcodes.AuthPermissionsInsufficient
+	}
+
+	//msgInfo, err := GetMsgInfoByID(ctx, param.ID)
+	//if err != nil {
+	//	return err
+	//}
+	return nil
 }

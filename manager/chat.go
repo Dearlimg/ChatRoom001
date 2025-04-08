@@ -106,3 +106,20 @@ func (c *ChatMap) HasSID(sID string) bool {
 	_, ok := c.sID.Load(sID)
 	return ok
 }
+
+// SendMany 给指定多个账号的全部设备推送消息
+// 参数：账号列表，事件名，要发送的数据
+func (c *ChatMap) SendMany(accountIDs []int64, event string, args ...interface{}) {
+	for _, accountID := range accountIDs {
+		cm, ok := c.m.Load(accountID)
+		if !ok { // 不存在该 accountID
+			return
+		}
+		cm.(*ConnMap).m.Range(func(key, value interface{}) bool { // 遍历所有键值对
+			activeConn := value.(*ActiveConn)
+			activeConn.activeTime = time.Now() // 每次有消息发送，就重新计时
+			activeConn.s.Emit(event, args...)  // 向指定客户端发送信息
+			return true
+		})
+	}
+}

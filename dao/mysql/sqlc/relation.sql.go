@@ -11,7 +11,7 @@ import (
 )
 
 const createFriendRelation = `-- name: CreateFriendRelation :exec
-insert into relations(relation_type,account1_id,account2_id)
+insert into relations (relation_type,account1_id,account2_id)
 value ('friend',?,?)
 `
 
@@ -42,13 +42,24 @@ func (q *Queries) CreateGroupRelation(ctx context.Context, arg *CreateGroupRelat
 }
 
 const createRelationReturn = `-- name: CreateRelationReturn :one
+
 select id
 from relations
-where last_insert_id()
+where account1_id = ?
+and account2_id = ?
 `
 
-func (q *Queries) CreateRelationReturn(ctx context.Context) (int64, error) {
-	row := q.queryRow(ctx, q.createRelationReturnStmt, createRelationReturn)
+type CreateRelationReturnParams struct {
+	Account1ID sql.NullInt64
+	Account2ID sql.NullInt64
+}
+
+// -- name: CreateRelationReturn :one
+// select id
+// from relations
+// where last_insert_id();
+func (q *Queries) CreateRelationReturn(ctx context.Context, arg *CreateRelationReturnParams) (int64, error) {
+	row := q.queryRow(ctx, q.createRelationReturnStmt, createRelationReturn, arg.Account1ID, arg.Account2ID)
 	var id int64
 	err := row.Scan(&id)
 	return id, err

@@ -6,7 +6,7 @@ import (
 	"ChatRoom001/model"
 	"ChatRoom001/model/chat/client"
 	"ChatRoom001/model/common"
-	"fmt"
+	"encoding/base64"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	socketio "github.com/googollee/go-socket.io"
 )
@@ -15,18 +15,24 @@ type message struct {
 }
 
 func (message) SendMsg(s socketio.Conn, msg string) string {
-	fmt.Println("send msg:", msg)
+	//fmt.Println("send msg:", msg)
 	token, ok := CheckAuth(s)
-	fmt.Println("token in sendmsgh:", token)
+	//fmt.Println("token in sendmsgh:", token)
 	if !ok {
 		return ""
 	}
 	param := new(client.HandleSendMsgParams)
 	if err := common.Decode(msg, param); err != nil {
-		fmt.Println("token in sendmsgh:", err)
+		//fmt.Println("token in sendmsgh 参数错误:", err)
 		return common.NewState(errcode.ErrParamsNotValid.WithDetails(err.Error())).MustJson()
 	}
-	fmt.Println("token in sendmsgh yes:")
+	temp, err := base64.StdEncoding.DecodeString(param.MsgContent)
+	//fmt.Println(string(temp))
+	if err != nil {
+		return err.Error()
+	}
+	param.MsgContent = string(temp)
+	//fmt.Println("token in sendmsgh yes:")
 	ctx, cancel := global.DefaultContextWithTimeout()
 	defer cancel()
 	result, myErr := chat.Group.Message.SendMsg(ctx, &model.HandleSendMsg{

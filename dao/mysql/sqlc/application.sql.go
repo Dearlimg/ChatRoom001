@@ -97,7 +97,7 @@ const getApplicationByID = `-- name: GetApplicationByID :one
 select account1_id, account2_id, apply_msg, refuse_msg, status, create_at, update_at
 from applications
 where account1_id = ?
-  or account2_id = ?
+  and account2_id = ?
 limit  1
 `
 

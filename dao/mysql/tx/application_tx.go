@@ -60,8 +60,10 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 			})
 			return err
 		})
-		//fmt.Println("AcceptApplicationTx is hrr 2", err)
-		relationID, err = queries.CreateRelationReturn(ctx)
+		relationID, err = queries.CreateRelationReturn(ctx, &db.CreateRelationReturnParams{
+			Account1ID: tempid1,
+			Account2ID: tempid2,
+		})
 		// 建立双方关系
 		err = tool.DoThat(err, func() error {
 			return queries.CreateSetting(ctx, &db.CreateSettingParams{

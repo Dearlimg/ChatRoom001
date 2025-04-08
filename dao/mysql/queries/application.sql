@@ -32,7 +32,7 @@ where account1_id = ?
 select *
 from applications
 where account1_id = ?
-  or account2_id = ?
+  and account2_id = ?
 limit  1;
 
 -- name: UpdateApplication :exec

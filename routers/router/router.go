@@ -27,6 +27,7 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 				"msg0": "haha",
 				"msg1": "what can i say",
 				"msg2": "manba out",
+				"msg3": " 孩子们,这并不好笑.",
 			})
 		})
 		rg := routers.Routers

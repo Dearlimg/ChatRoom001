@@ -3,10 +3,18 @@ package logic
 import (
 	"ChatRoom001/global"
 	"ChatRoom001/model"
+	"ChatRoom001/pkg/retry"
 	"github.com/Dearlimg/Goutils/pkg/token"
 	"github.com/gin-gonic/gin"
 	"time"
 )
+
+func reTry(name string, f func() error) {
+	go func() {
+		report := <-retry.NewTry(name, f, global.PublicSetting.Auto.Retry.Duration, global.PublicSetting.Auto.Retry.MaxTimes).Run()
+		global.Logger.Error(report.Error())
+	}()
+}
 
 func newAccountToken(t model.TokenType, id int64) (string, *token.Payload, error) {
 	if t != model.AccountToken {
