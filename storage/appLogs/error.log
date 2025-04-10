@@ -1410,3 +1410,592 @@
 2025-04-08T14:06:38.686+0800	ERROR	logic/setting.go:27	invalid connection
 2025-04-08T14:07:04.607+0800	ERROR	chat/handle.go:45	连接错误 | ID=1n | 错误=read: timeout
 2025-04-08T14:14:39.248+0800	ERROR	chat/handle.go:45	连接错误 | ID=1o | 错误=read: timeout
+2025-04-08T18:28:28.939+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T18:28:35.760+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=write: timeout
+2025-04-08T18:29:07.536+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=write: timeout
+2025-04-08T18:29:21.067+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-08T18:30:42.985+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-08T18:30:44.357+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T18:32:23.197+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=write: timeout
+2025-04-08T18:32:48.873+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=write: timeout
+2025-04-08T18:33:17.264+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=write: timeout
+2025-04-08T18:33:48.817+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=read: timeout
+2025-04-08T18:34:04.618+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=read: timeout
+2025-04-08T18:34:43.698+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=write: timeout
+2025-04-08T18:35:38.173+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=read: timeout
+2025-04-08T18:35:43.145+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=write: timeout
+2025-04-08T18:35:51.824+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=write: timeout
+2025-04-08T18:36:04.886+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=write: timeout
+2025-04-08T18:37:10.385+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=read: timeout
+2025-04-08T18:43:54.934+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=read: timeout
+2025-04-08T18:49:48.420+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=write: timeout
+2025-04-08T18:50:25.022+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T18:52:47.462+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-08T18:53:28.329+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-08T18:55:07.470+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=read: timeout
+2025-04-08T18:56:18.585+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T18:56:20.589+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-08T18:56:20.589+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=write: timeout
+2025-04-08T18:56:40.645+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=write: timeout
+2025-04-08T18:57:08.116+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=read: timeout
+2025-04-08T18:57:10.699+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=read: timeout
+2025-04-08T18:57:13.784+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=read: timeout
+2025-04-08T18:57:18.097+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=read: timeout
+2025-04-08T18:57:20.826+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=read: timeout
+2025-04-08T18:57:40.649+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T18:57:40.649+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T18:57:40.654+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-08T18:57:40.654+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=read: timeout
+2025-04-08T18:57:40.656+0800	ERROR	chat/handle.go:45	连接错误 | ID=l | 错误=read: timeout
+2025-04-08T18:58:40.660+0800	ERROR	chat/handle.go:45	连接错误 | ID=m | 错误=read: timeout
+2025-04-08T18:58:40.938+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=write: timeout
+2025-04-08T18:59:40.942+0800	ERROR	chat/handle.go:45	连接错误 | ID=q | 错误=read: timeout
+2025-04-08T18:59:40.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=s | 错误=write: timeout
+2025-04-08T18:59:40.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=r | 错误=read: timeout
+2025-04-08T18:59:40.948+0800	ERROR	chat/handle.go:45	连接错误 | ID=u | 错误=read: timeout
+2025-04-08T18:59:40.948+0800	ERROR	chat/handle.go:45	连接错误 | ID=t | 错误=write: timeout
+2025-04-08T19:00:31.605+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=write: timeout
+2025-04-08T19:00:40.968+0800	ERROR	chat/handle.go:45	连接错误 | ID=w | 错误=read: timeout
+2025-04-08T19:00:40.968+0800	ERROR	chat/handle.go:45	连接错误 | ID=v | 错误=write: timeout
+2025-04-08T19:00:42.947+0800	ERROR	chat/handle.go:45	连接错误 | ID=1b | 错误=write: timeout
+2025-04-08T19:00:42.947+0800	ERROR	chat/handle.go:45	连接错误 | ID=1a | 错误=read: timeout
+2025-04-08T19:00:42.947+0800	ERROR	chat/handle.go:45	连接错误 | ID=19 | 错误=write: timeout
+2025-04-08T19:00:42.948+0800	ERROR	chat/handle.go:45	连接错误 | ID=1c | 错误=read: timeout
+2025-04-08T19:00:48.201+0800	ERROR	chat/handle.go:45	连接错误 | ID=1e | 错误=write: timeout
+2025-04-08T19:01:21.606+0800	ERROR	chat/handle.go:45	连接错误 | ID=14 | 错误=write: timeout
+2025-04-08T19:01:21.613+0800	ERROR	chat/handle.go:45	连接错误 | ID=16 | 错误=read: timeout
+2025-04-08T19:01:21.613+0800	ERROR	chat/handle.go:45	连接错误 | ID=15 | 错误=read: timeout
+2025-04-08T19:01:40.977+0800	ERROR	chat/handle.go:45	连接错误 | ID=18 | 错误=write: timeout
+2025-04-08T19:01:40.977+0800	ERROR	chat/handle.go:45	连接错误 | ID=1l | 错误=read: timeout
+2025-04-08T19:01:40.979+0800	ERROR	chat/handle.go:45	连接错误 | ID=1m | 错误=read: timeout
+2025-04-08T19:01:40.979+0800	ERROR	chat/handle.go:45	连接错误 | ID=1n | 错误=write: timeout
+2025-04-08T19:02:21.634+0800	ERROR	chat/handle.go:45	连接错误 | ID=17 | 错误=write: timeout
+2025-04-08T19:02:21.637+0800	ERROR	chat/handle.go:45	连接错误 | ID=1d | 错误=read: timeout
+2025-04-08T19:02:21.639+0800	ERROR	chat/handle.go:45	连接错误 | ID=1s | 错误=write: timeout
+2025-04-08T19:02:21.660+0800	ERROR	chat/handle.go:45	连接错误 | ID=1g | 错误=read: timeout
+2025-04-08T19:02:23.599+0800	ERROR	chat/handle.go:45	连接错误 | ID=1u | 错误=write: timeout
+2025-04-08T19:02:23.610+0800	ERROR	chat/handle.go:45	连接错误 | ID=1v | 错误=write: timeout
+2025-04-08T19:02:40.984+0800	ERROR	chat/handle.go:45	连接错误 | ID=1o | 错误=read: timeout
+2025-04-08T19:02:40.984+0800	ERROR	chat/handle.go:45	连接错误 | ID=1p | 错误=read: timeout
+2025-04-08T19:02:40.985+0800	ERROR	chat/handle.go:45	连接错误 | ID=20 | 错误=read: timeout
+2025-04-08T19:02:40.985+0800	ERROR	chat/handle.go:45	连接错误 | ID=21 | 错误=read: timeout
+2025-04-08T19:02:40.986+0800	ERROR	chat/handle.go:45	连接错误 | ID=22 | 错误=read: timeout
+2025-04-08T19:02:40.986+0800	ERROR	chat/handle.go:45	连接错误 | ID=23 | 错误=read: timeout
+2025-04-08T19:02:54.607+0800	ERROR	chat/handle.go:45	连接错误 | ID=1h | 错误=read: timeout
+2025-04-08T19:02:55.616+0800	ERROR	chat/handle.go:45	连接错误 | ID=1f | 错误=read: timeout
+2025-04-08T19:02:59.610+0800	ERROR	chat/handle.go:45	连接错误 | ID=1i | 错误=read: timeout
+2025-04-08T19:03:21.678+0800	ERROR	chat/handle.go:45	连接错误 | ID=1t | 错误=read: timeout
+2025-04-08T19:04:09.638+0800	ERROR	chat/handle.go:45	连接错误 | ID=25 | 错误=read: timeout
+2025-04-08T19:05:56.959+0800	ERROR	chat/handle.go:45	连接错误 | ID=24 | 错误=read: timeout
+2025-04-08T19:06:03.054+0800	ERROR	chat/handle.go:45	连接错误 | ID=28 | 错误=write: timeout
+2025-04-08T19:06:56.966+0800	ERROR	chat/handle.go:45	连接错误 | ID=27 | 错误=read: timeout
+2025-04-08T19:06:56.967+0800	ERROR	chat/handle.go:45	连接错误 | ID=29 | 错误=write: timeout
+2025-04-08T19:06:56.967+0800	ERROR	chat/handle.go:45	连接错误 | ID=2c | 错误=read: timeout
+2025-04-08T19:06:56.969+0800	ERROR	chat/handle.go:45	连接错误 | ID=2e | 错误=write: timeout
+2025-04-08T19:06:56.972+0800	ERROR	chat/handle.go:45	连接错误 | ID=2n | 错误=write: timeout
+2025-04-08T19:06:56.972+0800	ERROR	chat/handle.go:45	连接错误 | ID=2o | 错误=write: timeout
+2025-04-08T19:07:03.089+0800	ERROR	chat/handle.go:45	连接错误 | ID=2a | 错误=read: timeout
+2025-04-08T19:07:03.098+0800	ERROR	chat/handle.go:45	连接错误 | ID=2b | 错误=read: timeout
+2025-04-08T19:07:03.101+0800	ERROR	chat/handle.go:45	连接错误 | ID=26 | 错误=read: timeout
+2025-04-08T19:07:03.107+0800	ERROR	chat/handle.go:45	连接错误 | ID=2d | 错误=read: timeout
+2025-04-08T19:07:16.199+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-08T19:07:17.182+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-08T19:07:17.198+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-08T19:07:57.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=39 | 错误=write: timeout
+2025-04-08T19:07:57.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=3a | 错误=write: timeout
+2025-04-08T19:07:57.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=3b | 错误=write: timeout
+2025-04-08T19:08:57.963+0800	ERROR	chat/handle.go:45	连接错误 | ID=3c | 错误=write: timeout
+2025-04-08T19:08:57.965+0800	ERROR	chat/handle.go:45	连接错误 | ID=3e | 错误=write: timeout
+2025-04-08T19:08:57.965+0800	ERROR	chat/handle.go:45	连接错误 | ID=3d | 错误=write: timeout
+2025-04-08T19:08:57.967+0800	ERROR	chat/handle.go:45	连接错误 | ID=3f | 错误=read: timeout
+2025-04-08T19:08:57.972+0800	ERROR	chat/handle.go:45	连接错误 | ID=3x | 错误=write: timeout
+2025-04-08T19:08:57.972+0800	ERROR	chat/handle.go:45	连接错误 | ID=3v | 错误=read: timeout
+2025-04-08T19:08:57.972+0800	ERROR	chat/handle.go:45	连接错误 | ID=3w | 错误=write: timeout
+2025-04-08T19:09:06.160+0800	ERROR	chat/handle.go:45	连接错误 | ID=3g | 错误=read: timeout
+2025-04-08T19:09:07.827+0800	ERROR	chat/handle.go:45	连接错误 | ID=3h | 错误=read: timeout
+2025-04-08T19:09:14.241+0800	ERROR	chat/handle.go:45	连接错误 | ID=3j | 错误=read: timeout
+2025-04-08T19:09:17.207+0800	ERROR	chat/handle.go:45	连接错误 | ID=2y | 错误=read: timeout
+2025-04-08T19:09:22.839+0800	ERROR	chat/handle.go:45	连接错误 | ID=3i | 错误=read: timeout
+2025-04-08T19:09:57.985+0800	ERROR	chat/handle.go:45	连接错误 | ID=48 | 错误=read: timeout
+2025-04-08T19:09:57.985+0800	ERROR	chat/handle.go:45	连接错误 | ID=47 | 错误=write: timeout
+2025-04-08T19:09:57.991+0800	ERROR	chat/handle.go:45	连接错误 | ID=4b | 错误=read: timeout
+2025-04-08T19:09:57.991+0800	ERROR	chat/handle.go:45	连接错误 | ID=4a | 错误=read: timeout
+2025-04-08T19:09:57.991+0800	ERROR	chat/handle.go:45	连接错误 | ID=49 | 错误=write: timeout
+2025-04-08T19:09:58.944+0800	ERROR	chat/handle.go:45	连接错误 | ID=4c | 错误=write: timeout
+2025-04-08T19:09:58.945+0800	ERROR	chat/handle.go:45	连接错误 | ID=4d | 错误=write: timeout
+2025-04-08T19:10:58.018+0800	ERROR	chat/handle.go:45	连接错误 | ID=4t | 错误=read: timeout
+2025-04-08T19:10:58.018+0800	ERROR	chat/handle.go:45	连接错误 | ID=4s | 错误=write: timeout
+2025-04-08T19:10:58.018+0800	ERROR	chat/handle.go:45	连接错误 | ID=4u | 错误=read: timeout
+2025-04-08T19:11:58.039+0800	ERROR	chat/handle.go:45	连接错误 | ID=4f | 错误=write: timeout
+2025-04-08T19:11:58.039+0800	ERROR	chat/handle.go:45	连接错误 | ID=4e | 错误=read: timeout
+2025-04-08T19:11:58.040+0800	ERROR	chat/handle.go:45	连接错误 | ID=4v | 错误=read: timeout
+2025-04-08T19:11:58.041+0800	ERROR	chat/handle.go:45	连接错误 | ID=4w | 错误=read: timeout
+2025-04-08T19:11:58.046+0800	ERROR	chat/handle.go:45	连接错误 | ID=5b | 错误=read: timeout
+2025-04-08T19:11:58.048+0800	ERROR	chat/handle.go:45	连接错误 | ID=5c | 错误=read: timeout
+2025-04-08T19:12:09.169+0800	ERROR	chat/handle.go:45	连接错误 | ID=3z | 错误=write: timeout
+2025-04-08T19:12:30.869+0800	ERROR	chat/handle.go:45	连接错误 | ID=5d | 错误=write: timeout
+2025-04-08T19:12:39.800+0800	ERROR	chat/handle.go:45	连接错误 | ID=5e | 错误=read: timeout
+2025-04-08T19:12:58.056+0800	ERROR	chat/handle.go:45	连接错误 | ID=5m | 错误=write: timeout
+2025-04-08T19:12:58.059+0800	ERROR	chat/handle.go:45	连接错误 | ID=5n | 错误=read: timeout
+2025-04-08T19:12:58.059+0800	ERROR	chat/handle.go:45	连接错误 | ID=5o | 错误=write: timeout
+2025-04-08T19:12:58.061+0800	ERROR	chat/handle.go:45	连接错误 | ID=5p | 错误=read: timeout
+2025-04-08T19:12:58.061+0800	ERROR	chat/handle.go:45	连接错误 | ID=5q | 错误=read: timeout
+2025-04-08T19:13:51.632+0800	ERROR	chat/handle.go:45	连接错误 | ID=5f | 错误=read: timeout
+2025-04-08T19:13:58.077+0800	ERROR	chat/handle.go:45	连接错误 | ID=68 | 错误=write: timeout
+2025-04-08T19:13:58.081+0800	ERROR	chat/handle.go:45	连接错误 | ID=6a | 错误=read: timeout
+2025-04-08T19:13:58.081+0800	ERROR	chat/handle.go:45	连接错误 | ID=69 | 错误=read: timeout
+2025-04-08T19:14:58.087+0800	ERROR	chat/handle.go:45	连接错误 | ID=5r | 错误=read: timeout
+2025-04-08T19:14:58.088+0800	ERROR	chat/handle.go:45	连接错误 | ID=5s | 错误=read: timeout
+2025-04-08T19:14:58.088+0800	ERROR	chat/handle.go:45	连接错误 | ID=5t | 错误=read: timeout
+2025-04-08T19:14:58.090+0800	ERROR	chat/handle.go:45	连接错误 | ID=6m | 错误=write: timeout
+2025-04-08T19:14:58.094+0800	ERROR	chat/handle.go:45	连接错误 | ID=6n | 错误=write: timeout
+2025-04-08T19:14:58.094+0800	ERROR	chat/handle.go:45	连接错误 | ID=6o | 错误=write: timeout
+2025-04-08T19:14:58.095+0800	ERROR	chat/handle.go:45	连接错误 | ID=6r | 错误=read: timeout
+2025-04-08T19:14:58.095+0800	ERROR	chat/handle.go:45	连接错误 | ID=6q | 错误=write: timeout
+2025-04-08T19:14:58.095+0800	ERROR	chat/handle.go:45	连接错误 | ID=6p | 错误=write: timeout
+2025-04-08T19:14:58.095+0800	ERROR	chat/handle.go:45	连接错误 | ID=6s | 错误=write: timeout
+2025-04-08T19:15:01.624+0800	ERROR	chat/handle.go:45	连接错误 | ID=6b | 错误=write: timeout
+2025-04-08T19:15:35.278+0800	ERROR	chat/handle.go:45	连接错误 | ID=6t | 错误=write: timeout
+2025-04-08T19:15:58.107+0800	ERROR	chat/handle.go:45	连接错误 | ID=72 | 错误=read: timeout
+2025-04-08T19:15:58.107+0800	ERROR	chat/handle.go:45	连接错误 | ID=71 | 错误=write: timeout
+2025-04-08T19:15:58.108+0800	ERROR	chat/handle.go:45	连接错误 | ID=73 | 错误=read: timeout
+2025-04-08T19:15:58.111+0800	ERROR	chat/handle.go:45	连接错误 | ID=74 | 错误=read: timeout
+2025-04-08T19:15:58.112+0800	ERROR	chat/handle.go:45	连接错误 | ID=75 | 错误=read: timeout
+2025-04-08T19:16:58.128+0800	ERROR	chat/handle.go:45	连接错误 | ID=7q | 错误=read: timeout
+2025-04-08T19:16:58.128+0800	ERROR	chat/handle.go:45	连接错误 | ID=7p | 错误=read: timeout
+2025-04-08T19:16:58.129+0800	ERROR	chat/handle.go:45	连接错误 | ID=7r | 错误=read: timeout
+2025-04-08T19:16:58.950+0800	ERROR	chat/handle.go:45	连接错误 | ID=7s | 错误=write: timeout
+2025-04-08T19:16:58.950+0800	ERROR	chat/handle.go:45	连接错误 | ID=7t | 错误=write: timeout
+2025-04-08T19:16:58.951+0800	ERROR	chat/handle.go:45	连接错误 | ID=7u | 错误=write: timeout
+2025-04-08T19:17:58.137+0800	ERROR	chat/handle.go:45	连接错误 | ID=76 | 错误=read: timeout
+2025-04-08T19:17:58.139+0800	ERROR	chat/handle.go:45	连接错误 | ID=7z | 错误=read: timeout
+2025-04-08T19:17:58.139+0800	ERROR	chat/handle.go:45	连接错误 | ID=80 | 错误=write: timeout
+2025-04-08T19:17:58.140+0800	ERROR	chat/handle.go:45	连接错误 | ID=81 | 错误=read: timeout
+2025-04-08T19:17:58.141+0800	ERROR	chat/handle.go:45	连接错误 | ID=82 | 错误=read: timeout
+2025-04-08T19:17:58.141+0800	ERROR	chat/handle.go:45	连接错误 | ID=84 | 错误=write: timeout
+2025-04-08T19:17:58.141+0800	ERROR	chat/handle.go:45	连接错误 | ID=83 | 错误=read: timeout
+2025-04-08T19:17:58.143+0800	ERROR	chat/handle.go:45	连接错误 | ID=85 | 错误=write: timeout
+2025-04-08T19:17:58.143+0800	ERROR	chat/handle.go:45	连接错误 | ID=86 | 错误=write: timeout
+2025-04-08T19:17:58.144+0800	ERROR	chat/handle.go:45	连接错误 | ID=87 | 错误=write: timeout
+2025-04-08T19:18:58.157+0800	ERROR	chat/handle.go:45	连接错误 | ID=88 | 错误=read: timeout
+2025-04-08T19:18:58.158+0800	ERROR	chat/handle.go:45	连接错误 | ID=89 | 错误=write: timeout
+2025-04-08T19:18:58.161+0800	ERROR	chat/handle.go:45	连接错误 | ID=8j | 错误=read: timeout
+2025-04-08T19:18:58.161+0800	ERROR	chat/handle.go:45	连接错误 | ID=8i | 错误=write: timeout
+2025-04-08T19:19:58.177+0800	ERROR	chat/handle.go:45	连接错误 | ID=91 | 错误=read: timeout
+2025-04-08T19:19:58.179+0800	ERROR	chat/handle.go:45	连接错误 | ID=94 | 错误=read: timeout
+2025-04-08T19:19:58.179+0800	ERROR	chat/handle.go:45	连接错误 | ID=93 | 错误=write: timeout
+2025-04-08T19:19:58.179+0800	ERROR	chat/handle.go:45	连接错误 | ID=92 | 错误=read: timeout
+2025-04-08T19:19:58.198+0800	ERROR	chat/handle.go:45	连接错误 | ID=8k | 错误=write: timeout
+2025-04-08T19:19:58.199+0800	ERROR	chat/handle.go:45	连接错误 | ID=8l | 错误=read: timeout
+2025-04-08T19:19:58.200+0800	ERROR	chat/handle.go:45	连接错误 | ID=8m | 错误=read: timeout
+2025-04-08T19:19:58.941+0800	ERROR	chat/handle.go:45	连接错误 | ID=6u | 错误=read: timeout
+2025-04-08T19:21:10.686+0800	ERROR	chat/handle.go:45	连接错误 | ID=95 | 错误=read: timeout
+2025-04-08T19:21:52.659+0800	ERROR	chat/handle.go:45	连接错误 | ID=96 | 错误=write: timeout
+2025-04-08T19:22:25.099+0800	ERROR	chat/handle.go:45	连接错误 | ID=97 | 错误=write: timeout
+2025-04-08T19:22:59.042+0800	ERROR	chat/handle.go:45	连接错误 | ID=9g | 错误=read: timeout
+2025-04-08T19:23:28.643+0800	ERROR	chat/handle.go:45	连接错误 | ID=9h | 错误=write: timeout
+2025-04-08T19:23:50.657+0800	ERROR	chat/handle.go:45	连接错误 | ID=9i | 错误=write: timeout
+2025-04-08T19:23:58.855+0800	ERROR	chat/handle.go:45	连接错误 | ID=98 | 错误=write: timeout
+2025-04-08T19:32:43.680+0800	ERROR	chat/handle.go:45	连接错误 | ID=9j | 错误=write: timeout
+2025-04-08T19:39:13.824+0800	ERROR	chat/handle.go:45	连接错误 | ID=9l | 错误=write: timeout
+2025-04-08T19:40:07.155+0800	ERROR	chat/handle.go:45	连接错误 | ID=9m | 错误=read: timeout
+2025-04-08T19:40:31.721+0800	ERROR	chat/handle.go:45	连接错误 | ID=9k | 错误=write: timeout
+2025-04-08T19:41:07.696+0800	ERROR	chat/handle.go:45	连接错误 | ID=9o | 错误=read: timeout
+2025-04-08T19:41:23.089+0800	ERROR	chat/handle.go:45	连接错误 | ID=9n | 错误=read: timeout
+2025-04-08T19:41:45.639+0800	ERROR	chat/handle.go:45	连接错误 | ID=9p | 错误=write: timeout
+2025-04-08T19:41:46.565+0800	ERROR	chat/handle.go:45	连接错误 | ID=9q | 错误=read: timeout
+2025-04-08T19:42:30.868+0800	ERROR	chat/handle.go:45	连接错误 | ID=9s | 错误=read: timeout
+2025-04-08T19:42:49.232+0800	ERROR	chat/handle.go:45	连接错误 | ID=9t | 错误=read: timeout
+2025-04-08T19:42:50.719+0800	ERROR	chat/handle.go:45	连接错误 | ID=9r | 错误=write: timeout
+2025-04-08T19:43:01.016+0800	ERROR	chat/handle.go:45	连接错误 | ID=9v | 错误=read: timeout
+2025-04-08T19:43:11.316+0800	ERROR	chat/handle.go:45	连接错误 | ID=9w | 错误=read: timeout
+2025-04-08T19:43:26.888+0800	ERROR	chat/handle.go:45	连接错误 | ID=9x | 错误=write: timeout
+2025-04-08T19:43:30.496+0800	ERROR	chat/handle.go:45	连接错误 | ID=9y | 错误=read: timeout
+2025-04-08T19:43:39.736+0800	ERROR	chat/handle.go:45	连接错误 | ID=9u | 错误=read: timeout
+2025-04-08T19:43:45.812+0800	ERROR	chat/handle.go:45	连接错误 | ID=9z | 错误=read: timeout
+2025-04-08T19:43:47.145+0800	ERROR	chat/handle.go:45	连接错误 | ID=a0 | 错误=read: timeout
+2025-04-08T19:43:50.652+0800	ERROR	chat/handle.go:45	连接错误 | ID=a1 | 错误=read: timeout
+2025-04-08T19:44:21.720+0800	ERROR	chat/handle.go:45	连接错误 | ID=a2 | 错误=read: timeout
+2025-04-08T19:44:22.497+0800	ERROR	chat/handle.go:45	连接错误 | ID=a3 | 错误=write: timeout
+2025-04-08T19:44:27.178+0800	ERROR	chat/handle.go:45	连接错误 | ID=a4 | 错误=read: timeout
+2025-04-08T19:44:28.393+0800	ERROR	chat/handle.go:45	连接错误 | ID=a5 | 错误=read: timeout
+2025-04-08T19:44:42.337+0800	ERROR	chat/handle.go:45	连接错误 | ID=a6 | 错误=read: timeout
+2025-04-08T19:44:43.137+0800	ERROR	chat/handle.go:45	连接错误 | ID=a7 | 错误=write: timeout
+2025-04-08T19:44:55.101+0800	ERROR	chat/handle.go:45	连接错误 | ID=a9 | 错误=write: timeout
+2025-04-08T19:45:14.250+0800	ERROR	chat/handle.go:45	连接错误 | ID=a8 | 错误=read: timeout
+2025-04-08T19:45:18.155+0800	ERROR	chat/handle.go:45	连接错误 | ID=aa | 错误=read: timeout
+2025-04-08T19:45:24.268+0800	ERROR	chat/handle.go:45	连接错误 | ID=ab | 错误=read: timeout
+2025-04-08T19:45:28.312+0800	ERROR	chat/handle.go:45	连接错误 | ID=ac | 错误=write: timeout
+2025-04-08T19:45:44.358+0800	ERROR	chat/handle.go:45	连接错误 | ID=ae | 错误=write: timeout
+2025-04-08T19:46:43.712+0800	ERROR	chat/handle.go:45	连接错误 | ID=ad | 错误=read: timeout
+2025-04-08T19:48:04.714+0800	ERROR	chat/handle.go:45	连接错误 | ID=ag | 错误=read: timeout
+2025-04-08T19:49:53.728+0800	ERROR	chat/handle.go:45	连接错误 | ID=ah | 错误=write: timeout
+2025-04-08T19:51:00.741+0800	ERROR	chat/handle.go:45	连接错误 | ID=af | 错误=write: timeout
+2025-04-08T19:51:12.726+0800	ERROR	chat/handle.go:45	连接错误 | ID=ai | 错误=write: timeout
+2025-04-08T19:51:26.375+0800	ERROR	chat/handle.go:45	连接错误 | ID=aj | 错误=read: timeout
+2025-04-08T19:54:16.793+0800	ERROR	chat/handle.go:45	连接错误 | ID=al | 错误=read: timeout
+2025-04-08T19:54:20.073+0800	ERROR	chat/handle.go:45	连接错误 | ID=am | 错误=read: timeout
+2025-04-08T19:54:23.619+0800	ERROR	chat/handle.go:45	连接错误 | ID=an | 错误=read: timeout
+2025-04-08T19:54:37.744+0800	ERROR	chat/handle.go:45	连接错误 | ID=ak | 错误=write: timeout
+2025-04-08T19:55:05.400+0800	ERROR	chat/handle.go:45	连接错误 | ID=ap | 错误=read: timeout
+2025-04-08T20:00:06.741+0800	ERROR	chat/handle.go:45	连接错误 | ID=aq | 错误=write: timeout
+2025-04-08T20:00:15.598+0800	ERROR	chat/handle.go:45	连接错误 | ID=ar | 错误=read: timeout
+2025-04-08T20:00:40.809+0800	ERROR	chat/handle.go:45	连接错误 | ID=as | 错误=write: timeout
+2025-04-08T20:00:42.782+0800	ERROR	chat/handle.go:45	连接错误 | ID=at | 错误=write: timeout
+2025-04-08T20:01:17.569+0800	ERROR	chat/handle.go:45	连接错误 | ID=ao | 错误=write: timeout
+2025-04-08T20:01:46.356+0800	ERROR	chat/handle.go:45	连接错误 | ID=av | 错误=read: timeout
+2025-04-08T20:01:54.330+0800	ERROR	chat/handle.go:45	连接错误 | ID=au | 错误=write: timeout
+2025-04-08T20:02:25.755+0800	ERROR	chat/handle.go:45	连接错误 | ID=ax | 错误=read: timeout
+2025-04-08T20:03:21.315+0800	ERROR	chat/handle.go:45	连接错误 | ID=aw | 错误=write: timeout
+2025-04-08T20:03:33.883+0800	ERROR	chat/handle.go:45	连接错误 | ID=ay | 错误=read: timeout
+2025-04-08T20:03:34.429+0800	ERROR	chat/handle.go:45	连接错误 | ID=az | 错误=read: timeout
+2025-04-08T20:04:58.699+0800	ERROR	chat/handle.go:45	连接错误 | ID=b0 | 错误=read: timeout
+2025-04-08T20:05:02.222+0800	ERROR	chat/handle.go:45	连接错误 | ID=b1 | 错误=read: timeout
+2025-04-08T20:07:34.532+0800	ERROR	chat/handle.go:45	连接错误 | ID=b3 | 错误=read: timeout
+2025-04-08T20:11:44.105+0800	ERROR	chat/handle.go:45	连接错误 | ID=b2 | 错误=read: timeout
+2025-04-08T20:11:49.995+0800	ERROR	chat/handle.go:45	连接错误 | ID=b4 | 错误=read: timeout
+2025-04-08T20:12:44.829+0800	ERROR	chat/handle.go:45	连接错误 | ID=b5 | 错误=read: timeout
+2025-04-08T20:12:46.042+0800	ERROR	chat/handle.go:45	连接错误 | ID=b6 | 错误=write: timeout
+2025-04-08T20:13:40.281+0800	ERROR	chat/handle.go:45	连接错误 | ID=b8 | 错误=read: timeout
+2025-04-08T20:14:40.619+0800	ERROR	chat/handle.go:45	连接错误 | ID=b9 | 错误=read: timeout
+2025-04-08T20:15:05.509+0800	ERROR	chat/handle.go:45	连接错误 | ID=ba | 错误=read: timeout
+2025-04-08T20:15:12.804+0800	ERROR	chat/handle.go:45	连接错误 | ID=bb | 错误=read: timeout
+2025-04-08T20:15:24.114+0800	ERROR	logic/setting.go:27	Error 1159 (08S01): Got timeout reading communication packets
+2025-04-08T20:16:00.205+0800	ERROR	chat/handle.go:45	连接错误 | ID=bd | 错误=read: timeout
+2025-04-08T20:17:12.746+0800	ERROR	chat/handle.go:45	连接错误 | ID=be | 错误=write: timeout
+2025-04-08T20:17:56.791+0800	ERROR	chat/handle.go:45	连接错误 | ID=bc | 错误=read: timeout
+2025-04-08T20:18:05.038+0800	ERROR	chat/handle.go:45	连接错误 | ID=bf | 错误=write: timeout
+2025-04-08T20:18:29.335+0800	ERROR	chat/handle.go:45	连接错误 | ID=bg | 错误=read: timeout
+2025-04-08T20:19:16.801+0800	ERROR	chat/handle.go:45	连接错误 | ID=bh | 错误=read: timeout
+2025-04-08T20:19:34.426+0800	ERROR	chat/handle.go:45	连接错误 | ID=bi | 错误=read: timeout
+2025-04-08T20:21:24.801+0800	ERROR	chat/handle.go:45	连接错误 | ID=bj | 错误=read: timeout
+2025-04-08T20:22:42.302+0800	ERROR	chat/handle.go:45	连接错误 | ID=bk | 错误=read: timeout
+2025-04-08T20:22:46.811+0800	ERROR	chat/handle.go:45	连接错误 | ID=b7 | 错误=read: timeout
+2025-04-08T20:23:16.456+0800	ERROR	chat/handle.go:45	连接错误 | ID=bm | 错误=read: timeout
+2025-04-08T20:23:27.558+0800	ERROR	chat/handle.go:45	连接错误 | ID=bl | 错误=read: timeout
+2025-04-08T20:23:29.173+0800	ERROR	chat/handle.go:45	连接错误 | ID=bn | 错误=write: timeout
+2025-04-08T20:24:31.014+0800	ERROR	chat/handle.go:45	连接错误 | ID=bo | 错误=write: timeout
+2025-04-08T20:24:34.211+0800	ERROR	chat/handle.go:45	连接错误 | ID=bp | 错误=read: timeout
+2025-04-08T20:24:39.926+0800	ERROR	chat/handle.go:45	连接错误 | ID=bq | 错误=read: timeout
+2025-04-08T20:25:04.787+0800	ERROR	chat/handle.go:45	连接错误 | ID=bs | 错误=write: timeout
+2025-04-08T20:25:21.244+0800	ERROR	chat/handle.go:45	连接错误 | ID=br | 错误=read: timeout
+2025-04-08T20:25:27.603+0800	ERROR	chat/handle.go:45	连接错误 | ID=bu | 错误=write: timeout
+2025-04-08T20:26:39.364+0800	ERROR	chat/handle.go:45	连接错误 | ID=bv | 错误=read: timeout
+2025-04-08T20:27:55.408+0800	ERROR	chat/handle.go:45	连接错误 | ID=bw | 错误=read: timeout
+2025-04-08T20:28:29.566+0800	ERROR	chat/handle.go:45	连接错误 | ID=bx | 错误=read: timeout
+2025-04-08T20:29:04.161+0800	ERROR	chat/handle.go:45	连接错误 | ID=by | 错误=read: timeout
+2025-04-08T20:29:31.556+0800	ERROR	chat/handle.go:45	连接错误 | ID=bz | 错误=write: timeout
+2025-04-08T20:29:37.751+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T20:31:54.476+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T20:32:39.698+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T20:32:53.823+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T20:33:49.835+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-08T20:34:23.969+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-08T20:35:06.285+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=write: timeout
+2025-04-08T20:35:33.280+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-08T20:36:57.558+0800	ERROR	logic/setting.go:27	context deadline exceeded
+2025-04-08T20:37:16.665+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-08T20:37:17.243+0800	ERROR	logic/setting.go:116	invalid connection	{"status": 200, "method": "GET", "path": "/api/setting/shows", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "body": ""}
+2025-04-08T20:37:21.470+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=read: timeout
+2025-04-08T20:37:24.410+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=read: timeout
+2025-04-08T20:37:40.695+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=write: timeout
+2025-04-08T20:37:58.881+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=write: timeout
+2025-04-08T20:38:03.370+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=write: timeout
+2025-04-08T20:38:24.603+0800	ERROR	chat/handle.go:45	连接错误 | ID=l | 错误=read: timeout
+2025-04-08T20:38:50.035+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=read: timeout
+2025-04-08T20:39:12.828+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=read: timeout
+2025-04-08T20:44:05.890+0800	ERROR	chat/handle.go:45	连接错误 | ID=o | 错误=read: timeout
+2025-04-08T20:44:55.860+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=read: timeout
+2025-04-08T20:46:42.866+0800	ERROR	chat/handle.go:45	连接错误 | ID=q | 错误=read: timeout
+2025-04-08T20:49:31.873+0800	ERROR	chat/handle.go:45	连接错误 | ID=r | 错误=read: timeout
+2025-04-08T20:49:45.938+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T20:50:49.868+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T20:54:22.882+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T20:54:57.617+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-08T20:55:45.875+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-08T20:56:32.157+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T20:57:18.109+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=write: timeout
+2025-04-08T20:57:24.729+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-08T20:58:21.067+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=read: timeout
+2025-04-08T20:58:31.883+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=write: timeout
+2025-04-08T20:58:49.296+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=read: timeout
+2025-04-08T20:58:54.433+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=write: timeout
+2025-04-08T20:58:55.170+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=write: timeout
+2025-04-08T20:59:19.285+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=write: timeout
+2025-04-08T20:59:24.207+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=read: timeout
+2025-04-08T20:59:30.043+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=write: timeout
+2025-04-08T21:00:06.899+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=write: timeout
+2025-04-08T21:03:22.916+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=read: timeout
+2025-04-08T21:03:31.689+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=read: timeout
+2025-04-08T21:03:47.523+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=write: timeout
+2025-04-08T21:04:27.604+0800	ERROR	chat/handle.go:45	连接错误 | ID=m | 错误=write: timeout
+2025-04-08T21:04:37.980+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=write: timeout
+2025-04-08T21:05:03.975+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=write: timeout
+2025-04-08T21:05:07.014+0800	ERROR	chat/handle.go:45	连接错误 | ID=o | 错误=write: timeout
+2025-04-08T21:05:36.144+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=write: timeout
+2025-04-08T21:05:40.413+0800	ERROR	chat/handle.go:45	连接错误 | ID=q | 错误=write: timeout
+2025-04-08T21:11:02.926+0800	ERROR	chat/handle.go:45	连接错误 | ID=10 | 错误=read: timeout
+2025-04-08T21:12:48.049+0800	ERROR	chat/handle.go:45	连接错误 | ID=2p | 错误=write: timeout
+2025-04-08T21:13:04.463+0800	ERROR	chat/handle.go:45	连接错误 | ID=3a | 错误=read: timeout
+2025-04-08T21:13:34.338+0800	ERROR	chat/handle.go:45	连接错误 | ID=3d | 错误=read: timeout
+2025-04-08T21:14:43.171+0800	ERROR	chat/handle.go:45	连接错误 | ID=3j | 错误=write: timeout
+2025-04-08T21:15:17.644+0800	ERROR	chat/handle.go:45	连接错误 | ID=3x | 错误=write: timeout
+2025-04-08T21:15:22.572+0800	ERROR	chat/handle.go:45	连接错误 | ID=43 | 错误=read: timeout
+2025-04-08T21:15:37.950+0800	ERROR	chat/handle.go:45	连接错误 | ID=11 | 错误=read: timeout
+2025-04-08T21:15:50.324+0800	ERROR	chat/handle.go:45	连接错误 | ID=4a | 错误=read: timeout
+2025-04-08T21:15:56.825+0800	ERROR	chat/handle.go:45	连接错误 | ID=46 | 错误=read: timeout
+2025-04-08T21:17:01.859+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:23:06.784+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:24:57.949+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T21:26:19.852+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:27:29.116+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:27:31.257+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=EOF
+2025-04-08T21:28:51.310+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T21:28:52.237+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T21:29:09.875+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=write: timeout
+2025-04-08T21:29:31.465+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=read: timeout
+2025-04-08T21:30:07.856+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=read: timeout
+2025-04-08T21:31:13.198+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-08T21:33:43.025+0800	ERROR	chat/handle.go:45	连接错误 | ID=15 | 错误=write: timeout
+2025-04-08T21:34:01.288+0800	ERROR	chat/handle.go:45	连接错误 | ID=1d | 错误=write: timeout
+2025-04-08T21:34:20.527+0800	ERROR	chat/handle.go:45	连接错误 | ID=1y | 错误=write: timeout
+2025-04-08T21:34:24.765+0800	ERROR	chat/handle.go:45	连接错误 | ID=20 | 错误=read: timeout
+2025-04-08T21:34:33.113+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:35:35.463+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-08T21:36:55.397+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T21:38:13.358+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=read: timeout
+2025-04-08T21:38:23.153+0800	ERROR	chat/handle.go:45	连接错误 | ID=11 | 错误=read: timeout
+2025-04-08T21:39:26.188+0800	ERROR	chat/handle.go:45	连接错误 | ID=13 | 错误=read: timeout
+2025-04-08T21:39:35.569+0800	ERROR	chat/handle.go:45	连接错误 | ID=1g | 错误=read: timeout
+2025-04-08T21:40:41.408+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:41:56.080+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=write: timeout
+2025-04-08T21:42:18.593+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-08T21:42:21.363+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=write: timeout
+2025-04-08T21:42:57.551+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=write: timeout
+2025-04-08T21:42:58.033+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T21:43:01.030+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T21:43:11.734+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-08T21:43:12.313+0800	ERROR	logic/setting.go:116	invalid connection	{"status": 200, "method": "GET", "path": "/api/setting/shows", "query": "", "ip": "192.168.3.86", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36", "body": ""}
+2025-04-08T21:43:33.716+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:43:37.308+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=EOF
+2025-04-08T21:44:37.906+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=write: timeout
+2025-04-08T21:45:19.764+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T21:46:05.020+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-08T21:46:21.558+0800	ERROR	chat/handle.go:45	连接错误 | ID=r | 错误=read: timeout
+2025-04-08T21:47:35.063+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=write: timeout
+2025-04-08T21:48:04.358+0800	ERROR	chat/handle.go:45	连接错误 | ID=17 | 错误=write: timeout
+2025-04-08T21:48:10.721+0800	ERROR	chat/handle.go:45	连接错误 | ID=t | 错误=read: timeout
+2025-04-08T21:48:10.757+0800	ERROR	chat/handle.go:45	连接错误 | ID=1d | 错误=write: timeout
+2025-04-08T21:48:12.162+0800	ERROR	chat/handle.go:45	连接错误 | ID=1f | 错误=read: timeout
+2025-04-08T21:48:30.948+0800	ERROR	chat/handle.go:45	连接错误 | ID=1j | 错误=read: timeout
+2025-04-08T21:48:32.070+0800	ERROR	chat/handle.go:45	连接错误 | ID=1k | 错误=write: timeout
+2025-04-08T21:48:37.884+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:50:15.865+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:52:06.834+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:53:28.078+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T21:57:41.051+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-08T21:58:12.034+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T21:59:28.155+0800	ERROR	chat/handle.go:45	连接错误 | ID=1s | 错误=read: timeout
+2025-04-08T22:00:02.063+0800	ERROR	chat/handle.go:45	连接错误 | ID=1j | 错误=read: timeout
+2025-04-08T22:00:21.269+0800	ERROR	chat/handle.go:45	连接错误 | ID=2d | 错误=write: timeout
+2025-04-08T22:00:23.869+0800	ERROR	chat/handle.go:45	连接错误 | ID=2j | 错误=write: timeout
+2025-04-08T22:00:24.674+0800	ERROR	chat/handle.go:45	连接错误 | ID=2q | 错误=write: timeout
+2025-04-08T22:00:26.910+0800	ERROR	chat/handle.go:45	连接错误 | ID=2r | 错误=read: timeout
+2025-04-08T22:02:00.184+0800	ERROR	chat/handle.go:45	连接错误 | ID=2w | 错误=write: timeout
+2025-04-08T22:02:01.858+0800	ERROR	chat/handle.go:45	连接错误 | ID=2x | 错误=write: timeout
+2025-04-08T22:02:08.027+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=write: timeout
+2025-04-08T22:02:18.686+0800	ERROR	chat/handle.go:45	连接错误 | ID=3r | 错误=read: timeout
+2025-04-08T22:02:37.254+0800	ERROR	chat/handle.go:45	连接错误 | ID=3v | 错误=read: timeout
+2025-04-08T22:02:37.930+0800	ERROR	chat/handle.go:45	连接错误 | ID=3q | 错误=write: timeout
+2025-04-08T22:03:00.714+0800	ERROR	chat/handle.go:45	连接错误 | ID=3x | 错误=read: timeout
+2025-04-08T22:03:04.485+0800	ERROR	chat/handle.go:45	连接错误 | ID=3y | 错误=write: timeout
+2025-04-08T22:03:50.435+0800	ERROR	chat/handle.go:45	连接错误 | ID=3n | 错误=read: timeout
+2025-04-08T22:03:52.419+0800	ERROR	chat/handle.go:45	连接错误 | ID=45 | 错误=read: timeout
+2025-04-08T22:04:07.425+0800	ERROR	chat/handle.go:45	连接错误 | ID=43 | 错误=write: timeout
+2025-04-08T22:04:27.110+0800	ERROR	chat/handle.go:45	连接错误 | ID=4g | 错误=write: timeout
+2025-04-08T22:04:28.134+0800	ERROR	chat/handle.go:45	连接错误 | ID=4h | 错误=write: timeout
+2025-04-08T22:07:19.417+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-08T22:10:00.314+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-08T22:10:23.058+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T22:10:39.071+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=write: timeout
+2025-04-08T22:11:58.534+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-08T22:12:15.831+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=read: timeout
+2025-04-08T22:13:04.677+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=read: timeout
+2025-04-08T22:13:16.683+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=write: timeout
+2025-04-08T22:13:59.970+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T22:14:16.023+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=read: timeout
+2025-04-08T22:14:37.926+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=write: timeout
+2025-04-08T22:14:51.462+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=write: timeout
+2025-04-08T22:14:56.712+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=write: timeout
+2025-04-08T22:15:08.023+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=write: timeout
+2025-04-08T22:15:08.901+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=read: timeout
+2025-04-08T22:15:30.338+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=read: timeout
+2025-04-08T22:15:34.510+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=write: timeout
+2025-04-08T22:15:44.773+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=write: timeout
+2025-04-08T22:16:40.881+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=write: timeout
+2025-04-08T22:17:03.125+0800	ERROR	chat/handle.go:45	连接错误 | ID=m | 错误=read: timeout
+2025-04-08T22:17:47.415+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=read: timeout
+2025-04-08T22:19:07.089+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=EOF
+2025-04-08T22:27:01.240+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T22:27:02.943+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T22:27:52.022+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-08T22:27:54.458+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=write: timeout
+2025-04-08T22:28:21.583+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T22:31:58.929+0800	ERROR	chat/handle.go:45	连接错误 | ID=j | 错误=EOF
+2025-04-08T22:31:58.939+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=EOF
+2025-04-08T22:31:58.940+0800	ERROR	chat/handle.go:45	连接错误 | ID=l | 错误=EOF
+2025-04-08T22:31:59.608+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=EOF
+2025-04-08T22:32:11.336+0800	ERROR	chat/handle.go:45	连接错误 | ID=m | 错误=EOF
+2025-04-08T22:32:11.370+0800	ERROR	chat/handle.go:45	连接错误 | ID=o | 错误=EOF
+2025-04-08T22:32:11.434+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=EOF
+2025-04-08T22:32:11.580+0800	ERROR	chat/handle.go:45	连接错误 | ID=p | 错误=EOF
+2025-04-08T22:32:23.091+0800	ERROR	chat/handle.go:45	连接错误 | ID=s | 错误=EOF
+2025-04-08T22:32:23.117+0800	ERROR	chat/handle.go:45	连接错误 | ID=r | 错误=EOF
+2025-04-08T22:32:23.296+0800	ERROR	chat/handle.go:45	连接错误 | ID=t | 错误=EOF
+2025-04-08T22:32:23.507+0800	ERROR	chat/handle.go:45	连接错误 | ID=q | 错误=EOF
+2025-04-08T22:33:22.946+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=write: timeout
+2025-04-08T22:33:23.055+0800	ERROR	chat/handle.go:45	连接错误 | ID=v | 错误=read: timeout
+2025-04-08T22:33:27.942+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=write: timeout
+2025-04-08T22:33:27.942+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=read: timeout
+2025-04-08T22:33:58.919+0800	ERROR	chat/handle.go:45	连接错误 | ID=y | 错误=write: timeout
+2025-04-08T22:34:01.480+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=read: timeout
+2025-04-08T22:34:03.120+0800	ERROR	chat/handle.go:45	连接错误 | ID=w | 错误=write: timeout
+2025-04-08T22:34:05.134+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=write: timeout
+2025-04-08T22:34:05.137+0800	ERROR	chat/handle.go:45	连接错误 | ID=x | 错误=read: timeout
+2025-04-08T22:34:05.137+0800	ERROR	chat/handle.go:45	连接错误 | ID=u | 错误=read: timeout
+2025-04-08T22:34:06.120+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=write: timeout
+2025-04-08T22:34:06.152+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=read: timeout
+2025-04-08T22:34:06.898+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=write: timeout
+2025-04-08T22:34:09.141+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=read: timeout
+2025-04-08T22:34:10.127+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=read: timeout
+2025-04-08T22:34:13.156+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=read: timeout
+2025-04-08T22:34:22.197+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=write: timeout
+2025-04-08T22:34:35.256+0800	ERROR	chat/handle.go:45	连接错误 | ID=11 | 错误=write: timeout
+2025-04-08T22:34:43.354+0800	ERROR	chat/handle.go:45	连接错误 | ID=12 | 错误=read: timeout
+2025-04-08T22:35:09.520+0800	ERROR	chat/handle.go:45	连接错误 | ID=13 | 错误=read: timeout
+2025-04-08T22:35:14.205+0800	ERROR	chat/handle.go:45	连接错误 | ID=14 | 错误=write: timeout
+2025-04-08T22:35:16.472+0800	ERROR	chat/handle.go:45	连接错误 | ID=16 | 错误=write: timeout
+2025-04-08T22:35:35.205+0800	ERROR	chat/handle.go:45	连接错误 | ID=15 | 错误=read: timeout
+2025-04-08T22:36:13.890+0800	ERROR	chat/handle.go:45	连接错误 | ID=17 | 错误=write: timeout
+2025-04-08T22:36:37.162+0800	ERROR	chat/handle.go:45	连接错误 | ID=19 | 错误=write: timeout
+2025-04-08T22:37:05.820+0800	ERROR	chat/handle.go:45	连接错误 | ID=1a | 错误=write: timeout
+2025-04-08T22:38:31.964+0800	ERROR	chat/handle.go:45	连接错误 | ID=z | 错误=write: timeout
+2025-04-08T22:39:15.986+0800	ERROR	chat/handle.go:45	连接错误 | ID=10 | 错误=read: timeout
+2025-04-08T22:39:17.046+0800	ERROR	chat/handle.go:45	连接错误 | ID=1c | 错误=read: timeout
+2025-04-08T22:39:20.354+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T22:42:26.926+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T22:42:27.366+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T22:43:59.247+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T22:50:17.157+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=write: timeout
+2025-04-08T22:50:18.562+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=EOF
+2025-04-08T22:50:20.025+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=EOF
+2025-04-08T22:50:39.165+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T22:50:48.380+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-08T22:51:20.022+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=write: timeout
+2025-04-08T22:51:22.576+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=write: timeout
+2025-04-08T22:51:22.657+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=read: timeout
+2025-04-08T22:51:40.497+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=write: timeout
+2025-04-08T22:52:27.170+0800	ERROR	chat/handle.go:45	连接错误 | ID=h | 错误=read: timeout
+2025-04-08T22:53:27.172+0800	ERROR	chat/handle.go:45	连接错误 | ID=i | 错误=write: timeout
+2025-04-08T22:53:29.267+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=read: timeout
+2025-04-08T22:53:41.504+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T22:54:04.721+0800	ERROR	task/message.go:19	dial tcp 123.249.32.125:6381: i/o timeout
+2025-04-08T22:54:13.547+0800	ERROR	logic/setting.go:27	invalid connection
+2025-04-08T22:54:49.111+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-08T22:54:50.563+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T22:54:51.055+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-08T22:54:51.351+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-08T22:54:52.622+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T22:55:09.145+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T22:55:11.871+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=write: timeout
+2025-04-08T22:55:56.179+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=write: timeout
+2025-04-08T22:56:04.626+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=write: timeout
+2025-04-08T22:56:05.226+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=write: timeout
+2025-04-08T22:56:09.667+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=write: timeout
+2025-04-08T22:56:41.592+0800	ERROR	chat/handle.go:45	连接错误 | ID=g | 错误=read: timeout
+2025-04-08T22:56:47.283+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=read: timeout
+2025-04-08T22:57:11.553+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T22:58:14.739+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=write: timeout
+2025-04-08T22:58:14.948+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T22:58:14.950+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-08T22:58:16.642+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T22:58:17.562+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=write: timeout
+2025-04-08T22:58:24.792+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-08T22:58:57.964+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=read: timeout
+2025-04-08T22:58:57.970+0800	ERROR	chat/handle.go:45	连接错误 | ID=f | 错误=read: timeout
+2025-04-08T22:59:06.486+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T23:00:04.176+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-08T23:01:46.247+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=write: timeout
+2025-04-08T23:01:46.970+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-08T23:02:09.222+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-08T23:02:12.688+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-08T23:02:51.069+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-08T23:02:53.656+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-08T23:02:55.243+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=read: timeout
+2025-04-08T23:02:57.348+0800	ERROR	chat/handle.go:45	连接错误 | ID=b | 错误=write: timeout
+2025-04-08T23:03:15.595+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=write: timeout
+2025-04-08T23:04:17.493+0800	ERROR	chat/handle.go:45	连接错误 | ID=c | 错误=write: timeout
+2025-04-08T23:04:19.038+0800	ERROR	chat/handle.go:45	连接错误 | ID=d | 错误=write: timeout
+2025-04-08T23:08:34.239+0800	ERROR	chat/handle.go:45	连接错误 | ID=k | 错误=read tcp 127.0.0.1:8000->127.0.0.1:1584: use of closed network connection
+2025-04-08T23:15:48.749+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=write: timeout
+2025-04-08T23:16:16.232+0800	ERROR	chat/handle.go:45	连接错误 | ID=e | 错误=write: timeout
+2025-04-08T23:16:18.834+0800	ERROR	chat/handle.go:45	连接错误 | ID=n | 错误=read: timeout
+2025-04-08T23:17:04.770+0800	ERROR	chat/handle.go:45	连接错误 | ID=o | 错误=read: timeout
+2025-04-09T19:13:41.431+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T19:13:44.688+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=EOF
+2025-04-09T19:14:10.503+0800	ERROR	logic/setting.go:27	invalid connection
+2025-04-09T19:14:10.942+0800	ERROR	logic/setting.go:124	invalid connection	{"status": 200, "method": "GET", "path": "/api/setting/shows", "query": "", "ip": "192.168.3.34", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36", "body": ""}
+2025-04-09T19:14:44.609+0800	ERROR	chat/handle.go:45	连接错误 | ID=2 | 错误=read: timeout
+2025-04-09T19:14:45.266+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-09T19:18:54.986+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-09T19:21:09.765+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-09T19:21:29.026+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-09T19:27:26.489+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T19:28:58.495+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=write: timeout
+2025-04-09T19:29:46.030+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=write: timeout
+2025-04-09T19:31:03.498+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=write: timeout
+2025-04-09T19:35:30.465+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T19:36:54.488+0800	ERROR	chat/handle.go:45	连接错误 | ID=1 | 错误=read: timeout
+2025-04-09T19:36:54.757+0800	ERROR	chat/handle.go:45	连接错误 | ID=3 | 错误=read: timeout
+2025-04-09T19:37:36.583+0800	ERROR	chat/handle.go:45	连接错误 | ID=4 | 错误=read: timeout
+2025-04-09T19:37:40.692+0800	ERROR	chat/handle.go:45	连接错误 | ID=5 | 错误=read: timeout
+2025-04-09T19:37:53.303+0800	ERROR	chat/handle.go:45	连接错误 | ID=7 | 错误=read: timeout
+2025-04-09T19:38:03.060+0800	ERROR	chat/handle.go:45	连接错误 | ID=6 | 错误=read: timeout
+2025-04-09T19:39:03.727+0800	ERROR	chat/handle.go:45	连接错误 | ID=8 | 错误=read: timeout
+2025-04-09T19:41:51.401+0800	ERROR	chat/handle.go:45	连接错误 | ID=9 | 错误=write: timeout
+2025-04-09T19:41:58.572+0800	ERROR	chat/handle.go:45	连接错误 | ID=a | 错误=read: timeout
+2025-04-09T19:44:02.694+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T19:46:34.432+0800	ERROR	logic/setting.go:124	invalid connection	{"status": 200, "method": "GET", "path": "/api/setting/shows", "query": "", "ip": "192.168.3.34", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0", "body": ""}
+2025-04-09T19:47:45.709+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T19:58:15.960+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:10:07.453+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:26:03.193+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:33:19.662+0800	ERROR	logic/setting.go:27	dial tcp 123.249.32.125:3307: i/o timeout
+2025-04-09T20:34:15.242+0800	ERROR	logic/setting.go:27	invalid connection
+2025-04-09T20:38:11.943+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:39:44.118+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:40:05.517+0800	ERROR	task/message.go:23	context deadline exceeded
+2025-04-09T20:41:06.170+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:42:20.106+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:43:13.709+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:49:38.001+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T20:55:46.520+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:07:56.893+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:14:12.888+0800	ERROR	logic/setting.go:27	context deadline exceeded
+2025-04-09T21:17:00.004+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:30:28.287+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-09T21:30:43.223+0800	ERROR	logic/setting.go:27	dial tcp 123.249.32.125:3307: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+2025-04-09T21:44:31.955+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:47:52.712+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:49:17.928+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:51:28.678+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T21:57:06.710+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T22:03:58.195+0800	ERROR	logic/application.go:69	错误码：3002，错误信息：申请不存在，详细信息：[]	{"status": 200, "method": "DELETE", "path": "/api/application/delete", "query": "", "ip": "192.168.3.34", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0", "body": "{\"account_id\":266032119808}"}
+2025-04-09T22:05:21.973+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T22:08:03.828+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T22:08:31.481+0800	ERROR	logic/application.go:61	Error 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`chatroom`.`applications`, CONSTRAINT `applications_ibfk_2` FOREIGN KEY (`account2_id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE)	{"status": 200, "method": "POST", "path": "/api/application/create", "query": "", "ip": "192.168.3.34", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36 Edg/135.0.0.0", "body": "{\"account_id\":381060907,\"application_msg\":\"的撒\"}"}
+2025-04-09T22:15:42.270+0800	ERROR	chat/common.go:49	invalid connection
+2025-04-09T22:18:10.995+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded
+2025-04-09T22:42:05.356+0800	ERROR	logic/setting.go:27	invalid connection
+2025-04-09T22:55:07.104+0800	ERROR	logic/setting.go:27	invalid connection
+2025-04-09T23:00:10.626+0800	ERROR	ChatRoom001/main.go:67	Server forced to Shutdown, err:context deadline exceeded

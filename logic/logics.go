@@ -8,6 +8,7 @@ type Logic struct {
 	File        file
 	Message     message
 	Setting     setting
+	Group       group
 }
 
 var Logics = new(Logic)

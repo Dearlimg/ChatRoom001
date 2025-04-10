@@ -22,6 +22,7 @@ func (setting) Init(router *gin.RouterGroup) {
 		{
 			updateGroup.PUT("pin", api.Apis.Setting.UpdateSettingPin)
 			updateGroup.PUT("nick_name", api.Apis.Setting.UpdateNickName)
+			updateGroup.PUT("show", api.Apis.Setting.UpdateSettingShow)
 		}
 	}
 }

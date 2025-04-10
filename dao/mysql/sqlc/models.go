@@ -347,6 +347,17 @@ type Group struct {
 	Avatar      sql.NullString
 }
 
+type GroupNotify struct {
+	ID            int64
+	RelationID    sql.NullInt64
+	MsgContent    string
+	MsgExpand     json.RawMessage
+	AccountID     sql.NullInt64
+	CreateAt      time.Time
+	ReadIds       json.RawMessage
+	MsgContentTsv sql.NullString
+}
+
 type Message struct {
 	ID            int64
 	NotifyType    MessagesNotifyType

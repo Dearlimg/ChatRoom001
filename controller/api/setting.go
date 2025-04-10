@@ -65,7 +65,19 @@ func (setting) GetPins(ctx *gin.Context) {
 }
 
 func (setting) UpdateSettingPin(ctx *gin.Context) {
-
+	rly := app.NewResponse(ctx)
+	params := new(request.ParamUpdateSettingPin)
+	if err := ctx.ShouldBind(params); err != nil {
+		rly.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		rly.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.Setting.UpdatePin(ctx, content.ID, params.RelationID, *params.IsPin)
+	rly.Reply(err, nil)
 }
 
 func (setting) UpdateNickName(ctx *gin.Context) {
@@ -82,4 +94,20 @@ func (setting) UpdateNickName(ctx *gin.Context) {
 	}
 	err := logic.Logics.Setting.UpdateNickName(ctx, content.ID, params.RelationID, params.NickName)
 	reply.Reply(err)
+}
+
+func (setting) UpdateSettingShow(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := &request.ParamUpdateSettingShow{}
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.Setting.UpdateShow(ctx, content.ID, params.RelationID)
+	reply.Reply(err, nil)
 }

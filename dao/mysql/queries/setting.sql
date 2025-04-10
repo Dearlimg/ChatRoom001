@@ -30,6 +30,12 @@ set nick_name = ?
 where account_id =?
 and relation_id =?;
 
+-- name: UpdateSettingPin :exec
+update settings
+set is_pin = ?
+where account_id=?
+and  relation_id= ?;
+
 -- name: UpdateSettingDisturb :exec
 update settings
 set is_not_disturb = ?

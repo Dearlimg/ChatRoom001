@@ -36,27 +36,36 @@ func (handle) OnConnect(s socketio.Conn) error {
 }
 
 func (handle) OnError(s socketio.Conn, err error) {
-	log.Println("OnError on error:", err)
+	//log.Println("OnError on error:", err)
 	if s == nil {
 		return
 	}
 	global.ChatMap.Leave(s)
-	log.Println("OnError disconnected: ", s.RemoteAddr().String(), s.ID())
-	global.Logger.Error(fmt.Sprintf("连接错误 | ID=%s | 错误=%s", s.ID(), err.Error()))
+	//log.Println("OnError disconnected: ", s.RemoteAddr().String(), s.ID())
+	fmt.Printf("\033[32m[Error ConnMap] Error: %d sid: %s\033[0m\n", err.Error(), s.ID())
+	//global.Logger.Error(fmt.Sprintf("连接错误 | ID=%s | 错误=%s", s.ID(), err.Error()))
 	_ = s.Close()
 }
 
+var consumerMap = make(map[int64]bool)
+
 func (handle) Auth(s socketio.Conn, accessToken string) string {
-	fmt.Println("Auth", accessToken)
+	//fmt.Println("Auth", accessToken)
 	token, myErr := MustAccount(accessToken)
 	if myErr != nil {
 		return common.NewState(myErr).MustJson()
 	}
 	s.SetContext(token)
+
 	global.ChatMap.Link(s, token.Content.ID)
 	global.Worker.SendTask(task.AccountLogin(accessToken, s.RemoteAddr().String(), token.Content.ID))
-	log.Println("auth accept:", s.RemoteAddr().String(), global.ChatMap.HasSID(s.ID()))
-	go consumer.StartConsumer(token.Content.ID)
+	//go consumer.StartConsumer(token.Content.ID)
+
+	if !consumerMap[token.Content.ID] {
+		go consumer.StartConsumer(token.Content.ID)
+		consumerMap[token.Content.ID] = true
+	}
+
 	return common.NewState(nil).MustJson()
 }
 
@@ -82,5 +91,6 @@ func (handle) Test(s socketio.Conn, msg string) string {
 
 func (handle) OnDisconnect(s socketio.Conn, _ string) {
 	global.ChatMap.Leave(s)
+	fmt.Printf("\033[32m[Error ConnMap] sid: %s\033[0m\n", s.ID())
 	global.Logger.Warn(fmt.Sprintf("连接断开 | ID=%s | 原因=%s", s.ID()))
 }

@@ -297,6 +297,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.updateSettingNickNameStmt, err = db.PrepareContext(ctx, updateSettingNickName); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateSettingNickName: %w", err)
 	}
+	if q.updateSettingPinStmt, err = db.PrepareContext(ctx, updateSettingPin); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateSettingPin: %w", err)
+	}
 	if q.updateSettingShowStmt, err = db.PrepareContext(ctx, updateSettingShow); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateSettingShow: %w", err)
 	}
@@ -763,6 +766,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing updateSettingNickNameStmt: %w", cerr)
 		}
 	}
+	if q.updateSettingPinStmt != nil {
+		if cerr := q.updateSettingPinStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateSettingPinStmt: %w", cerr)
+		}
+	}
 	if q.updateSettingShowStmt != nil {
 		if cerr := q.updateSettingShowStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing updateSettingShowStmt: %w", cerr)
@@ -903,6 +911,7 @@ type Queries struct {
 	updateMsgTopStmt                         *sql.Stmt
 	updateSettingDisturbStmt                 *sql.Stmt
 	updateSettingNickNameStmt                *sql.Stmt
+	updateSettingPinStmt                     *sql.Stmt
 	updateSettingShowStmt                    *sql.Stmt
 	updateUserStmt                           *sql.Stmt
 }
@@ -1002,6 +1011,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		updateMsgTopStmt:                         q.updateMsgTopStmt,
 		updateSettingDisturbStmt:                 q.updateSettingDisturbStmt,
 		updateSettingNickNameStmt:                q.updateSettingNickNameStmt,
+		updateSettingPinStmt:                     q.updateSettingPinStmt,
 		updateSettingShowStmt:                    q.updateSettingShowStmt,
 		updateUserStmt:                           q.updateUserStmt,
 	}

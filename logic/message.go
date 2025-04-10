@@ -498,18 +498,59 @@ func (message) UpdateMsgTop(ctx *gin.Context, accountID int64, param *request.Pa
 	return nil
 }
 
-func (message) RevokeMsg(ctx *gin.Context, accountID int64, param *request.ParamRevokeMsg) errcode.Err {
-	ok, err := ExistsSetting(ctx, accountID, param.ID)
+func (message) RevokeMsg(ctx *gin.Context, accountID int64, msgID int64) errcode.Err {
+	msgInfo, err := GetMsgInfoByID(ctx, msgID)
 	if err != nil {
 		return err
 	}
-	if !ok {
+	if msgInfo.AccountID.Int64 != accountID {
 		return errcodes.AuthPermissionsInsufficient
 	}
+	if msgInfo.IsRevoke {
+		return errcodes.MsgAlreadyRevoke
+	}
+	myErr := dao.Database.DB.RevokeMsgWithTx(ctx, msgID, msgInfo.IsPin, msgInfo.IsTop)
+	if myErr != nil {
+		global.Logger.Error(myErr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+	global.Worker.SendTask(task.UpdateMsgState(accessToken, msgInfo.RelationID, msgID, server.MsgRevoke, true))
+	if msgInfo.IsTop {
+		// 推送 top 通知
+		global.Worker.SendTask(task.UpdateMsgState(accessToken, msgInfo.RelationID, msgID, server.MsgTop, false))
+		// 创建并推送 top 消息
+		f := func() error {
 
-	//msgInfo, err := GetMsgInfoByID(ctx, param.ID)
-	//if err != nil {
-	//	return err
-	//}
+			arg := &db.CreateMessageParams{
+				NotifyType: db.MessagesNotifyTypeSystem,
+				MsgType:    db.MessagesMsgType(model.MsgTypeText),
+				MsgContent: fmt.Sprintf(format2.TopMessage, accountID),
+				//MsgExtend:  pgtype.JSON{Status: pgtype.Null},
+				RelationID: msgInfo.RelationID,
+			}
+			err := dao.Database.DB.CreateMessage(ctx, arg)
+			msgRly, err := dao.Database.DB.CreateMessageReturn(ctx)
+			if err != nil {
+				return err
+			}
+			global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
+				ParamMsgInfo: reply.ParamMsgInfo{
+					ID:         msgRly.ID,
+					NotifyType: string(arg.NotifyType),
+					MsgType:    string(arg.MsgType),
+					MsgContent: arg.MsgContent,
+					RelationID: arg.RelationID,
+					CreateAt:   msgRly.CreateAt,
+				},
+				RlyMsg: nil,
+			}))
+			return nil
+		}
+		if err := f(); err != nil {
+			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			reTry("RevokeMsg", f)
+		}
+	}
 	return nil
 }

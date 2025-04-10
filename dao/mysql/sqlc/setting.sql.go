@@ -1074,6 +1074,24 @@ func (q *Queries) UpdateSettingNickName(ctx context.Context, arg *UpdateSettingN
 	return err
 }
 
+const updateSettingPin = `-- name: UpdateSettingPin :exec
+update settings
+set is_pin = ?
+where account_id=?
+and  relation_id= ?
+`
+
+type UpdateSettingPinParams struct {
+	IsPin      bool
+	AccountID  int64
+	RelationID int64
+}
+
+func (q *Queries) UpdateSettingPin(ctx context.Context, arg *UpdateSettingPinParams) error {
+	_, err := q.exec(ctx, q.updateSettingPinStmt, updateSettingPin, arg.IsPin, arg.AccountID, arg.RelationID)
+	return err
+}
+
 const updateSettingShow = `-- name: UpdateSettingShow :exec
 update settings
 set  is_show = ?

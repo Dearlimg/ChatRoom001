@@ -99,7 +99,7 @@ func getApplication(ctx *gin.Context, accountID1, accountID2 int64) (*db.Applica
 }
 
 func (application) RefuseApplication(ctx *gin.Context, accountID1, accountID2 int64, refuseMsg string) errcode.Err {
-	apply, err := getApplication(ctx, accountID1, accountID2)
+	apply, err := getApplication(ctx, accountID2, accountID1)
 	if err != nil {
 		return err
 	}

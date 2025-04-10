@@ -14,12 +14,25 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
+	socketio "github.com/googollee/go-socket.io"
 )
 
-type message struct{}
+type message struct {
+	server *socketio.Server //
+}
+
+var processedMessages = make(map[int64]bool)
 
 func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client.HandleSendMsgRly, errcode.Err) {
-	//fmt.Println("SendMsg0")
+	// 检查消息是否已经处理过
+	//if processedMessages[param.MsgID] {
+	//	// 直接返回之前的处理结果，这里简单返回一个空结果
+	//	return &client.HandleSendMsgRly{}, nil
+	//}
+	//
+	//// 标记消息为已处理
+	//processedMessages[param.MsgID] = true
+
 	ok, myErr := logic.ExistsSetting(ctx, param.AccountID, param.RelationID)
 	if myErr != nil {
 		//fmt.Println("SendMsg2", myErr)
@@ -31,11 +44,10 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 	}
 	var rlyMsgID int64
 	var rlyMsg *reply.ParamRlyMsg
-	//fmt.Println("SendMsg4")
+
 	if param.RlyMsgID > 0 {
 		rlyInfo, myErr := logic.GetMsgInfoByID(ctx, param.RlyMsgID)
 		if myErr != nil {
-			fmt.Println("SendMsg5", myErr)
 			return nil, myErr
 		}
 		if rlyInfo.RelationID != param.RelationID {
@@ -51,7 +63,7 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 			global.Logger.Error(err.Error())
 			return nil, errcode.ErrServer
 		}
-		//fmt.Println("SendMsg7", err)
+
 		rlyMsg = &reply.ParamRlyMsg{
 			MsgID:      rlyInfo.ID,
 			MsgType:    string(rlyInfo.MsgType),
@@ -60,13 +72,13 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 			IsRevoked:  rlyInfo.IsRevoke,
 		}
 	}
-	//fmt.Println("SendMsg4.8")
+
 	msgExtend, err := model.ExtendToJson(param.MsgExtend)
 	if err != nil {
 		global.Logger.Error(err.Error())
 		return nil, errcode.ErrServer
 	}
-	//fmt.Println("SendMsg8")
+
 	err = dao.Database.DB.CreateMessage(ctx, &db.CreateMessageParams{
 		NotifyType: db.MessagesNotifyTypeCommon,
 		MsgType:    db.MessagesMsgType(model.MsgTypeText),
@@ -80,8 +92,8 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 		global.Logger.Error(err.Error())
 		return nil, errcode.ErrServer
 	}
-	//fmt.Println("SendMsg9")
 	result, err := dao.Database.DB.CreateMessageReturn(ctx)
+	fmt.Println("\036[31mSend msg before !!\036[0m")
 	global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
 		ParamMsgInfo: reply.ParamMsgInfo{
 			ID:         rlyMsgID,
@@ -95,7 +107,6 @@ func (message) SendMsg(ctx context.Context, param *model.HandleSendMsg) (*client
 		},
 		RlyMsg: rlyMsg,
 	}))
-	//fmt.Println("SendMsg10")
 	return &client.HandleSendMsgRly{
 		MsgID:    result.ID,
 		CreateAt: result.CreateAt,

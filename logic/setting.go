@@ -7,6 +7,7 @@ import (
 	"ChatRoom001/global"
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
+	"ChatRoom001/model/chat/server"
 	"ChatRoom001/model/reply"
 	"ChatRoom001/task"
 	"context"
@@ -263,6 +264,35 @@ func (setting) UpdateNickName(ctx *gin.Context, accountID, relationID int64, nic
 		// 向自己推送更改昵称的通知
 		accessToken, _ := middlewares.GetToken(ctx.Request.Header)
 		global.Worker.SendTask(task.UpdateNickName(accessToken, accountID, relationID, nickName))
+		return nil
+	default:
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+}
+
+func (setting) UpdatePin(ctx *gin.Context, accountID, relationID int64, isPin bool) errcode.Err {
+	settingInfo, err := dao.Database.DB.GetSettingByID(ctx, &db.GetSettingByIDParams{
+		AccountID:  accountID,
+		RelationID: relationID,
+	})
+	switch {
+	case errors.Is(err, sql.ErrNoRows):
+		return errcodes.RelationNotExists
+	case errors.Is(err, nil):
+		if settingInfo.IsPin == isPin {
+			return nil
+		}
+		if err := dao.Database.DB.UpdateSettingPin(ctx, &db.UpdateSettingPinParams{
+			IsPin:      isPin,
+			AccountID:  accountID,
+			RelationID: relationID,
+		}); err != nil {
+			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			return errcode.ErrServer
+		}
+		accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+		global.Worker.SendTask(task.UpdateSettingState(accessToken, server.SettingPin, accountID, relationID, isPin))
 		return nil
 	default:
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)

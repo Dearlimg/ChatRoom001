@@ -195,6 +195,6 @@ func (message) RevokeMsg(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
-	err := logic.Logics.Message.RevokeMsg(ctx, content.ID, params)
+	err := logic.Logics.Message.RevokeMsg(ctx, content.ID, params.ID)
 	reply.Reply(err)
 }

@@ -16,3 +16,14 @@ func UpdateNickName(accessToken string, accountID, relationID int64, nickName st
 		})
 	}
 }
+
+func UpdateSettingState(accessToken string, settingType server.SettingType, accountID, relationID int64, state bool) func() {
+	return func() {
+		global.ChatMap.Send(accountID, chat.ServerUpdateSettingState, server.UpdateSettingState{
+			EnToken:    utils.EncodeMD5(accessToken),
+			RelationID: relationID,
+			Type:       settingType,
+			State:      state,
+		})
+	}
+}

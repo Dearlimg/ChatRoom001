@@ -1,6 +1,7 @@
 package model
 
 type HandleSendMsg struct {
+	MsgID       int64
 	AccessToken string     // AccessToken
 	RelationID  int64      // 关系 ID
 	AccountID   int64      // 账户 ID

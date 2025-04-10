@@ -7,6 +7,7 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
+	"fmt"
 )
 
 func (store *SqlStore) CreateApplicationTx(ctx context.Context, param *db.CreateApplicationParams) error {
@@ -111,9 +112,9 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 		})
 		//fmt.Println("AcceptApplicationTx is hrr 5", err)
 		err = tool.DoThat(err, func() error {
+			fmt.Println("\033[34mAcceptApplicationWithTX :", relationID, account1.ID, account2.ID, "\033[0m")
 			return rdb.AddRelationAccount(ctx, relationID, account1.ID, account2.ID)
 		})
-		//fmt.Println("AcceptApplicationTx is hrr 6", err)
 		return err
 	})
 	return result, err

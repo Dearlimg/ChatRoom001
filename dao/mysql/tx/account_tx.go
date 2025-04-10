@@ -73,8 +73,8 @@ func (store *SqlStore) CreateAccountWithTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     true,
 			})
 		})
-
-		err = tool.DoThat(err, func() error { return rdb.AddRelationAccount(ctx, rID) })
+		//rdb.AddRelationAccount(ctx, relationID, account1.ID, account2.ID)
+		err = tool.DoThat(err, func() error { return rdb.AddRelationAccount(ctx, rID, arg.ID, arg.ID) })
 		return err
 	})
 }

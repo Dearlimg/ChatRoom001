@@ -195,22 +195,22 @@ CREATE TABLE IF NOT EXISTS messages (
 # CREATE INDEX msg_create_at ON messages (create_at);
 #
 # -- 群通知
-# CREATE TABLE IF NOT EXISTS group_notify (
-#                                             id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 群通知 id
-#                                             relation_id BIGINT, -- 关系 id（外键）
-#                                             msg_content TEXT NOT NULL, -- 消息内容
-#                                             msg_expand JSON, -- 消息扩展信息
-#                                             account_id BIGINT, -- 发送账号 id（外键）
-#                                             create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
-#                                             read_ids JSON NOT NULL DEFAULT '[]', -- 已读用户 id 集合
-#                                             msg_content_tsv TEXT, -- 消息分词
-#                                             FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE,
-#                                             FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
-# );
-#
-# -- 分词索引
+CREATE TABLE IF NOT EXISTS group_notify (
+                                            id BIGINT AUTO_INCREMENT PRIMARY KEY, -- 群通知 id
+                                            relation_id BIGINT, -- 关系 id（外键）
+                                            msg_content TEXT NOT NULL, -- 消息内容
+                                            msg_expand JSON, -- 消息扩展信息
+                                            account_id BIGINT, -- 发送账号 id（外键）
+                                            create_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, -- 创建时间
+                                            read_ids JSON NOT NULL DEFAULT '[]', -- 已读用户 id 集合
+                                            msg_content_tsv TEXT, -- 消息分词
+                                            FOREIGN KEY (relation_id) REFERENCES relations(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                                            FOREIGN KEY (account_id) REFERENCES accounts(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+# #
+# # -- 分词索引
 # CREATE INDEX group_notify_msg_content_tsv ON group_notify (msg_content_tsv);
-
+#
 # -- 创建更新时间戳的触发器
 # ALTER TABLE applications
 #     ADD COLUMN update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;

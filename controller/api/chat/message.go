@@ -12,30 +12,31 @@ import (
 )
 
 type message struct {
+	server *socketio.Server
 }
 
-func (message) SendMsg(s socketio.Conn, msg string) string {
-	//fmt.Println("send msg:", msg)
+func (m message) SendMsg(s socketio.Conn, msg string) string {
+
 	token, ok := CheckAuth(s)
-	//fmt.Println("token in sendmsgh:", token)
+
 	if !ok {
 		return ""
 	}
 	param := new(client.HandleSendMsgParams)
 	if err := common.Decode(msg, param); err != nil {
-		//fmt.Println("token in sendmsgh 参数错误:", err)
 		return common.NewState(errcode.ErrParamsNotValid.WithDetails(err.Error())).MustJson()
 	}
 	temp, err := base64.StdEncoding.DecodeString(param.MsgContent)
-	//fmt.Println(string(temp))
 	if err != nil {
 		return err.Error()
 	}
 	param.MsgContent = string(temp)
-	//fmt.Println("token in sendmsgh yes:")
 	ctx, cancel := global.DefaultContextWithTimeout()
 	defer cancel()
+	//var count int64
+	//count = 0
 	result, myErr := chat.Group.Message.SendMsg(ctx, &model.HandleSendMsg{
+		//MsgID:       count,
 		AccessToken: token.AccessToken,
 		RelationID:  param.RelationID,
 		AccountID:   token.Content.ID,
@@ -43,6 +44,7 @@ func (message) SendMsg(s socketio.Conn, msg string) string {
 		MsgExtend:   param.MsgExtend,
 		RlyMsgID:    param.RlyMsgID,
 	})
+	//count++
 	return common.NewState(myErr, result).MustJson()
 }
 

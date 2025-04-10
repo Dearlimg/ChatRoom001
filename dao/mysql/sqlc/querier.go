@@ -151,6 +151,7 @@ type Querier interface {
 	UpdateMsgTop(ctx context.Context, arg *UpdateMsgTopParams) error
 	UpdateSettingDisturb(ctx context.Context, arg *UpdateSettingDisturbParams) error
 	UpdateSettingNickName(ctx context.Context, arg *UpdateSettingNickNameParams) error
+	UpdateSettingPin(ctx context.Context, arg *UpdateSettingPinParams) error
 	UpdateSettingShow(ctx context.Context, arg *UpdateSettingShowParams) error
 	UpdateUser(ctx context.Context, arg *UpdateUserParams) error
 }

@@ -1,6 +1,7 @@
 package manager
 
 import (
+	"fmt"
 	socketio "github.com/googollee/go-socket.io"
 	"sync"
 	"time"
@@ -16,6 +17,8 @@ type ChatMap struct {
 	// （GO 内置的 map 不是并发安全的，sync.Map 是并发安全的）
 	m   sync.Map // k: accountID v: ConnMap（说明 accountID 可以不止有一个客户端设备）
 	sID sync.Map // k: sID v: accountID，用于快速查找 某个连接 属于哪个 账户
+
+	mu sync.Mutex
 }
 
 type ConnMap struct {
@@ -33,22 +36,96 @@ func NewChatMap() *ChatMap {
 
 // Link 添加设备
 func (c *ChatMap) Link(s socketio.Conn, accountID int64) {
-	c.sID.Store(s.ID(), accountID) // 存入 SID 和 accountID 的对应关系
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	fmt.Printf("\033[32mmanager chat Link: %v accountID: %d sid: %s\033[0m\n", time.Now(), accountID, s.ID())
+	c.sID.Store(s.ID(), accountID)
+
+	// 清理旧连接（新增逻辑）
+	if cm, ok := c.m.Load(accountID); ok {
+		// 遍历并关闭所有旧连接
+		cm.(*ConnMap).m.Range(func(key, value any) bool {
+			oldConn := value.(*ActiveConn)
+			oldConn.s.Close() // 关闭旧连接的 Socket.IO 连接
+			cm.(*ConnMap).m.Delete(key)
+			fmt.Printf("\033[33m[Close Old Connection] accountID: %d sid: %s\033[0m\n", accountID, key.(string))
+			return true
+		})
+	}
+
+	// 创建或更新 ConnMap
 	cm, ok := c.m.Load(accountID)
-	if !ok { // 没有找到对应的 ConnMap 对象，创建一个新的
-		cm := &ConnMap{}
-		activeConn := &ActiveConn{}
-		activeConn.s = s
-		activeConn.activeTime = time.Now()
-		cm.m.Store(s.ID(), activeConn) // 将新连接存储在 ConnMap 中
-		c.m.Store(accountID, cm)       // 将 ConnMap 存储在 c.m 中，以 accountID 为键
+	if !ok {
+		newCm := &ConnMap{}
+		activeConn := &ActiveConn{
+			s:          s,
+			activeTime: time.Now(),
+		}
+		newCm.m.Store(s.ID(), activeConn)
+		c.m.Store(accountID, newCm)
+		fmt.Printf("\033[32m[New ConnMap] accountID: %d sid: %s\033[0m\n", accountID, s.ID())
 		return
 	}
-	activeConn := &ActiveConn{}
-	activeConn.s = s
-	activeConn.activeTime = time.Now()
-	cm.(*ConnMap).m.Store(s.ID(), activeConn) // 将新的连接存储在 ConnMap 对象中
+	activeConn := &ActiveConn{
+		s:          s,
+		activeTime: time.Now(),
+	}
+	cm.(*ConnMap).m.Store(s.ID(), activeConn)
+	fmt.Printf("\033[32m[Back Connection] accountID: %d sid: %s\033[0m\n", accountID, s.ID())
 }
+
+//func (c *ChatMap) Link(s socketio.Conn, accountID int64) {
+//	c.mu.Lock()         // 加锁
+//	defer c.mu.Unlock() // 确保解锁
+//
+//	fmt.Printf("\033[32mmanager chat Link: %v accountID: %d sid: %s\033[0m\n", time.Now(), accountID, s.ID())
+//	c.sID.Store(s.ID(), accountID)
+//
+//	// 以下操作在锁保护下，保证原子性
+//	cm, ok := c.m.Load(accountID)
+//	if !ok {
+//		// 没有 ConnMap，初始化并存储
+//		newCm := &ConnMap{}
+//		activeConn := &ActiveConn{
+//			s:          s,
+//			activeTime: time.Now(),
+//		}
+//		newCm.m.Store(s.ID(), activeConn)
+//		c.m.Store(accountID, newCm)
+//		fmt.Printf("\033[32m[New ConnMap] accountID: %d sid: %s\033[0m\n", accountID, s.ID())
+//		return
+//	}
+//
+//	// 已有 ConnMap，直接添加连接
+//	activeConn := &ActiveConn{
+//		s:          s,
+//		activeTime: time.Now(),
+//	}
+//	cm.(*ConnMap).m.Store(s.ID(), activeConn)
+//	fmt.Printf("\033[32m[Back Connection] accountID: %d sid: %s\033[0m\n", accountID, s.ID())
+//}
+
+//func (c *ChatMap) Link(s socketio.Conn, accountID int64) {
+//	fmt.Println("\032[32mmanager chat Link:", time.Now(), "accountID:", accountID, s.ID(), "\032")
+//	c.sID.Store(s.ID(), accountID) // 存入 SID 和 accountID 的对应关系
+//	cm, ok := c.m.Load(accountID)
+//	if !ok { // 没有找到对应的 ConnMap 对象，创建一个新的
+//		cm := &ConnMap{}
+//		activeConn := &ActiveConn{}
+//		activeConn.s = s
+//		activeConn.activeTime = time.Now()
+//		cm.m.Store(s.ID(), activeConn) // 将新连接存储在 ConnMap 中
+//		c.m.Store(accountID, cm)       // 将 ConnMap 存储在 c.m 中，以 accountID 为键
+//		fmt.Println("\033[32222mmanager chat Link:", time.Now(), "accountID:", accountID, s.ID(), activeConn, "\033")
+//		return
+//	}
+//	activeConn := &ActiveConn{}
+//	activeConn.s = s
+//	activeConn.activeTime = time.Now()
+//	cm.(*ConnMap).m.Store(s.ID(), activeConn) // 将新的连接存储在 ConnMap 对象中
+//	//fmt.Println("\033[32mmanager chat Link:", time.Now(), "accountID:", accountID, s.ID(), activeConn, "\033")
+//}
 
 func (c *ChatMap) Leave(s socketio.Conn) {
 	accountID, ok := c.sID.LoadAndDelete(s.ID())
@@ -80,6 +157,7 @@ func (c *ChatMap) Send(accountID int64, event string, args ...interface{}) {
 		activeConn := value.(*ActiveConn)
 		activeConn.activeTime = time.Now()
 		activeConn.s.Emit(event, args...)
+		fmt.Println("\033[31mmanager chat Send:", time.Now(), "event:", event, "args:", args, "your_args\033[0m")
 		return true
 	})
 }
