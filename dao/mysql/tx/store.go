@@ -3,6 +3,7 @@ package tx
 import (
 	db "ChatRoom001/dao/mysql/sqlc"
 	"ChatRoom001/dao/redis/operate"
+	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
 	"fmt"
@@ -38,18 +39,83 @@ type SqlStore struct {
 }
 
 func (store *SqlStore) AddSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64, isLeader bool) error {
-	//TODO implement me
-	panic("implement me")
+	return store.execTx(ctx, func(queries *db.Queries) error {
+		err := queries.CreateSetting(ctx, &db.CreateSettingParams{
+			AccountID:  accountID,
+			RelationID: relationID,
+			IsLeader:   isLeader,
+			IsSelf:     false,
+		})
+		if err != nil {
+			return err
+		}
+		return rdb.AddRelationAccount(ctx, relationID, accountID)
+	})
 }
 
 func (store *SqlStore) UploadGroupAvatarWithTx(ctx context.Context, arg db.CreateFileParams) error {
-	//TODO implement me
-	panic("implement me")
+	return store.execTx(ctx, func(queries *db.Queries) error {
+		var err error
+		_, err = queries.GetGroupAvatar(ctx, arg.RelationID)
+		if err != nil {
+			// 如果没有设置过群头像
+			if err.Error() == "no rows in result set" {
+				err = queries.CreateFile(ctx, &db.CreateFileParams{
+					FileName:   arg.FileName,
+					FileType:   "img",
+					FileSize:   arg.FileSize,
+					Key:        arg.Key,
+					Url:        arg.Url,
+					RelationID: arg.RelationID,
+					AccountID:  sql.NullInt64{},
+				})
+			} else {
+				return err
+			}
+		} else {
+			// 在 file 表中覆盖之前的群头像
+			err = queries.UpdateGroupAvatar(ctx, &db.UpdateGroupAvatarParams{
+				Url:        arg.Url,
+				RelationID: arg.RelationID,
+			})
+		}
+		data, err := queries.GetGroupRelationByID(ctx, arg.RelationID.Int64)
+		if err != nil {
+			return err
+		}
+		// 更新 relation 表中的头像数据
+		return queries.UpdateGroupRelation(ctx, &db.UpdateGroupRelationParams{
+			GroupName: data.GroupName,
+
+			GroupDescription: data.GroupDescription,
+			GroupAvatar: sql.NullString{
+				String: arg.Url,
+				Valid:  true,
+			},
+			ID: arg.RelationID.Int64,
+		})
+	})
 }
 
 func (store *SqlStore) TransferGroupWithTx(ctx context.Context, accountID, relationID, toAccountID int64) error {
-	//TODO implement me
-	panic("implement me")
+	return store.execTx(ctx, func(queries *db.Queries) error {
+		var err error
+		err = tool.DoThat(err, func() error {
+			// 将原群主的 isLeader 转换为 false
+			return queries.TransferIsLeaderFalse(ctx, &db.TransferIsLeaderFalseParams{
+				RelationID: relationID,
+				AccountID:  accountID,
+			})
+		})
+		err = tool.DoThat(err, func() error {
+			// 将新群主的 isLeader 转换为 true
+			return queries.TransferIsLeaderTrue(ctx, &db.TransferIsLeaderTrueParams{
+				RelationID: relationID,
+				AccountID:  toAccountID,
+			})
+		})
+		return err
+	})
 }
 
 func (store *SqlStore) DeleteSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64) error {

@@ -41,6 +41,24 @@ func (q *Queries) CreateGroupRelation(ctx context.Context, arg *CreateGroupRelat
 	return err
 }
 
+const createGroupRelationReturn = `-- name: CreateGroupRelationReturn :one
+select id
+from relations
+where group_description=? and group_name= ?
+`
+
+type CreateGroupRelationReturnParams struct {
+	GroupDescription sql.NullString
+	GroupName        sql.NullString
+}
+
+func (q *Queries) CreateGroupRelationReturn(ctx context.Context, arg *CreateGroupRelationReturnParams) (int64, error) {
+	row := q.queryRow(ctx, q.createGroupRelationReturnStmt, createGroupRelationReturn, arg.GroupDescription, arg.GroupName)
+	var id int64
+	err := row.Scan(&id)
+	return id, err
+}
+
 const createRelationReturn = `-- name: CreateRelationReturn :one
 
 select id

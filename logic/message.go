@@ -43,7 +43,79 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 	if !ok {
 		return nil, errcodes.AuthPermissionsInsufficient
 	}
-	//fileInfo, myErr := Logics.File.PublishFile(ctx,params)
+	fileInfo, myErr := Logics.File.PublishFile(ctx, model.PublishFile{
+		File:       params.File,
+		RelationID: params.RelationID,
+		AccountID:  params.AccountID,
+	})
+	if myErr != nil {
+		return nil, myErr
+	}
+	var isRly bool  // 是否是回复别人的消息
+	var rlyID int64 // 回复 ID 为 rlyID 的消息
+	var rlyMsg *reply.ParamRlyMsg
+	if params.RlyMsgID > 0 { // 如果是回复别人的消息
+		rltInfo, myErr := GetMsgInfoByID(ctx, params.RlyMsgID)
+		if myErr != nil {
+			return nil, myErr
+		}
+		if rltInfo.IsRevoke {
+			return nil, errcodes.RlyMsgHasRevoked
+		}
+		isRly = true
+		rlyID = params.RlyMsgID
+		rlyMsgExtend, err := model.JsonToExtend(rltInfo.MsgExtend)
+		if err != nil {
+			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			return nil, errcode.ErrServer
+		}
+		rlyMsg = &reply.ParamRlyMsg{
+			MsgID:      rltInfo.ID,
+			MsgType:    string(rltInfo.MsgType),
+			MsgContent: rltInfo.MsgContent,
+			MsgExtend:  rlyMsgExtend,
+			IsRevoked:  rltInfo.IsRevoke,
+		}
+	}
+	extend, _ := model.ExtendToJson(nil)
+	err := dao.Database.DB.CreateMessage(ctx, &db.CreateMessageParams{
+		NotifyType: db.MessagesNotifyTypeCommon,
+		MsgType:    db.MessagesMsgType(model.MsgTypeFile),
+		MsgContent: fileInfo.Url,
+		MsgExtend:  extend,
+		FileID:     sql.NullInt64{Int64: fileInfo.ID, Valid: true},
+		AccountID:  sql.NullInt64{Int64: params.AccountID, Valid: true},
+		RlyMsgID:   sql.NullInt64{Int64: rlyID, Valid: isRly},
+		RelationID: params.RelationID,
+	})
+
+	result, err := dao.Database.DB.CreateMessageReturn(ctx)
+
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+
+	global.Worker.SendTask(task.PublishMsg(reply.ParamMsgInfoWithRly{
+		ParamMsgInfo: reply.ParamMsgInfo{
+			ID:         result.ID,
+			NotifyType: string(db.MessagesNotifyTypeCommon),
+			MsgType:    string(model.MsgTypeText),
+			MsgContent: result.MsgContent,
+			MsgExtend:  nil,
+			AccountID:  params.AccountID,
+			RelationID: params.RelationID,
+			CreateAt:   result.CreateAt,
+		},
+		RlyMsg: rlyMsg,
+	}))
+	return &reply.ParamCreateFileMsg{
+		ID:         result.ID,
+		MsgContent: result.MsgContent,
+		FileID:     result.FileID.Int64,
+		CreateAt:   result.CreateAt,
+	}, nil
+
 	return &reply.ParamCreateFileMsg{}, nil
 }
 

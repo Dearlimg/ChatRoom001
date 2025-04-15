@@ -26,19 +26,19 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 			ctx.JSON(200, gin.H{
 				"msg0": "haha",
 				"msg1": "what can i say",
-				"msg2": "manba out",
+				"msg2": "manBa out",
 				"msg3": " 孩子们,这并不好笑.",
 			})
 		})
 		rg := routers.Routers
-		rg.Account.Init(root)
-		rg.User.Init(root)
-		rg.Email.Init(root)
+		rg.Account.Init(root) //finish
+		rg.User.Init(root)    //need modify
+		rg.Email.Init(root)   //finish
 		rg.Group.Init(root)
-		rg.Application.Init(root)
-		rg.File.Init(root)
-		rg.Message.Init(root)
-		rg.Setting.Init(root)
+		rg.Application.Init(root) //finish
+		rg.File.Init(root)        //finish
+		rg.Message.Init(root)     //finish
+		rg.Setting.Init(root)     //need delete
 	}
 	return r, routers.Routers.Chat.Init(r)
 }

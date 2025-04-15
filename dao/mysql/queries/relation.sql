@@ -2,6 +2,11 @@
 INSERT INTO relations (relation_type, group_name, group_description, group_avatar)
 value ('group',?,?,?);
 
+-- name: CreateGroupRelationReturn :one
+select id
+from relations
+where group_description=? and group_name= ?;
+
 # -- name: CreateRelationReturn :one
 # select id
 # from relations

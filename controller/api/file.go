@@ -1,6 +1,7 @@
 package api
 
 import (
+	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
 	"ChatRoom001/logic"
 	"ChatRoom001/middlewares"
@@ -23,9 +24,8 @@ func (file) PublishFile(ctx *gin.Context) {
 		reply.Reply(errcode.ErrParamsNotValid)
 		return
 	}
-	fmt.Println("params:", params.File)
 	fileType, myErr := gtype.GetFileType(params.File)
-	fmt.Println(fileType, myErr)
+	fmt.Println("\\033[33m", fileType, myErr, "\033[0m")
 	if myErr != nil {
 		global.Logger.Error(myErr.Error(), middlewares.ErrLogMsg(ctx)...)
 		reply.Reply(errcode.ErrServer)
@@ -43,5 +43,50 @@ func (file) PublishFile(ctx *gin.Context) {
 }
 
 func (file) DeleteFile(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamDeleteFile)
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	err := logic.Logics.File.DeleteFile(ctx, params.FileID)
+	reply.Reply(err)
+}
 
+func (file) GetRelationFile(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamGetRelationFile)
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	result, err := logic.Logics.File.GetRelationFile(ctx, params.RelationID)
+	reply.Reply(err, result)
+}
+
+func (file) UploadAccountAvatar(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamUploadAccountAvatar)
+	if err := ctx.ShouldBind(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	result, err := logic.Logics.File.UploadAccountAvatar(ctx, content.ID, params.File)
+	reply.Reply(err, result)
+}
+
+func (file) GetFileDetailsByID(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamGetFileDetailsByID)
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	result, err := logic.Logics.File.GetFileDetailsByID(ctx, params.FileID)
+	reply.Reply(err, result)
 }

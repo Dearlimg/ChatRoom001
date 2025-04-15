@@ -201,9 +201,12 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 		if i < len(friendData) && (j >= len(groupData) || friendData[i].PinTime.Before(groupData[j].PinTime)) {
 			v := friendData[i]
 			friendInfo := &model.SettingFriendInfo{
-				AccountID: accountID,
-				Name:      v.AccountName,
-				Avatar:    v.AccountAvatar,
+				AccountID:      accountID,
+				Name:           v.AccountName,
+				Avatar:         v.AccountAvatar,
+				Is_Pin:         v.IsPin,
+				Is_Show:        v.IsShow,
+				Is_Not_Disturb: v.IsNotDisturb,
 			}
 			result = append(result, &model.SettingPin{
 				SettingPinInfo: model.SettingPinInfo{
@@ -218,10 +221,13 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 		} else {
 			v := groupData[j]
 			groupInfo := &model.SettingGroupInfo{
-				RelationID:  v.RelationID,
-				Name:        v.GroupName_2.String,
-				Description: v.GroupDescription_2.String,
-				Avatar:      v.GroupAvatar.String,
+				RelationID:     v.RelationID,
+				Name:           v.GroupName_2.String,
+				Description:    v.GroupDescription_2.String,
+				Avatar:         v.GroupAvatar.String,
+				Is_Pin:         v.IsPin,
+				Is_Show:        v.IsShow,
+				Is_Not_Disturb: v.IsNotDisturb,
 			}
 			result = append(result, &model.SettingPin{
 				SettingPinInfo: model.SettingPinInfo{
@@ -293,6 +299,66 @@ func (setting) UpdatePin(ctx *gin.Context, accountID, relationID int64, isPin bo
 		}
 		accessToken, _ := middlewares.GetToken(ctx.Request.Header)
 		global.Worker.SendTask(task.UpdateSettingState(accessToken, server.SettingPin, accountID, relationID, isPin))
+		return nil
+	default:
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+}
+
+func (setting) UpdateShow(ctx *gin.Context, accountID, relationID int64, isShow bool) errcode.Err {
+	settingInfo, err := dao.Database.DB.GetSettingByID(ctx, &db.GetSettingByIDParams{
+		AccountID:  accountID,
+		RelationID: relationID,
+	})
+	switch {
+	case errors.Is(err, sql.ErrNoRows):
+		return errcodes.RelationNotExists
+	case errors.Is(err, nil):
+		if settingInfo.IsShow == true {
+			return nil
+		}
+		err = dao.Database.DB.UpdateSettingShow(ctx, &db.UpdateSettingShowParams{
+			IsShow:     isShow,
+			AccountID:  accountID,
+			RelationID: relationID,
+		})
+		if err != nil {
+			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			return errcode.ErrServer
+		}
+		accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+		global.Worker.SendTask(task.UpdateSettingState(accessToken, server.SettingShow, accountID, relationID, isShow))
+		return nil
+	default:
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+}
+
+func (setting) UpdateDisaturb(ctx *gin.Context, accountID, relationID int64, isDisat bool) errcode.Err {
+	settingInfo, err := dao.Database.DB.GetSettingByID(ctx, &db.GetSettingByIDParams{
+		AccountID:  accountID,
+		RelationID: relationID,
+	})
+	switch {
+	case errors.Is(err, sql.ErrNoRows):
+		return errcodes.RelationNotExists
+	case errors.Is(err, nil):
+		if settingInfo.IsNotDisturb == isDisat {
+			return nil
+		}
+		err = dao.Database.DB.UpdateSettingDisturb(ctx, &db.UpdateSettingDisturbParams{
+			IsNotDisturb: isDisat,
+			AccountID:    accountID,
+			RelationID:   relationID,
+		})
+		if err != nil {
+			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			return errcode.ErrServer
+		}
+		accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+		global.Worker.SendTask(task.UpdateSettingState(accessToken, server.SettingNotDisturb, accountID, relationID, isDisat))
 		return nil
 	default:
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)

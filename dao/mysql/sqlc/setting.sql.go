@@ -207,11 +207,11 @@ func (q *Queries) GetAccountIDsByRelationID(ctx context.Context, relationID int6
 }
 
 const getFriendPinSettingsOrderByPinTime = `-- name: GetFriendPinSettingsOrderByPinTime :many
-select s.relation_id, s.nick_name, s.pin_time,
+select s.relation_id, s.nick_name, s.pin_time, s.is_pin, s.is_show, s.is_not_disturb,
        a.id as account_id,
        a.name as account_name,
        a.avatar as account_avatar
-from (select settings.relation_id, settings.nick_name, settings.pin_time
+from (select settings.relation_id, settings.nick_name, settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
       from settings,
            relations
       where settings.account_id = ?
@@ -232,6 +232,9 @@ type GetFriendPinSettingsOrderByPinTimeRow struct {
 	RelationID    int64
 	NickName      string
 	PinTime       time.Time
+	IsPin         bool
+	IsShow        bool
+	IsNotDisturb  bool
 	AccountID     int64
 	AccountName   string
 	AccountAvatar string
@@ -250,6 +253,9 @@ func (q *Queries) GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *G
 			&i.RelationID,
 			&i.NickName,
 			&i.PinTime,
+			&i.IsPin,
+			&i.IsShow,
+			&i.IsNotDisturb,
 			&i.AccountID,
 			&i.AccountName,
 			&i.AccountAvatar,
@@ -701,6 +707,9 @@ const getGroupPinSettingsOrderByPinTime = `-- name: GetGroupPinSettingsOrderByPi
 select s.relation_id,
        s.nick_name,
        s.pin_time,
+       s.is_show,
+       s.is_not_disturb,
+       s.is_pin,
         r.id,
         r.group_name,
         r.group_description,
@@ -708,7 +717,7 @@ select s.relation_id,
         r.group_name,
         r.group_description,
         r.group_avatar
-from (select settings.relation_id,settings.nick_name,settings.pin_time
+from (select settings.relation_id,settings.nick_name,settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
       from settings,
            relations
       where settings.account_id = ?
@@ -732,6 +741,9 @@ type GetGroupPinSettingsOrderByPinTimeRow struct {
 	RelationID         int64
 	NickName           string
 	PinTime            time.Time
+	IsShow             bool
+	IsNotDisturb       bool
+	IsPin              bool
 	ID                 int64
 	GroupName          sql.NullString
 	GroupDescription   sql.NullString
@@ -754,6 +766,9 @@ func (q *Queries) GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *Ge
 			&i.RelationID,
 			&i.NickName,
 			&i.PinTime,
+			&i.IsShow,
+			&i.IsNotDisturb,
+			&i.IsPin,
 			&i.ID,
 			&i.GroupName,
 			&i.GroupDescription,

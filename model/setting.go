@@ -10,16 +10,22 @@ type SettingPinInfo struct {
 }
 
 type SettingFriendInfo struct {
-	AccountID int64  `json:"account_id,omitempty"` // 好友 ID
-	Name      string `json:"name,omitempty"`       // 好友昵称
-	Avatar    string `json:"avatar,omitempty"`     // 好友头像
+	AccountID      int64  `json:"account_id,omitempty"` // 好友 ID
+	Name           string `json:"name,omitempty"`       // 好友昵称
+	Avatar         string `json:"avatar,omitempty"`     // 好友头像
+	Is_Pin         bool   `json:"is_pin,omitempty"`
+	Is_Show        bool   `json:"is_show,omitempty"`
+	Is_Not_Disturb bool   `json:"is_not_disturb,omitempty"`
 }
 
 type SettingGroupInfo struct {
-	RelationID  int64  `json:"relation_id,omitempty"` // 群组 ID
-	Name        string `json:"name,omitempty"`        // 群组名称
-	Description string `json:"description,omitempty"` // 群组的描述
-	Avatar      string `json:"avatar,omitempty"`      // 群组头像
+	RelationID     int64  `json:"relation_id,omitempty"` // 群组 ID
+	Name           string `json:"name,omitempty"`        // 群组名称
+	Description    string `json:"description,omitempty"` // 群组的描述
+	Avatar         string `json:"avatar,omitempty"`      // 群组头像
+	Is_Pin         bool   `json:"is_pin,omitempty"`
+	Is_Show        bool   `json:"is_show,omitempty"`
+	Is_Not_Disturb bool   `json:"is_not_disturb,omitempty"`
 }
 
 type SettingPin struct {

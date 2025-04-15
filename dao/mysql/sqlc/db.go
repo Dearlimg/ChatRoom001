@@ -45,6 +45,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.createGroupRelationStmt, err = db.PrepareContext(ctx, createGroupRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateGroupRelation: %w", err)
 	}
+	if q.createGroupRelationReturnStmt, err = db.PrepareContext(ctx, createGroupRelationReturn); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateGroupRelationReturn: %w", err)
+	}
 	if q.createManySettingStmt, err = db.PrepareContext(ctx, createManySetting); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateManySetting: %w", err)
 	}
@@ -165,8 +168,8 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getFileByRelationStmt, err = db.PrepareContext(ctx, getFileByRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query GetFileByRelation: %w", err)
 	}
-	if q.getFileByRelationIDIsNULLStmt, err = db.PrepareContext(ctx, getFileByRelationIDIsNULL); err != nil {
-		return nil, fmt.Errorf("error preparing query GetFileByRelationIDIsNULL: %w", err)
+	if q.getFileByRelationIDStmt, err = db.PrepareContext(ctx, getFileByRelationID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetFileByRelationID: %w", err)
 	}
 	if q.getFileDetailsByIDStmt, err = db.PrepareContext(ctx, getFileDetailsByID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetFileDetailsByID: %w", err)
@@ -344,6 +347,11 @@ func (q *Queries) Close() error {
 	if q.createGroupRelationStmt != nil {
 		if cerr := q.createGroupRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createGroupRelationStmt: %w", cerr)
+		}
+	}
+	if q.createGroupRelationReturnStmt != nil {
+		if cerr := q.createGroupRelationReturnStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createGroupRelationReturnStmt: %w", cerr)
 		}
 	}
 	if q.createManySettingStmt != nil {
@@ -546,9 +554,9 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getFileByRelationStmt: %w", cerr)
 		}
 	}
-	if q.getFileByRelationIDIsNULLStmt != nil {
-		if cerr := q.getFileByRelationIDIsNULLStmt.Close(); cerr != nil {
-			err = fmt.Errorf("error closing getFileByRelationIDIsNULLStmt: %w", cerr)
+	if q.getFileByRelationIDStmt != nil {
+		if cerr := q.getFileByRelationIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getFileByRelationIDStmt: %w", cerr)
 		}
 	}
 	if q.getFileDetailsByIDStmt != nil {
@@ -827,6 +835,7 @@ type Queries struct {
 	createFriendRelationStmt                 *sql.Stmt
 	createGetStmt                            *sql.Stmt
 	createGroupRelationStmt                  *sql.Stmt
+	createGroupRelationReturnStmt            *sql.Stmt
 	createManySettingStmt                    *sql.Stmt
 	createMessageStmt                        *sql.Stmt
 	createMessageReturnStmt                  *sql.Stmt
@@ -867,7 +876,7 @@ type Queries struct {
 	getApplicationsStmt                      *sql.Stmt
 	getCreateFileStmt                        *sql.Stmt
 	getFileByRelationStmt                    *sql.Stmt
-	getFileByRelationIDIsNULLStmt            *sql.Stmt
+	getFileByRelationIDStmt                  *sql.Stmt
 	getFileDetailsByIDStmt                   *sql.Stmt
 	getFileKeyByIDStmt                       *sql.Stmt
 	getFriendPinSettingsOrderByPinTimeStmt   *sql.Stmt
@@ -927,6 +936,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		createFriendRelationStmt:                 q.createFriendRelationStmt,
 		createGetStmt:                            q.createGetStmt,
 		createGroupRelationStmt:                  q.createGroupRelationStmt,
+		createGroupRelationReturnStmt:            q.createGroupRelationReturnStmt,
 		createManySettingStmt:                    q.createManySettingStmt,
 		createMessageStmt:                        q.createMessageStmt,
 		createMessageReturnStmt:                  q.createMessageReturnStmt,
@@ -967,7 +977,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getApplicationsStmt:                      q.getApplicationsStmt,
 		getCreateFileStmt:                        q.getCreateFileStmt,
 		getFileByRelationStmt:                    q.getFileByRelationStmt,
-		getFileByRelationIDIsNULLStmt:            q.getFileByRelationIDIsNULLStmt,
+		getFileByRelationIDStmt:                  q.getFileByRelationIDStmt,
 		getFileDetailsByIDStmt:                   q.getFileDetailsByIDStmt,
 		getFileKeyByIDStmt:                       q.getFileKeyByIDStmt,
 		getFriendPinSettingsOrderByPinTimeStmt:   q.getFriendPinSettingsOrderByPinTimeStmt,

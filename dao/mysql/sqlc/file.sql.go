@@ -127,27 +127,32 @@ func (q *Queries) GetFileByRelation(ctx context.Context, relationID sql.NullInt6
 	return items, nil
 }
 
-const getFileByRelationIDIsNULL = `-- name: GetFileByRelationIDIsNULL :many
-SELECT id, ` + "`" + `key` + "`" + `
-FROM files
-WHERE relation_id IS NULL AND file_name != 'AccountAvatar'
+const getFileByRelationID = `-- name: GetFileByRelationID :many
+select id, file_name, file_type, file_size, ` + "`" + `key` + "`" + `, url, relation_id, account_id, create_at
+from files
+where relation_id = ?
 `
 
-type GetFileByRelationIDIsNULLRow struct {
-	ID  int64
-	Key string
-}
-
-func (q *Queries) GetFileByRelationIDIsNULL(ctx context.Context) ([]*GetFileByRelationIDIsNULLRow, error) {
-	rows, err := q.query(ctx, q.getFileByRelationIDIsNULLStmt, getFileByRelationIDIsNULL)
+func (q *Queries) GetFileByRelationID(ctx context.Context, relationID sql.NullInt64) ([]*File, error) {
+	rows, err := q.query(ctx, q.getFileByRelationIDStmt, getFileByRelationID, relationID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	items := []*GetFileByRelationIDIsNULLRow{}
+	items := []*File{}
 	for rows.Next() {
-		var i GetFileByRelationIDIsNULLRow
-		if err := rows.Scan(&i.ID, &i.Key); err != nil {
+		var i File
+		if err := rows.Scan(
+			&i.ID,
+			&i.FileName,
+			&i.FileType,
+			&i.FileSize,
+			&i.Key,
+			&i.Url,
+			&i.RelationID,
+			&i.AccountID,
+			&i.CreateAt,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, &i)

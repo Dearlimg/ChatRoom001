@@ -93,7 +93,7 @@ func (setting) UpdateNickName(ctx *gin.Context) {
 		return
 	}
 	err := logic.Logics.Setting.UpdateNickName(ctx, content.ID, params.RelationID, params.NickName)
-	reply.Reply(err)
+	reply.Reply(err, nil)
 }
 
 func (setting) UpdateSettingShow(ctx *gin.Context) {
@@ -108,6 +108,22 @@ func (setting) UpdateSettingShow(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
-	err := logic.Logics.Setting.UpdateShow(ctx, content.ID, params.RelationID)
+	err := logic.Logics.Setting.UpdateShow(ctx, content.ID, params.RelationID, *params.IsShow)
+	reply.Reply(err, nil)
+}
+
+func (setting) UpdateSettingDisturb(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := &request.ParamUpdateSettingDisturb{}
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.Setting.UpdateDisaturb(ctx, content.ID, params.RelationID, *params.IsNotDisturb)
 	reply.Reply(err, nil)
 }

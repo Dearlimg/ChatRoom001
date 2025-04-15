@@ -50,7 +50,7 @@ UPDATE files
 SET url = ?
 WHERE relation_id = ? AND file_name = 'groupAvatar';
 
--- name: GetFileByRelationIDIsNULL :many
-SELECT id, `key`
-FROM files
-WHERE relation_id IS NULL AND file_name != 'AccountAvatar';
+-- name: GetFileByRelationID :many
+select id, file_name, file_type, file_size, `key`, url, relation_id, account_id, create_at
+from files
+where relation_id = ?;

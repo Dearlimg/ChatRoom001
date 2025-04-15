@@ -60,7 +60,7 @@ select s.*,
        a.id as account_id,
        a.name as account_name,
        a.avatar as account_avatar
-from (select settings.relation_id, settings.nick_name, settings.pin_time
+from (select settings.relation_id, settings.nick_name, settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
       from settings,
            relations
       where settings.account_id = ?
@@ -75,6 +75,9 @@ order by s.pin_time;
 select s.relation_id,
        s.nick_name,
        s.pin_time,
+       s.is_show,
+       s.is_not_disturb,
+       s.is_pin,
         r.id,
         r.group_name,
         r.group_description,
@@ -82,7 +85,7 @@ select s.relation_id,
         r.group_name,
         r.group_description,
         r.group_avatar
-from (select settings.relation_id,settings.nick_name,settings.pin_time
+from (select settings.relation_id,settings.nick_name,settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
       from settings,
            relations
       where settings.account_id = ?

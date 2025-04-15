@@ -104,6 +104,5 @@ func GetFileType(file *multipart.FileHeader) (string, errcode.Err) {
 		return "", errcode.ErrServer
 	}
 	fileCode := bytesToHexString(fSrc)
-
 	return fileTypeMap[fileCode], nil
 }

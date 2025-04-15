@@ -27,6 +27,7 @@ type Querier interface {
 	CreateFriendRelation(ctx context.Context, arg *CreateFriendRelationParams) error
 	CreateGet(ctx context.Context, account1ID int64) (*Application, error)
 	CreateGroupRelation(ctx context.Context, arg *CreateGroupRelationParams) error
+	CreateGroupRelationReturn(ctx context.Context, arg *CreateGroupRelationReturnParams) (int64, error)
 	CreateManySetting(ctx context.Context, arg *CreateManySettingParams) error
 	CreateMessage(ctx context.Context, arg *CreateMessageParams) error
 	CreateMessageReturn(ctx context.Context) (*CreateMessageReturnRow, error)
@@ -95,7 +96,7 @@ type Querier interface {
 	GetApplications(ctx context.Context, arg *GetApplicationsParams) ([]*GetApplicationsRow, error)
 	GetCreateFile(ctx context.Context) (*File, error)
 	GetFileByRelation(ctx context.Context, relationID sql.NullInt64) ([]*File, error)
-	GetFileByRelationIDIsNULL(ctx context.Context) ([]*GetFileByRelationIDIsNULLRow, error)
+	GetFileByRelationID(ctx context.Context, relationID sql.NullInt64) ([]*File, error)
 	GetFileDetailsByID(ctx context.Context, id int64) (*File, error)
 	GetFileKeyByID(ctx context.Context, id int64) (string, error)
 	GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *GetFriendPinSettingsOrderByPinTimeParams) ([]*GetFriendPinSettingsOrderByPinTimeRow, error)
