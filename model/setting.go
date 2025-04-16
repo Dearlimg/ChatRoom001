@@ -16,6 +16,11 @@ type SettingFriendInfo struct {
 	Is_Pin         bool   `json:"is_pin,omitempty"`
 	Is_Show        bool   `json:"is_show,omitempty"`
 	Is_Not_Disturb bool   `json:"is_not_disturb,omitempty"`
+
+	Msg_id      int64     `json:"msg_id,omitempty"`
+	Msg_type    string    `json:"msg_type,omitempty"`
+	Msg_content string    `json:"msg_content,omitempty"`
+	Create_at   time.Time `json:"create_at,omitempty"`
 }
 
 type SettingGroupInfo struct {
@@ -26,6 +31,11 @@ type SettingGroupInfo struct {
 	Is_Pin         bool   `json:"is_pin,omitempty"`
 	Is_Show        bool   `json:"is_show,omitempty"`
 	Is_Not_Disturb bool   `json:"is_not_disturb,omitempty"`
+
+	Msg_id      int64     `json:"msg_id,omitempty"`
+	Msg_type    string    `json:"msg_type,omitempty"`
+	Msg_content string    `json:"msg_content,omitempty"`
+	Create_at   time.Time `json:"create_at,omitempty"`
 }
 
 type SettingPin struct {
@@ -43,6 +53,11 @@ type SettingInfo struct {
 	IsShow       bool      `json:"is_show,omitempty"`        // 是否显示
 	PinTime      time.Time `json:"pin_time"`                 // pin 时间
 	LastShow     time.Time `json:"last_show"`                // 最后显示时间
+
+	Msg_id      int64     `json:"msg_id,omitempty"`
+	Msg_type    string    `json:"msg_type,omitempty"`
+	Msg_content string    `json:"msg_content,omitempty"`
+	Create_at   time.Time `json:"create_at,omitempty"`
 }
 
 type Setting struct {

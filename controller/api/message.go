@@ -34,7 +34,6 @@ func (message) CreateFileMsg(ctx *gin.Context) {
 		RlyMsgID:   params.RlyMsg,
 		File:       params.File,
 	})
-
 	reply.Reply(err, result)
 }
 
@@ -59,7 +58,7 @@ func (message) GetMsgsByRelationIDAndTime(ctx *gin.Context) {
 		Limit:      limit,
 		Offset:     offset,
 	})
-	fmt.Println("GetMsgsByRelationIDAndTime test NULL data", result)
+	//fmt.Println("GetMsgsByRelationIDAndTime test NULL data", result)
 	reply.Reply(err, result)
 }
 

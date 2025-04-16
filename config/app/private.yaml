@@ -72,7 +72,7 @@ RedisCluster:
   DisableAutoReconnect: false # 是否禁用自动重连
 ###########################################################################
 Email:
-  Password: pmuereghhhoeibee
+  Password: nbafgutnzsediibc
   IsSSL: true # 是否使用 SSL 加密
   Host: smtp.qq.com # 邮箱服务器的主机地址，smtp.qq.com 是 QQ 邮件的 SMTP
   Port: 465 # 邮箱服务器端口号

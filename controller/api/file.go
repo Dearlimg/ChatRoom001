@@ -25,12 +25,12 @@ func (file) PublishFile(ctx *gin.Context) {
 		return
 	}
 	fileType, myErr := gtype.GetFileType(params.File)
-	fmt.Println("\\033[33m", fileType, myErr, "\033[0m")
 	if myErr != nil {
 		global.Logger.Error(myErr.Error(), middlewares.ErrLogMsg(ctx)...)
 		reply.Reply(errcode.ErrServer)
 		return
 	}
+	fmt.Println("Publishfiletype", fileType)
 	if fileType != "img" && fileType != "png" && fileType != "jpg" {
 		fileType = "file"
 	}

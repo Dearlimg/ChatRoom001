@@ -68,11 +68,11 @@ func (q *Queries) DeleteFileByID(ctx context.Context, id int64) error {
 const getCreateFile = `-- name: GetCreateFile :one
 select id, file_name, file_type, file_size, ` + "`" + `key` + "`" + `, url, relation_id, account_id, create_at
 from files
-where last_insert_id()
+where ` + "`" + `key` + "`" + `=?
 `
 
-func (q *Queries) GetCreateFile(ctx context.Context) (*File, error) {
-	row := q.queryRow(ctx, q.getCreateFileStmt, getCreateFile)
+func (q *Queries) GetCreateFile(ctx context.Context, key string) (*File, error) {
+	row := q.queryRow(ctx, q.getCreateFileStmt, getCreateFile, key)
 	var i File
 	err := row.Scan(
 		&i.ID,

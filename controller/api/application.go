@@ -78,9 +78,9 @@ func (application) AcceptApplication(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
-	fmt.Println("AcceptApplication  ", content.ID, param.AccountID, param)
+	//fmt.Println("AcceptApplication  ", content.ID, param.AccountID, param)
 	err := logic.Logics.Application.AcceptApplication(ctx, content.ID, param.AccountID)
-	fmt.Println(err)
+	reply.Reply(err)
 }
 
 func (application) ListApplications(ctx *gin.Context) {

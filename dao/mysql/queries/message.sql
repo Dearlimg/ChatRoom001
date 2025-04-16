@@ -8,9 +8,9 @@ INSERT INTO messages (
     account_id,
     rly_msg_id,
     relation_id,
-    read_ids -- 必须显式传值
+    read_ids
 ) VALUES (
-             ?, ?, ?, ?, ?, ?, ?, ?, JSON_ARRAY() -- 示例中使用空数组作为默认值
+             ?, ?, ?, ?, ?, ?, ?, ?, JSON_ARRAY()
          );
 
 -- name: CreateMessageReturn :one
@@ -225,3 +225,11 @@ WHERE (NOT is_revoke)
   AND MATCH(m1.msg_content_tsy) AGAINST(? IN NATURAL LANGUAGE MODE)
 ORDER BY m1.create_at DESC
 LIMIT ? OFFSET ?;
+
+-- name: GetLastMessageByRelation :one
+SELECT id,msg_type,msg_content,create_at
+FROM messages
+WHERE relation_id = ?  -- 替换为目标relation_id（如100）
+  AND is_revoke = FALSE  -- 可选：排除已撤回消息
+ORDER BY create_at DESC, id DESC
+LIMIT 1;

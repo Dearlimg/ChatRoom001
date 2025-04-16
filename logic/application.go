@@ -9,7 +9,6 @@ import (
 	"ChatRoom001/model/reply"
 	"ChatRoom001/task"
 	"database/sql"
-	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
@@ -120,7 +119,7 @@ func (application) RefuseApplication(ctx *gin.Context, accountID1, accountID2 in
 
 func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 int64) errcode.Err {
 	apply, err := getApplication(ctx, accountID1, accountID2)
-	fmt.Println("AcceptApplication res apply :", apply)
+	//fmt.Println("AcceptApplication res apply :", apply)
 	if err != nil {
 		return err
 	}

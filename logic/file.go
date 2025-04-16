@@ -58,6 +58,7 @@ func (file) PublishFile(ctx *gin.Context, params model.PublishFile) (model.Publi
 		if params.File.Size > global.PublicSetting.Rules.BiggestFileSize {
 			return model.PublishFileReply{}, myErr
 		}
+		//}
 	} else {
 		fileType = "img"
 	}
@@ -86,7 +87,7 @@ func (file) PublishFile(ctx *gin.Context, params model.PublishFile) (model.Publi
 		global.Logger.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return model.PublishFileReply{}, errcode.ErrServer
 	}
-	r, err := dao.Database.DB.GetCreateFile(ctx)
+	r, err := dao.Database.DB.GetCreateFile(ctx, key)
 	if err != nil {
 		global.Logger.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return model.PublishFileReply{}, errcode.ErrServer
@@ -124,14 +125,22 @@ func (file) UploadGroupAvatar(ctx *gin.Context, file *multipart.FileHeader, acco
 	if file == nil {
 		url = global.PublicSetting.Rules.DefaultAvatarURL
 	}
+
+	//filetype, myErr := gtype.GetFileType(file)
+	//if myErr != nil {
+	//	return &reply.ParamUploadAvatar{URL: ""}, errcode.ErrServer
+	//}
+
 	err = dao.Database.DB.UploadGroupAvatarWithTx(ctx, db.CreateFileParams{
-		FileName:   "groupAvatar",
-		FileType:   "",
-		FileSize:   0,
+		FileName: "groupAvatar",
+		FileType: "",
+		//FileType: db.FilesFileType(filetype),
+		//FileSize:   0,
+		FileSize:   file.Size,
 		Key:        key,
 		Url:        url,
 		RelationID: sql.NullInt64{Int64: relationID, Valid: true},
-		AccountID:  sql.NullInt64{},
+		AccountID:  sql.NullInt64{Int64: accountID, Valid: true},
 	})
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)

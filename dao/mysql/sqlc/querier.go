@@ -94,7 +94,7 @@ type Querier interface {
 	// limit  1;
 	GetApplicationByID(ctx context.Context, arg *GetApplicationByIDParams) (*Application, error)
 	GetApplications(ctx context.Context, arg *GetApplicationsParams) ([]*GetApplicationsRow, error)
-	GetCreateFile(ctx context.Context) (*File, error)
+	GetCreateFile(ctx context.Context, key string) (*File, error)
 	GetFileByRelation(ctx context.Context, relationID sql.NullInt64) ([]*File, error)
 	GetFileByRelationID(ctx context.Context, relationID sql.NullInt64) ([]*File, error)
 	GetFileDetailsByID(ctx context.Context, id int64) (*File, error)
@@ -112,6 +112,7 @@ type Querier interface {
 	GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error)
 	GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error)
 	GetGroupShowSettingsOrderByShowTime(ctx context.Context, arg *GetGroupShowSettingsOrderByShowTimeParams) ([]*GetGroupShowSettingsOrderByShowTimeRow, error)
+	GetLastMessageByRelation(ctx context.Context, relationID int64) (*GetLastMessageByRelationRow, error)
 	GetMessageByID(ctx context.Context, id int64) (*GetMessageByIDRow, error)
 	GetMsgByRelationIDAndTime(ctx context.Context, arg *GetMsgByRelationIDAndTimeParams) ([]*GetMsgByRelationIDAndTimeRow, error)
 	GetMsgsByContent(ctx context.Context, arg *GetMsgsByContentParams) ([]*GetMsgsByContentRow, error)

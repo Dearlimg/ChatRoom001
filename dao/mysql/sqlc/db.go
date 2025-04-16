@@ -216,6 +216,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getGroupShowSettingsOrderByShowTimeStmt, err = db.PrepareContext(ctx, getGroupShowSettingsOrderByShowTime); err != nil {
 		return nil, fmt.Errorf("error preparing query GetGroupShowSettingsOrderByShowTime: %w", err)
 	}
+	if q.getLastMessageByRelationStmt, err = db.PrepareContext(ctx, getLastMessageByRelation); err != nil {
+		return nil, fmt.Errorf("error preparing query GetLastMessageByRelation: %w", err)
+	}
 	if q.getMessageByIDStmt, err = db.PrepareContext(ctx, getMessageByID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetMessageByID: %w", err)
 	}
@@ -634,6 +637,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getGroupShowSettingsOrderByShowTimeStmt: %w", cerr)
 		}
 	}
+	if q.getLastMessageByRelationStmt != nil {
+		if cerr := q.getLastMessageByRelationStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getLastMessageByRelationStmt: %w", cerr)
+		}
+	}
 	if q.getMessageByIDStmt != nil {
 		if cerr := q.getMessageByIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getMessageByIDStmt: %w", cerr)
@@ -892,6 +900,7 @@ type Queries struct {
 	getGroupRelationByIDStmt                 *sql.Stmt
 	getGroupSettingsByNameStmt               *sql.Stmt
 	getGroupShowSettingsOrderByShowTimeStmt  *sql.Stmt
+	getLastMessageByRelationStmt             *sql.Stmt
 	getMessageByIDStmt                       *sql.Stmt
 	getMsgByRelationIDAndTimeStmt            *sql.Stmt
 	getMsgsByContentStmt                     *sql.Stmt
@@ -993,6 +1002,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getGroupRelationByIDStmt:                 q.getGroupRelationByIDStmt,
 		getGroupSettingsByNameStmt:               q.getGroupSettingsByNameStmt,
 		getGroupShowSettingsOrderByShowTimeStmt:  q.getGroupShowSettingsOrderByShowTimeStmt,
+		getLastMessageByRelationStmt:             q.getLastMessageByRelationStmt,
 		getMessageByIDStmt:                       q.getMessageByIDStmt,
 		getMsgByRelationIDAndTimeStmt:            q.getMsgByRelationIDAndTimeStmt,
 		getMsgsByContentStmt:                     q.getMsgsByContentStmt,

@@ -8,9 +8,11 @@ import (
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/reply"
+	"database/sql"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/password"
 	"github.com/gin-gonic/gin"
+	"github.com/pkg/errors"
 )
 
 type user struct {
@@ -131,5 +133,22 @@ func (user) Logout(ctx *gin.Context) errcode.Err {
 	if err := dao.Database.Redis.DeleteAllTokenByUser(ctx, content.ID); err != nil {
 		return errcode.ErrServer.WithDetails(err.Error())
 	}
+	return nil
+}
+
+func getUserInfoByID(ctx *gin.Context, userID int64) (*db.User, errcode.Err) {
+	userInfo, err := dao.Database.DB.GetUserByID(ctx, userID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, errcodes.UserNotFound
+		}
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+	return userInfo, nil
+}
+
+func (user) UpdateUserPassword(ctx *gin.Context, userid int64, code, newPwd string) errcode.Err {
+	//userInfo, myErr := getUserInfoByID(ctx, userid)
 	return nil
 }

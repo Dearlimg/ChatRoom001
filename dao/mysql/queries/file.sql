@@ -17,7 +17,7 @@ values(?,?,?,?,?,?,?);
 -- name: GetCreateFile :one
 select *
 from files
-where last_insert_id();
+where `key`=?;
 
 -- name: DeleteFileByID :exec
 delete

@@ -7,7 +7,6 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
-	"fmt"
 )
 
 func (store *SqlStore) CreateApplicationTx(ctx context.Context, param *db.CreateApplicationParams) error {
@@ -36,7 +35,7 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 		err = tool.DoThat(err, func() error {
 			return queries.UpdateApplication(ctx, &db.UpdateApplicationParams{
 				Status:     db.ApplicationsStatusValue1,
-				RefuseMsg:  "我已通过你的好友请求,让我们开始聊天吧!  ",
+				RefuseMsg:  "",
 				Account1ID: account2.ID,
 				Account2ID: account1.ID,
 			})
@@ -74,7 +73,7 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     false,
 			})
 		})
-		//fmt.Println("AcceptApplicationTx is hrr 3", err)
+
 		err = tool.DoThat(err, func() error {
 			return queries.CreateSetting(ctx, &db.CreateSettingParams{
 				AccountID:  account2.ID,
@@ -83,10 +82,7 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				IsSelf:     false,
 			})
 		})
-		//fmt.Println("AcceptApplicationTx is hrr 4", err)
-		// 新建一个系统通知消息作为好友的第一条消息
-		//var tempjson json.RawMessage
-		//tempjson = json.RawMessage{}
+
 		err = tool.DoThat(err, func() error {
 			arg := &db.CreateMessageParams{
 				NotifyType: db.MessagesNotifyTypeCommon,
@@ -107,12 +103,11 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				RelationID: relationID,
 				CreateAt:   msgInfo.CreateAt,
 			}
-			//fmt.Println("AcceptApplicationTx is hrr 4.2", result)
+
 			return err
 		})
 		//fmt.Println("AcceptApplicationTx is hrr 5", err)
 		err = tool.DoThat(err, func() error {
-			fmt.Println("\033[34mAcceptApplicationWithTX :", relationID, account1.ID, account2.ID, "\033[0m")
 			return rdb.AddRelationAccount(ctx, relationID, account1.ID, account2.ID)
 		})
 		return err

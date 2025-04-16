@@ -22,9 +22,9 @@ INSERT INTO messages (
     account_id,
     rly_msg_id,
     relation_id,
-    read_ids -- 必须显式传值
+    read_ids
 ) VALUES (
-             ?, ?, ?, ?, ?, ?, ?, ?, JSON_ARRAY() -- 示例中使用空数组作为默认值
+             ?, ?, ?, ?, ?, ?, ?, ?, JSON_ARRAY()
          )
 `
 
@@ -76,6 +76,34 @@ func (q *Queries) CreateMessageReturn(ctx context.Context) (*CreateMessageReturn
 		&i.MsgContent,
 		&i.MsgExtend,
 		&i.FileID,
+		&i.CreateAt,
+	)
+	return &i, err
+}
+
+const getLastMessageByRelation = `-- name: GetLastMessageByRelation :one
+SELECT id,msg_type,msg_content,create_at
+FROM messages
+WHERE relation_id = ?  -- 替换为目标relation_id（如100）
+  AND is_revoke = FALSE  -- 可选：排除已撤回消息
+ORDER BY create_at DESC, id DESC
+LIMIT 1
+`
+
+type GetLastMessageByRelationRow struct {
+	ID         int64
+	MsgType    MessagesMsgType
+	MsgContent string
+	CreateAt   time.Time
+}
+
+func (q *Queries) GetLastMessageByRelation(ctx context.Context, relationID int64) (*GetLastMessageByRelationRow, error) {
+	row := q.queryRow(ctx, q.getLastMessageByRelationStmt, getLastMessageByRelation, relationID)
+	var i GetLastMessageByRelationRow
+	err := row.Scan(
+		&i.ID,
+		&i.MsgType,
+		&i.MsgContent,
 		&i.CreateAt,
 	)
 	return &i, err

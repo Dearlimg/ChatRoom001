@@ -48,6 +48,9 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 		RelationID: params.RelationID,
 		AccountID:  params.AccountID,
 	})
+
+	//fileType, myErr := gtype.GetFileType(params.File)
+
 	if myErr != nil {
 		return nil, myErr
 	}
@@ -70,8 +73,9 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 			return nil, errcode.ErrServer
 		}
 		rlyMsg = &reply.ParamRlyMsg{
-			MsgID:      rltInfo.ID,
-			MsgType:    string(rltInfo.MsgType),
+			MsgID:   rltInfo.ID,
+			MsgType: string(rltInfo.MsgType),
+			//MsgType:    fileType,
 			MsgContent: rltInfo.MsgContent,
 			MsgExtend:  rlyMsgExtend,
 			IsRevoked:  rltInfo.IsRevoke,
@@ -81,6 +85,7 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 	err := dao.Database.DB.CreateMessage(ctx, &db.CreateMessageParams{
 		NotifyType: db.MessagesNotifyTypeCommon,
 		MsgType:    db.MessagesMsgType(model.MsgTypeFile),
+		//MsgType:    db.MessagesMsgType(fileType),
 		MsgContent: fileInfo.Url,
 		MsgExtend:  extend,
 		FileID:     sql.NullInt64{Int64: fileInfo.ID, Valid: true},
@@ -100,7 +105,7 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 		ParamMsgInfo: reply.ParamMsgInfo{
 			ID:         result.ID,
 			NotifyType: string(db.MessagesNotifyTypeCommon),
-			MsgType:    string(model.MsgTypeText),
+			MsgType:    string(model.MsgTypeFile),
 			MsgContent: result.MsgContent,
 			MsgExtend:  nil,
 			AccountID:  params.AccountID,
@@ -116,7 +121,6 @@ func (message) CreateFileMsg(ctx *gin.Context, params model.CreateFileMsg) (*rep
 		CreateAt:   result.CreateAt,
 	}, nil
 
-	return &reply.ParamCreateFileMsg{}, nil
 }
 
 func (message) GetMsgsByRelationIDAndTime(ctx *gin.Context, params model.GetMsgsByRelationIDAndTime) (*reply.ParamGetMsgsRelationIDAndTime, errcode.Err) {

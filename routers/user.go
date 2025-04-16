@@ -2,6 +2,7 @@ package routers
 
 import (
 	"ChatRoom001/controller/api"
+	"ChatRoom001/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,6 +15,11 @@ func (user) Init(router *gin.RouterGroup) {
 		r.POST("register", api.Apis.User.Register)
 		r.POST("/login", api.Apis.User.Login)
 		r.DELETE("/logout", api.Apis.User.Logout)
+		updateGroup := r.Group("update").Use(middlewares.MustUser())
+		{
+			updateGroup.PUT("pwd", api.Apis.User.UpdateUserPassword)
+		}
+
 	}
 	r.DELETE("deleteUser")
 }

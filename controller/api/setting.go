@@ -7,6 +7,7 @@ import (
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/request"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
@@ -49,6 +50,7 @@ func (setting) GetShows(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
+	fmt.Println("GetShows 1 ")
 	result, err := logic.Logics.Setting.GetShows(ctx, content.ID)
 	reply.Reply(err, result)
 }

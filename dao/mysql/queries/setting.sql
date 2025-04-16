@@ -222,8 +222,8 @@ LIMIT ? OFFSET ?;
 -- name: GetGroupSettingsByName :many
 select s.*,
        r.id as realtion_id,
-       r.group_name AS group_name,       -- 假设 group_type.name 映射为 group_type_name 字段
-       r.group_avatar AS group_avatar,   -- 假设 group_type.avatar 映射为 group_type_avatar 字段
+       r.group_name AS group_name,
+       r.group_avatar AS group_avatar,
        r.group_description AS description,
        count(*) over () as total
 from (select relation_id,
@@ -241,7 +241,7 @@ from (select relation_id,
     and relations.relation_type = 'group') as s,
     relations r
 where r.id = (select s.relation_id from settings where s.relation_id=s.relation_id and (settings.account_id=?))
-    and ((r.group_name like ('%' || @name || '%')))
+    and ((r.group_name like ('%' || ? || '%')))
 order by (r.group_name)
 limit ? offset ?;
 

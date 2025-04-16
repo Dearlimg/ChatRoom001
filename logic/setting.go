@@ -12,6 +12,7 @@ import (
 	"ChatRoom001/task"
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
@@ -117,6 +118,7 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
+	//fmt.Println("GetShows 2 ", err)
 	groupData, err := dao.Database.DB.GetGroupShowSettingsOrderByShowTime(ctx, &db.GetGroupShowSettingsOrderByShowTimeParams{
 		AccountID:   accountID,
 		AccountID_2: accountID,
@@ -125,10 +127,16 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
+	//fmt.Println("GetShows 3 ", err)
 	result := make([]*model.Setting, 0, len(groupData))
 	for i, j := 0, 0; i < len(friendData) || j < len(groupData); {
 		if i < len(friendData) && (j >= len(groupData) || friendData[i].LastShow.After(groupData[j].LastShow)) {
 			v := friendData[i]
+			msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
+			if myErr != nil {
+				global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+				return nil, errcode.ErrServer
+			}
 			friendInfo := &model.SettingFriendInfo{
 				AccountID: v.AccountID,
 				Name:      v.AccountName,
@@ -144,6 +152,11 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 					IsShow:       v.IsShow,
 					PinTime:      v.PinTime,
 					LastShow:     v.LastShow,
+
+					Msg_id:      msgInfo.ID,
+					Msg_type:    string(msgInfo.MsgType),
+					Msg_content: msgInfo.MsgContent,
+					Create_at:   msgInfo.CreateAt,
 				},
 				FriendInfo: friendInfo,
 			})
@@ -151,6 +164,17 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 		} else {
 			v := groupData[j]
 			//groupType := strings.Split(v., ",")
+			//msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
+			//if myErr != nil {
+			//	global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			//	return nil, errcode.ErrServer
+			//}
+			//fmt.Println("GetShows 423323 ", err, msgInfo)
+			//if msgInfo.ID == 0 || msgInfo.MsgType == "" || msgInfo.MsgContent == "" {
+			//	msgInfo.MsgType = "text"
+			//	msgInfo.ID = 0
+			//	msgInfo.MsgContent = "nil"
+			//}
 			groupInfo := &model.SettingGroupInfo{
 				RelationID:  v.RelationID,
 				Name:        v.GroupName.String,
@@ -167,12 +191,18 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 					IsShow:       v.IsShow,
 					PinTime:      v.PinTime,
 					LastShow:     v.LastShow,
+
+					//Msg_id:      msgInfo.ID,
+					//Msg_type:    string(msgInfo.MsgType),
+					//Msg_content: msgInfo.MsgContent,
+					//Create_at:   msgInfo.CreateAt,
 				},
 				GroupInfo: groupInfo,
 			})
 			j++
 		}
 	}
+	fmt.Println("GetShows 4 ")
 	return &reply.ParamGetShows{
 		List:  result,
 		Total: int64(len(result)),
@@ -200,6 +230,11 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 	for i, j := 0, 0; i < len(friendData) || j < len(groupData); {
 		if i < len(friendData) && (j >= len(groupData) || friendData[i].PinTime.Before(groupData[j].PinTime)) {
 			v := friendData[i]
+			msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
+			if myErr != nil {
+				global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+				return nil, errcode.ErrServer
+			}
 			friendInfo := &model.SettingFriendInfo{
 				AccountID:      accountID,
 				Name:           v.AccountName,
@@ -207,6 +242,11 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 				Is_Pin:         v.IsPin,
 				Is_Show:        v.IsShow,
 				Is_Not_Disturb: v.IsNotDisturb,
+
+				Msg_id:      msgInfo.ID,
+				Msg_type:    string(msgInfo.MsgType),
+				Msg_content: msgInfo.MsgContent,
+				Create_at:   msgInfo.CreateAt,
 			}
 			result = append(result, &model.SettingPin{
 				SettingPinInfo: model.SettingPinInfo{
@@ -220,6 +260,11 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 			i++
 		} else {
 			v := groupData[j]
+			msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
+			if myErr != nil {
+				global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+				return nil, errcode.ErrServer
+			}
 			groupInfo := &model.SettingGroupInfo{
 				RelationID:     v.RelationID,
 				Name:           v.GroupName_2.String,
@@ -228,6 +273,11 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 				Is_Pin:         v.IsPin,
 				Is_Show:        v.IsShow,
 				Is_Not_Disturb: v.IsNotDisturb,
+
+				Msg_id:      msgInfo.ID,
+				Msg_type:    string(msgInfo.MsgType),
+				Msg_content: msgInfo.MsgContent,
+				Create_at:   msgInfo.CreateAt,
 			}
 			result = append(result, &model.SettingPin{
 				SettingPinInfo: model.SettingPinInfo{

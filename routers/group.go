@@ -14,5 +14,12 @@ func (group) Init(router *gin.RouterGroup) {
 	{
 		r.POST("create", api.Apis.Group.CreateGroup)
 		r.POST("transfer", api.Apis.Group.TransferGroup)
+		r.POST("dissolve", api.Apis.Group.DissolveGroup)
+		r.POST("update", api.Apis.Group.UpdateGroup)
+		r.POST("invite", api.Apis.Group.InviteAccount)
+		r.GET("list", api.Apis.Group.GetGroupList)
+		r.POST("quit", api.Apis.Group.QuitGroup)
+		r.POST("name", api.Apis.Group.GetGroupsByName)
+		r.GET("members", api.Apis.Group.GetGroupMembers)
 	}
 }

@@ -6,6 +6,7 @@ import (
 	"ChatRoom001/pkg/tool"
 	"context"
 	"database/sql"
+	"errors"
 	"fmt"
 )
 
@@ -59,7 +60,8 @@ func (store *SqlStore) UploadGroupAvatarWithTx(ctx context.Context, arg db.Creat
 		_, err = queries.GetGroupAvatar(ctx, arg.RelationID)
 		if err != nil {
 			// 如果没有设置过群头像
-			if err.Error() == "no rows in result set" {
+			//if err.Error() == "no rows in result set" {
+			if errors.Is(sql.ErrNoRows, err) {
 				err = queries.CreateFile(ctx, &db.CreateFileParams{
 					FileName:   arg.FileName,
 					FileType:   "img",
@@ -119,8 +121,16 @@ func (store *SqlStore) TransferGroupWithTx(ctx context.Context, accountID, relat
 }
 
 func (store *SqlStore) DeleteSettingWithTx(ctx context.Context, rdb *operate.RDB, accountID, relationID int64) error {
-	//TODO implement me
-	panic("implement me")
+	return store.execTx(ctx, func(queries *db.Queries) error {
+		err := queries.DeleteSetting(ctx, &db.DeleteSettingParams{
+			AccountID:  accountID,
+			RelationID: relationID,
+		})
+		if err != nil {
+			return err
+		}
+		return rdb.DeleteRelationAccount(ctx, relationID, accountID)
+	})
 }
 
 func (store *SqlStore) RevokeMsgWithTx(ctx context.Context, msgID int64, isPin, isTop bool) error {

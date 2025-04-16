@@ -31,10 +31,10 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 			})
 		})
 		rg := routers.Routers
-		rg.Account.Init(root) //finish
-		rg.User.Init(root)    //need modify
-		rg.Email.Init(root)   //finish
-		rg.Group.Init(root)
+		rg.Account.Init(root)     //finish
+		rg.User.Init(root)        //need modify
+		rg.Email.Init(root)       //finish
+		rg.Group.Init(root)       //finish
 		rg.Application.Init(root) //finish
 		rg.File.Init(root)        //finish
 		rg.Message.Init(root)     //finish

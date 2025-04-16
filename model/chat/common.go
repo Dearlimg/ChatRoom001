@@ -24,6 +24,8 @@ const (
 	ServerCreateNotify       = "create_notify"        // 创建群通知
 	ServerUpdateNotify       = "update_notify"        // 更新群通知
 	ServerError              = "error"                // 错误
+
+	ServerGroupCreate = "group_create" // 创建群聊
 )
 
 // 客户端推送的事件

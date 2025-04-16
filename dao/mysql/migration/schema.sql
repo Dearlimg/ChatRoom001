@@ -1,12 +1,12 @@
 USE chatroom;
 
--- 群类型
-CREATE TABLE `groups` (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        name VARCHAR(50) NOT NULL, -- 群名称
-                        description VARCHAR(255), -- 群描述
-                        avatar VARCHAR(255) -- 群头像
-);
+# -- 群类型
+# CREATE TABLE `groups` (
+#                         id INT AUTO_INCREMENT PRIMARY KEY,
+#                         name VARCHAR(50) NOT NULL, -- 群名称
+#                         description VARCHAR(255), -- 群描述
+#                         avatar VARCHAR(255) -- 群头像
+# );
 
 -- 创建用户表
 CREATE TABLE IF NOT EXISTS users (

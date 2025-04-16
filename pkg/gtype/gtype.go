@@ -69,6 +69,11 @@ func init() {
 	fileTypeMap["AC9EBD8F"] = "qdf"         // Quicken [qdf]
 	fileTypeMap["E3828596"] = "pwl"         // Windows Password [pwl]
 	fileTypeMap["2E7261FD"] = "ram"         // Real Audio [ram]
+
+	fileTypeMap["efbbbf"] = "txt" // 带BOM的UTF-8编码文本文件（常见于Windows系统生成的TXT）
+	fileTypeMap["0d0a"] = "txt"   // 无BOM的TXT文件（以换行符开头，如`\r\n`）
+	fileTypeMap["6c6f67"] = "txt" // 无BOM的TXT文件（以ASCII字符开头，例如"log"开头）
+
 }
 
 // 获取前面结果字节的二进制
