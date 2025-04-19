@@ -61,3 +61,30 @@ func (user) UpdateUserPassword(ctx *gin.Context) {
 	err := logic.Logics.User.UpdateUserPassword(ctx, content.ID, params.Code, params.NewPassword)
 	reply.Reply(err, nil)
 }
+
+func (user) UpdateUserEmail(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamUpdateUserEmail)
+	if err := ctx.ShouldBind(params); err != nil {
+		reply.Reply(errcodes.PasswordNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.UserToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.User.UpdateUserEmail(ctx, content.ID, params.Email, params.Code)
+	reply.Reply(err, nil)
+}
+
+func (user) DeleteUser(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.UserToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.User.DeleteUser(ctx, content.ID)
+	reply.Reply(err)
+}

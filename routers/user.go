@@ -18,8 +18,8 @@ func (user) Init(router *gin.RouterGroup) {
 		updateGroup := r.Group("update").Use(middlewares.MustUser())
 		{
 			updateGroup.PUT("pwd", api.Apis.User.UpdateUserPassword)
+			updateGroup.PUT("email", api.Apis.User.UpdateUserEmail)
 		}
-
+		r.DELETE("deleteUser", middlewares.MustUser(), api.Apis.User.DeleteUser)
 	}
-	r.DELETE("deleteUser")
 }

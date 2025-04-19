@@ -203,39 +203,13 @@ func (q *Queries) GetAccountByUserID(ctx context.Context, userID int64) ([]*GetA
 	return items, nil
 }
 
-const getAccountsByName = `-- name: GetAccountsByName :many
-SELECT a.id, a.name, a.avatar, a.gender, r.id AS relation_id, COUNT(*) OVER () AS total
-FROM (
-         SELECT id, name, avatar, gender
-         FROM accounts
-         WHERE name LIKE CONCAT('%', ?, '%')
-     ) AS a
-         LEFT JOIN relations r
-                   ON r.relation_type = 'friend'
-                       AND (
-                          (r.account1_id = a.id AND r.account2_id = ?)
-                              OR (r.account1_id = ? AND r.account2_id = a.id)
-                          )
-LIMIT ? OFFSET ?
+const getAccountNameByID = `-- name: GetAccountNameByID :one
 
+
+SELECT name
+from accounts
+where id = ?
 `
-
-type GetAccountsByNameParams struct {
-	CONCAT     interface{}
-	Account2ID sql.NullInt64
-	Account1ID sql.NullInt64
-	Limit      int32
-	Offset     int32
-}
-
-type GetAccountsByNameRow struct {
-	ID         int64
-	Name       string
-	Avatar     string
-	Gender     AccountsGender
-	RelationID sql.NullInt64
-	Total      interface{}
-}
 
 // -- name: GetAccountsByName :many
 // SELECT
@@ -259,6 +233,46 @@ type GetAccountsByNameRow struct {
 //	                     )
 //
 // LIMIT ? OFFSET ?;
+func (q *Queries) GetAccountNameByID(ctx context.Context, id int64) (string, error) {
+	row := q.queryRow(ctx, q.getAccountNameByIDStmt, getAccountNameByID, id)
+	var name string
+	err := row.Scan(&name)
+	return name, err
+}
+
+const getAccountsByName = `-- name: GetAccountsByName :many
+SELECT a.id, a.name, a.avatar, a.gender, r.id AS relation_id, COUNT(*) OVER () AS total
+FROM (
+         SELECT id, name, avatar, gender
+         FROM accounts
+         WHERE name LIKE CONCAT('%', ?, '%')
+     ) AS a
+         LEFT JOIN relations r
+                   ON r.relation_type = 'friend'
+                       AND (
+                          (r.account1_id = a.id AND r.account2_id = ?)
+                              OR (r.account1_id = ? AND r.account2_id = a.id)
+                          )
+LIMIT ? OFFSET ?
+`
+
+type GetAccountsByNameParams struct {
+	CONCAT     interface{}
+	Account2ID sql.NullInt64
+	Account1ID sql.NullInt64
+	Limit      int32
+	Offset     int32
+}
+
+type GetAccountsByNameRow struct {
+	ID         int64
+	Name       string
+	Avatar     string
+	Gender     AccountsGender
+	RelationID sql.NullInt64
+	Total      interface{}
+}
+
 func (q *Queries) GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error) {
 	rows, err := q.query(ctx, q.getAccountsByNameStmt, getAccountsByName,
 		arg.CONCAT,

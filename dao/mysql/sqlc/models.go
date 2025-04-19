@@ -340,13 +340,6 @@ type File struct {
 	CreateAt   time.Time
 }
 
-type Group struct {
-	ID          int32
-	Name        string
-	Description sql.NullString
-	Avatar      sql.NullString
-}
-
 type GroupNotify struct {
 	ID            int64
 	RelationID    sql.NullInt64

@@ -65,12 +65,18 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 			Account2ID: tempid2,
 		})
 		// 建立双方关系
+
+		nickname1, _ := queries.GetAccountNameByID(ctx, account1.ID)
+		nickname2, _ := queries.GetAccountNameByID(ctx, account2.ID)
+
 		err = tool.DoThat(err, func() error {
 			return queries.CreateSetting(ctx, &db.CreateSettingParams{
 				AccountID:  account1.ID,
 				RelationID: relationID,
 				IsLeader:   false,
 				IsSelf:     false,
+
+				NickName: nickname2,
 			})
 		})
 
@@ -80,6 +86,8 @@ func (store *SqlStore) AcceptApplicationTx(ctx context.Context, rdb *operate.RDB
 				RelationID: relationID,
 				IsLeader:   false,
 				IsSelf:     false,
+
+				NickName: nickname1,
 			})
 		})
 

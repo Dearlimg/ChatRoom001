@@ -35,6 +35,7 @@ func (account) CreateAccount(ctx *gin.Context) {
 func (account) GetAccountToken(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := new(request.ParamGetAccountToken)
+	fmt.Println(params)
 	if err := ctx.ShouldBindQuery(params); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return

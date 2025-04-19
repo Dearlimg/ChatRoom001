@@ -1,6 +1,6 @@
 -- name: CreateSetting :exec
 insert into settings (account_id, relation_id, nick_name,is_leader,is_self)
-values (?,?,'',?,?);
+values (?,?,?,?,?);
 
 -- name: DeleteSetting :exec
 delete
@@ -120,28 +120,164 @@ from (select relation_id,
 where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ? limit 1)
 order by s.last_show desc;
 
+
 -- name: GetFriendShowSettingsOrderByShowTime :many
-select s.*,
-       a.id as account_id,
-       a.name as account_name,
-       a.avatar as account_avatar
-from (select relation_id,
-             nick_name,
-             is_not_disturb,
-             is_pin,
-             pin_time,
-             is_show,
-             last_show,
-             is_self
-      from settings,
-           relations
-      where settings.account_id = ?
-        and settings.is_show = true
-        and settings.relation_id = relations.id
-        and relations.relation_type = 'friend') as s,
-     accounts a
-where a.id = (select account_id from settings where relation_id = s.relation_id and (settings.account_id != ? or is_self = true))
-order by s.last_show desc;
+SELECT
+    s.relation_id AS RelationID,
+    s.nick_name AS NickName,
+    s.is_not_disturb AS IsNotDisturb,
+    s.is_pin AS IsPin,
+    s.pin_time AS PinTime,
+    s.is_show AS IsShow,
+    s.last_show AS LastShow,
+    s.is_self AS IsSelf,
+    a.id AS AccountID,
+    a.name AS AccountName,
+    a.avatar AS AccountAvatar,
+    a.create_at AS AccountCreateAt  -- 新增字段
+FROM (
+         SELECT
+             st.relation_id,
+             st.nick_name,
+             st.is_not_disturb,
+             st.is_pin,
+             st.pin_time,
+             st.is_show,
+             st.last_show,
+             st.is_self,
+             r.relation_type
+         FROM settings st
+                  INNER JOIN relations r
+                             ON st.relation_id = r.id
+         WHERE
+             st.account_id = ?
+           AND st.is_show = TRUE
+           AND r.relation_type = 'friend'
+     ) AS s
+         INNER JOIN accounts a
+                    ON a.id = (
+                        SELECT account_id
+                        FROM settings
+                        WHERE
+                            relation_id = s.relation_id
+                          AND (settings.account_id != ? OR is_self = TRUE)
+                        LIMIT 1
+                    )
+ORDER BY s.last_show DESC;
+
+
+# SELECT
+#     s.relation_id,
+#     s.nick_name,
+#     s.is_not_disturb,
+#     s.is_pin,
+#     s.pin_time,
+#     s.is_show,
+#     s.last_show,
+#     s.is_self,
+#     a.id AS account_id,
+#     a.name AS account_name,
+#     a.avatar AS account_avatar
+# FROM (
+#          SELECT
+#              st.relation_id,
+#              st.nick_name,
+#              st.is_not_disturb,
+#              st.is_pin,
+#              st.pin_time,
+#              st.is_show,
+#              st.last_show,
+#              st.is_self,
+#              CASE
+#                  WHEN rt.relation_type = 'friend' THEN rt.account2_id
+#                  ELSE NULL
+#                  END AS friend_account_id
+#          FROM settings st
+#                   INNER JOIN relations rt
+#                              ON st.relation_id = rt.id
+#                                  AND rt.relation_type = 'friend'
+#          WHERE
+#              st.account_id = ?
+#            AND st.is_show = true
+#      ) s
+#          INNER JOIN accounts a
+#                     ON a.id = s.friend_account_id
+# ORDER BY
+#     s.last_show DESC;
+
+
+#
+# -- name: GetFriendShowSettingsOrderByShowTime :many
+# SELECT
+#     s.relation_id,
+#     s.nick_name,
+#     s.is_not_disturb,
+#     s.is_pin,
+#     s.pin_time,
+#     s.is_show,
+#     s.last_show,
+#     s.is_self,
+#     a.id AS account_id,
+#     a.name AS account_name,
+#     a.avatar AS account_avatar
+# FROM (
+#          SELECT
+#              settings.relation_id,
+#              settings.nick_name,
+#              settings.is_not_disturb,
+#              settings.is_pin,
+#              settings.pin_time,
+#              settings.is_show,
+#              settings.last_show,
+#              settings.is_self
+#          FROM
+#              settings
+#                  JOIN
+#              relations ON settings.relation_id = relations.id
+#          WHERE
+#              settings.account_id =?  -- 这里的? 是占位符，实际使用时需要替换为具体的值
+#            AND settings.is_show = true
+#            AND relations.relation_type = 'friend'
+#      ) AS s
+#          JOIN
+#      accounts a ON a.id = (
+#          SELECT
+#              sub_settings.account_id  -- 给子查询中的 settings 表取别名 sub_settings
+#          FROM
+#              settings AS sub_settings  -- 给子查询中的 settings 表取别名 sub_settings
+#          WHERE
+#              sub_settings.relation_id = s.relation_id
+#            AND (sub_settings.account_id !=? OR sub_settings.is_self = true)  -- 这里的? 是占位符，实际使用时需要替换为具体的值
+#      )
+# ORDER BY
+#     s.last_show DESC;
+
+
+
+#
+# -- name: GetFriendShowSettingsOrderByShowTime :many
+# select s.*,
+#        r.id,r.group_avatar,r.group_name,r.group_description,r.created_at
+# from (select relation_id,
+#              nick_name,
+#              is_not_disturb,
+#              is_pin,
+#              pin_time,
+#              is_show,
+#              last_show,
+#              is_self
+#       from settings,
+#            relations
+#       where settings.account_id = ?
+#         and settings.relation_id = relations.id
+#         and settings.is_show = true
+#         and relations.relation_type = 'friend') as s,
+#      relations r
+# where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ? limit 1)
+# order by s.last_show desc;
+
+
+
 
 -- name: GetFriendSettingsOrderByName :many
 select s.*,

@@ -138,6 +138,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getAccountIDsByRelationIDStmt, err = db.PrepareContext(ctx, getAccountIDsByRelationID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAccountIDsByRelationID: %w", err)
 	}
+	if q.getAccountNameByIDStmt, err = db.PrepareContext(ctx, getAccountNameByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetAccountNameByID: %w", err)
+	}
 	if q.getAccountsByNameStmt, err = db.PrepareContext(ctx, getAccountsByName); err != nil {
 		return nil, fmt.Errorf("error preparing query GetAccountsByName: %w", err)
 	}
@@ -507,6 +510,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getAccountIDsByRelationIDStmt: %w", cerr)
 		}
 	}
+	if q.getAccountNameByIDStmt != nil {
+		if cerr := q.getAccountNameByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getAccountNameByIDStmt: %w", cerr)
+		}
+	}
 	if q.getAccountsByNameStmt != nil {
 		if cerr := q.getAccountsByNameStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getAccountsByNameStmt: %w", cerr)
@@ -874,6 +882,7 @@ type Queries struct {
 	getAccountByIDStmt                       *sql.Stmt
 	getAccountByUserIDStmt                   *sql.Stmt
 	getAccountIDsByRelationIDStmt            *sql.Stmt
+	getAccountNameByIDStmt                   *sql.Stmt
 	getAccountsByNameStmt                    *sql.Stmt
 	getAcountIDsByUserIDStmt                 *sql.Stmt
 	getAllEmailStmt                          *sql.Stmt
@@ -976,6 +985,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getAccountByIDStmt:                       q.getAccountByIDStmt,
 		getAccountByUserIDStmt:                   q.getAccountByUserIDStmt,
 		getAccountIDsByRelationIDStmt:            q.getAccountIDsByRelationIDStmt,
+		getAccountNameByIDStmt:                   q.getAccountNameByIDStmt,
 		getAccountsByNameStmt:                    q.getAccountsByNameStmt,
 		getAcountIDsByUserIDStmt:                 q.getAcountIDsByUserIDStmt,
 		getAllEmailStmt:                          q.getAllEmailStmt,

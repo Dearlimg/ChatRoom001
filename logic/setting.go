@@ -114,49 +114,54 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 		AccountID:   accountID,
 		AccountID_2: accountID,
 	})
+	//friendData, err := dao.Database.DB.GetFriendShowSettingsOrderByShowTime(ctx, accountID)
+
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
-	//fmt.Println("GetShows 2 ", err)
+
 	groupData, err := dao.Database.DB.GetGroupShowSettingsOrderByShowTime(ctx, &db.GetGroupShowSettingsOrderByShowTimeParams{
 		AccountID:   accountID,
 		AccountID_2: accountID,
 	})
+
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
 	//fmt.Println("GetShows 3 ", err)
-	result := make([]*model.Setting, 0, len(groupData))
+	result := make([]*model.Setting, 0, len(friendData)+len(groupData))
 	for i, j := 0, 0; i < len(friendData) || j < len(groupData); {
-		if i < len(friendData) && (j >= len(groupData) || friendData[i].LastShow.After(groupData[j].LastShow)) {
+		if i < len(friendData) && (j >= len(groupData) || friendData[i].Lastshow.After(groupData[j].LastShow)) {
 			v := friendData[i]
-			msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
-			if myErr != nil {
-				global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
-				return nil, errcode.ErrServer
-			}
+			fmt.Println("GetShow data", v)
+			//msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
+			//if myErr != nil {
+			//	global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			//	return nil, errcode.ErrServer
+			//}
 			friendInfo := &model.SettingFriendInfo{
-				AccountID: v.AccountID,
-				Name:      v.AccountName,
-				Avatar:    v.AccountAvatar,
+				AccountID: v.Accountid,
+				Name:      v.Accountname,
+				Avatar:    v.Accountavatar,
+				Create_at: v.Accountcreateat,
 			}
 			result = append(result, &model.Setting{
 				SettingInfo: model.SettingInfo{
-					RelationID:   v.RelationID,
+					RelationID:   v.Relationid,
 					RelationType: "friend",
-					NickName:     v.NickName,
-					IsNotDisturb: v.IsNotDisturb,
-					IsPin:        v.IsPin,
-					IsShow:       v.IsShow,
-					PinTime:      v.PinTime,
-					LastShow:     v.LastShow,
+					NickName:     v.Nickname,
+					IsNotDisturb: v.Isnotdisturb,
+					IsPin:        v.Ispin,
+					IsShow:       v.Isshow,
+					PinTime:      v.Pintime,
+					LastShow:     v.Lastshow,
 
-					Msg_id:      msgInfo.ID,
-					Msg_type:    string(msgInfo.MsgType),
-					Msg_content: msgInfo.MsgContent,
-					Create_at:   msgInfo.CreateAt,
+					//Msg_id:      msgInfo.ID,
+					//Msg_type:    string(msgInfo.MsgType),
+					//Msg_content: msgInfo.MsgContent,
+					//Create_at:   msgInfo.CreateAt,
 				},
 				FriendInfo: friendInfo,
 			})

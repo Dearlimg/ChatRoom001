@@ -106,6 +106,7 @@ func (file) UploadGroupAvatar(ctx *gin.Context, file *multipart.FileHeader, acco
 		AccountID:  accountID,
 		RelationID: relationID,
 	})
+	fmt.Println("UpdateGroup5", ok, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return &reply.ParamUploadAvatar{URL: ""}, errcode.ErrServer
@@ -142,6 +143,7 @@ func (file) UploadGroupAvatar(ctx *gin.Context, file *multipart.FileHeader, acco
 		RelationID: sql.NullInt64{Int64: relationID, Valid: true},
 		AccountID:  sql.NullInt64{Int64: accountID, Valid: true},
 	})
+	fmt.Println("UpdateGroup6", ok, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return &reply.ParamUploadAvatar{URL: ""}, errcode.ErrServer

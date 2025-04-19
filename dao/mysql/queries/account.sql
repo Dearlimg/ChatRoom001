@@ -86,7 +86,7 @@ FROM (
                           (r.account1_id = a.id AND r.account2_id = ?)
                               OR (r.account1_id = ? AND r.account2_id = a.id)
                           )
-LIMIT ? OFFSET ?
+LIMIT ? OFFSET ?;
 
 # -- name: GetAccountsByName :many
 # SELECT
@@ -106,3 +106,9 @@ LIMIT ? OFFSET ?
 #                           (r.account1_id = ? AND r.account2_id = a.id)
 #                           )
 # LIMIT ? OFFSET ?;
+
+
+-- name: GetAccountNameByID :one
+SELECT name
+from accounts
+where id = ?;

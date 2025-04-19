@@ -19,7 +19,7 @@ func (r *RDB) SaveUserToken(ctx *gin.Context, userID int64, tokens []string) err
 	return nil
 }
 
-func (r *RDB) CheckUserToken(ctx *gin.Context, userID int64, token string) bool {
+func (r *RDB) CheckUserTokenValid(ctx *gin.Context, userID int64, token string) bool {
 	key := utils.LinkStr(UserKey, utils.IDToString(userID))
 	ok := r.rdb.SIsMember(ctx, key, token).Val()
 	return ok

@@ -8,6 +8,7 @@ import (
 	"ChatRoom001/model"
 	"ChatRoom001/model/reply"
 	"ChatRoom001/model/request"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
@@ -87,10 +88,12 @@ func (group) UpdateGroup(ctx *gin.Context) {
 		rly.Reply(errcodes.AuthNotExist)
 		return
 	}
+	fmt.Println("update group", params)
 	result, err := logic.Logics.Group.UpdateGroup(ctx, content.ID, params.RelationID, params.Name, params.Description)
 	if err != nil {
 		rly.Reply(err, result)
 	}
+
 	avatar, err := logic.Logics.File.UploadGroupAvatar(ctx, params.Avatar, content.ID, params.RelationID)
 	result.Avatar = avatar.URL
 	rly.Reply(err, result)
@@ -108,6 +111,7 @@ func (group) InviteAccount(ctx *gin.Context) {
 		rly.Reply(errcodes.AuthNotExist)
 		return
 	}
+	fmt.Println("invite account 001", content.ID, params.RelationID, params.AccountID)
 	result, err := logic.Logics.Group.InviteAccount(ctx, content.ID, params.RelationID, params.AccountID)
 	rly.Reply(err, result)
 }

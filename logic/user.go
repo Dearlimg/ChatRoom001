@@ -8,6 +8,7 @@ import (
 	"ChatRoom001/middlewares"
 	"ChatRoom001/model"
 	"ChatRoom001/model/reply"
+	"ChatRoom001/task"
 	"database/sql"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/password"
@@ -127,7 +128,7 @@ func (user) Logout(ctx *gin.Context) errcode.Err {
 	content := &model.Content{}
 	_ = content.Unmarshal(payload.Content)
 	//判断是否再redis
-	if ok := dao.Database.Redis.CheckUserToken(ctx, content.ID, Token); !ok {
+	if ok := dao.Database.Redis.CheckUserTokenValid(ctx, content.ID, Token); !ok {
 		return errcodes.UserNotFound
 	}
 	if err := dao.Database.Redis.DeleteAllTokenByUser(ctx, content.ID); err != nil {
@@ -148,7 +149,106 @@ func getUserInfoByID(ctx *gin.Context, userID int64) (*db.User, errcode.Err) {
 	return userInfo, nil
 }
 
-func (user) UpdateUserPassword(ctx *gin.Context, userid int64, code, newPwd string) errcode.Err {
-	//userInfo, myErr := getUserInfoByID(ctx, userid)
+func (user) UpdateUserPassword(ctx *gin.Context, userID int64, code, newPwd string) errcode.Err {
+	userInfo, myerr := getUserInfoByID(ctx, userID)
+	if myerr != nil {
+		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return myerr
+	}
+	// 校验验证码
+	if !global.EmailMark.CheckCode(userInfo.Email, code) {
+		return errcodes.EmailCodeNotValid
+	}
+	// 密码加密
+	hashPassword, err := password.HashPassword(newPwd)
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	// 更新密码
+	if err = dao.Database.DB.UpdateUser(ctx, &db.UpdateUserParams{
+		Email:    userInfo.Email,
+		Password: hashPassword,
+		ID:       userInfo.ID,
+	}); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+
+	// 清除用户的 token
+	if err := dao.Database.Redis.DeleteAllTokenByUser(ctx, userID); err != nil {
+		return errcode.ErrServer.WithDetails(err.Error())
+	}
+	return nil
+}
+
+func (user) UpdateUserEmail(ctx *gin.Context, userID int64, email, code string) errcode.Err {
+	userInfo, myerr := getUserInfoByID(ctx, userID)
+	if myerr != nil {
+		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	if userInfo.Email == email {
+		return errcodes.EmailSame
+	}
+	if err := CheckEmailNotExists(ctx, email); err != nil {
+		return err
+	}
+	if !global.EmailMark.CheckCode(userInfo.Email, code) {
+		return errcodes.EmailCodeNotValid
+	}
+	if err := dao.Database.DB.UpdateUser(ctx, &db.UpdateUserParams{
+		Email:    email,
+		Password: userInfo.Password,
+		ID:       userInfo.ID,
+	}); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	if err := dao.Database.Redis.UpdateEmail(ctx, userInfo.Email, email); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+	global.Worker.SendTask(task.UpdateEmail(accessToken, userID, email))
+	return nil
+}
+
+func (user) DeleteUser(ctx *gin.Context, UserID int64) errcode.Err {
+	userInfo, myerr := getUserInfoByID(ctx, UserID)
+	if myerr != nil {
+		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	accountNum, err := dao.Database.DB.CountAccountByUserID(ctx, UserID)
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	if accountNum > 0 {
+		return errcodes.UserHasAccount
+	}
+	if err := dao.Database.DB.DeleteUser(ctx, UserID); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	if err := dao.Database.Redis.DeleteEmail(ctx, userInfo.Email); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	Token, payload, err := GetTokenAndPayload(ctx)
+	if err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcodes.AuthenticationFailed
+	}
+	content := &model.Content{}
+	_ = content.Unmarshal(payload.Content)
+	if ok := dao.Database.Redis.CheckUserTokenValid(ctx, content.ID, Token); !ok {
+		return errcodes.UserNotFound
+	}
+	//先将token从redis中清除
+	if err := dao.Database.Redis.DeleteAllTokenByUser(ctx, content.ID); err != nil {
+		return errcode.ErrServer.WithDetails(err.Error())
+	}
 	return nil
 }

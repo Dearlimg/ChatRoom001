@@ -80,6 +80,7 @@ type Querier interface {
 	//                           (r.account1_id = ? AND r.account2_id = a.id)
 	//                           )
 	// LIMIT ? OFFSET ?;
+	GetAccountNameByID(ctx context.Context, id int64) (string, error)
 	GetAccountsByName(ctx context.Context, arg *GetAccountsByNameParams) ([]*GetAccountsByNameRow, error)
 	GetAcountIDsByUserID(ctx context.Context, userID int64) ([]int64, error)
 	GetAllEmail(ctx context.Context) ([]string, error)
@@ -102,6 +103,110 @@ type Querier interface {
 	GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *GetFriendPinSettingsOrderByPinTimeParams) ([]*GetFriendPinSettingsOrderByPinTimeRow, error)
 	GetFriendRelationByID(ctx context.Context, id int64) (interface{}, error)
 	GetFriendSettingsByName(ctx context.Context, arg *GetFriendSettingsByNameParams) ([]*GetFriendSettingsByNameRow, error)
+	// SELECT
+	//     s.relation_id,
+	//     s.nick_name,
+	//     s.is_not_disturb,
+	//     s.is_pin,
+	//     s.pin_time,
+	//     s.is_show,
+	//     s.last_show,
+	//     s.is_self,
+	//     a.id AS account_id,
+	//     a.name AS account_name,
+	//     a.avatar AS account_avatar
+	// FROM (
+	//          SELECT
+	//              st.relation_id,
+	//              st.nick_name,
+	//              st.is_not_disturb,
+	//              st.is_pin,
+	//              st.pin_time,
+	//              st.is_show,
+	//              st.last_show,
+	//              st.is_self,
+	//              CASE
+	//                  WHEN rt.relation_type = 'friend' THEN rt.account2_id
+	//                  ELSE NULL
+	//                  END AS friend_account_id
+	//          FROM settings st
+	//                   INNER JOIN relations rt
+	//                              ON st.relation_id = rt.id
+	//                                  AND rt.relation_type = 'friend'
+	//          WHERE
+	//              st.account_id = ?
+	//            AND st.is_show = true
+	//      ) s
+	//          INNER JOIN accounts a
+	//                     ON a.id = s.friend_account_id
+	// ORDER BY
+	//     s.last_show DESC;
+	//
+	// -- name: GetFriendShowSettingsOrderByShowTime :many
+	// SELECT
+	//     s.relation_id,
+	//     s.nick_name,
+	//     s.is_not_disturb,
+	//     s.is_pin,
+	//     s.pin_time,
+	//     s.is_show,
+	//     s.last_show,
+	//     s.is_self,
+	//     a.id AS account_id,
+	//     a.name AS account_name,
+	//     a.avatar AS account_avatar
+	// FROM (
+	//          SELECT
+	//              settings.relation_id,
+	//              settings.nick_name,
+	//              settings.is_not_disturb,
+	//              settings.is_pin,
+	//              settings.pin_time,
+	//              settings.is_show,
+	//              settings.last_show,
+	//              settings.is_self
+	//          FROM
+	//              settings
+	//                  JOIN
+	//              relations ON settings.relation_id = relations.id
+	//          WHERE
+	//              settings.account_id =?  -- 这里的? 是占位符，实际使用时需要替换为具体的值
+	//            AND settings.is_show = true
+	//            AND relations.relation_type = 'friend'
+	//      ) AS s
+	//          JOIN
+	//      accounts a ON a.id = (
+	//          SELECT
+	//              sub_settings.account_id  -- 给子查询中的 settings 表取别名 sub_settings
+	//          FROM
+	//              settings AS sub_settings  -- 给子查询中的 settings 表取别名 sub_settings
+	//          WHERE
+	//              sub_settings.relation_id = s.relation_id
+	//            AND (sub_settings.account_id !=? OR sub_settings.is_self = true)  -- 这里的? 是占位符，实际使用时需要替换为具体的值
+	//      )
+	// ORDER BY
+	//     s.last_show DESC;
+	//
+	// -- name: GetFriendShowSettingsOrderByShowTime :many
+	// select s.*,
+	//        r.id,r.group_avatar,r.group_name,r.group_description,r.created_at
+	// from (select relation_id,
+	//              nick_name,
+	//              is_not_disturb,
+	//              is_pin,
+	//              pin_time,
+	//              is_show,
+	//              last_show,
+	//              is_self
+	//       from settings,
+	//            relations
+	//       where settings.account_id = ?
+	//         and settings.relation_id = relations.id
+	//         and settings.is_show = true
+	//         and relations.relation_type = 'friend') as s,
+	//      relations r
+	// where r.id = (select relation_id from settings where relation_id = s.relation_id and settings.account_id = ? limit 1)
+	// order by s.last_show desc;
 	GetFriendSettingsOrderByName(ctx context.Context, arg *GetFriendSettingsOrderByNameParams) ([]*GetFriendSettingsOrderByNameRow, error)
 	GetFriendShowSettingsOrderByShowTime(ctx context.Context, arg *GetFriendShowSettingsOrderByShowTimeParams) ([]*GetFriendShowSettingsOrderByShowTimeRow, error)
 	GetGroupAvatar(ctx context.Context, relationID sql.NullInt64) (*File, error)

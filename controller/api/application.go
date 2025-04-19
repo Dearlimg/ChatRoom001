@@ -79,6 +79,7 @@ func (application) AcceptApplication(ctx *gin.Context) {
 		return
 	}
 	//fmt.Println("AcceptApplication  ", content.ID, param.AccountID, param)
+
 	err := logic.Logics.Application.AcceptApplication(ctx, content.ID, param.AccountID)
 	reply.Reply(err)
 }

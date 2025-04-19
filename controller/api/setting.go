@@ -85,6 +85,7 @@ func (setting) UpdateSettingPin(ctx *gin.Context) {
 func (setting) UpdateNickName(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := &request.ParamUpdateNickName{}
+	fmt.Println("UpdateNickName", params.RelationID, params.NickName)
 	if err := ctx.ShouldBindJSON(params); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
@@ -94,6 +95,7 @@ func (setting) UpdateNickName(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
+	//fmt.Println("UpdateNickName", content.ID, params.RelationID, params.NickName)
 	err := logic.Logics.Setting.UpdateNickName(ctx, content.ID, params.RelationID, params.NickName)
 	reply.Reply(err, nil)
 }

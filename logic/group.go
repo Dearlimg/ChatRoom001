@@ -10,6 +10,7 @@ import (
 	"ChatRoom001/model/reply"
 	"ChatRoom001/task"
 	"database/sql"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 )
@@ -121,6 +122,7 @@ func (group) UpdateGroup(ctx *gin.Context, accountID, relationID int64, name, de
 		RelationID: relationID,
 		AccountID:  accountID,
 	})
+	fmt.Println("UpdateGroup2", ok, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -129,6 +131,7 @@ func (group) UpdateGroup(ctx *gin.Context, accountID, relationID int64, name, de
 		return nil, errcodes.NotLeader
 	}
 	data, err := dao.Database.DB.GetGroupRelationByID(ctx, relationID)
+	fmt.Println("UpdateGroup3", ok, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -139,6 +142,7 @@ func (group) UpdateGroup(ctx *gin.Context, accountID, relationID int64, name, de
 		ID:               relationID,
 		GroupAvatar:      data.GroupAvatar,
 	})
+	fmt.Println("UpdateGroup4", ok, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -166,10 +170,11 @@ func (group) InviteAccount(ctx *gin.Context, accountID, relationID int64, member
 		ok1, err1 := dao.Database.DB.ExistsFriendSetting(ctx, &db.ExistsFriendSettingParams{
 			Account1ID:   sql.NullInt64{Int64: accountID, Valid: true},
 			Account2ID:   sql.NullInt64{Int64: v, Valid: true},
-			Account1ID_2: sql.NullInt64{Int64: accountID, Valid: true},
-			Account2ID_2: sql.NullInt64{Int64: v, Valid: true},
+			Account1ID_2: sql.NullInt64{Int64: v, Valid: true},
+			Account2ID_2: sql.NullInt64{Int64: accountID, Valid: true},
 			AccountID:    accountID,
 		})
+		fmt.Println("InviteAccount", ok1, err1, accountID, v)
 		if err1 != nil {
 			global.Logger.Error(err1.Error(), middlewares.ErrLogMsg(ctx)...)
 			return nil, errcode.ErrServer

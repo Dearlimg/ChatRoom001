@@ -8,8 +8,8 @@ import (
 	"ChatRoom001/model/reply"
 	"ChatRoom001/pkg/emailMark"
 	"errors"
-	"fmt"
-	"github.com/Dearlimg/Goutils/pkg/utils"
+	"math/rand"
+	"strings"
 
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 
@@ -63,6 +63,18 @@ func CheckEmailNotExists(ctx *gin.Context, emailStr string) errcode.Err {
 	return nil
 }
 
+func RandomNumberString(n int) string {
+	var sb strings.Builder
+	digits := "0123456789" // 数字字符集
+	k := len(digits)
+
+	for i := 0; i < n; i++ {
+		c := digits[rand.Intn(k)] // 随机选择一个数字字符
+		sb.WriteByte(c)
+	}
+	return sb.String()
+}
+
 // SendMark 发送验证码(邮件)
 func (email) SendMark(emailStr string) errcode.Err {
 	// 判断发送邮件的频率
@@ -71,9 +83,10 @@ func (email) SendMark(emailStr string) errcode.Err {
 	}
 	// 异步发送邮件(使用工作池)
 	global.Worker.SendTask(func() {
-		code := utils.RandomString(global.PublicSetting.Rules.CodeLength)
+		//code := utils.RandomString(global.PublicSetting.Rules.CodeLength)
+		code := RandomNumberString(global.PublicSetting.Rules.CodeLength)
 		if err := global.EmailMark.SendMark(emailStr, code); err != nil && !errors.Is(err, emailMark.ErrSendTooMany) {
-			fmt.Println("logic/email.go")
+			//fmt.Println("logic/email.go")
 			global.Logger.Error(err.Error())
 		}
 	})

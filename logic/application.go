@@ -134,6 +134,7 @@ func (application) AcceptApplication(ctx *gin.Context, accountID1, accountID2 in
 	if myerr != nil {
 		return myerr
 	}
+
 	msgInfo, err1 := dao.Database.DB.AcceptApplicationTx(ctx, dao.Database.Redis, accountInfo1, accountInfo2)
 	if err1 != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)

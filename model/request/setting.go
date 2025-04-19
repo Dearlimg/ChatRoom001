@@ -3,8 +3,8 @@ package request
 import "ChatRoom001/model/common"
 
 type ParamUpdateNickName struct {
-	RelationID int64  `json:"relation_id" binding:"required,gte=1"`      // 关系 ID
-	NickName   string `json:"nick_name" binding:"required,gte=1,tle=20"` // 昵称
+	RelationID int64  `json:"relation_id" binding:"required,gte=1"` // 关系 ID
+	NickName   string `json:"nick_name" binding:"required,gte=1"`   // 昵称
 }
 
 type ParamUpdateSettingPin struct {
