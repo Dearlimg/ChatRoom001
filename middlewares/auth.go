@@ -5,7 +5,6 @@ import (
 	"ChatRoom001/errcodes"
 	"ChatRoom001/global"
 	"ChatRoom001/model"
-	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/Dearlimg/Goutils/pkg/token"
@@ -47,16 +46,12 @@ func ParseToken(token string) (*token.Payload, string, errcode.Err) {
 func PasetoAuth() func(c *gin.Context) {
 	return func(c *gin.Context) {
 		accessToken, err := GetToken(c.Request.Header)
-		fmt.Println("PasetoAuth1:", accessToken, err)
 		if err != nil {
-			//fmt.Println("PasetoAuth1:")
 			c.Next()
 			return
 		}
 		payload, _, err := ParseToken(accessToken)
-		fmt.Println("PasetoAuth2:", payload, err)
 		if err != nil {
-			//fmt.Println("PasetoAuth2:")
 			c.Next()
 			return
 		}
@@ -66,7 +61,6 @@ func PasetoAuth() func(c *gin.Context) {
 			return
 		}
 		c.Set(global.PrivateSetting.Token.AuthorizationKey, content)
-		fmt.Println("PasetoAuth:", content, payload)
 		c.Next()
 	}
 }

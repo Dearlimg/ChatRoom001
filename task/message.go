@@ -70,6 +70,12 @@ func UpdateMsgState(accessToken string, relationID, msgID int64, msgType server.
 			global.Logger.Error(err.Error())
 			return
 		}
+		fmt.Println("UpdateMsgState", accountIDs, chat.ServerUpdateMsgState, server.UpdateMsgState{
+			EnToken: utils.EncodeMD5(accessToken),
+			MsgType: msgType,
+			MsgID:   msgID,
+			State:   state,
+		})
 		global.ChatMap.SendMany(accountIDs, chat.ServerUpdateMsgState, server.UpdateMsgState{
 			EnToken: utils.EncodeMD5(accessToken),
 			MsgType: msgType,

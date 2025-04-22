@@ -17,6 +17,7 @@ func (setting) Init(router *gin.RouterGroup) {
 		{
 			friendGroup.GET("list", api.Apis.Setting.GetFriends)
 			friendGroup.GET("name", api.Apis.Setting.GetFriendsByName)
+			friendGroup.DELETE("delete", api.Apis.Setting.DeleteFriend)
 		}
 		updateGroup := r.Group("update")
 		{

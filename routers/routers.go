@@ -10,6 +10,7 @@ type routers struct {
 	Message     message
 	File        file
 	Setting     setting
+	Notify      notify
 }
 
 var Routers = new(routers)

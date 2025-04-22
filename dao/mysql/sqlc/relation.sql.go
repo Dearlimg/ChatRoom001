@@ -238,17 +238,26 @@ func (q *Queries) GetAllRelationOnRelation(ctx context.Context) ([]*Relation, er
 }
 
 const getFriendRelationByID = `-- name: GetFriendRelationByID :one
-select (relations.account2_id,relations.account1_id,relations.created_at)
+select id, relation_type, group_name, group_description, group_avatar, account1_id, account2_id, created_at
 from relations
 where relation_type='friend'
   and id =?
 `
 
-func (q *Queries) GetFriendRelationByID(ctx context.Context, id int64) (interface{}, error) {
+func (q *Queries) GetFriendRelationByID(ctx context.Context, id int64) (*Relation, error) {
 	row := q.queryRow(ctx, q.getFriendRelationByIDStmt, getFriendRelationByID, id)
-	var column_1 interface{}
-	err := row.Scan(&column_1)
-	return column_1, err
+	var i Relation
+	err := row.Scan(
+		&i.ID,
+		&i.RelationType,
+		&i.GroupName,
+		&i.GroupDescription,
+		&i.GroupAvatar,
+		&i.Account1ID,
+		&i.Account2ID,
+		&i.CreatedAt,
+	)
+	return &i, err
 }
 
 const getGroupRelationByID = `-- name: GetGroupRelationByID :one

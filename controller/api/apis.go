@@ -12,6 +12,7 @@ type apis struct {
 	Message     message
 	File        file
 	Setting     setting
+	Notify      notify
 }
 
 var Apis = new(apis)

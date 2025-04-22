@@ -32,13 +32,14 @@ func NewRouter() (*gin.Engine, *socketio.Server) {
 		})
 		rg := routers.Routers
 		rg.Account.Init(root)     //finish
-		rg.User.Init(root)        //need modify
+		rg.User.Init(root)        //finish
 		rg.Email.Init(root)       //finish
 		rg.Group.Init(root)       //finish
 		rg.Application.Init(root) //finish
 		rg.File.Init(root)        //finish
 		rg.Message.Init(root)     //finish
-		rg.Setting.Init(root)     //need delete
+		rg.Setting.Init(root)     //finish
+		rg.Notify.Init(root)      //finish
 	}
 	return r, routers.Routers.Chat.Init(r)
 }

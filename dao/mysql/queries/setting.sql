@@ -56,20 +56,50 @@ and relation_id =?;
 
 
 -- name: GetFriendPinSettingsOrderByPinTime :many
-select s.*,
-       a.id as account_id,
-       a.name as account_name,
-       a.avatar as account_avatar
-from (select settings.relation_id, settings.nick_name, settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
-      from settings,
-           relations
-      where settings.account_id = ?
-        and settings.is_pin = true
-        and settings.relation_id = relations.id
-        and relations.relation_type = 'friend') as s,
-     accounts a
-where a.id = (select account_id from settings where relation_id = s.relation_id and (settings.account_id != ? or is_self = true))
-order by s.pin_time;
+SELECT
+    s.relation_id,
+    s.nick_name,
+    s.pin_time,
+    s.is_pin,
+    s.is_show,
+    s.is_not_disturb,
+    a.id AS account_id,
+    a.name AS account_name,
+    a.avatar AS account_avatar
+FROM (
+         SELECT
+             settings.relation_id,
+             settings.nick_name,
+             settings.pin_time,
+             settings.is_pin,
+             settings.is_show,
+             settings.is_not_disturb
+         FROM
+             settings
+                 JOIN relations ON settings.relation_id = relations.id
+         WHERE
+             settings.account_id = ?
+           AND settings.is_pin = true
+           AND relations.relation_type = 'friend'
+     ) AS s
+         JOIN settings s2 ON s.relation_id = s2.relation_id AND s2.account_id != ?
+         JOIN accounts a ON a.id = s2.account_id
+ORDER BY s.pin_time;
+
+# select s.*,
+#        a.id as account_id,
+#        a.name as account_name,
+#        a.avatar as account_avatar
+# from (select settings.relation_id, settings.nick_name, settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
+#       from settings,
+#            relations
+#       where settings.account_id = ?
+#         and settings.is_pin = true
+#         and settings.relation_id = relations.id
+#         and relations.relation_type = 'friend') as s,
+#      accounts a
+# where a.id = (select account_id from settings where relation_id = s.relation_id and (settings.account_id != ? or is_self = true))
+# order by s.pin_time;
 
 -- name: GetGroupPinSettingsOrderByPinTime :many
 select s.relation_id,

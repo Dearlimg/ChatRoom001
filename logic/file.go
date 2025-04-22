@@ -120,6 +120,7 @@ func (file) UploadGroupAvatar(ctx *gin.Context, file *multipart.FileHeader, acco
 		url, key, err = oss.UploadFile(file)
 		if err != nil {
 			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+			fmt.Println("UpdateGroup6", ok, err)
 			return &reply.ParamUploadAvatar{URL: ""}, errcode.ErrServer
 		}
 	}
@@ -135,9 +136,8 @@ func (file) UploadGroupAvatar(ctx *gin.Context, file *multipart.FileHeader, acco
 	err = dao.Database.DB.UploadGroupAvatarWithTx(ctx, db.CreateFileParams{
 		FileName: "groupAvatar",
 		FileType: "",
-		//FileType: db.FilesFileType(filetype),
-		//FileSize:   0,
-		FileSize:   file.Size,
+		FileSize: 0,
+		//FileSize:   file.Size,
 		Key:        key,
 		Url:        url,
 		RelationID: sql.NullInt64{Int64: relationID, Valid: true},

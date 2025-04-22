@@ -26,6 +26,14 @@ type Querier interface {
 	CreateFile(ctx context.Context, arg *CreateFileParams) error
 	CreateFriendRelation(ctx context.Context, arg *CreateFriendRelationParams) error
 	CreateGet(ctx context.Context, account1ID int64) (*Application, error)
+	CreateGroupNotify(ctx context.Context, arg *CreateGroupNotifyParams) error
+	// -- name: CreateGroupNotifyReturn :one
+	// select *
+	// from group_notify
+	// where create_at=?
+	// and relation_id=?
+	// and account_id=?;
+	CreateGroupNotifyReturn(ctx context.Context) (*GroupNotify, error)
 	CreateGroupRelation(ctx context.Context, arg *CreateGroupRelationParams) error
 	CreateGroupRelationReturn(ctx context.Context, arg *CreateGroupRelationReturnParams) (int64, error)
 	CreateManySetting(ctx context.Context, arg *CreateManySettingParams) error
@@ -45,6 +53,7 @@ type Querier interface {
 	DeleteFriendRelation(ctx context.Context, arg *DeleteFriendRelationParams) error
 	DeleteFriendRelationByAccountID(ctx context.Context, account1ID sql.NullInt64) error
 	DeleteGroup(ctx context.Context, relationID int64) error
+	DeleteGroupNotify(ctx context.Context, id int64) error
 	DeleteRelation(ctx context.Context, id int64) error
 	DeleteSetting(ctx context.Context, arg *DeleteSettingParams) error
 	DeleteSettingsByAccountID(ctx context.Context, accountID int64) error
@@ -101,7 +110,7 @@ type Querier interface {
 	GetFileDetailsByID(ctx context.Context, id int64) (*File, error)
 	GetFileKeyByID(ctx context.Context, id int64) (string, error)
 	GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *GetFriendPinSettingsOrderByPinTimeParams) ([]*GetFriendPinSettingsOrderByPinTimeRow, error)
-	GetFriendRelationByID(ctx context.Context, id int64) (interface{}, error)
+	GetFriendRelationByID(ctx context.Context, id int64) (*Relation, error)
 	GetFriendSettingsByName(ctx context.Context, arg *GetFriendSettingsByNameParams) ([]*GetFriendSettingsByNameRow, error)
 	// SELECT
 	//     s.relation_id,
@@ -213,6 +222,21 @@ type Querier interface {
 	GetGroupList(ctx context.Context, arg *GetGroupListParams) ([]*GetGroupListRow, error)
 	GetGroupMembers(ctx context.Context, relationID int64) ([]int64, error)
 	GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersByIDParams) ([]*GetGroupMembersByIDRow, error)
+	GetGroupNotifyByID(ctx context.Context, id int64) ([]*GetGroupNotifyByIDRow, error)
+	// select s.*,
+	//        a.id as account_id,
+	//        a.name as account_name,
+	//        a.avatar as account_avatar
+	// from (select settings.relation_id, settings.nick_name, settings.pin_time,settings.is_pin,settings.is_show,settings.is_not_disturb
+	//       from settings,
+	//            relations
+	//       where settings.account_id = ?
+	//         and settings.is_pin = true
+	//         and settings.relation_id = relations.id
+	//         and relations.relation_type = 'friend') as s,
+	//      accounts a
+	// where a.id = (select account_id from settings where relation_id = s.relation_id and (settings.account_id != ? or is_self = true))
+	// order by s.pin_time;
 	GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *GetGroupPinSettingsOrderByPinTimeParams) ([]*GetGroupPinSettingsOrderByPinTimeRow, error)
 	GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error)
 	GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error)
@@ -238,6 +262,8 @@ type Querier interface {
 	UpdateAccountAvatar(ctx context.Context, arg *UpdateAccountAvatarParams) error
 	UpdateApplication(ctx context.Context, arg *UpdateApplicationParams) error
 	UpdateGroupAvatar(ctx context.Context, arg *UpdateGroupAvatarParams) error
+	UpdateGroupNotify(ctx context.Context, arg *UpdateGroupNotifyParams) error
+	UpdateGroupNotifyReturn(ctx context.Context, id int64) (*GroupNotify, error)
 	UpdateGroupRelation(ctx context.Context, arg *UpdateGroupRelationParams) error
 	UpdateMsgPin(ctx context.Context, arg *UpdateMsgPinParams) error
 	// -- name: UpdateMsgReads :exec

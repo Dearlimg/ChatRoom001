@@ -467,6 +467,7 @@ func (message) GetTopMsgByRelationID(ctx *gin.Context, accountID, relationID int
 			return nil, errcode.ErrServer
 		}
 	}
+	fmt.Println("GetTopMsgByRelationID  ", data.AccountID.Int64)
 	return &reply.ParamGetTopMsgByRelationID{MsgInfo: reply.ParamMsgInfo{
 		ID:         data.ID,
 		NotifyType: string(data.NotifyType),
@@ -491,6 +492,7 @@ func (message) UpdateMsgPin(ctx *gin.Context, accountID int64, param *request.Pa
 	if err != nil {
 		return err
 	}
+
 	if !ok {
 		return errcodes.AuthPermissionsInsufficient
 	}
@@ -501,10 +503,12 @@ func (message) UpdateMsgPin(ctx *gin.Context, accountID int64, param *request.Pa
 	if msgInfo.IsPin == param.IsPin {
 		return nil
 	}
+
 	myerr := dao.Database.DB.UpdateMsgPin(ctx, &db.UpdateMsgPinParams{
 		ID:    param.ID,
 		IsPin: param.IsPin,
 	})
+
 	if myerr != nil {
 		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
@@ -512,6 +516,7 @@ func (message) UpdateMsgPin(ctx *gin.Context, accountID int64, param *request.Pa
 
 	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
 	global.Worker.SendTask(task.UpdateMsgState(accessToken, param.RelationID, param.ID, server.MsgPin, param.IsPin))
+
 	return nil
 }
 
@@ -539,14 +544,14 @@ func (message) UpdateMsgTop(ctx *gin.Context, accountID int64, param *request.Pa
 		return errcode.ErrServer
 	}
 	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+
 	global.Worker.SendTask(task.UpdateMsgState(accessToken, param.RelationID, param.ID, server.MsgTop, param.IsTop))
+	//fmt.Println("UpdateMsgTop ", param.RelationID, param.ID, server.MsgTop, param.IsTop)
 	f := func() error {
-		//var temp json.RawMessage
 		arg := &db.CreateMessageParams{
 			NotifyType: db.MessagesNotifyTypeSystem,
 			MsgType:    db.MessagesMsgType(model.MsgTypeText),
-			MsgContent: fmt.Sprintf(format2.UnTopMessage, accountID),
-			//MsgExtend:  temp,
+			MsgContent: fmt.Sprintf(format2.TopMessage, accountID),
 			RelationID: msgInfo.RelationID,
 		}
 		err := dao.Database.DB.CreateMessage(ctx, arg)
@@ -562,6 +567,7 @@ func (message) UpdateMsgTop(ctx *gin.Context, accountID int64, param *request.Pa
 				MsgContent: arg.MsgContent,
 				RelationID: arg.RelationID,
 				CreateAt:   msgRly.CreateAt,
+				AccountID:  -1,
 			},
 			RlyMsg: nil,
 		}))

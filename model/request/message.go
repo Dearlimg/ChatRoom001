@@ -25,13 +25,13 @@ type ParamOfferMsgsByAccountIDAndTime struct {
 type ParamUpdateMsgPin struct {
 	ID         int64 `json:"id" binding:"required,gte=1"`          // 消息 ID
 	RelationID int64 `json:"relation_id" binding:"required,gte=1"` // 关系 ID
-	IsPin      bool  `json:"is_pin" binding:"required"`            // 是否 pin
+	IsPin      bool  `json:"is_pin"`                               // 是否 pin
 }
 
 type ParamUpdateMsgTop struct {
 	ID         int64 `json:"id" binding:"required,gte=1"`          // 消息 ID
 	RelationID int64 `json:"relation_id" binding:"required,gte=1"` // 关系 ID
-	IsTop      bool  `json:"is_top" binding:"required"`            // 是否置顶
+	IsTop      bool  `json:"is_top"`                               // 是否置顶
 }
 
 type ParamRevokeMsg struct {

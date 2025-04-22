@@ -9,6 +9,7 @@ type Logic struct {
 	Message     message
 	Setting     setting
 	Group       group
+	Notify      notify
 }
 
 var Logics = new(Logic)

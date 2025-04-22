@@ -196,7 +196,8 @@ func (c *ChatMap) SendMany(accountIDs []int64, event string, args ...interface{}
 		cm.(*ConnMap).m.Range(func(key, value interface{}) bool { // 遍历所有键值对
 			activeConn := value.(*ActiveConn)
 			activeConn.activeTime = time.Now() // 每次有消息发送，就重新计时
-			activeConn.s.Emit(event, args...)  // 向指定客户端发送信息
+			fmt.Println("SendMany   ", event, args)
+			activeConn.s.Emit(event, args...) // 向指定客户端发送信息
 			return true
 		})
 	}

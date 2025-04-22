@@ -50,7 +50,6 @@ func (setting) GetShows(ctx *gin.Context) {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
-	fmt.Println("GetShows 1 ")
 	result, err := logic.Logics.Setting.GetShows(ctx, content.ID)
 	reply.Reply(err, result)
 }
@@ -130,4 +129,20 @@ func (setting) UpdateSettingDisturb(ctx *gin.Context) {
 	}
 	err := logic.Logics.Setting.UpdateDisaturb(ctx, content.ID, params.RelationID, *params.IsNotDisturb)
 	reply.Reply(err, nil)
+}
+
+func (setting) DeleteFriend(ctx *gin.Context) {
+	reply := app.NewResponse(ctx)
+	params := new(request.ParamDeleteFriend)
+	if err := ctx.ShouldBindJSON(params); err != nil {
+		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
+		return
+	}
+	content, ok := middlewares.GetTokenContent(ctx)
+	if !ok || content.TokenType != model.AccountToken {
+		reply.Reply(errcodes.AuthNotExist)
+		return
+	}
+	err := logic.Logics.Setting.DeleteFriend(ctx, content.ID, params.RelationID)
+	reply.Reply(err)
 }

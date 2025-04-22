@@ -27,3 +27,13 @@ func UpdateSettingState(accessToken string, settingType server.SettingType, acco
 		})
 	}
 }
+
+// DeleteRelation 删除关系的通知
+func DeleteRelation(accessToken string, accountID, relationID int64) func() {
+	return func() {
+		global.ChatMap.Send(accountID, chat.ServerDeleteRelation, server.DeleteRelation{
+			EnToken:    utils.EncodeMD5(accessToken),
+			RelationID: relationID,
+		})
+	}
+}

@@ -56,7 +56,7 @@ select exists(select 1
               and account2_id=?);
 
 -- name: GetFriendRelationByID :one
-select (relations.account2_id,relations.account1_id,relations.created_at)
+select *
 from relations
 where relation_type='friend'
   and id =?;

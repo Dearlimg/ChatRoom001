@@ -12,7 +12,6 @@ import (
 	"ChatRoom001/task"
 	"context"
 	"database/sql"
-	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
@@ -114,7 +113,6 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 		AccountID:   accountID,
 		AccountID_2: accountID,
 	})
-	//friendData, err := dao.Database.DB.GetFriendShowSettingsOrderByShowTime(ctx, accountID)
 
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
@@ -130,17 +128,17 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
-	//fmt.Println("GetShows 3 ", err)
 	result := make([]*model.Setting, 0, len(friendData)+len(groupData))
 	for i, j := 0, 0; i < len(friendData) || j < len(groupData); {
 		if i < len(friendData) && (j >= len(groupData) || friendData[i].Lastshow.After(groupData[j].LastShow)) {
 			v := friendData[i]
-			fmt.Println("GetShow data", v)
-			//msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
-			//if myErr != nil {
-			//	global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
-			//	return nil, errcode.ErrServer
-			//}
+			msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.Relationid)
+			if myErr == sql.ErrNoRows {
+				msgInfo.MsgType = "text"
+				msgInfo.ID = -1
+				msgInfo.MsgContent = "暂无消息"
+			}
+
 			friendInfo := &model.SettingFriendInfo{
 				AccountID: v.Accountid,
 				Name:      v.Accountname,
@@ -158,28 +156,23 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 					PinTime:      v.Pintime,
 					LastShow:     v.Lastshow,
 
-					//Msg_id:      msgInfo.ID,
-					//Msg_type:    string(msgInfo.MsgType),
-					//Msg_content: msgInfo.MsgContent,
-					//Create_at:   msgInfo.CreateAt,
+					Msg_id:      msgInfo.ID,
+					Msg_type:    string(msgInfo.MsgType),
+					Msg_content: msgInfo.MsgContent,
+					Create_at:   msgInfo.CreateAt,
 				},
 				FriendInfo: friendInfo,
 			})
 			i++
 		} else {
 			v := groupData[j]
-			//groupType := strings.Split(v., ",")
-			//msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
-			//if myErr != nil {
-			//	global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
-			//	return nil, errcode.ErrServer
-			//}
-			//fmt.Println("GetShows 423323 ", err, msgInfo)
-			//if msgInfo.ID == 0 || msgInfo.MsgType == "" || msgInfo.MsgContent == "" {
-			//	msgInfo.MsgType = "text"
-			//	msgInfo.ID = 0
-			//	msgInfo.MsgContent = "nil"
-			//}
+			msgInfo, myErr := dao.Database.DB.GetLastMessageByRelation(ctx, v.RelationID)
+			if myErr == sql.ErrNoRows {
+				msgInfo.MsgType = "text"
+				msgInfo.ID = -1
+				msgInfo.MsgContent = "暂无消息"
+			}
+
 			groupInfo := &model.SettingGroupInfo{
 				RelationID:  v.RelationID,
 				Name:        v.GroupName.String,
@@ -197,17 +190,16 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 					PinTime:      v.PinTime,
 					LastShow:     v.LastShow,
 
-					//Msg_id:      msgInfo.ID,
-					//Msg_type:    string(msgInfo.MsgType),
-					//Msg_content: msgInfo.MsgContent,
-					//Create_at:   msgInfo.CreateAt,
+					Msg_id:      msgInfo.ID,
+					Msg_type:    string(msgInfo.MsgType),
+					Msg_content: msgInfo.MsgContent,
+					Create_at:   msgInfo.CreateAt,
 				},
 				GroupInfo: groupInfo,
 			})
 			j++
 		}
 	}
-	fmt.Println("GetShows 4 ")
 	return &reply.ParamGetShows{
 		List:  result,
 		Total: int64(len(result)),
@@ -419,4 +411,37 @@ func (setting) UpdateDisaturb(ctx *gin.Context, accountID, relationID int64, isD
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
 	}
+}
+
+func getFriendRelationByID(ctx *gin.Context, relationID int64) (*db.Relation, errcode.Err) {
+	relationInfo, err := dao.Database.DB.GetFriendRelationByID(ctx, relationID)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, errcodes.RelationNotExists
+		}
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+	return relationInfo, nil
+}
+
+func (setting) DeleteFriend(ctx *gin.Context, accountID, relationID int64) errcode.Err {
+	friendInfo, myErr := getFriendRelationByID(ctx, relationID)
+	if myErr != nil {
+		return myErr
+	}
+	tempAccountID := sql.NullInt64{Int64: accountID, Valid: true}
+	tempRelationID := sql.NullInt64{Int64: relationID, Valid: true}
+
+	if friendInfo.Account1ID != tempAccountID && friendInfo.Account2ID != tempRelationID {
+		return errcodes.AuthPermissionsInsufficient
+	}
+	if err := dao.Database.DB.DeleteRelationWithTx(ctx, dao.Database.Redis, relationID); err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return errcode.ErrServer
+	}
+	// 推送删除通知
+	accessToken, _ := middlewares.GetToken(ctx.Request.Header)
+	global.Worker.SendTask(task.DeleteRelation(accessToken, accountID, relationID))
+	return nil
 }

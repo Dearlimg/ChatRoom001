@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS messages (
                                         notify_type ENUM('system', 'common') NOT NULL,
                                         msg_type ENUM('text', 'file') NOT NULL,
                                         msg_content TEXT NOT NULL,
-                                        msg_extend JSON,
+                                        msg_extend JSON default '{}',
                                         file_id BIGINT,
                                         account_id BIGINT,
                                         rly_msg_id BIGINT,

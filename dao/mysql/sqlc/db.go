@@ -42,6 +42,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.createGetStmt, err = db.PrepareContext(ctx, createGet); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateGet: %w", err)
 	}
+	if q.createGroupNotifyStmt, err = db.PrepareContext(ctx, createGroupNotify); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateGroupNotify: %w", err)
+	}
+	if q.createGroupNotifyReturnStmt, err = db.PrepareContext(ctx, createGroupNotifyReturn); err != nil {
+		return nil, fmt.Errorf("error preparing query CreateGroupNotifyReturn: %w", err)
+	}
 	if q.createGroupRelationStmt, err = db.PrepareContext(ctx, createGroupRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query CreateGroupRelation: %w", err)
 	}
@@ -86,6 +92,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	}
 	if q.deleteGroupStmt, err = db.PrepareContext(ctx, deleteGroup); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteGroup: %w", err)
+	}
+	if q.deleteGroupNotifyStmt, err = db.PrepareContext(ctx, deleteGroupNotify); err != nil {
+		return nil, fmt.Errorf("error preparing query DeleteGroupNotify: %w", err)
 	}
 	if q.deleteRelationStmt, err = db.PrepareContext(ctx, deleteRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query DeleteRelation: %w", err)
@@ -207,6 +216,9 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.getGroupMembersByIDStmt, err = db.PrepareContext(ctx, getGroupMembersByID); err != nil {
 		return nil, fmt.Errorf("error preparing query GetGroupMembersByID: %w", err)
 	}
+	if q.getGroupNotifyByIDStmt, err = db.PrepareContext(ctx, getGroupNotifyByID); err != nil {
+		return nil, fmt.Errorf("error preparing query GetGroupNotifyByID: %w", err)
+	}
 	if q.getGroupPinSettingsOrderByPinTimeStmt, err = db.PrepareContext(ctx, getGroupPinSettingsOrderByPinTime); err != nil {
 		return nil, fmt.Errorf("error preparing query GetGroupPinSettingsOrderByPinTime: %w", err)
 	}
@@ -282,6 +294,12 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	if q.updateGroupAvatarStmt, err = db.PrepareContext(ctx, updateGroupAvatar); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateGroupAvatar: %w", err)
 	}
+	if q.updateGroupNotifyStmt, err = db.PrepareContext(ctx, updateGroupNotify); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateGroupNotify: %w", err)
+	}
+	if q.updateGroupNotifyReturnStmt, err = db.PrepareContext(ctx, updateGroupNotifyReturn); err != nil {
+		return nil, fmt.Errorf("error preparing query UpdateGroupNotifyReturn: %w", err)
+	}
 	if q.updateGroupRelationStmt, err = db.PrepareContext(ctx, updateGroupRelation); err != nil {
 		return nil, fmt.Errorf("error preparing query UpdateGroupRelation: %w", err)
 	}
@@ -348,6 +366,16 @@ func (q *Queries) Close() error {
 	if q.createGetStmt != nil {
 		if cerr := q.createGetStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing createGetStmt: %w", cerr)
+		}
+	}
+	if q.createGroupNotifyStmt != nil {
+		if cerr := q.createGroupNotifyStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createGroupNotifyStmt: %w", cerr)
+		}
+	}
+	if q.createGroupNotifyReturnStmt != nil {
+		if cerr := q.createGroupNotifyReturnStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing createGroupNotifyReturnStmt: %w", cerr)
 		}
 	}
 	if q.createGroupRelationStmt != nil {
@@ -423,6 +451,11 @@ func (q *Queries) Close() error {
 	if q.deleteGroupStmt != nil {
 		if cerr := q.deleteGroupStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing deleteGroupStmt: %w", cerr)
+		}
+	}
+	if q.deleteGroupNotifyStmt != nil {
+		if cerr := q.deleteGroupNotifyStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing deleteGroupNotifyStmt: %w", cerr)
 		}
 	}
 	if q.deleteRelationStmt != nil {
@@ -625,6 +658,11 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing getGroupMembersByIDStmt: %w", cerr)
 		}
 	}
+	if q.getGroupNotifyByIDStmt != nil {
+		if cerr := q.getGroupNotifyByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing getGroupNotifyByIDStmt: %w", cerr)
+		}
+	}
 	if q.getGroupPinSettingsOrderByPinTimeStmt != nil {
 		if cerr := q.getGroupPinSettingsOrderByPinTimeStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing getGroupPinSettingsOrderByPinTimeStmt: %w", cerr)
@@ -750,6 +788,16 @@ func (q *Queries) Close() error {
 			err = fmt.Errorf("error closing updateGroupAvatarStmt: %w", cerr)
 		}
 	}
+	if q.updateGroupNotifyStmt != nil {
+		if cerr := q.updateGroupNotifyStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateGroupNotifyStmt: %w", cerr)
+		}
+	}
+	if q.updateGroupNotifyReturnStmt != nil {
+		if cerr := q.updateGroupNotifyReturnStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing updateGroupNotifyReturnStmt: %w", cerr)
+		}
+	}
 	if q.updateGroupRelationStmt != nil {
 		if cerr := q.updateGroupRelationStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing updateGroupRelationStmt: %w", cerr)
@@ -850,6 +898,8 @@ type Queries struct {
 	createFileStmt                           *sql.Stmt
 	createFriendRelationStmt                 *sql.Stmt
 	createGetStmt                            *sql.Stmt
+	createGroupNotifyStmt                    *sql.Stmt
+	createGroupNotifyReturnStmt              *sql.Stmt
 	createGroupRelationStmt                  *sql.Stmt
 	createGroupRelationReturnStmt            *sql.Stmt
 	createManySettingStmt                    *sql.Stmt
@@ -865,6 +915,7 @@ type Queries struct {
 	deleteFriendRelationStmt                 *sql.Stmt
 	deleteFriendRelationByAccountIDStmt      *sql.Stmt
 	deleteGroupStmt                          *sql.Stmt
+	deleteGroupNotifyStmt                    *sql.Stmt
 	deleteRelationStmt                       *sql.Stmt
 	deleteSettingStmt                        *sql.Stmt
 	deleteSettingsByAccountIDStmt            *sql.Stmt
@@ -905,6 +956,7 @@ type Queries struct {
 	getGroupListStmt                         *sql.Stmt
 	getGroupMembersStmt                      *sql.Stmt
 	getGroupMembersByIDStmt                  *sql.Stmt
+	getGroupNotifyByIDStmt                   *sql.Stmt
 	getGroupPinSettingsOrderByPinTimeStmt    *sql.Stmt
 	getGroupRelationByIDStmt                 *sql.Stmt
 	getGroupSettingsByNameStmt               *sql.Stmt
@@ -930,6 +982,8 @@ type Queries struct {
 	updateAccountAvatarStmt                  *sql.Stmt
 	updateApplicationStmt                    *sql.Stmt
 	updateGroupAvatarStmt                    *sql.Stmt
+	updateGroupNotifyStmt                    *sql.Stmt
+	updateGroupNotifyReturnStmt              *sql.Stmt
 	updateGroupRelationStmt                  *sql.Stmt
 	updateMsgPinStmt                         *sql.Stmt
 	updateMsgReadsStmt                       *sql.Stmt
@@ -953,6 +1007,8 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		createFileStmt:                           q.createFileStmt,
 		createFriendRelationStmt:                 q.createFriendRelationStmt,
 		createGetStmt:                            q.createGetStmt,
+		createGroupNotifyStmt:                    q.createGroupNotifyStmt,
+		createGroupNotifyReturnStmt:              q.createGroupNotifyReturnStmt,
 		createGroupRelationStmt:                  q.createGroupRelationStmt,
 		createGroupRelationReturnStmt:            q.createGroupRelationReturnStmt,
 		createManySettingStmt:                    q.createManySettingStmt,
@@ -968,6 +1024,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		deleteFriendRelationStmt:                 q.deleteFriendRelationStmt,
 		deleteFriendRelationByAccountIDStmt:      q.deleteFriendRelationByAccountIDStmt,
 		deleteGroupStmt:                          q.deleteGroupStmt,
+		deleteGroupNotifyStmt:                    q.deleteGroupNotifyStmt,
 		deleteRelationStmt:                       q.deleteRelationStmt,
 		deleteSettingStmt:                        q.deleteSettingStmt,
 		deleteSettingsByAccountIDStmt:            q.deleteSettingsByAccountIDStmt,
@@ -1008,6 +1065,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		getGroupListStmt:                         q.getGroupListStmt,
 		getGroupMembersStmt:                      q.getGroupMembersStmt,
 		getGroupMembersByIDStmt:                  q.getGroupMembersByIDStmt,
+		getGroupNotifyByIDStmt:                   q.getGroupNotifyByIDStmt,
 		getGroupPinSettingsOrderByPinTimeStmt:    q.getGroupPinSettingsOrderByPinTimeStmt,
 		getGroupRelationByIDStmt:                 q.getGroupRelationByIDStmt,
 		getGroupSettingsByNameStmt:               q.getGroupSettingsByNameStmt,
@@ -1033,6 +1091,8 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 		updateAccountAvatarStmt:                  q.updateAccountAvatarStmt,
 		updateApplicationStmt:                    q.updateApplicationStmt,
 		updateGroupAvatarStmt:                    q.updateGroupAvatarStmt,
+		updateGroupNotifyStmt:                    q.updateGroupNotifyStmt,
+		updateGroupNotifyReturnStmt:              q.updateGroupNotifyReturnStmt,
 		updateGroupRelationStmt:                  q.updateGroupRelationStmt,
 		updateMsgPinStmt:                         q.updateMsgPinStmt,
 		updateMsgReadsStmt:                       q.updateMsgReadsStmt,

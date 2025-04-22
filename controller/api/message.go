@@ -97,6 +97,7 @@ func (message) GetPinMsgsByRelationID(ctx *gin.Context) {
 		return
 	}
 	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
+	fmt.Println("GetPinMsgsByRelati dwa wd 1 onID:", content.ID, params, params.RelationID, limit, offset)
 	result, err := logic.Logics.Message.GetPinMsgsByRelationID(ctx, content.ID, params.RelationID, limit, offset)
 	reply.Reply(err, result)
 }
@@ -154,15 +155,19 @@ func (message) GetTopMsgByRelationID(ctx *gin.Context) {
 func (message) UpdateMsgPin(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := new(request.ParamUpdateMsgPin)
+
 	if err := ctx.ShouldBindJSON(params); err != nil {
+		//fmt.Println("UpdateMsgPin  ", params, err)
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}
+
 	content, ok := middlewares.GetTokenContent(ctx)
 	if !ok || content.TokenType != model.AccountToken {
 		reply.Reply(errcodes.AuthNotExist)
 		return
 	}
+
 	err := logic.Logics.Message.UpdateMsgPin(ctx, content.ID, params)
 	reply.Reply(err)
 }
