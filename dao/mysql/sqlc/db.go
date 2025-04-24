@@ -24,6 +24,9 @@ func New(db DBTX) *Queries {
 func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 	q := Queries{db: db}
 	var err error
+	if q.checkRelationTypeByIDStmt, err = db.PrepareContext(ctx, checkRelationTypeByID); err != nil {
+		return nil, fmt.Errorf("error preparing query CheckRelationTypeByID: %w", err)
+	}
 	if q.countAccountByUserIDStmt, err = db.PrepareContext(ctx, countAccountByUserID); err != nil {
 		return nil, fmt.Errorf("error preparing query CountAccountByUserID: %w", err)
 	}
@@ -338,6 +341,11 @@ func Prepare(ctx context.Context, db DBTX) (*Queries, error) {
 
 func (q *Queries) Close() error {
 	var err error
+	if q.checkRelationTypeByIDStmt != nil {
+		if cerr := q.checkRelationTypeByIDStmt.Close(); cerr != nil {
+			err = fmt.Errorf("error closing checkRelationTypeByIDStmt: %w", cerr)
+		}
+	}
 	if q.countAccountByUserIDStmt != nil {
 		if cerr := q.countAccountByUserIDStmt.Close(); cerr != nil {
 			err = fmt.Errorf("error closing countAccountByUserIDStmt: %w", cerr)
@@ -892,6 +900,7 @@ func (q *Queries) queryRow(ctx context.Context, stmt *sql.Stmt, query string, ar
 type Queries struct {
 	db                                       DBTX
 	tx                                       *sql.Tx
+	checkRelationTypeByIDStmt                *sql.Stmt
 	countAccountByUserIDStmt                 *sql.Stmt
 	createAccountStmt                        *sql.Stmt
 	createApplicationStmt                    *sql.Stmt
@@ -1001,6 +1010,7 @@ func (q *Queries) WithTx(tx *sql.Tx) *Queries {
 	return &Queries{
 		db:                                       tx,
 		tx:                                       tx,
+		checkRelationTypeByIDStmt:                q.checkRelationTypeByIDStmt,
 		countAccountByUserIDStmt:                 q.countAccountByUserIDStmt,
 		createAccountStmt:                        q.createAccountStmt,
 		createApplicationStmt:                    q.createApplicationStmt,

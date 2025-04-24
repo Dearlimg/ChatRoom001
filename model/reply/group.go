@@ -41,4 +41,7 @@ type ParamGroupMemberInfo struct {
 	Avatar    string `json:"avatar"`
 	Nickname  string `json:"nickname"`
 	IsLeader  bool   `json:"is_leader"`
+
+	Gender    string `json:"gender"`
+	Signature string `json:"signature"`
 }

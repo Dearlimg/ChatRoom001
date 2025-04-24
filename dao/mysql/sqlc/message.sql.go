@@ -617,6 +617,7 @@ SELECT m1.id,
        COUNT(*) OVER () AS total
 FROM messages m1
 WHERE m1.relation_id = ? AND m1.is_top = TRUE
+ORDER BY pin_time DESC
 LIMIT 1
 `
 

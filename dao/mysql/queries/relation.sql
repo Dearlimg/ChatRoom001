@@ -88,3 +88,10 @@ from relations
 where relation_type='friend'
 and account1_id=?
 and account2_id=?;
+
+
+-- name: CheckRelationTypeByID :one
+select exists(select 1
+              from relations
+              where id=?
+              and relation_type='group');

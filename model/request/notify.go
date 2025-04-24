@@ -20,6 +20,6 @@ type ParamGetNotifyByID struct {
 }
 
 type ParamDeleteNotify struct {
-	ID         int64 `json:"id" form:"id" binding:"required"`                   // 群通知的 ID
-	RelationID int64 `json:"relation_id" form:"relation_id" binding:"required"` // 群 ID
+	ID         int64 `json:"id" form:"id"`                   // 群通知的 ID
+	RelationID int64 `json:"relation_id" form:"relation_id"` // 群 ID
 }

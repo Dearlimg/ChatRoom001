@@ -11,7 +11,7 @@ type ParamCreateAccount struct {
 }
 
 type ParamAccountInfo struct {
-	ID        int64  `json:"id,omitempty"`
+	ID        int64  `json:"account_id,omitempty"`
 	Name      string `json:"name,omitempty"`
 	Avatar    string `json:"avatar,omitempty"`
 	Gender    string `json:"gender,omitempty"`

@@ -39,6 +39,7 @@ func (setting) GetFriendsByName(ctx *gin.Context) {
 		return
 	}
 	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
+	fmt.Println("GetFriendsByName:", content.ID, params.Name, limit, offset)
 	result, err := logic.Logics.Setting.GetFriendsByName(ctx, content.ID, params.Name, limit, offset)
 	reply.Reply(err, result)
 }

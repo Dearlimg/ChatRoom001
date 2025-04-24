@@ -10,17 +10,21 @@ type SettingPinInfo struct {
 }
 
 type SettingFriendInfo struct {
-	AccountID      int64  `json:"account_id,omitempty"` // 好友 ID
-	Name           string `json:"name,omitempty"`       // 好友昵称
-	Avatar         string `json:"avatar,omitempty"`     // 好友头像
-	Is_Pin         bool   `json:"is_pin,omitempty"`
-	Is_Show        bool   `json:"is_show,omitempty"`
-	Is_Not_Disturb bool   `json:"is_not_disturb,omitempty"`
+	AccountID int64  `json:"account_id,omitempty"` // 好友 ID
+	Name      string `json:"name,omitempty"`       // 好友昵称
+	Avatar    string `json:"avatar,omitempty"`     // 好友头像
+
+	Is_Pin         bool `json:"is_pin,omitempty"`
+	Is_Show        bool `json:"is_show,omitempty"`
+	Is_Not_Disturb bool `json:"is_not_disturb,omitempty"`
 
 	Msg_id      int64     `json:"msg_id,omitempty"`
 	Msg_type    string    `json:"msg_type,omitempty"`
 	Msg_content string    `json:"msg_content,omitempty"`
 	Create_at   time.Time `json:"create_at,omitempty"`
+
+	Gender    string `json:"gender,omitempty"`
+	Signature string `json:"signature,omitempty"`
 }
 
 type SettingGroupInfo struct {
@@ -58,6 +62,9 @@ type SettingInfo struct {
 	Msg_type    string    `json:"msg_type,omitempty"`
 	Msg_content string    `json:"msg_content,omitempty"`
 	Create_at   time.Time `json:"create_at,omitempty"`
+
+	Gender    string `json:"gender,omitempty"`
+	Signature string `json:"signature,omitempty"`
 }
 
 type Setting struct {

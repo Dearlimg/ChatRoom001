@@ -10,6 +10,7 @@ import (
 )
 
 type Querier interface {
+	CheckRelationTypeByID(ctx context.Context, id int64) (bool, error)
 	CountAccountByUserID(ctx context.Context, userID int64) (int64, error)
 	CreateAccount(ctx context.Context, arg *CreateAccountParams) error
 	CreateApplication(ctx context.Context, arg *CreateApplicationParams) error
@@ -222,7 +223,7 @@ type Querier interface {
 	GetGroupList(ctx context.Context, arg *GetGroupListParams) ([]*GetGroupListRow, error)
 	GetGroupMembers(ctx context.Context, relationID int64) ([]int64, error)
 	GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersByIDParams) ([]*GetGroupMembersByIDRow, error)
-	GetGroupNotifyByID(ctx context.Context, id int64) ([]*GetGroupNotifyByIDRow, error)
+	GetGroupNotifyByID(ctx context.Context, relationID sql.NullInt64) ([]*GetGroupNotifyByIDRow, error)
 	// select s.*,
 	//        a.id as account_id,
 	//        a.name as account_name,
@@ -239,6 +240,43 @@ type Querier interface {
 	// order by s.pin_time;
 	GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *GetGroupPinSettingsOrderByPinTimeParams) ([]*GetGroupPinSettingsOrderByPinTimeRow, error)
 	GetGroupRelationByID(ctx context.Context, id int64) (*GetGroupRelationByIDRow, error)
+	// SELECT
+	//     s.*,
+	//     a.id AS account_id,
+	//     a.name AS account_name,
+	//     a.avatar AS account_avatar,
+	//     COUNT(*) OVER () AS total
+	// FROM (
+	//          SELECT
+	//              s.relation_id,
+	//              s.nick_name,
+	//              s.is_not_disturb,
+	//              s.is_pin,
+	//              s.pin_time,
+	//              s.is_show,
+	//              s.last_show,
+	//              s.is_self
+	//          FROM settings s
+	//                   INNER JOIN relations r ON s.relation_id = r.id
+	//          WHERE
+	//              s.account_id = ?
+	//            AND r.relation_type = 'friend'
+	//      ) AS s
+	//          CROSS JOIN accounts a
+	// WHERE
+	//     a.id = (
+	//         SELECT account_id
+	//         FROM settings
+	//         WHERE
+	//             relation_id = s.relation_id
+	//           AND (settings.account_id != ? OR s.is_self = 1)
+	//     )
+	//   AND (
+	//     a.name LIKE CONCAT('%', ?, '%')
+	//         OR s.nick_name LIKE CONCAT('%', ?, '%')
+	//     )
+	// ORDER BY a.name
+	// LIMIT ? OFFSET ?;
 	GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error)
 	GetGroupShowSettingsOrderByShowTime(ctx context.Context, arg *GetGroupShowSettingsOrderByShowTimeParams) ([]*GetGroupShowSettingsOrderByShowTimeRow, error)
 	GetLastMessageByRelation(ctx context.Context, relationID int64) (*GetLastMessageByRelationRow, error)
@@ -257,6 +295,30 @@ type Querier interface {
 	GetUserByID(ctx context.Context, id int64) (*User, error)
 	OfferMsgsByAccountIDAndTime(ctx context.Context, arg *OfferMsgsByAccountIDAndTimeParams) ([]*OfferMsgsByAccountIDAndTimeRow, error)
 	TransferIsLeaderFalse(ctx context.Context, arg *TransferIsLeaderFalseParams) error
+	// select s.*,
+	//        r.id as realtion_id,
+	//        r.group_name AS group_name,
+	//        r.group_avatar AS group_avatar,
+	//        r.group_description AS description,
+	//        count(*) over () as total
+	// from (select relation_id,
+	//     nick_name,
+	//     is_not_disturb,
+	//     is_pin,
+	//     pin_time,
+	//     is_show,
+	//     last_show,
+	//     is_self
+	//     from settings,
+	//     relations
+	//     where settings.account_id = ?
+	//     and settings.relation_id = relations.id
+	//     and relations.relation_type = 'group') as s,
+	//     relations r
+	// where r.id = (select s.relation_id from settings where s.relation_id=s.relation_id and (settings.account_id=?))
+	//     and ((r.group_name like ('%' || ? || '%')))
+	// order by (r.group_name)
+	// limit ? offset ?;
 	TransferIsLeaderTrue(ctx context.Context, arg *TransferIsLeaderTrueParams) error
 	UpdateAccount(ctx context.Context, arg *UpdateAccountParams) error
 	UpdateAccountAvatar(ctx context.Context, arg *UpdateAccountAvatarParams) error

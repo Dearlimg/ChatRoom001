@@ -11,7 +11,7 @@ import (
 )
 
 type TXer interface {
-	// CreateAccountWithTx 创建账号并建立和自己的关系
+	//CreateAccountWithTx 创建账号并建立和自己的关系
 	CreateAccountWithTx(ctx context.Context, rdb *operate.RDB, maxAccountNum int64, arg *db.CreateAccountParams) error
 	//DeleteAccountWithTx 删除账号并删除与之相关的好友关系
 	DeleteAccountWithTx(ctx context.Context, rdb *operate.RDB, accountID int64) error
@@ -134,8 +134,32 @@ func (store *SqlStore) DeleteSettingWithTx(ctx context.Context, rdb *operate.RDB
 }
 
 func (store *SqlStore) RevokeMsgWithTx(ctx context.Context, msgID int64, isPin, isTop bool) error {
-	//TODO implement me
-	panic("implement me")
+	return store.execTx(ctx, func(queries *db.Queries) error {
+		var err error
+		err = tool.DoThat(err, func() error {
+			return queries.UpdateMsgRevoke(ctx, &db.UpdateMsgRevokeParams{
+				ID:       msgID,
+				IsRevoke: true,
+			})
+		})
+		if isPin {
+			err = tool.DoThat(err, func() error {
+				return queries.UpdateMsgPin(ctx, &db.UpdateMsgPinParams{
+					ID:    msgID,
+					IsPin: false,
+				})
+			})
+		}
+		if isTop {
+			err = tool.DoThat(err, func() error {
+				return queries.UpdateMsgTop(ctx, &db.UpdateMsgTopParams{
+					ID:    msgID,
+					IsTop: false,
+				})
+			})
+		}
+		return err
+	})
 }
 
 func (store *SqlStore) execTx(ctx context.Context, fn func(queries *db.Queries) error) error {

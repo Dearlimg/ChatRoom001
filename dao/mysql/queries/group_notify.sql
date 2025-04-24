@@ -32,9 +32,9 @@ from group_notify
 where id=?;
 
 -- name: GetGroupNotifyByID :many
-select id, relation_id, msg_content, msg_expand, account_id, create_at, read_ids
+select id, relation_id, msg_content,COALESCE(msg_expand, CAST('null' AS JSON)) AS msg_expand, account_id, create_at, read_ids
 from group_notify
-where id = ?;
+where relation_id = ?;
 
 -- name: DeleteGroupNotify :exec
 delete

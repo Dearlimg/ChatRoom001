@@ -16,9 +16,7 @@ type message struct {
 }
 
 func (m message) SendMsg(s socketio.Conn, msg string) string {
-
 	token, ok := CheckAuth(s)
-
 	if !ok {
 		return ""
 	}

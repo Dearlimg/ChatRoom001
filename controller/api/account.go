@@ -101,7 +101,6 @@ func (account) GetAccountsByName(ctx *gin.Context) {
 func (account) GetAccountByID(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := new(request.ParamGetAccountByID)
-	//fmt.Println("GetAccountByID ", params)
 	if err := ctx.ShouldBindQuery(params); err != nil {
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return

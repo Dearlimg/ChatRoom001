@@ -10,6 +10,20 @@ import (
 	"database/sql"
 )
 
+const checkRelationTypeByID = `-- name: CheckRelationTypeByID :one
+select exists(select 1
+              from relations
+              where id=?
+              and relation_type='group')
+`
+
+func (q *Queries) CheckRelationTypeByID(ctx context.Context, id int64) (bool, error) {
+	row := q.queryRow(ctx, q.checkRelationTypeByIDStmt, checkRelationTypeByID, id)
+	var exists bool
+	err := row.Scan(&exists)
+	return exists, err
+}
+
 const createFriendRelation = `-- name: CreateFriendRelation :exec
 insert into relations (relation_type,account1_id,account2_id)
 value ('friend',?,?)

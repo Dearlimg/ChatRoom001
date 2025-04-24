@@ -88,6 +88,7 @@ func (message) GetPinMsgsByRelationID(ctx *gin.Context) {
 	reply := app.NewResponse(ctx)
 	params := new(request.ParamGetPinMsgsByRelationID)
 	if err := ctx.ShouldBindQuery(params); err != nil {
+		//fmt.Println(params)
 		reply.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}

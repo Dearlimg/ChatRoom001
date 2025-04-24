@@ -33,9 +33,10 @@ var (
 	RlyMsgNotOneRelation = errcode.NewErr(5004, "回复的消息和发送的消息并非在一个群")
 	MsgAlreadyRead       = errcode.NewErr(5005, "消息已经阅读")
 
-	NotLeader      = errcode.NewErr(7001, "非群主")
-	IsLeader       = errcode.NewErr(7002, "群主不可退群")
-	NotGroupMember = errcode.NewErr(7003, "非该群成员")
+	NotLeader         = errcode.NewErr(7001, "非群主")
+	IsLeader          = errcode.NewErr(7002, "群主不可退群")
+	NotGroupMember    = errcode.NewErr(7003, "非该群成员")
+	RelationTypeError = errcode.NewErr(7004, "关系类型错误")
 
 	FailedStore      = errcode.NewErr(8001, "存储文件失败")
 	FileNotExist     = errcode.NewErr(8002, "文件不存在")

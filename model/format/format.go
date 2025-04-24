@@ -1,6 +1,6 @@
 package format
 
 const (
-	TopMessage   = "%d置顶了一条消息"
-	UnTopMessage = "%d移除了置顶消息"
+	TopMessage   = "%s 置顶了一条消息"
+	UnTopMessage = "%s 移除了置顶消息"
 )

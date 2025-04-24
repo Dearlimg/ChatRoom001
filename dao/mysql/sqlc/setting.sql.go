@@ -218,7 +218,9 @@ SELECT
     s.is_not_disturb,
     a.id AS account_id,
     a.name AS account_name,
-    a.avatar AS account_avatar
+    a.avatar AS account_avatar,
+    a.gender AS account_gender,
+    a.signature AS account_signature
 FROM (
          SELECT
              settings.relation_id,
@@ -246,15 +248,17 @@ type GetFriendPinSettingsOrderByPinTimeParams struct {
 }
 
 type GetFriendPinSettingsOrderByPinTimeRow struct {
-	RelationID    int64
-	NickName      string
-	PinTime       time.Time
-	IsPin         bool
-	IsShow        bool
-	IsNotDisturb  bool
-	AccountID     int64
-	AccountName   string
-	AccountAvatar string
+	RelationID       int64
+	NickName         string
+	PinTime          time.Time
+	IsPin            bool
+	IsShow           bool
+	IsNotDisturb     bool
+	AccountID        int64
+	AccountName      string
+	AccountAvatar    string
+	AccountGender    AccountsGender
+	AccountSignature string
 }
 
 func (q *Queries) GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *GetFriendPinSettingsOrderByPinTimeParams) ([]*GetFriendPinSettingsOrderByPinTimeRow, error) {
@@ -276,6 +280,8 @@ func (q *Queries) GetFriendPinSettingsOrderByPinTime(ctx context.Context, arg *G
 			&i.AccountID,
 			&i.AccountName,
 			&i.AccountAvatar,
+			&i.AccountGender,
+			&i.AccountSignature,
 		); err != nil {
 			return nil, err
 		}
@@ -299,34 +305,31 @@ SELECT
     COUNT(*) OVER () AS total
 FROM (
          SELECT
-             s.relation_id,
-             s.nick_name,
-             s.is_not_disturb,
-             s.is_pin,
-             s.pin_time,
-             s.is_show,
-             s.last_show,
-             s.is_self
-         FROM settings s
-                  INNER JOIN relations r ON s.relation_id = r.id
+             st.relation_id,
+             st.nick_name,
+             st.is_not_disturb,
+             st.is_pin,
+             st.pin_time,
+             st.is_show,
+             st.last_show,
+             st.is_self
+         FROM
+             settings st
+                 JOIN
+             relations rl ON st.relation_id = rl.id
          WHERE
-             s.account_id = ?
-           AND r.relation_type = 'friend'
+             st.account_id = ?
+           AND rl.relation_type = 'friend'
      ) AS s
-         CROSS JOIN accounts a
+         JOIN
+     settings s2 ON s.relation_id = s2.relation_id AND (s2.account_id != ? OR s.is_self = true)
+         JOIN
+     accounts a ON a.id = s2.account_id
 WHERE
-    a.id = (
-        SELECT account_id
-        FROM settings
-        WHERE
-            relation_id = s.relation_id
-          AND (settings.account_id != ? OR s.is_self = 1)
-    )
-  AND (
-    a.name LIKE CONCAT('%', ?, '%')
-        OR s.nick_name LIKE CONCAT('%', ?, '%')
-    )
-ORDER BY a.name
+    (a.name LIKE CONCAT('%', ?, '%'))
+   OR (s.nick_name LIKE CONCAT('%', ?, '%'))
+ORDER BY
+    a.name
 LIMIT ? OFFSET ?
 `
 
@@ -614,7 +617,9 @@ SELECT
     a.id AS AccountID,
     a.name AS AccountName,
     a.avatar AS AccountAvatar,
-    a.create_at AS AccountCreateAt  -- 新增字段
+    a.create_at AS AccountCreateAt,  -- 新增字段
+    a.gender AS AccountGender,
+    a.signature AS AccountSignature
 FROM (
          SELECT
              st.relation_id,
@@ -652,18 +657,20 @@ type GetFriendShowSettingsOrderByShowTimeParams struct {
 }
 
 type GetFriendShowSettingsOrderByShowTimeRow struct {
-	Relationid      int64
-	Nickname        string
-	Isnotdisturb    bool
-	Ispin           bool
-	Pintime         time.Time
-	Isshow          bool
-	Lastshow        time.Time
-	Isself          bool
-	Accountid       int64
-	Accountname     string
-	Accountavatar   string
-	Accountcreateat time.Time
+	Relationid       int64
+	Nickname         string
+	Isnotdisturb     bool
+	Ispin            bool
+	Pintime          time.Time
+	Isshow           bool
+	Lastshow         time.Time
+	Isself           bool
+	Accountid        int64
+	Accountname      string
+	Accountavatar    string
+	Accountcreateat  time.Time
+	Accountgender    AccountsGender
+	Accountsignature string
 }
 
 func (q *Queries) GetFriendShowSettingsOrderByShowTime(ctx context.Context, arg *GetFriendShowSettingsOrderByShowTimeParams) ([]*GetFriendShowSettingsOrderByShowTimeRow, error) {
@@ -688,6 +695,8 @@ func (q *Queries) GetFriendShowSettingsOrderByShowTime(ctx context.Context, arg 
 			&i.Accountname,
 			&i.Accountavatar,
 			&i.Accountcreateat,
+			&i.Accountgender,
+			&i.Accountsignature,
 		); err != nil {
 			return nil, err
 		}
@@ -819,6 +828,8 @@ SELECT
     a.id,
     a.name,
     a.avatar,
+    a.gender,
+    a.signature,
     s.nick_name,
     s.is_leader
 FROM accounts a
@@ -834,11 +845,13 @@ type GetGroupMembersByIDParams struct {
 }
 
 type GetGroupMembersByIDRow struct {
-	ID       int64
-	Name     string
-	Avatar   string
-	NickName sql.NullString
-	IsLeader sql.NullBool
+	ID        int64
+	Name      string
+	Avatar    string
+	Gender    AccountsGender
+	Signature string
+	NickName  sql.NullString
+	IsLeader  sql.NullBool
 }
 
 func (q *Queries) GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersByIDParams) ([]*GetGroupMembersByIDRow, error) {
@@ -854,6 +867,8 @@ func (q *Queries) GetGroupMembersByID(ctx context.Context, arg *GetGroupMembersB
 			&i.ID,
 			&i.Name,
 			&i.Avatar,
+			&i.Gender,
+			&i.Signature,
 			&i.NickName,
 			&i.IsLeader,
 		); err != nil {
@@ -977,38 +992,43 @@ func (q *Queries) GetGroupPinSettingsOrderByPinTime(ctx context.Context, arg *Ge
 }
 
 const getGroupSettingsByName = `-- name: GetGroupSettingsByName :many
-select s.relation_id, s.nick_name, s.is_not_disturb, s.is_pin, s.pin_time, s.is_show, s.last_show, s.is_self,
-       r.id as realtion_id,
+
+SELECT s.relation_id, s.nick_name, s.is_not_disturb, s.is_pin, s.pin_time, s.is_show, s.last_show, s.is_self,
+       r.id AS relation_id,
        r.group_name AS group_name,
        r.group_avatar AS group_avatar,
        r.group_description AS description,
-       count(*) over () as total
-from (select relation_id,
-    nick_name,
-    is_not_disturb,
-    is_pin,
-    pin_time,
-    is_show,
-    last_show,
-    is_self
-    from settings,
-    relations
-    where settings.account_id = ?
-    and settings.relation_id = relations.id
-    and relations.relation_type = 'group') as s,
-    relations r
-where r.id = (select s.relation_id from settings where s.relation_id=s.relation_id and (settings.account_id=?))
-    and ((r.group_name like ('%' || ? || '%')))
-order by (r.group_name)
-limit ? offset ?
+       COUNT(*) OVER () AS total
+FROM (
+         SELECT
+             settings.relation_id,
+             settings.nick_name,
+             settings.is_not_disturb,
+             settings.is_pin,
+             settings.pin_time,
+             settings.is_show,
+             settings.last_show,
+             settings.is_self
+         FROM settings
+                  INNER JOIN relations
+                             ON settings.relation_id = relations.id
+         WHERE
+             settings.account_id = ?
+           AND relations.relation_type = 'group'
+     ) AS s
+         INNER JOIN relations r
+                    ON r.id = s.relation_id
+WHERE
+    r.group_name LIKE ('%' || ? || '%')
+ORDER BY r.group_name
+LIMIT ? OFFSET ?
 `
 
 type GetGroupSettingsByNameParams struct {
-	AccountID   int64
-	AccountID_2 int64
-	GroupName   sql.NullString
-	Limit       int32
-	Offset      int32
+	AccountID int64
+	GroupName sql.NullString
+	Limit     int32
+	Offset    int32
 }
 
 type GetGroupSettingsByNameRow struct {
@@ -1020,17 +1040,59 @@ type GetGroupSettingsByNameRow struct {
 	IsShow       bool
 	LastShow     time.Time
 	IsSelf       bool
-	RealtionID   int64
+	RelationID_2 int64
 	GroupName    sql.NullString
 	GroupAvatar  sql.NullString
 	Description  sql.NullString
 	Total        interface{}
 }
 
+// SELECT
+//
+//	s.*,
+//	a.id AS account_id,
+//	a.name AS account_name,
+//	a.avatar AS account_avatar,
+//	COUNT(*) OVER () AS total
+//
+// FROM (
+//
+//	    SELECT
+//	        s.relation_id,
+//	        s.nick_name,
+//	        s.is_not_disturb,
+//	        s.is_pin,
+//	        s.pin_time,
+//	        s.is_show,
+//	        s.last_show,
+//	        s.is_self
+//	    FROM settings s
+//	             INNER JOIN relations r ON s.relation_id = r.id
+//	    WHERE
+//	        s.account_id = ?
+//	      AND r.relation_type = 'friend'
+//	) AS s
+//	    CROSS JOIN accounts a
+//
+// WHERE
+//
+//	  a.id = (
+//	      SELECT account_id
+//	      FROM settings
+//	      WHERE
+//	          relation_id = s.relation_id
+//	        AND (settings.account_id != ? OR s.is_self = 1)
+//	  )
+//	AND (
+//	  a.name LIKE CONCAT('%', ?, '%')
+//	      OR s.nick_name LIKE CONCAT('%', ?, '%')
+//	  )
+//
+// ORDER BY a.name
+// LIMIT ? OFFSET ?;
 func (q *Queries) GetGroupSettingsByName(ctx context.Context, arg *GetGroupSettingsByNameParams) ([]*GetGroupSettingsByNameRow, error) {
 	rows, err := q.query(ctx, q.getGroupSettingsByNameStmt, getGroupSettingsByName,
 		arg.AccountID,
-		arg.AccountID_2,
 		arg.GroupName,
 		arg.Limit,
 		arg.Offset,
@@ -1051,7 +1113,7 @@ func (q *Queries) GetGroupSettingsByName(ctx context.Context, arg *GetGroupSetti
 			&i.IsShow,
 			&i.LastShow,
 			&i.IsSelf,
-			&i.RealtionID,
+			&i.RelationID_2,
 			&i.GroupName,
 			&i.GroupAvatar,
 			&i.Description,
@@ -1226,6 +1288,8 @@ func (q *Queries) TransferIsLeaderFalse(ctx context.Context, arg *TransferIsLead
 }
 
 const transferIsLeaderTrue = `-- name: TransferIsLeaderTrue :exec
+
+
 UPDATE settings
 SET is_leader = 1
 WHERE relation_id = ? AND account_id = ?
@@ -1236,6 +1300,36 @@ type TransferIsLeaderTrueParams struct {
 	AccountID  int64
 }
 
+// select s.*,
+//
+//	r.id as realtion_id,
+//	r.group_name AS group_name,
+//	r.group_avatar AS group_avatar,
+//	r.group_description AS description,
+//	count(*) over () as total
+//
+// from (select relation_id,
+//
+//	nick_name,
+//	is_not_disturb,
+//	is_pin,
+//	pin_time,
+//	is_show,
+//	last_show,
+//	is_self
+//	from settings,
+//	relations
+//	where settings.account_id = ?
+//	and settings.relation_id = relations.id
+//	and relations.relation_type = 'group') as s,
+//	relations r
+//
+// where r.id = (select s.relation_id from settings where s.relation_id=s.relation_id and (settings.account_id=?))
+//
+//	and ((r.group_name like ('%' || ? || '%')))
+//
+// order by (r.group_name)
+// limit ? offset ?;
 func (q *Queries) TransferIsLeaderTrue(ctx context.Context, arg *TransferIsLeaderTrueParams) error {
 	_, err := q.exec(ctx, q.transferIsLeaderTrueStmt, transferIsLeaderTrue, arg.RelationID, arg.AccountID)
 	return err

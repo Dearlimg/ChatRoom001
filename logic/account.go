@@ -195,7 +195,6 @@ func (account) GetAccountsByName(ctx *gin.Context, accountID int64, name string,
 }
 
 func (account) GetAccountByID(ctx *gin.Context, accountID, selfID int64) (*reply.ParamGetAccountByID, errcode.Err) {
-	fmt.Println("GetAccountByID ACCOUNTID:", accountID, "SELFID", selfID)
 	info, err := GetAccountInfoByID(ctx, selfID, accountID)
 	if err != nil {
 		return nil, err

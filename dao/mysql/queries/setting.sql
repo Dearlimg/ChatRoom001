@@ -65,7 +65,9 @@ SELECT
     s.is_not_disturb,
     a.id AS account_id,
     a.name AS account_name,
-    a.avatar AS account_avatar
+    a.avatar AS account_avatar,
+    a.gender AS account_gender,
+    a.signature AS account_signature
 FROM (
          SELECT
              settings.relation_id,
@@ -164,7 +166,9 @@ SELECT
     a.id AS AccountID,
     a.name AS AccountName,
     a.avatar AS AccountAvatar,
-    a.create_at AS AccountCreateAt  -- 新增字段
+    a.create_at AS AccountCreateAt,  -- 新增字段
+    a.gender AS AccountGender,
+    a.signature AS AccountSignature
 FROM (
          SELECT
              st.relation_id,
@@ -355,61 +359,129 @@ SELECT
     COUNT(*) OVER () AS total
 FROM (
          SELECT
-             s.relation_id,
-             s.nick_name,
-             s.is_not_disturb,
-             s.is_pin,
-             s.pin_time,
-             s.is_show,
-             s.last_show,
-             s.is_self
-         FROM settings s
-                  INNER JOIN relations r ON s.relation_id = r.id
+             st.relation_id,
+             st.nick_name,
+             st.is_not_disturb,
+             st.is_pin,
+             st.pin_time,
+             st.is_show,
+             st.last_show,
+             st.is_self
+         FROM
+             settings st
+                 JOIN
+             relations rl ON st.relation_id = rl.id
          WHERE
-             s.account_id = ?
-           AND r.relation_type = 'friend'
+             st.account_id = ?
+           AND rl.relation_type = 'friend'
      ) AS s
-         CROSS JOIN accounts a
+         JOIN
+     settings s2 ON s.relation_id = s2.relation_id AND (s2.account_id != ? OR s.is_self = true)
+         JOIN
+     accounts a ON a.id = s2.account_id
 WHERE
-    a.id = (
-        SELECT account_id
-        FROM settings
-        WHERE
-            relation_id = s.relation_id
-          AND (settings.account_id != ? OR s.is_self = 1)
-    )
-  AND (
-    a.name LIKE CONCAT('%', ?, '%')
-        OR s.nick_name LIKE CONCAT('%', ?, '%')
-    )
-ORDER BY a.name
+    (a.name LIKE CONCAT('%', ?, '%'))
+   OR (s.nick_name LIKE CONCAT('%', ?, '%'))
+ORDER BY
+    a.name
 LIMIT ? OFFSET ?;
 
+
+
+# SELECT
+#     s.*,
+#     a.id AS account_id,
+#     a.name AS account_name,
+#     a.avatar AS account_avatar,
+#     COUNT(*) OVER () AS total
+# FROM (
+#          SELECT
+#              s.relation_id,
+#              s.nick_name,
+#              s.is_not_disturb,
+#              s.is_pin,
+#              s.pin_time,
+#              s.is_show,
+#              s.last_show,
+#              s.is_self
+#          FROM settings s
+#                   INNER JOIN relations r ON s.relation_id = r.id
+#          WHERE
+#              s.account_id = ?
+#            AND r.relation_type = 'friend'
+#      ) AS s
+#          CROSS JOIN accounts a
+# WHERE
+#     a.id = (
+#         SELECT account_id
+#         FROM settings
+#         WHERE
+#             relation_id = s.relation_id
+#           AND (settings.account_id != ? OR s.is_self = 1)
+#     )
+#   AND (
+#     a.name LIKE CONCAT('%', ?, '%')
+#         OR s.nick_name LIKE CONCAT('%', ?, '%')
+#     )
+# ORDER BY a.name
+# LIMIT ? OFFSET ?;
+
 -- name: GetGroupSettingsByName :many
-select s.*,
-       r.id as realtion_id,
+SELECT s.*,
+       r.id AS relation_id,
        r.group_name AS group_name,
        r.group_avatar AS group_avatar,
        r.group_description AS description,
-       count(*) over () as total
-from (select relation_id,
-    nick_name,
-    is_not_disturb,
-    is_pin,
-    pin_time,
-    is_show,
-    last_show,
-    is_self
-    from settings,
-    relations
-    where settings.account_id = ?
-    and settings.relation_id = relations.id
-    and relations.relation_type = 'group') as s,
-    relations r
-where r.id = (select s.relation_id from settings where s.relation_id=s.relation_id and (settings.account_id=?))
-    and ((r.group_name like ('%' || ? || '%')))
-order by (r.group_name)
-limit ? offset ?;
+       COUNT(*) OVER () AS total
+FROM (
+         SELECT
+             settings.relation_id,
+             settings.nick_name,
+             settings.is_not_disturb,
+             settings.is_pin,
+             settings.pin_time,
+             settings.is_show,
+             settings.last_show,
+             settings.is_self
+         FROM settings
+                  INNER JOIN relations
+                             ON settings.relation_id = relations.id
+         WHERE
+             settings.account_id = ?
+           AND relations.relation_type = 'group'
+     ) AS s
+         INNER JOIN relations r
+                    ON r.id = s.relation_id
+WHERE
+    r.group_name LIKE ('%' || ? || '%')
+ORDER BY r.group_name
+LIMIT ? OFFSET ?;
+
+
+# select s.*,
+#        r.id as realtion_id,
+#        r.group_name AS group_name,
+#        r.group_avatar AS group_avatar,
+#        r.group_description AS description,
+#        count(*) over () as total
+# from (select relation_id,
+#     nick_name,
+#     is_not_disturb,
+#     is_pin,
+#     pin_time,
+#     is_show,
+#     last_show,
+#     is_self
+#     from settings,
+#     relations
+#     where settings.account_id = ?
+#     and settings.relation_id = relations.id
+#     and relations.relation_type = 'group') as s,
+#     relations r
+# where r.id = (select s.relation_id from settings where s.relation_id=s.relation_id and (settings.account_id=?))
+#     and ((r.group_name like ('%' || ? || '%')))
+# order by (r.group_name)
+# limit ? offset ?;
 
 
 -- name: TransferIsLeaderTrue :exec
@@ -483,6 +555,8 @@ SELECT
     a.id,
     a.name,
     a.avatar,
+    a.gender,
+    a.signature,
     s.nick_name,
     s.is_leader
 FROM accounts a

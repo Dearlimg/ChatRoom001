@@ -12,6 +12,7 @@ import (
 	"ChatRoom001/task"
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
@@ -75,6 +76,7 @@ func (setting) GetFriendsByName(ctx *gin.Context, accountID int64, name string, 
 		CONCAT:      name,
 		CONCAT_2:    name,
 	})
+	fmt.Println("GetFriendsByName2:", data, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -160,6 +162,9 @@ func (setting) GetShows(ctx *gin.Context, accountID int64) (*reply.ParamGetShows
 					Msg_type:    string(msgInfo.MsgType),
 					Msg_content: msgInfo.MsgContent,
 					Create_at:   msgInfo.CreateAt,
+
+					Gender:    string(v.Accountgender),
+					Signature: v.Accountsignature,
 				},
 				FriendInfo: friendInfo,
 			})
@@ -244,6 +249,9 @@ func (setting) GetPins(ctx *gin.Context, accountID int64) (*reply.ParamGetPins, 
 				Msg_type:    string(msgInfo.MsgType),
 				Msg_content: msgInfo.MsgContent,
 				Create_at:   msgInfo.CreateAt,
+
+				Gender:    string(v.AccountGender),
+				Signature: v.AccountSignature,
 			}
 			result = append(result, &model.SettingPin{
 				SettingPinInfo: model.SettingPinInfo{

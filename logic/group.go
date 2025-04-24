@@ -283,6 +283,7 @@ func (group) GetGroupsByName(ctx *gin.Context, accountID int64, name string, lim
 		Offset:    offset,
 		GroupName: sql.NullString{String: name, Valid: true},
 	})
+	fmt.Println("GetGroupsByName2", data, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -319,6 +320,7 @@ func (group) GetGroupMembers(ctx *gin.Context, accountID, relationID int64, limi
 		AccountID:  accountID,
 		RelationID: relationID,
 	})
+
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -326,6 +328,16 @@ func (group) GetGroupMembers(ctx *gin.Context, accountID, relationID int64, limi
 	if !ok {
 		return nil, errcodes.NotGroupMember
 	}
+
+	Ok, Err := dao.Database.DB.CheckRelationTypeByID(ctx, relationID)
+	if !Ok {
+		return nil, errcodes.RelationTypeError
+	}
+	if Err != nil {
+		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
+		return nil, errcode.ErrServer
+	}
+
 	data, err := dao.Database.DB.GetGroupMembersByID(ctx, &db.GetGroupMembersByIDParams{
 		RelationID: relationID,
 		Limit:      limit,
@@ -343,6 +355,9 @@ func (group) GetGroupMembers(ctx *gin.Context, accountID, relationID int64, limi
 			Avatar:    v.Avatar,
 			Nickname:  v.NickName.String,
 			IsLeader:  v.IsLeader.Bool,
+
+			Gender:    string(v.Gender),
+			Signature: v.Signature,
 		})
 	}
 	return &reply.ParamGetGroupMembers{

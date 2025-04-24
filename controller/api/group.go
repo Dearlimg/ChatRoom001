@@ -146,7 +146,7 @@ func (group) QuitGroup(ctx *gin.Context) {
 func (group) GetGroupsByName(ctx *gin.Context) {
 	rly := app.NewResponse(ctx)
 	params := new(request.ParamGetGroupsByName)
-	if err := ctx.ShouldBindJSON(params); err != nil {
+	if err := ctx.ShouldBindQuery(params); err != nil {
 		rly.Reply(errcode.ErrParamsNotValid.WithDetails(err.Error()))
 		return
 	}
@@ -156,6 +156,7 @@ func (group) GetGroupsByName(ctx *gin.Context) {
 		return
 	}
 	limit, offset := global.Page.GetPageSizeAndOffset(ctx.Request)
+	fmt.Println("GetGroupsByName1", limit, offset, params, content)
 	result, err := logic.Logics.Group.GetGroupsByName(ctx, content.ID, params.Name, limit, offset)
 	rly.Reply(err, result)
 }

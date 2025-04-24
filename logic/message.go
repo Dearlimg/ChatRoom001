@@ -311,9 +311,10 @@ func (message) GetPinMsgsByRelationID(ctx *gin.Context, accountID, relationID in
 		return &reply.ParamGetPinMsgsByRelationID{Total: 0}, errcodes.AuthPermissionsInsufficient
 	}
 	data, myerr := dao.Database.DB.GetPinMsgsByRelationID(ctx, &db.GetPinMsgsByRelationIDParams{
-		RelationID: relationID,
-		Limit:      limit,
-		Offset:     offset,
+		RelationID:   relationID,
+		RelationID_2: relationID,
+		Limit:        limit,
+		Offset:       offset,
 	})
 	if myerr != nil {
 		global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
@@ -535,7 +536,18 @@ func (message) UpdateMsgTop(ctx *gin.Context, accountID int64, param *request.Pa
 	if msgInfo.IsTop == param.IsTop {
 		return nil
 	}
+
+	msg, _ := dao.Database.DB.GetTopMsgByRelationID(ctx, &db.GetTopMsgByRelationIDParams{
+		RelationID:   param.RelationID,
+		RelationID_2: param.RelationID,
+	})
+
 	myerr := dao.Database.DB.UpdateMsgTop(ctx, &db.UpdateMsgTopParams{
+		ID:    msg.ID,
+		IsTop: !msg.IsTop,
+	})
+
+	myerr = dao.Database.DB.UpdateMsgTop(ctx, &db.UpdateMsgTopParams{
 		ID:    param.ID,
 		IsTop: param.IsTop,
 	})
@@ -548,13 +560,28 @@ func (message) UpdateMsgTop(ctx *gin.Context, accountID int64, param *request.Pa
 	global.Worker.SendTask(task.UpdateMsgState(accessToken, param.RelationID, param.ID, server.MsgTop, param.IsTop))
 	//fmt.Println("UpdateMsgTop ", param.RelationID, param.ID, server.MsgTop, param.IsTop)
 	f := func() error {
+
+		name, err := dao.Database.DB.GetAccountNameByID(ctx, accountID)
+		if err != nil {
+			global.Logger.Error(myerr.Error(), middlewares.ErrLogMsg(ctx)...)
+			return errcode.ErrServer
+		}
+
+		var tempMsg string
+		if param.IsTop == true {
+			tempMsg = fmt.Sprintf(format2.TopMessage, name)
+		} else {
+			tempMsg = fmt.Sprintf(format2.UnTopMessage, name)
+		}
+
 		arg := &db.CreateMessageParams{
 			NotifyType: db.MessagesNotifyTypeSystem,
 			MsgType:    db.MessagesMsgType(model.MsgTypeText),
-			MsgContent: fmt.Sprintf(format2.TopMessage, accountID),
+			MsgContent: tempMsg,
+			//MsgContent: fmt.Sprintf(format2.TopMessage, accountID),
 			RelationID: msgInfo.RelationID,
 		}
-		err := dao.Database.DB.CreateMessage(ctx, arg)
+		err = dao.Database.DB.CreateMessage(ctx, arg)
 		if err != nil {
 			return err
 		}
@@ -608,7 +635,6 @@ func (message) RevokeMsg(ctx *gin.Context, accountID int64, msgID int64) errcode
 				NotifyType: db.MessagesNotifyTypeSystem,
 				MsgType:    db.MessagesMsgType(model.MsgTypeText),
 				MsgContent: fmt.Sprintf(format2.TopMessage, accountID),
-				//MsgExtend:  pgtype.JSON{Status: pgtype.Null},
 				RelationID: msgInfo.RelationID,
 			}
 			err := dao.Database.DB.CreateMessage(ctx, arg)

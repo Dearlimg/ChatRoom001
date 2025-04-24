@@ -12,6 +12,7 @@ import (
 	"ChatRoom001/task"
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"github.com/Dearlimg/Goutils/pkg/app/errcode"
 	"github.com/gin-gonic/gin"
 	"time"
@@ -102,6 +103,7 @@ func (notify) GetNotifyByID(ctx *gin.Context, accountID int64, params *request.P
 		AccountID:  accountID,
 		RelationID: params.RelationID,
 	})
+	fmt.Println("GetNotifyByID content2:")
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
@@ -109,13 +111,20 @@ func (notify) GetNotifyByID(ctx *gin.Context, accountID int64, params *request.P
 	if !ok {
 		return nil, errcode.ErrServer
 	}
-	data, err := dao.Database.DB.GetGroupNotifyByID(ctx, params.RelationID)
+
+	var tempRelationID sql.NullInt64
+	tempRelationID.Valid = true
+	tempRelationID.Int64 = params.RelationID
+
+	data, err := dao.Database.DB.GetGroupNotifyByID(ctx, tempRelationID)
+	fmt.Println("GetNotifyByID content3:", data, err)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return nil, errcode.ErrServer
 	}
 	result := make([]reply.ParamGroupNotify, 0, len(data))
 	for _, v := range data {
+		fmt.Println("GetNotifyByID4   as dawd ", v)
 		if err != nil {
 			global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 			return nil, errcode.ErrServer
@@ -149,7 +158,7 @@ func (notify) DeleteNotify(ctx *gin.Context, accountID int64, params *request.Pa
 	if !ok {
 		return errcode.ErrServer
 	}
-	err = dao.Database.DB.DeleteGroupNotify(ctx, params.RelationID)
+	err = dao.Database.DB.DeleteGroupNotify(ctx, params.ID)
 	if err != nil {
 		global.Logger.Error(err.Error(), middlewares.ErrLogMsg(ctx)...)
 		return errcode.ErrServer
